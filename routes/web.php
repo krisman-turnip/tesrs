@@ -86,7 +86,7 @@ Route::get('/beranda/{id}','anggotamemberController@tab');
 Route::get('/produkanggota','produkanggotaController@index');
 
                 /* route transaksi->member */
-Route::get('/produkanggota/tambah/{id}/{create}','transaksiController@store');
+Route::post('/produkanggota/tambah/{id}','transaksiController@store');
 Route::get('/produkanggota/pengajuan','transaksiController@pengajuan');
 Route::get('/produkanggota/batal/{id}','transaksiController@delete');
 Route::get('/produkanggota/diterima','transaksiController@diterima');

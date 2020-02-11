@@ -87,9 +87,9 @@ class anggotaController extends Controller
     	$this->validate($request,[
             'id_anggota' => 'required',
             'id_parent' => 'required',
-            'id_jabatan' => 'required',
+            'id_jabatan' => 'required', 
             'nama' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'alamat' => 'required',
             'no_handphone' => 'required',
             'password' => 'required',

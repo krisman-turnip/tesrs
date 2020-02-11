@@ -41,8 +41,8 @@ class produkController extends Controller
     {
     	$this->validate($request,[
             'nama_produk' => 'required',
-            'jumlah' => 'required',
-            'harga' => 'required'
+            'jumlah' => 'required|numeric',
+            'harga' => 'required|numeric'
     	]);
  
         produk::create([
@@ -190,7 +190,7 @@ class produkController extends Controller
             $saldoAkhir=(int)$komisi+(int)$saldo;
             if ((int)$sisa!=0)
             {
-                if((int)$sisa>(int)$pengajuanProduk)
+                if((int)$sisa>=(int)$pengajuanProduk)
                 {
                     // ([
                     //     ['status', '=', '1'],
@@ -215,6 +215,7 @@ class produkController extends Controller
                         'id_produk' =>$pengajuanIDProduk, 
                         'id_anggota' => $pengajuanIDAnggota,
                         'jumlah' => $pengajuanProduk,
+                        'komisi' => $komisi,
                         'admin' =>$namaAdmin,
                     ]); 
                     return redirect('produk/produk_pengajuan');

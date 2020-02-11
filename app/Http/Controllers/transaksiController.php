@@ -8,11 +8,16 @@ use Illuminate\Http\Request;
 
 class transaksiController extends Controller
 {
-    public function store(Request $request, $id,$create)
+    public function store(Request $request, $id)
     {
+        $this->validate($request,[
+            'jumlah' => 'required|numeric',
+            
+        ]);
         $id=$id;
-        $create=$create;
+      
         $jumlah=$request->jumlah;
+        echo $jumlah;
         if (Session::get('login'))
         {
         transaksi::create([
@@ -20,8 +25,7 @@ class transaksiController extends Controller
             'id_anggota' => $request->session()->get('login'),
             'status' => 'Pengajuan',
             'komisi' => '0',
-            'jumlah' => 9,
-            'create_at' => $create,
+            'jumlah' => $jumlah,
     	]);
  
         return redirect('produkanggota/pengajuan');
@@ -51,7 +55,7 @@ class transaksiController extends Controller
         {
             $idproduk=$request->session()->get('login');
             $produk = DB::table('transaksi as a')
-                    ->select('b.nama_produk','a.id_transaksi','a.komisi','b.sisa')
+                    ->select('b.nama_produk','a.id_transaksi','a.komisi','b.sisa','a.created_at')
                     ->join('produk as b','b.id_produk','=','a.id_produk')
                     ->where([['a.id_anggota',$idproduk],['a.status','diterima'],])->paginate(10);
             return view('member/produk/produk_diterima', ['produk' => $produk]);

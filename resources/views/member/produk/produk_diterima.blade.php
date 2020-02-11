@@ -62,6 +62,7 @@
                                 <th>Nama Produk</th>
                                 <th>Produk Tersedia</th>
                                 <th>Komisi</th>
+                                <th>Tanggal Approve</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,6 +73,7 @@
                                 <td>{{ $p->nama_produk }}</td>
                                 <td>{{ $p->sisa }}</td>
                                 <td>{{ $p->komisi }}</td>
+                                <td>{{ $p->created_at }}</td>
                             </tr>
                             @endforeach
                         </tbody>

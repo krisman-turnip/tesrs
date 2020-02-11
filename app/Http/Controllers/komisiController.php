@@ -43,6 +43,10 @@ class komisiController extends Controller
     { 
         if (Session::get('login'))
         { 
+            $this->validate($request,[
+                'pembayaran' => 'required|numeric',
+                'bukti_transfer'=> 'required'
+            ]);
             $ids = $request->session()->get('login'); 
             $admin = DB::table('users')->where('id',$ids)->first();
             $namaadmin = $admin->name;

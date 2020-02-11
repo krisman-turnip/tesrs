@@ -66,6 +66,7 @@
                                 <th>Nama Parent</th>
                                 <th>Email</th>
                                 <th>No Handphone</th>
+                                <th>Saldo</th>
                                 <th>Alamat</th>
                             </tr>
                         </thead>
@@ -79,6 +80,7 @@
                                 <td>{{ $p->namaParent }}</td>
                                 <td>{{ $p->email }}</td>
                                 <td>{{ $p->no_handphone }}</td>
+                                <td>{{ $p->saldo }}</td>
                                 <td>{{ $p->alamat }}</td>
                             </tr>
                             @endforeach

@@ -72,11 +72,13 @@
                                 <td>{{ $p->nama_produk }}</td>
                                 <td>{{ $p->sisa }}</td>
                                 <td>
-                                
+                                <form method="post" action="{{ url('/produkanggota/tambah/'.(isset($p) ? $p->id_produk : '')) }}">
                                  <input type="text" name="jumlah"></td> 
+                                 <input type="hidden" name="_method" value="post">
+                            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                                 <td>
-                                    <a href="produkanggota/tambah/{{ $p->id_produk }}/{{ $p->created_at }}" class="btn btn-warning">Ambil</a>
-                                </td>
+                                <input type="submit" class="btn btn-success" value="Ambil">
+                                </td>  </form>
                             </tr>
                             @endforeach
                         </tbody>
