@@ -72,7 +72,7 @@ class transaksiController extends Controller
         {
             $idproduk=$request->session()->get('login');
             $produk = DB::table('transaksi as a')
-                    ->select('b.nama_produk','a.id_transaksi','a.komisi','b.sisa')
+                    ->select('b.nama_produk','a.id_transaksi','a.komisi','b.sisa','a.created_at')
                     ->join('produk as b','b.id_produk','=','a.id_produk')
                     ->where([['a.id_anggota',$idproduk],['a.status','ditolak'],])->paginate(10);
             return view('member/produk/produktolak', ['produk' => $produk]);

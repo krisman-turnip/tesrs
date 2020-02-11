@@ -40,7 +40,7 @@ class adminController extends Controller
     {
     	$this->validate($request,[
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required'
     	]);
  

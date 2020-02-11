@@ -4,7 +4,7 @@
     <title>Real Programmer</title>
 </head>
 <body>
-<p>Hi, {{ $name }}</p>
+<p>{{ $name }}</p>
 <p>{{ $email_body }}</p>
 </body>
 </html>

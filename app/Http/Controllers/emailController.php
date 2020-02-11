@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\email;
+use App\jabatan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -14,7 +15,8 @@ class emailController extends Controller
     {
         if (Session::get('login'))
         {
-            return view('email/email');
+            $jabatan = DB::table('jabatan')->select('id_jabatan','nama_jabatan')->get();
+            return view('email/email', ['jabatan' => $jabatan]);
         }
         else 
         {
@@ -48,7 +50,7 @@ class emailController extends Controller
         // \Mail::to('krisman.andrianus@gmail.com')->send(new email($details));
         // return view('email/email');
 
-        $email = $request->email;
+        $email = 'krisman.andrianus@yahoo.com';
         $data = array(
                 'name' => $request->name,
                 'email_body' => $request->email_body
@@ -61,7 +63,7 @@ class emailController extends Controller
             $mail->from('krisman.andrianus@gmail.com', 'Testing');
         });
         email::create([
-            'penerima' => $request->email,
+            'penerima' => 'krisman.andrianus@yahoo.com',
             'judul'    => $request->name,
             'body'     => $request->email_body
 

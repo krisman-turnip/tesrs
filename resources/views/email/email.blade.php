@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="{{url('adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="{{url('adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
 
   <!-- Google Font -->
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
@@ -48,7 +49,7 @@
     <div class="container">
             <div class="card mt-3">
                 <div class="card-header text-center">
-                    <strong>TAMBAH ADMIN</strong> 
+                    <strong>Kirim Email</strong> 
                 </div>
                 <div class="card-body">
                     <!-- <a href="../admin" class="btn btn-primary">Kembali</a> -->
@@ -56,15 +57,20 @@
                     <br/>
                     <br/>
                     
-                    <form method="POST" action="{{url('email/kirim')}}">
+                    <form method="POST" action="{{url('email/kirim')}}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="text" class="form-control @error('name') is-invalid @enderror" name="email" required autocomplete="name" autofocus>
-
+                                <select id="cek" type="text" class="form-control selected2" name="email" multiple="multiple" >
+                                    <option></option>
+                                    @foreach($jabatan as $value)
+                                    <option value="{{ $value->id_jabatan }}">{{$value->nama_jabatan}}
+                                    </option>
+                                    @endforeach
+                                </select>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <st rong>{{ $message }}</strong>
@@ -117,6 +123,15 @@
       immediately after the control sidebar -->
  <div class="control-sidebar-bg"></div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script type="text/javascript">
+$("#cek").select2({
+    placeholder:'select jabatan',
+    allowClear:true
+})
+</script>
 <!-- ./wrapper -->
 <script src="{{ url('ckeditor/ckeditor.js') }}"></script>
 <script>
