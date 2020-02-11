@@ -30,6 +30,7 @@
             <li><a href="{{ url('produkanggota') }}"><i class="fa fa-circle-o"></i> List Produk</a></li>
             <li><a href="{{ url('produkanggota/pengajuan') }}"><i class="fa fa-circle-o"></i> pengajuan Produk</a></li>
             <li><a href="{{ url('produkanggota/diterima') }}"><i class="fa fa-circle-o"></i> Penjualan Produk</a></li>
+            <li><a href="{{ url('produkanggota/ditolak') }}"><i class="fa fa-circle-o"></i> Penjualan Ditolak</a></li>
           </ul>
         </li>
         <li class="treeview">

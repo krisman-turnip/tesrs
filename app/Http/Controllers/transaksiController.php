@@ -62,6 +62,23 @@ class transaksiController extends Controller
         }
     }
 
+    public function ditolak(Request $request)
+    {
+        if (Session::get('login'))
+        {
+            $idproduk=$request->session()->get('login');
+            $produk = DB::table('transaksi as a')
+                    ->select('b.nama_produk','a.id_transaksi','a.komisi','b.sisa')
+                    ->join('produk as b','b.id_produk','=','a.id_produk')
+                    ->where([['a.id_anggota',$idproduk],['a.status','ditolak'],])->paginate(10);
+            return view('member/produk/produktolak', ['produk' => $produk]);
+        }
+        else
+        {
+            return redirect('/loginanggota');
+        }
+    }
+
     public function delete($id)
     {
         if (Session::get('login'))

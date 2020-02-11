@@ -42,7 +42,7 @@ class komisiController extends Controller
     public function bayar($id,request $request)
     { 
         if (Session::get('login'))
-        {
+        { 
             $ids = $request->session()->get('login'); 
             $admin = DB::table('users')->where('id',$ids)->first();
             $namaadmin = $admin->name;

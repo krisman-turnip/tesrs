@@ -90,6 +90,7 @@ Route::get('/produkanggota/tambah/{id}/{create}','transaksiController@store');
 Route::get('/produkanggota/pengajuan','transaksiController@pengajuan');
 Route::get('/produkanggota/batal/{id}','transaksiController@delete');
 Route::get('/produkanggota/diterima','transaksiController@diterima');
+Route::get('/produkanggota/ditolak','transaksiController@ditolak');
 
                 /* route materi->member */
 Route::get('/materianggota','materianggotaController@index');
