@@ -12,6 +12,7 @@ class transaksiController extends Controller
     {
         $id=$id;
         $create=$create;
+        $jumlah=$request->jumlah;
         if (Session::get('login'))
         {
         transaksi::create([
@@ -19,7 +20,8 @@ class transaksiController extends Controller
             'id_anggota' => $request->session()->get('login'),
             'status' => 'Pengajuan',
             'komisi' => '0',
-            'create_at' => $create
+            'jumlah' => 9,
+            'create_at' => $create,
     	]);
  
         return redirect('produkanggota/pengajuan');
@@ -32,7 +34,7 @@ class transaksiController extends Controller
         {
             $idproduk=$request->session()->get('login');
             $produk = DB::table('transaksi as a')
-                    ->select('b.nama_produk','a.id_transaksi')
+                    ->select('b.nama_produk','a.id_transaksi','a.jumlah','b.sisa','a.created_at')
                     ->join('produk as b','b.id_produk','=','a.id_produk')
                     ->where([['a.id_anggota',$idproduk],['a.status','Pengajuan'],])->paginate(10);
             return view('member/produk/pengajuan_produk', ['produk' => $produk]);
@@ -49,7 +51,7 @@ class transaksiController extends Controller
         {
             $idproduk=$request->session()->get('login');
             $produk = DB::table('transaksi as a')
-                    ->select('b.nama_produk','a.id_transaksi','a.komisi')
+                    ->select('b.nama_produk','a.id_transaksi','a.komisi','b.sisa')
                     ->join('produk as b','b.id_produk','=','a.id_produk')
                     ->where([['a.id_anggota',$idproduk],['a.status','diterima'],])->paginate(10);
             return view('member/produk/produk_diterima', ['produk' => $produk]);

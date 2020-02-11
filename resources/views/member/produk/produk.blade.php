@@ -13,7 +13,7 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="{{url('adminlte/bower_components/Ionicons/css/ionicons.min.css')}}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{url('adminlte/css/AdminLTE.min.css')}}">
+  <link rel="stylesheet" href="{{url('adminlte/css/AdminLTE.min.css')}}"> 
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{url('adminlte/css/skins/_all-skins.min.css')}}">
@@ -59,6 +59,8 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Produk</th>
+                                <th>Jumlah Tersedia</th>
+                                <th>Jumlah pengajuan</th>
                                 <th>Opsi</th>
                             </tr>
                         </thead>
@@ -68,6 +70,8 @@
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $p->nama_produk }}</td>
+                                <td>{{ $p->sisa }}</td>
+                                <td> <input type="text" name="jumlah"></td> 
                                 <td>
                                     <a href="produkanggota/tambah/{{ $p->id_produk }}/{{ $p->created_at }}" class="btn btn-warning">Ambil</a>
                                 </td>

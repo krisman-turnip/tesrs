@@ -11,7 +11,7 @@ class pembayarankomisiController extends Controller
 {
     public function index(Request $request) 
     {
-        if (Session::get('login'))
+        if (Session::get('login')) 
         {
             $id = $request->session()->get('login'); 
             //echo $request->session()->get('login');

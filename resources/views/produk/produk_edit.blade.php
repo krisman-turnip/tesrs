@@ -130,7 +130,7 @@
                             @endif
                             </div>
                         </div>
-
+ 
                         <input type="hidden" name="_method" value="put">
                             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                         <div class="form-group">
@@ -139,6 +139,39 @@
                     </form>
                 </div>
             </div>
+
+            <div class="container">
+            <div class="card mt-5">
+                <div class="card-header text-center">
+                </div>
+                <div class="card-body">
+               
+                    <br/>
+                    <br/>
+                    
+                    <table class="table table-bordered table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Materi</th>
+                                <th>Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @php $no=1; @endphp
+                            @foreach($materi as $p)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $p->nama_materi }}</td>
+                                <td>{{ $p->keterangan }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <a href="{{ url('materi/upload') }}" class="btn btn-primary">Upload</a>
         </div>
         </div>
         

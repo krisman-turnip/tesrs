@@ -60,6 +60,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Produk</th>
+                                <th>Produk Tersedia</th>
                                 <th>Komisi</th>
                             </tr>
                         </thead>
@@ -67,8 +68,9 @@
                         @php $no = 1; @endphp 
                             @foreach($produk as $p)
                             <tr>
-                                <td>{{ $no++ }}</td>
+                                <td>{{ $no++ }}</td> 
                                 <td>{{ $p->nama_produk }}</td>
+                                <td>{{ $p->sisa }}</td>
                                 <td>{{ $p->komisi }}</td>
                             </tr>
                             @endforeach

@@ -14,6 +14,7 @@ class anggotaController extends Controller
 {
     //  s
     public function index()
+    
     {
         if (Session::get('login'))
         { 

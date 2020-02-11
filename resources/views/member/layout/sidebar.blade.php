@@ -56,18 +56,17 @@
             <li><a href="{{ url('pembayaran') }}"><i class="fa fa-circle-o"></i> Pembayaran Komisi</a></li>
           </ul>
         </li>
-        <!-- <li class="treeview">
+        <li class="treeview">
           <a href="#">
-            <i class="fa fa-table"></i> <span>Admin</span>
+            <i class="fa fa-table"></i> <span>LogOut</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ url('admin') }}"><i class="fa fa-circle-o"></i> Tampil Admin</a></li>
-            <li><a href="{{ url('admin/tambah_admin') }}"><i class="fa fa-circle-o"></i> Tambah Admin</a></li>
+            <li><a href="{{ url('proseslogoutanggota') }}"><i class="fa fa-circle-o"></i> LogOut </a></li>
           </ul>
-        </li> -->
+        </li>
        
       </ul>
     </section>

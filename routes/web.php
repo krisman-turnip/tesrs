@@ -29,6 +29,7 @@ Route::post('/produk/store','produkController@store');
 Route::get('/produk/hapus/{id}', 'produkController@delete');
 Route::get('/produk/edit/{id}', 'produkController@edit');
 Route::put('/produk/update/{id}', 'produkController@update');
+Route::get('/report','produkController@transaksiProduk');
 
                 /* route materi->admin */
 Route::get('/materi','materiController@index');
@@ -37,7 +38,7 @@ Route::post('/materi/prosesupload','materiController@proses_upload');
 Route::get('/materi/download/{id}','materiController@download');
 Route::get('/materi/hapus/{id}', 'materiController@delete');
 
-                /* route produk->admin */
+                /* route jabatan->admin */
 Route::get('/jabatan','jabatanController@index');
 Route::get('/jabatan/tambah','jabatanController@tambah');
 Route::post('/jabatan/store','jabatanController@store');
@@ -61,7 +62,7 @@ Route::put('/admin/update/{id}', 'adminController@update');
                 /* route transaksi->admin */
 Route::get('/produk/produk_pengajuan','produkController@tampil');
 Route::get('/produk/tolak/{id}/{a}/{b}','produkController@tolak');
-Route::get('/produk/terima/{id}/{a}/{b}','produkController@terima');
+Route::get('/produk/terima/{id}/{a}/{b}/{c}','produkController@terima');
 
                 /* Login Admin*/
 Route::get('/', function () {
@@ -94,9 +95,11 @@ Route::get('/produkanggota/diterima','transaksiController@diterima');
 Route::get('/materianggota','materianggotaController@index');
 
                 /* route komisi->admin */
- Route::get('/komisi/tampil','komisiController@index');
- Route::get('/komisi/pembayaran/{id}','komisiController@pembayaran');
+ Route::get('/komisi','komisiController@index');
+ Route::get('/pembayaran/{id}','komisiController@pembayaran');
  Route::put('/bayar/{id}','komisiController@bayar');
+ Route::get('/transaksiKomisi','komisiController@transaksiKomisi');
+ Route::get('/komisi/download/{id}','komisiController@download');
 
                 /* route komisi->admin */
 Route::get('/pembayaran','pembayarankomisiController@index');

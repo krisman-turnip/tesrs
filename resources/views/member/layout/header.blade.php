@@ -8,9 +8,7 @@
       <!-- Sidebar toggle button-->
       <div class="navbar-custom-menu">
       <a class="text-bold-black" aria-labelledby="text-bold-black ">
-                                    <a class="text-black" href="{{ url('proseslogoutanggota') }}">
-                                        Logout
-                                    </a>
+                                
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf

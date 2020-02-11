@@ -61,7 +61,7 @@
                                 <th>No</th>
                                 <th>Nama Anggota</th>
                                 <th>Email</th>
-                                <th>No Hp</th>
+                                <th>No Hp</th> 
                                 <th>Jabatan</th>
                                 <th>Komisi</th>
                                 <th>OPSI</th>
@@ -101,15 +101,15 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="../adminlte/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="adminlte/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="../adminlte/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<script src="adminlte/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
  $.widget.bridge('uibutton', $.ui.button);
 </script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
 <script src="adminlte/bower_components/raphael/raphael.min.js"></script>
 <script src="adminlte/bower_components/morris.js/morris.min.js"></script>

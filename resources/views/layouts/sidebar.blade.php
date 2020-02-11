@@ -12,7 +12,7 @@
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
-          </a>
+          </a> 
           <ul class="treeview-menu">
       
             <li><a href="{{ url('home') }}"><i class="fa fa-circle-o"></i> Data Anggota</a></li>
@@ -32,6 +32,7 @@
             <li><a href="{{ url('produk') }}"><i class="fa fa-circle-o"></i> List Produk</a></li>
             <li><a href="{{ url('produk/tambah') }}"><i class="fa fa-circle-o"></i> Tambah Produk</a></li>
             <li><a href="{{ url('produk/produk_pengajuan') }}"><i class="fa fa-circle-o"></i> Pengajuan Produk</a></li>
+            <li><a href="{{ url('report') }}"><i class="fa fa-circle-o"></i> Transaksi Produk</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -95,10 +96,23 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ url('komisi/tampil') }}"><i class="fa fa-circle-o"></i> Tampil Komisi</a></li>
+            <li><a href="{{ url('komisi') }}"><i class="fa fa-circle-o"></i> Tampil Komisi</a></li>
+            <li><a href="{{ url('transaksiKomisi') }}"><i class="fa fa-circle-o"></i> Transaksi Komisi</a></li>
           </ul>
         </li>
-     
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-table"></i> <span>LogOut </span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('proseslogoutadmin') }}"><i class="fa fa-circle-o"></i> LogOut </a></li>
+          </ul>
+        </li>
+        
+        
       </ul>
     </section>
     <!-- /.sidebar -->

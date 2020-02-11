@@ -61,19 +61,25 @@
                                 <th>No</th>
                                 <th>Nama Produk</th>
                                 <th>Nama Anggota</th>
+                                <th>Jumlah Pengajuan</th>
+                                <th>Produk Tersedia </th>
+                                <th>Tanggal Pengajuan </th>
                                 <th>Opsi</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @php $no=1; @endphp
+                        @php $no=1; @endphp 
                             @foreach($produk as $p)
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $p->nama_produk }}</td>
                                 <td>{{ $p->nama }}</td>
+                                <td>{{ $p->jumlah }}</td>
+                                <td>{{ $p->sisa }}</td> 
+                                <td>{{ $p->created_at }}</td>
                                 <td>
                                     <a href="tolak/{{ $p->id_produk }}/{{ $p->id_anggota}}/{{$p->created_at}}" class="btn btn-warning">Tolak</a>
-                                    <a href="terima/{{ $p->id_produk }}/{{ $p->id_anggota}}/{{$p->created_at}}" class="btn btn-warning">Terima</a>
+                                    <a href="terima/{{ $p->id_produk }}/{{ $p->id_anggota}}/{{$p->created_at}}/{{$p->id_transaksi}}" class="btn btn-warning">Terima</a>
                                 </td>
                             </tr>
                             @endforeach

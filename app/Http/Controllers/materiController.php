@@ -84,7 +84,7 @@ class materiController extends Controller
         $book_cover = materi::where('id_materi', $id)->first();
         $path = public_path(). '/data_file/'. $book_cover->nama_materi;
         return response()->download($path, $book_cover
-                 ->original_filename, ['Content-Type' => $book_cover->mime]);
+                 ->original_filename, ['Content-Type' => $book_cover->mime]); 
     }
 
     public function delete($id)

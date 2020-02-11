@@ -55,7 +55,7 @@
                     <strong>EDIT Anggota</strong>
                 </div>
                 <div class="card-body">
-                <a href="../../komisi/tampil" class="btn btn-primary">Kembali</a>
+                <a href="{{ url('komisi') }}" class="btn btn-primary">Kembali</a>
                     <br/>
                     <br/>
                     
@@ -76,7 +76,7 @@
                                     {{ $errors->first('nama')}}
                                 </div>
                             @endif
-                            </div>
+                            </div> 
                         </div>
 
                         <div class="form-group row">
@@ -133,6 +133,7 @@
 
                         <h3>Bukti Bayar</h3>
                         <div class="form-group row">
+                        <label for="pembayaran" class="col-md-2 col-form-label text-md-right">Upload Bukti Bayar </label>
                             <div class="col-md-6">
                                 <input type="file" name="bukti_transfer">
                             </div>
@@ -160,15 +161,15 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="../../adminlte/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="{{url('adminlte/bower_components/jquery/dist/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="../../adminlte/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<script src="{{url('adminlte/bower_components/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
  $.widget.bridge('uibutton', $.ui.button);
 </script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../../adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="{{url('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 <!-- Morris.js charts -->
 <script src="../../adminlte/bower_components/raphael/raphael.min.js"></script>
 <script src="../../adminlte/bower_components/morris.js/morris.min.js"></script>
@@ -191,10 +192,10 @@
 <!-- FastClick -->
 <script src="../../adminlte/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="../../adminlte/js/adminlte.min.js"></script>
+<script src="{{url('adminlte/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../../adminlte/js/pages/dashboard.js"></script>
+<script src="{{url('adminlte/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../../adminlte/js/demo.js"></script>
+<script src="{{url('adminlte/js/demo.js')}}"></script>
 </body>
 </html>

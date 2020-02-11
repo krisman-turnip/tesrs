@@ -62,6 +62,7 @@
                         <th>No</th>
                         <th>Komisi</th>
                         <th>Bukti Transfer</th>
+                        <th>Tanggal Pembayaran</th>
                         <th>OPSI</th>
                     </tr>
                 </thead>
@@ -72,9 +73,10 @@
                         <td>{{ $no++ }}</td>
                         <td>{{ $p->komisi }}</td>
                         <td>{{ $p->bukti_transfer }}</td>
+                        <td>{{ $p->created_at }}</td>
                         <td>
                             <a href="pembayaran/download/{{ $p->id_komisi }}" class="btn btn-danger">Download</a>
-                        </td>
+                        </td> 
                     </tr>
                     @endforeach 
                 </tbody>

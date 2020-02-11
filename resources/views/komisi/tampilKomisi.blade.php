@@ -28,15 +28,17 @@
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="{{url('adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
   <!-- Google Font -->
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-  @include('member.layout.header')
+  @include('layouts.header')
   <!-- Left side column. contains the logo and sidebar -->
-  @include('member.layout.sidebar')
+  @include('layouts.sidebar')
   @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -47,35 +49,36 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 class="text-center">
-        Pengajuan Produk
+        Daftar Pembayaran Komisi
       </h1>
         <div class="container">
             <div class="card mt-5">
                 <div class="card-body">
+                    <!-- <a href="admin/tambah" class="btn btn-primary">Input Admin Baru</a> -->
                     <br/>
                     <br/>
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Produk</th>
-                                <th>Sisa</th>
-                                <th>Jumlah Pengajuan</th>
-                                <th>Tanggal Pengajuan</th>
-                                <th>Opsi</th>
+                                <th>Nama Anggota</th>
+                                <th>Komisi</th>
+                                <th>Approval </th>
+                                <th>Tanggal Pembayaran</th>
+                                <th>Download</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @php $no = 1; @endphp  
-                            @foreach($produk as $p)
+                        @php $no=1; @endphp
+                            @foreach($komisi as $p)
                             <tr>
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $p->nama_produk }}</td>
-                                <td>{{ $p->sisa }}</td>
-                                <td>{{ $p->jumlah }}</td>
+                                <td>{{ $p->nama }}</td>
+                                <td>{{ $p->komisi }}</td>
+                                <td>{{ $p->approval }}</td>
                                 <td>{{ $p->created_at }}</td>
                                 <td>
-                                    <a href="batal/{{ $p->id_transaksi }}" class="btn btn-warning">Batal</a>
+                                    <a href="komisi/download/{{ $p->id_komisi }}" class="btn btn-warning">Download</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -83,13 +86,14 @@
                     </table>
                 </div>
             </div>
-            {{ $produk->links() }}
+            {{ $komisi->links() }}
         </div>
+        
         </div>
         
 
   <!-- /.content-wrapper -->
-@include('member.layout.footer')
+@include('layouts.footer')
  
  <!-- Add the sidebar's background. This div must be placed
       immediately after the control sidebar -->
@@ -98,40 +102,39 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="../adminlte/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="adminlte/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="../adminlte/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<script src="adminlte/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
  $.widget.bridge('uibutton', $.ui.button);
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../../adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
-<script src="../adminlte/bower_components/raphael/raphael.min.js"></script>
+<script src="adminlte/bower_components/raphael/raphael.min.js"></script>
 <!-- Sparkline -->
-<script src="../adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+<script src="adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
-<script src="../adminlte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="../adminlte/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<script src="adminlte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="adminlte/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <!-- jQuery Knob Chart -->
-<script src="../adminlte/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
+<script src="adminlte/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
-<script src="../adminlte/bower_components/moment/min/moment.min.js"></script>
-<script src="../adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="adminlte/bower_components/moment/min/moment.min.js"></script>
+<script src="adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
-<script src="../adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
-<script src="../adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Slimscroll -->
-<script src="../adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="../adminlte/bower_components/fastclick/lib/fastclick.js"></script>
+<script src="adminlte/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="../adminlte/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../adminlte/js/pages/dashboard.js"></script>
+<script src="adminlte/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../adminlte/js/demo.js"></script>
+<script src="adminlte/js/demo.js"></script>
 </body>
 </html>
