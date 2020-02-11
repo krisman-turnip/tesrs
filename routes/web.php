@@ -97,6 +97,7 @@ Route::get('/materianggota','materianggotaController@index');
 
                 /* route komisi->admin */
  Route::get('/komisi','komisiController@index');
+ Route::get('/komisianggota','komisiController@komisianggota');
  Route::get('/pembayaran/{id}','komisiController@pembayaran');
  Route::put('/bayar/{id}','komisiController@bayar');
  Route::get('/transaksiKomisi','komisiController@transaksiKomisi');

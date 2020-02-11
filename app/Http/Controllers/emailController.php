@@ -60,7 +60,7 @@ class emailController extends Controller
         // Kirim Email
         Mail::send('email/emailsend', $data, function($mail) use($email) {
             $mail->to($email, 'no-reply')
-                    ->subject('judul');
+                    ->subject($judul);
             $mail->from('krisman.andrianus@gmail.com', 'Testing');
         });
         email::create([

@@ -1,7 +1,7 @@
 <header class="main-header">
     <!-- Logo -->
     <a class="logo">
-      Hello
+      Hello, Admin
 
     </a>
     <!-- Header Navbar: style can be found in header.less -->

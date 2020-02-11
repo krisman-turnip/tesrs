@@ -47,7 +47,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 class="text-center">
-        Daftar Pembayaran Komisi
+        Daftar Komisi
       </h1>
         <div class="container">
            <br>
@@ -61,9 +61,8 @@
                     <tr>
                         <th>No</th>
                         <th>Komisi</th>
-                        <th>Bukti Transfer</th>
-                        <th>Tanggal Pembayaran</th>
-                        <th>OPSI</th>
+                        <th>Jumlah Produk</th>
+                        <th>Tanggal Approval</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,11 +71,9 @@
                     <tr>
                         <td>{{ $no++ }}</td>
                         <td>{{ $p->komisi }}</td>
-                        <td>{{ $p->bukti_transfer }}</td>
+                        <td>{{ $p->jumlah }}</td>
                         <td>{{ $p->created_at }}</td>
-                        <td>
-                            <a href="pembayaran/download/{{ $p->id_komisi }}" class="btn btn-danger">Download</a>
-                        </td> 
+                       
                     </tr>
                     @endforeach 
                 </tbody>

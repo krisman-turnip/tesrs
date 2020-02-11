@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 07, 2020 at 07:14 AM
+-- Generation Time: Feb 11, 2020 at 11:34 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -50,9 +50,9 @@ CREATE TABLE `anggota` (
 --
 
 INSERT INTO `anggota` (`id`, `id_anggota`, `id_parent`, `id_jabatan`, `parent_all`, `nama`, `email`, `alamat`, `no_handphone`, `password`, `saldo`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 2, '1,1', 'Aldo', 'aldo@gmail.com', 'Jl manggis raya no 82', '087627135261', '$2y$10$JTxlAzw3MQKyyfJtxv/15u3bTvvfWgi3Ud66adpbE7wH7e1WMs2E6', 2100000, 'aktif', NULL, NULL),
+(1, 2, 1, 2, '1,1', 'Aldo', 'aldo@gmail.com', 'Jl manggis raya no 82', '087627135261', '$2y$10$JTxlAzw3MQKyyfJtxv/15u3bTvvfWgi3Ud66adpbE7wH7e1WMs2E6', 1000000, 'aktif', NULL, NULL),
 (2, 5, 2, 1, '1,2', 'Juned', 'juned@gmail.com', 'Jl. kebayoran baru no 29', '082283712371', 'juned12345', 0, 'aktif', NULL, NULL),
-(3, 1, 1, 1, '1,1', 'Krisman andrianus', 'krisman01@yahoo.com', 'Tangerang', '08677188218', '$2y$10$Bq5ypZVefX/6zlGiyWFti.MfRI1g3EnCk83GfFt5T0GSQP4yrxfWO', 350000, 'aktif', NULL, NULL),
+(3, 1, 1, 1, '1,1', 'Krisman andrianus', 'krisman01@yahoo.com', 'Tangerang', '08677188218', '$2y$10$Bq5ypZVefX/6zlGiyWFti.MfRI1g3EnCk83GfFt5T0GSQP4yrxfWO', 7950000, 'aktif', NULL, NULL),
 (4, 4, 2, 1, '1,2', 'Marwan', 'marwan@gmail.com', 'jl. mangga raya no 19 Tangerang', '085611192919', '$2y$10$qqstFTjqz0uOT67uTF6uiePTl09I22Bv2hHBMS2TTp6LaOBN50JLO', 0, 'aktif', NULL, NULL),
 (5, 6, 2, 1, '1,2', 'Randy', 'randy@gmail.com', 'jl. Mustika Ratu no 80 Jakarta', '082199230182', 'randy12345', 0, 'aktif', NULL, NULL),
 (6, 3, 1, 1, '1,1,1', 'Satria', 'satria@gmail.com', 'Jl. mulawarman 2 no 19', '085698128345', '$2y$10$i3kqCTu9RcRkTSdrwRr5QuATBhok2xfHUoX4U3RDvYKT4sTfWk/oC', 0, 'aktif', NULL, NULL),
@@ -87,7 +87,14 @@ INSERT INTO `email` (`id_email`, `penerima`, `judul`, `body`, `created_at`, `upd
 (5, 'krisman.andrianus@gmail.com', 'pertama', '<p>pertama laravel</p>', '2020-02-05 21:58:03', '2020-02-05 21:58:03'),
 (6, 'krisman.andrianus@gmail.com', 'pertama', '<p>pertama laravel</p>', '2020-02-05 21:58:45', '2020-02-05 21:58:45'),
 (7, 'krisman.andrianus@gmail.com', 'pertama', '<p>pertama laravel</p>', '2020-02-05 21:59:02', '2020-02-05 21:59:02'),
-(8, 'krisman.andrianus@gmail.com', 'pertama', '<p>pertama laravel</p>', '2020-02-05 21:59:31', '2020-02-05 21:59:31');
+(8, 'krisman.andrianus@gmail.com', 'pertama', '<p>pertama laravel</p>', '2020-02-05 21:59:31', '2020-02-05 21:59:31'),
+(9, 'krisman.andrianus@yahoo.com', 'tes', '<p>adasdasdadasd</p>', '2020-02-10 23:10:54', '2020-02-10 23:10:54'),
+(10, 'krisman.andrianus@yahoo.com', 'tesd', '<p>tes</p>', '2020-02-10 23:15:15', '2020-02-10 23:15:15'),
+(11, 'krisman.andrianus@gmail.com', 'sdasdasdasda', '<p>adadasdas terse</p>', '2020-02-10 23:25:35', '2020-02-10 23:25:35'),
+(12, 'krisman.andrianus@yahoo.com', 'percobaan pertama', '<h1><strong>Kemudian masukkan kata kunci yang ingin anda cari</strong>,<em> jika data tersebut</em> tersedia maka secara otomatis akan menampilkan hasil sesuai kata kunci yang anda masukkan.</h1>', '2020-02-11 02:49:03', '2020-02-11 02:49:03'),
+(13, 'krisman.andrianus@yahoo.com', 'judul', '<p>Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common</p>', '2020-02-11 02:59:17', '2020-02-11 02:59:17'),
+(14, 'krisman.andrianus@yahoo.com', 'admin', '<p>$judul&nbsp;=&nbsp;&nbsp;$request-&gt;name;</p>', '2020-02-11 03:08:02', '2020-02-11 03:08:02'),
+(15, 'krisman.andrianus@yahoo.com', 'percobaan', '<p>percobaan</p>', '2020-02-11 03:09:41', '2020-02-11 03:09:41');
 
 -- --------------------------------------------------------
 
@@ -138,6 +145,7 @@ CREATE TABLE `komisi` (
   `id_anggota` int(11) NOT NULL,
   `komisi` double(8,2) NOT NULL,
   `bukti_transfer` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `approval` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -146,10 +154,14 @@ CREATE TABLE `komisi` (
 -- Dumping data for table `komisi`
 --
 
-INSERT INTO `komisi` (`id_komisi`, `id_anggota`, `komisi`, `bukti_transfer`, `created_at`, `updated_at`) VALUES
-(3, 1, 400000.00, 'asuransi.pdf', '2020-01-29 00:24:35', '2020-01-29 00:24:35'),
-(4, 1, 50000.00, 'pembayaran.pdf', '2020-01-29 00:32:00', '2020-01-29 00:32:00'),
-(5, 2, 75000.00, 'bayar.jpg', '2020-02-06 03:08:05', '2020-02-06 03:08:05');
+INSERT INTO `komisi` (`id_komisi`, `id_anggota`, `komisi`, `bukti_transfer`, `approval`, `created_at`, `updated_at`) VALUES
+(3, 1, 400000.00, 'asuransi.pdf', 'admin', '2020-01-29 00:24:35', '2020-01-29 00:24:35'),
+(4, 1, 50000.00, 'pembayaran.pdf', '', '2020-01-29 00:32:00', '2020-01-29 00:32:00'),
+(5, 2, 75000.00, 'bayar.jpg', '', '2020-02-06 03:08:05', '2020-02-06 03:08:05'),
+(6, 2, 700000.00, 'bayar1.jpg', 'admin', '2020-02-10 21:25:24', '2020-02-10 21:25:24'),
+(7, 1, 60000.00, 'bayar2.jpg', 'admin', '2020-02-10 21:26:32', '2020-02-10 21:26:32'),
+(8, 1, 500000.00, 'bayar3.jpg', 'admin', '2020-02-10 21:28:04', '2020-02-10 21:28:04'),
+(9, 1, 200000.00, 'bayar4.jpg', 'krisman andrianus', '2020-02-10 21:33:38', '2020-02-10 21:33:38');
 
 -- --------------------------------------------------------
 
@@ -209,7 +221,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (11, '2020_01_23_043616_create_transaksi_table', 9),
 (12, '2020_01_28_042309_create_komisis_table', 10),
 (14, '2020_01_28_042309_create_komisi_table', 11),
-(15, '2020_02_06_033517_create_email_table', 12);
+(15, '2020_02_06_033517_create_email_table', 12),
+(16, '2020_02_10_083700_create_transaksi_produk_table', 13);
 
 -- --------------------------------------------------------
 
@@ -245,12 +258,12 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id_produk`, `nama_produk`, `jumlah`, `sisa`, `terjual`, `harga`, `created_at`, `updated_at`) VALUES
-(1, 'Haji Plus', 10, 9, 1, 1000000, NULL, NULL),
-(2, 'Umrah', 25, 10, 15, 1700000, '2020-01-16 20:08:12', '2020-01-16 20:08:12'),
+(1, 'Haji Plus', 10, 5, 5, 1000000, NULL, NULL),
+(2, 'Umrah', 25, 1, 24, 1700000, '2020-01-16 20:08:12', '2020-01-16 20:08:12'),
 (3, 'Investasi Syariah', 30, 28, 2, 3000000, '2020-01-27 23:41:48', '2020-01-27 23:41:48'),
-(7, 'Asuransi Jiwa', 30, 0, 0, 350000, '2020-01-28 02:12:59', '2020-01-28 02:12:59'),
-(9, 'Penyakit Kritis', 50, 0, 0, 350000, '2020-01-28 20:17:35', '2020-01-28 20:17:35'),
-(10, 'Asuransi Anak', 40, 0, 0, 40000, '2020-01-28 20:18:37', '2020-01-28 20:18:37');
+(7, 'Asuransi Jiwa', 30, 9, 21, 350000, '2020-01-28 02:12:59', '2020-01-28 02:12:59'),
+(9, 'Penyakit Kritis', 50, 17, 33, 350000, '2020-01-28 20:17:35', '2020-01-28 20:17:35'),
+(10, 'Asuransi Anak', 40, 5, 9, 40000, '2020-01-28 20:18:37', '2020-01-28 20:18:37');
 
 -- --------------------------------------------------------
 
@@ -278,6 +291,7 @@ CREATE TABLE `transaksi` (
   `id_produk` int(11) NOT NULL,
   `id_anggota` int(11) NOT NULL,
   `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jumlah` int(5) NOT NULL,
   `komisi` float NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -287,23 +301,88 @@ CREATE TABLE `transaksi` (
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`id_transaksi`, `id_produk`, `id_anggota`, `status`, `komisi`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 'Diterima', 200000, '2020-01-22 23:37:15', '2020-01-22 23:37:15'),
-(13, 2, 2, 'Diterima', 425000, '2020-01-23 01:57:43', '2020-01-23 02:48:14'),
-(14, 1, 1, 'Diterima', 200000, '2020-01-23 01:58:21', '2020-01-23 01:58:21'),
-(15, 2, 1, 'Diterima', 340000, '2020-01-23 02:00:58', '2020-01-23 02:00:58'),
-(16, 2, 1, 'Diterima', 340000, '2020-01-23 02:02:02', '2020-01-23 02:02:02'),
-(17, 2, 2, 'Diterima', 425000, '2020-01-23 02:02:27', '2020-01-23 02:02:27'),
-(18, 1, 2, 'Diterima', 250000, '2020-01-23 02:48:37', '2020-01-23 02:52:07'),
-(19, 2, 2, 'Diterima', 425000, '2020-01-23 03:28:08', '2020-01-23 03:28:08'),
-(20, 2, 2, 'Diterima', 425000, '2020-01-23 03:33:04', '2020-01-23 03:33:04'),
-(21, 2, 2, 'Diterima', 425000, '2020-01-23 03:33:35', '2020-01-23 03:33:35'),
-(22, 1, 2, 'Ditolak', 0, '2020-01-23 21:07:48', '2020-01-23 21:07:48'),
-(23, 1, 2, 'Pengajuan', 0, '2020-01-23 21:08:57', '2020-01-23 21:08:57'),
-(24, 3, 2, 'Diterima', 750000, '2020-01-28 00:20:04', '2020-01-28 00:20:04'),
-(25, 3, 2, 'Diterima', 750000, '2020-01-28 00:22:55', '2020-01-28 00:22:55'),
-(26, 3, 2, 'Diterima', 750000, '2020-01-28 00:31:36', '2020-01-28 00:31:36'),
-(27, 3, 2, 'Pengajuan', 0, '2020-01-28 00:31:53', '2020-01-28 00:31:53');
+INSERT INTO `transaksi` (`id_transaksi`, `id_produk`, `id_anggota`, `status`, `jumlah`, `komisi`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 'Diterima', 0, 0, '2020-01-22 23:37:15', '2020-01-22 23:37:15'),
+(13, 2, 2, 'Diterima', 0, 0, '2020-01-23 01:57:43', '2020-01-23 02:48:14'),
+(14, 1, 1, 'Diterima', 0, 0, '2020-01-23 01:58:21', '2020-01-23 01:58:21'),
+(15, 2, 1, 'Diterima', 0, 0, '2020-01-23 02:00:58', '2020-01-23 02:00:58'),
+(16, 2, 1, 'Diterima', 0, 0, '2020-01-23 02:02:02', '2020-01-23 02:02:02'),
+(17, 2, 2, 'Diterima', 0, 0, '2020-01-23 02:02:27', '2020-01-23 02:02:27'),
+(18, 1, 2, 'Diterima', 0, 0, '2020-01-23 02:48:37', '2020-01-23 02:52:07'),
+(19, 2, 2, 'Diterima', 0, 0, '2020-01-23 03:28:08', '2020-01-23 03:28:08'),
+(20, 2, 2, 'Diterima', 0, 0, '2020-01-23 03:33:04', '2020-01-23 03:33:04'),
+(21, 2, 2, 'Diterima', 0, 0, '2020-01-23 03:33:35', '2020-01-23 03:33:35'),
+(22, 1, 2, 'Ditolak', 0, 0, '2020-01-23 21:07:48', '2020-01-23 21:07:48'),
+(23, 1, 2, 'Diterima', 0, 0, '2020-01-23 21:08:57', '2020-01-23 21:08:57'),
+(24, 3, 2, 'Diterima', 0, 0, '2020-01-28 00:20:04', '2020-01-28 00:20:04'),
+(25, 3, 2, 'Diterima', 0, 0, '2020-01-28 00:22:55', '2020-01-28 00:22:55'),
+(26, 3, 2, 'Diterima', 0, 0, '2020-01-28 00:31:36', '2020-01-28 00:31:36'),
+(27, 3, 2, 'Diterima', 0, 0, '2020-01-28 00:31:53', '2020-01-28 00:31:53'),
+(28, 2, 1, 'Diterima', 0, 0, '2020-02-10 00:30:42', '2020-02-10 00:30:42'),
+(29, 10, 1, 'Diterima', 3, 0, '2020-02-10 00:45:31', '2020-02-10 00:45:31'),
+(30, 10, 1, 'Diterima', 9, 0, '2020-02-10 01:11:04', '2020-02-10 01:11:04'),
+(31, 10, 1, 'Batal', 1, 0, '2020-02-10 01:11:20', '2020-02-10 01:11:20'),
+(32, 10, 1, 'Batal', 0, 0, '2020-02-10 01:12:44', '2020-02-10 01:12:44'),
+(33, 10, 1, 'Diterima', 9, 0, '2020-02-10 01:19:41', '2020-02-10 01:19:41'),
+(34, 10, 1, 'Diterima', 9, 0, '2020-02-10 01:20:25', '2020-02-10 01:20:25'),
+(35, 10, 1, 'Diterima', 9, 0, '2020-02-10 01:50:49', '2020-02-10 01:50:49'),
+(36, 10, 1, 'Diterima', 9, 0, '2020-02-10 03:32:40', '2020-02-10 03:32:40'),
+(37, 10, 1, 'Diterima', 9, 0, '2020-02-10 03:35:50', '2020-02-10 03:35:50'),
+(38, 10, 1, 'Diterima', 9, 0, '2020-02-10 20:18:40', '2020-02-10 20:18:40'),
+(39, 10, 1, 'Diterima', 9, 0, '2020-02-10 20:19:49', '2020-02-10 20:19:49'),
+(40, 10, 1, 'Diterima', 9, 0, '2020-02-10 20:21:13', '2020-02-10 20:21:13'),
+(41, 2, 1, 'Diterima', 9, 0, '2020-02-10 20:23:23', '2020-02-10 20:23:23'),
+(42, 7, 1, 'Diterima', 9, 0, '2020-02-10 20:25:45', '2020-02-10 20:25:45'),
+(43, 2, 1, 'Pengajuan', 9, 0, '2020-02-10 20:36:43', '2020-02-10 20:36:43'),
+(44, 10, 1, 'Ditolak', 9, 0, '2020-02-10 21:59:00', '2020-02-10 21:59:00'),
+(45, 10, 1, 'Pengajuan', 7, 0, '2020-02-11 00:03:35', '2020-02-11 00:03:35'),
+(46, 9, 1, 'Diterima', 7, 490000, '2020-02-11 00:04:45', '2020-02-11 00:04:45'),
+(47, 10, 1, 'Batal', 2, 0, '2020-02-11 00:41:29', '2020-02-11 00:41:29'),
+(48, 10, 1, 'Batal', 2, 0, '2020-02-11 00:41:41', '2020-02-11 00:41:41'),
+(49, 10, 1, 'Pengajuan', 12, 0, '2020-02-11 01:01:04', '2020-02-11 01:01:04'),
+(50, 9, 1, 'Diterima', 13, 910000, '2020-02-11 01:01:16', '2020-02-11 01:01:16'),
+(51, 7, 1, 'Diterima', 12, 840000, '2020-02-11 01:04:00', '2020-02-11 01:04:00'),
+(52, 7, 1, 'Pengajuan', 10, 0, '2020-02-11 01:47:16', '2020-02-11 01:47:16'),
+(53, 1, 1, 'Diterima', 2, 400000, '2020-02-11 01:53:41', '2020-02-11 01:53:41'),
+(54, 1, 1, 'Diterima', 2, 400000, '2020-02-11 03:12:45', '2020-02-11 03:12:45');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaksi_produk`
+--
+
+CREATE TABLE `transaksi_produk` (
+  `id_transaksi_produk` bigint(20) UNSIGNED NOT NULL,
+  `id_anggota` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_produk` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `komisi` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `admin` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `transaksi_produk`
+--
+
+INSERT INTO `transaksi_produk` (`id_transaksi_produk`, `id_anggota`, `id_produk`, `komisi`, `jumlah`, `admin`, `created_at`, `updated_at`) VALUES
+(1, '1', '10', '', 9, 'admin', '2020-02-10 01:52:45', '2020-02-10 01:52:45'),
+(2, '1', '10', '', 9, '', '2020-02-10 03:32:52', '2020-02-10 03:32:52'),
+(3, '1', '10', '', 9, '', '2020-02-10 03:35:54', '2020-02-10 03:35:54'),
+(4, '1', '10', '', 9, 'krisman andrianus', '2020-02-10 20:18:44', '2020-02-10 20:18:44'),
+(5, '1', '10', '', 9, 'admin', '2020-02-10 20:20:13', '2020-02-10 20:20:13'),
+(6, '1', '10', '', 9, 'admin', '2020-02-10 20:22:11', '2020-02-10 20:22:11'),
+(7, '2', '1', '', 0, 'admin', '2020-02-10 20:22:27', '2020-02-10 20:22:27'),
+(8, '2', '3', '', 0, 'admin', '2020-02-10 20:22:42', '2020-02-10 20:22:42'),
+(9, '1', '2', '', 0, 'admin', '2020-02-10 20:22:43', '2020-02-10 20:22:43'),
+(10, '1', '2', '', 9, 'admin', '2020-02-10 20:25:54', '2020-02-10 20:25:54'),
+(11, '1', '7', '', 9, 'admin', '2020-02-10 20:27:22', '2020-02-10 20:27:22'),
+(12, '1', '9', '910000', 13, 'krisman andrianus', '2020-02-11 01:43:21', '2020-02-11 01:43:21'),
+(13, '1', '9', '490000', 7, 'krisman andrianus', '2020-02-11 01:46:09', '2020-02-11 01:46:09'),
+(14, '1', '1', '400000', 2, 'krisman andrianus', '2020-02-11 01:53:54', '2020-02-11 01:53:54'),
+(15, '1', '1', '400000', 2, 'krisman andrianus', '2020-02-11 03:13:02', '2020-02-11 03:13:02');
 
 -- --------------------------------------------------------
 
@@ -403,6 +482,12 @@ ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`id_transaksi`);
 
 --
+-- Indexes for table `transaksi_produk`
+--
+ALTER TABLE `transaksi_produk`
+  ADD PRIMARY KEY (`id_transaksi_produk`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -423,7 +508,7 @@ ALTER TABLE `anggota`
 -- AUTO_INCREMENT for table `email`
 --
 ALTER TABLE `email`
-  MODIFY `id_email` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_email` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -435,7 +520,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `komisi`
 --
 ALTER TABLE `komisi`
-  MODIFY `id_komisi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_komisi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `materi`
@@ -447,7 +532,7 @@ ALTER TABLE `materi`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `produk`
@@ -459,7 +544,13 @@ ALTER TABLE `produk`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_transaksi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- AUTO_INCREMENT for table `transaksi_produk`
+--
+ALTER TABLE `transaksi_produk`
+  MODIFY `id_transaksi_produk` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `users`

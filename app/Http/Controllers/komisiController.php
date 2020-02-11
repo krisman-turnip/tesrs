@@ -133,4 +133,14 @@ class komisiController extends Controller
         return response()->download($path, $book_cover
                  ->original_filename, ['Content-Type' => $book_cover->mime]); 
     }
+
+    public function komisianggota(request $request)
+    {
+        if (Session::get('login'))
+        {
+            $ids = $request->session()->get('login');
+            $komisi = DB::table('transaksi_produk')->where('id_anggota',$ids)->paginate(10);
+            return view('member/komisi/komisi', ['komisi' => $komisi]);
+        }
+    }
 }
