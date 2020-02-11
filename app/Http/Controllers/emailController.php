@@ -56,10 +56,11 @@ class emailController extends Controller
                 'email_body' => $request->email_body
             );
         $judul =  $request->name;
+        echo $judul;
         // Kirim Email
         Mail::send('email/emailsend', $data, function($mail) use($email) {
             $mail->to($email, 'no-reply')
-                    ->subject("Sample Email Laravel");
+                    ->subject('judul');
             $mail->from('krisman.andrianus@gmail.com', 'Testing');
         });
         email::create([
