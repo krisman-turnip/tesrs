@@ -5,7 +5,7 @@
      
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-       
+      @if(session()->has('admin')||session()->has('multiadmin'))
         <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Anggota</span>
@@ -20,6 +20,8 @@
         
           </ul>
         </li>
+        @endif
+        @if(session()->has('marketing')||session()->has('multiadmin'))
         <li class="treeview">
           <a href="#">
             <i class="fa fa-pie-chart"></i>
@@ -35,6 +37,8 @@
             <li><a href="{{ url('report') }}"><i class="fa fa-circle-o"></i> Transaksi Produk</a></li>
           </ul>
         </li>
+        @endif
+        @if(session()->has('marketing')||session()->has('multiadmin'))
         <li class="treeview">
           <a href="#">
             <i class="fa fa-laptop"></i>
@@ -50,7 +54,7 @@
             
           </ul>
         </li>
-       
+       @endif
         <li class="treeview">
           <a href="#">
             <i class="fa fa-edit"></i> <span>Level Jabatan</span>
@@ -75,6 +79,7 @@
             <li><a href="{{ url('emailtampil') }}"><i class="fa fa-circle-o"></i> Tampil Email </a></li>
           </ul>
         </li>
+        @if(session()->has('admin'))
         <li class="treeview">
           <a href="#">
             <i class="fa fa-table"></i> <span>Admin</span>
@@ -87,7 +92,7 @@
             <li><a href="{{ url('admin/tambah') }}"><i class="fa fa-circle-o"></i> Tambah Admin</a></li>
           </ul>
         </li>
-
+        @endif
         <li class="treeview">
           <a href="#">
             <i class="fa fa-table"></i> <span>Pembayaran Komisi</span>

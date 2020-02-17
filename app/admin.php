@@ -8,6 +8,6 @@ class admin extends Model
 {
     protected $table = 'users';
     protected $fillable = [
-        'name', 'email', 'password','status',
+        'name', 'email', 'password','status','level',
     ];
 }

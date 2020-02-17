@@ -61,7 +61,7 @@
                     
 
                     <!-- <form method="post" action="{{url('pegawai/update/$pegawai->id' )}}"> -->
-                    <form method="post" action="{{ url('/update/'.(isset($anggota) ? $anggota->id_anggota : '')) }}">
+                    <form method="post" action="{{ url('/update/'.(isset($anggota) ? $anggota->id_anggota : '')) }}" enctype="multipart/form-data">
 
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}  
@@ -71,7 +71,7 @@
                             <div class="col-md-6">
                             <!-- <input type="text" name="id_parent" class="form-control" placeholder="ID Parent  .." value=" {{ $anggota->id_parent }}"> -->
                             <select class="form-control select2" name="id_parent" id="cari" value=" ">
-                            <option value=""></option>
+                            <option value="{{$anggota->id_parent}}">{{$anggota->namaParent}}</option>
                             @foreach($data as $d)
                             <option value="{{$d->id_anggota}}">{{$d->nama}}</option>
                             @endforeach
@@ -89,7 +89,7 @@
                             <div class="col-md-6">
                             <!-- <input type="text" name="id_jabatan" class="form-control" placeholder="ID Jabatan  .." value=" {{ $anggota->id_jabatan }}"> -->
                             <select class="form-control select2" name="id_jabatan" id="carijabatan" value=" ">
-                            <option></option>
+                            <option value=" {{ $anggota->id_jabatan }}">{{ $anggota->nama_jabatan }}</option>
                             @foreach($pilihan as $value)
                             <option value="{{ $value->id_jabatan }}">{{$value->nama_jabatan}}
                                 </option>
@@ -155,23 +155,44 @@
                         </div>
 
                         <div class="form-group row">
-                        <label for="password" class="col-md-2 col-form-label text-md-right">Password</label>
-                            <div class="col-md-6">
-                            <input type="password" name="password" class="form-control" placeholder="Password .." value="{{ $anggota->password }}"> 
+                        <label for="no_ktp" class="col-md-2 col-form-label text-md-right">No KTP</label>
+                        <div class="col-md-6">
+                            <input type="text" name="no_ktp" class="form-control" value="{{ $anggota->no_ktp }}">
 
-                             @if($errors->has('password'))
+                             @if($errors->has('no_ktp'))
                                 <div class="text-danger">
-                                    {{ $errors->first('password')}}
+                                    {{ $errors->first('no_ktp')}}
                                 </div>
                             @endif
                             </div>
                         </div>
 
-                        <input type="hidden" name="_method" value="put">
-                            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-success" value="Simpan">
+                        <div class="form-group row">
+                        <label for="no_npwp" class="col-md-2 col-form-label text-md-right">No NPWP</label>
+                        <div class="col-md-6">
+                            <input type="text" name="no_npwp" class="form-control" value="{{ $anggota->no_npwp }}">
+
+                             @if($errors->has('no_npwp'))
+                                <div class="text-danger">
+                                    {{ $errors->first('no_npwp')}}
+                                </div>
+                            @endif
+                            </div>
                         </div>
+
+                        <div class="form-group row">
+                    <label for="file_ktp" class="col-md-2 col-form-label text-md-right"> Upload KTP</label>
+                        <div class="col-md-6">
+                            <input type="text" name="" value="{{ $anggota->file_ktp }}">
+                            <input type="file" name="file_ktp" >
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="_method" value="put">
+                        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-success" value="Simpan">
+                    </div>
                     </form>
                 </div>
             </div>

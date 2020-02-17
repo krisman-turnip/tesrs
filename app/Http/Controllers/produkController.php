@@ -45,13 +45,14 @@ class produkController extends Controller
             'harga' => 'required|numeric'
     	]);
  
-        produk::create([
+        $a = produk::create([
             'nama_produk' => $request->nama_produk,
             'jumlah' => $request->jumlah,
             'sisa' => '0',
             'terjual' => '0',
             'harga' => $request->harga
         ]);
+        //print_r $a;
         $produk = DB::table('produk')
                 ->orderBy('id_produk','desc')
                 ->first();

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Arr;
+use File;
 
 class anggotaController extends Controller
 {
@@ -96,28 +97,64 @@ class anggotaController extends Controller
             
         ]);
         $a= $request->id_parent;
-        $p = DB::table('anggota')->select('parent_all')->where('id_anggota',$a)->first();
+        $p = DB::table('anggota')->select('parent_all','id_parent')->where('id_anggota',$a)->first();
+        $parenta = $p->id_parent;
         $pa = $p->parent_all;
         $ex = explode(",",$pa);
         $i= count($ex);
         $ex[$i]=$a;
         $newData = implode(",", $ex);
-        anggota::create([
-            'id_anggota' => $request->id_anggota,
-            'id_parent' => $request->id_parent,
-            'id_jabatan' => $request->id_jabatan,
-            'parent_all' => $newData,
-            'nama' => $request->nama,
-            'email' => $request->email,
-            'alamat' => $request->alamat,
-            'no_handphone' => $request->no_handphone,
-            'password' => hash::make($request->password),
-            'saldo' => '0',
-            'status' => 'aktif'
-    	]);
+
+        $file = $request->file('file_ktp');
+    
+        $nama_file = $file->getClientOriginalName();
+        $gambar = anggota::where('file_ktp',$nama_file)->count();
+        //$a = $gambar->nama_materi;
+        if ($gambar==0)
+        {            
+              // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'data_ktp';
+            $file->move($tujuan_upload,$nama_file);
+        
+            anggota::create([
+                'id_anggota' => $request->id_anggota,
+                'id_parent' => $request->id_parent,
+                'id_parent_2' => $parenta,
+                'id_jabatan' => $request->id_jabatan,
+                'parent_all' => $newData,
+                'nama' => $request->nama,
+                'email' => $request->email,
+                'alamat' => $request->alamat,
+                'no_handphone' => $request->no_handphone,
+                'password' => hash::make($request->password),
+                'saldo' => '0',
+                'status' => 'aktif',
+                'no_ktp' => $request->no_ktp,
+                'file_ktp' => $request->file_ktp,
+                'no_npwp' => $request->no_npwp,
+            ]);
+        
+        }
+        else
+        {
+            //Alert::message('Message', 'Optional Title');
+            //return view ('');
+            Alert::message('Nama materi sudah ada', 'Judul Pesan');
+            return redirect()->back();
+        }
  
         return redirect('home');
     }
+
+    public function reset($id)
+    {
+       $delete= DB::table('anggota')-> where('id_anggota', $id)-> update([
+           'status' => 'reset',
+           'password' => ''
+       ]);
+        
+        return redirect('home');
+    } 
 
     public function delete($id)
     {
@@ -129,11 +166,16 @@ class anggotaController extends Controller
     } 
     public function edit($id)
     {
+        // id','id_anggota','id_parent', 'id_jabatan','parent_all','nama','alamat','email','no_handphone','password','saldo','status','no_ktp','no_npwp','file_ktp',];
+
         if (Session::get('login'))
         {
             //$anggota = anggota::find($id);
-            $anggota = DB::table('anggota')
-                    ->where('id_anggota',$id)
+            $anggota = DB::table('anggota as a')
+                    ->select('c.nama as namaParent','a.id_anggota','a.id_parent','a.id_jabatan','a.parent_all','a.nama','a.alamat','a.email','a.no_handphone','a.password','a.saldo','a.status','a.no_ktp','a.no_npwp','a.file_ktp','b.nama_jabatan')
+                    ->join('jabatan as b','a.id_jabatan','=','b.id_jabatan')
+                    ->join('anggota as c','c.id_anggota','=','a.id_parent')
+                    ->where('a.id_anggota',$id)
                     ->first();
                     $pilihan = DB::table('jabatan')
                     ->select('id_jabatan','nama_jabatan')
@@ -161,24 +203,48 @@ class anggotaController extends Controller
         // 'password' => 'required'
         // ]);
         $a= $request->id_parent;
-        $p = DB::table('anggota')->select('parent_all')->where('id_anggota',$a)->first();
+        $p = DB::table('anggota')->select('parent_all','id_parent')->where('id_anggota',$a)->first();
+        $parenta = $p->id_parent;
         $pa = $p->parent_all;
         $ex = explode(",",$pa);
         $i= count($ex);
         $ex[$i]=$a;
         $newData = implode(",", $ex);
-        DB::table('anggota')-> where('id_anggota', $request-> id)-> update([
-        //$anggota = anggota::find($id);
-        'id_parent' => $request->id_parent,
-        'id_jabatan' => $request->id_jabatan,
-        'parent_all' => $newData,
-        'nama' => $request->nama,
-        'email' => $request->email,
-        'alamat' => $request->alamat,
-        'no_handphone' => $request->no_handphone,
-        'password' => hash::make($request->password)
-        ]);
-        return redirect('home');
+        $gambar = anggota::where('id_anggota',$request-> id)->first();
+        File::delete('data_ktp/'.$gambar->file_ktp);
+        $file = $request->file('file_ktp');
+        $nama_file = $file->getClientOriginalName();
+        $gambar = anggota::where('file_ktp',$nama_file)->count();
+        //$a = $gambar->nama_materi;
+        if ($gambar==0)
+        {            
+              // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'data_ktp';
+            $file->move($tujuan_upload,$nama_file);
+            DB::table('anggota')-> where('id_anggota', $request-> id)-> update([
+            //$anggota = anggota::find($id);
+            'id_parent' => $request->id_parent,
+            'id_jabatan' => $request->id_jabatan,
+            'id_parent_2' => $request->$parenta,
+            'parent_all' => $newData,
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'alamat' => $request->alamat,
+            'no_handphone' => $request->no_handphone,
+            'no_ktp' => $request->no_ktp,
+            'file_ktp' => $nama_file,
+            'no_npwp' => $request->no_npwp,
+            ]);
+           
+            return redirect('home');
+        }
+        else
+        {
+            //Alert::message('Message', 'Optional Title');
+            //return view ('');
+            //Alert::message('Nama materi sudah ada', 'Judul Pesan');
+            return redirect()->back();
+        }
     }
 
     public function profile($id)
@@ -187,7 +253,7 @@ class anggotaController extends Controller
         {
             //$anggota = anggota::find($id);
             $anggota = DB::table('anggota as a')
-                    ->select('b.id_anggota','b.id_parent','b.id_jabatan','a.nama','b.email','b.alamat','b.no_handphone','b.saldo','b.nama as namaParent','c.nama_jabatan')
+                    ->select('b.id_anggota','b.id_parent','b.id_jabatan','a.nama','a.email','a.alamat','a.no_handphone','a.saldo','b.nama as namaParent','c.nama_jabatan')
                     ->join('anggota as b','b.id_anggota','=','a.id_parent')
                     ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
                     ->where('a.id_anggota',$id)
@@ -210,10 +276,10 @@ class anggotaController extends Controller
                             $sc = $az->id_anggota;
                             //echo $sc;
                             $anak[$sc] =DB::table('anggota as a')
-                                    ->select('b.id_anggota','a.id_parent','b.id_jabatan','a.nama','b.email','b.alamat','b.no_handphone','b.saldo','b.nama as namaParent','c.nama_jabatan')
+                                    ->select('b.id_anggota','b.id_parent','b.id_jabatan','a.nama','b.email','b.alamat','b.no_handphone','b.saldo','b.nama as namaParent','c.nama_jabatan')
                                     ->join('anggota as b','b.id_parent','=','a.id_anggota')
                                     ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
-                                    ->where('b.id_parent',$sc)
+                                    ->where([['b.id_parent',$sc],])
                                     ->get();
 
                             //$anak_array = Arr::add([$anak_array],$anak);
