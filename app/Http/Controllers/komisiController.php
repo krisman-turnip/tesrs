@@ -172,12 +172,7 @@ class komisiController extends Controller
             $ids = $request->session()->get('login');
             $anggota = DB::table('anggota')->where('id_anggota',$ids)->first();
             $komisi = DB::table('request_komisi')->where('id_anggota',$ids)->first();
-            $a = $komisi->status;
-            if($a == 'belum dibayar')
-            {
-                return redirect('/lihatrequestkomisi');
-            }
-            else{
+          
             request_komisi::create([
                 'id_anggota' => $ids,
                 'jumlah_request' => $request->requestkomisi,
@@ -185,7 +180,7 @@ class komisiController extends Controller
             ]);
 
             return redirect('/lihatrequestkomisi');
-            }
+            
         }
     }
 

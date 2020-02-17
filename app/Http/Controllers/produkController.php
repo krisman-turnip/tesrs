@@ -52,7 +52,7 @@ class produkController extends Controller
             'terjual' => '0',
             'harga' => $request->harga
         ]);
-        //print_r $a;
+        //dd($a->id);
         $produk = DB::table('produk')
                 ->orderBy('id_produk','desc')
                 ->first();

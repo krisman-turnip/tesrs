@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 17, 2020 at 11:30 AM
+-- Generation Time: Feb 17, 2020 at 11:56 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -54,7 +54,7 @@ CREATE TABLE `anggota` (
 --
 
 INSERT INTO `anggota` (`id`, `id_anggota`, `id_parent`, `id_parent_2`, `id_jabatan`, `parent_all`, `nama`, `email`, `alamat`, `no_handphone`, `password`, `saldo`, `status`, `no_ktp`, `file_ktp`, `no_npwp`, `created_at`, `updated_at`) VALUES
-(1, '2', '1', '', '2', '1,1', 'Aldo', 'aldo@gmail.com', 'Jl manggis raya no 82', '087627135261', '$2y$10$IxOgZkMX3u.PjGNwB.wRp.wT9bOo/VdIGLhxR7TrYvcd02d98xonm', 1000000, 'aktif', 0, '', 0, NULL, NULL),
+(1, '2', '1', '', '2', '1,1', 'Aldo', 'aldo@gmail.com', 'Jl manggis raya no 82', '087627135261', '$2y$10$Vw6DEDGNK8Y/EXXn8QvFXOkyxRLZQwmLiTlNic/8BhTwYAy1jga.2', 1000000, 'aktif', 0, '', 0, NULL, NULL),
 (2, '5', '2', '', '1', '1,2', 'Juned', 'juned@gmail.com', 'Jl. kebayoran baru no 29', '082283712371', 'juned12345', 0, 'aktif', 0, '', 0, NULL, NULL),
 (3, '1', '1', '', '1', '1,1,1,1', 'Krisman andrianus', 'krisman01@yahoo.com', 'Tangerang', '08677188218', '$2y$10$RUKHYA/WYZ8kY0Gi82QWieFo26feC7Q3QtrD9lywDSBTmK7LhiI12', 7950000, 'aktif', 9818273645, 'ktp krisman1.pdf', 2718284392, NULL, NULL),
 (4, '4', '2', '', '1', '1,2', 'Marwan', 'marwan@gmail.com', 'jl. mangga raya no 19 Tangerang', '085611192919', '$2y$10$qqstFTjqz0uOT67uTF6uiePTl09I22Bv2hHBMS2TTp6LaOBN50JLO', 0, 'aktif', 0, '', 0, NULL, NULL),
@@ -288,11 +288,19 @@ INSERT INTO `produk` (`id_produk`, `nama_produk`, `jumlah`, `sisa`, `terjual`, `
 
 CREATE TABLE `request_komisi` (
   `id_requestkomisi` bigint(20) UNSIGNED NOT NULL,
+  `id_anggota` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `jumlah_request` double(8,2) NOT NULL,
   `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `request_komisi`
+--
+
+INSERT INTO `request_komisi` (`id_requestkomisi`, `id_anggota`, `jumlah_request`, `status`, `created_at`, `updated_at`) VALUES
+(1, '2', 10000.00, 'belum dibayar', '2020-02-17 03:55:48', '2020-02-17 03:55:48');
 
 -- --------------------------------------------------------
 
@@ -620,13 +628,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `request_komisi`
 --
 ALTER TABLE `request_komisi`
-  MODIFY `id_requestkomisi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_requestkomisi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `sub_produk`
