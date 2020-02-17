@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 11, 2020 at 11:34 AM
+-- Generation Time: Feb 17, 2020 at 11:30 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -30,10 +30,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `anggota` (
   `id` bigint(20) NOT NULL,
-  `id_anggota` int(11) NOT NULL,
-  `id_parent` int(11) NOT NULL,
-  `id_jabatan` int(11) NOT NULL,
-  `parent_all` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_anggota` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_parent` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_parent_2` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_jabatan` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `parent_all` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `alamat` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -41,6 +42,9 @@ CREATE TABLE `anggota` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `saldo` float NOT NULL,
   `status` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `no_ktp` bigint(50) NOT NULL,
+  `file_ktp` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `no_npwp` bigint(50) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -49,16 +53,22 @@ CREATE TABLE `anggota` (
 -- Dumping data for table `anggota`
 --
 
-INSERT INTO `anggota` (`id`, `id_anggota`, `id_parent`, `id_jabatan`, `parent_all`, `nama`, `email`, `alamat`, `no_handphone`, `password`, `saldo`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 2, '1,1', 'Aldo', 'aldo@gmail.com', 'Jl manggis raya no 82', '087627135261', '$2y$10$JTxlAzw3MQKyyfJtxv/15u3bTvvfWgi3Ud66adpbE7wH7e1WMs2E6', 1000000, 'aktif', NULL, NULL),
-(2, 5, 2, 1, '1,2', 'Juned', 'juned@gmail.com', 'Jl. kebayoran baru no 29', '082283712371', 'juned12345', 0, 'aktif', NULL, NULL),
-(3, 1, 1, 1, '1,1', 'Krisman andrianus', 'krisman01@yahoo.com', 'Tangerang', '08677188218', '$2y$10$Bq5ypZVefX/6zlGiyWFti.MfRI1g3EnCk83GfFt5T0GSQP4yrxfWO', 7950000, 'aktif', NULL, NULL),
-(4, 4, 2, 1, '1,2', 'Marwan', 'marwan@gmail.com', 'jl. mangga raya no 19 Tangerang', '085611192919', '$2y$10$qqstFTjqz0uOT67uTF6uiePTl09I22Bv2hHBMS2TTp6LaOBN50JLO', 0, 'aktif', NULL, NULL),
-(5, 6, 2, 1, '1,2', 'Randy', 'randy@gmail.com', 'jl. Mustika Ratu no 80 Jakarta', '082199230182', 'randy12345', 0, 'aktif', NULL, NULL),
-(6, 3, 1, 1, '1,1,1', 'Satria', 'satria@gmail.com', 'Jl. mulawarman 2 no 19', '085698128345', '$2y$10$i3kqCTu9RcRkTSdrwRr5QuATBhok2xfHUoX4U3RDvYKT4sTfWk/oC', 0, 'aktif', NULL, NULL),
-(7, 7, 3, 2, '1,3', 'Deni', 'deni@gmail.com', 'Jl. Kamal Raya No 86', '085618217263', '$2y$10$3/DIzUSpbnxhd6hP7vrLpuzwIuH4d9oef8L/.CLxrFo8OhQ2ocWEe', 0, 'aktif', '2020-02-04 20:51:43', '2020-02-04 20:51:43'),
-(8, 8, 3, 1, '1,3', 'Andry', 'andry@gmail.com', 'Jl pluit raya no 12', '086727163427', '$2y$10$vkGBNRs1tyCQ/k/nGEtsp.SaUKQ87CAW.XIjaYjjqMj3kFz1x5lhG', 0, 'aktif', '2020-02-04 22:04:24', '2020-02-04 22:04:24'),
-(9, 9, 8, 1, '1,3,8', 'Dion', 'dion@gmail.com', 'Jl. duren sawit 2 no 19', '085727314857', '$2y$10$Uy/ritxWj/FFasrEDuHQE.ExfUHWkXdgtaMJ.acYavMjwjjvArNEm', 0, 'aktif', '2020-02-04 23:49:28', '2020-02-04 23:49:28');
+INSERT INTO `anggota` (`id`, `id_anggota`, `id_parent`, `id_parent_2`, `id_jabatan`, `parent_all`, `nama`, `email`, `alamat`, `no_handphone`, `password`, `saldo`, `status`, `no_ktp`, `file_ktp`, `no_npwp`, `created_at`, `updated_at`) VALUES
+(1, '2', '1', '', '2', '1,1', 'Aldo', 'aldo@gmail.com', 'Jl manggis raya no 82', '087627135261', '$2y$10$IxOgZkMX3u.PjGNwB.wRp.wT9bOo/VdIGLhxR7TrYvcd02d98xonm', 1000000, 'aktif', 0, '', 0, NULL, NULL),
+(2, '5', '2', '', '1', '1,2', 'Juned', 'juned@gmail.com', 'Jl. kebayoran baru no 29', '082283712371', 'juned12345', 0, 'aktif', 0, '', 0, NULL, NULL),
+(3, '1', '1', '', '1', '1,1,1,1', 'Krisman andrianus', 'krisman01@yahoo.com', 'Tangerang', '08677188218', '$2y$10$RUKHYA/WYZ8kY0Gi82QWieFo26feC7Q3QtrD9lywDSBTmK7LhiI12', 7950000, 'aktif', 9818273645, 'ktp krisman1.pdf', 2718284392, NULL, NULL),
+(4, '4', '2', '', '1', '1,2', 'Marwan', 'marwan@gmail.com', 'jl. mangga raya no 19 Tangerang', '085611192919', '$2y$10$qqstFTjqz0uOT67uTF6uiePTl09I22Bv2hHBMS2TTp6LaOBN50JLO', 0, 'aktif', 0, '', 0, NULL, NULL),
+(5, '6', '2', '', '1', '1,1,2', 'Randy', 'randy@gmail.com', 'jl. Mustika Ratu no 80 Jakarta', '082199230182', '$2y$10$.I9MbGx9CdvcTFUNF1G8gOYG003zFwBwv.LFnb1cpmPsEesZjyWF2', 0, 'aktif', 987654321, 'ktp.pdf', 543216789, NULL, NULL),
+(6, '3', '1', '', '1', '1,1,1', 'Satria', 'satria@gmail.com', 'Jl. mulawarman 2 no 19', '085698128345', '$2y$10$i3kqCTu9RcRkTSdrwRr5QuATBhok2xfHUoX4U3RDvYKT4sTfWk/oC', 0, 'aktif', 0, '', 0, NULL, NULL),
+(7, '7', '3', '', '2', '1,3', 'Deni', 'deni@gmail.com', 'Jl. Kamal Raya No 86', '085618217263', '$2y$10$3/DIzUSpbnxhd6hP7vrLpuzwIuH4d9oef8L/.CLxrFo8OhQ2ocWEe', 0, 'aktif', 0, '', 0, '2020-02-04 20:51:43', '2020-02-04 20:51:43'),
+(8, '8', '3', '', '2', '1,1,1,3', 'Andry', 'andry@gmail.com', 'Jl pluit raya no 12', '086727163427', '$2y$10$rNs4/Ocrqb5jcIdEqbC3qOswGhkvF1pEGCWaZWm7vNMhNO./lS9gm', 0, 'aktif', 192819889891212, 'asuransi2.pdf', 121398171899899, '2020-02-04 22:04:24', '2020-02-04 22:04:24'),
+(9, '9', '8', '', '1', '1,3,8', 'Dion', 'dion@gmail.com', 'Jl. duren sawit 2 no 19', '085727314857', '$2y$10$Uy/ritxWj/FFasrEDuHQE.ExfUHWkXdgtaMJ.acYavMjwjjvArNEm', 0, 'aktif', 0, '', 0, '2020-02-04 23:49:28', '2020-02-04 23:49:28'),
+(10, '10', '6', '', '1', '1,2,6', 'ahmad', 'ahmad@gmail.com', 'Jl. tembaga raya no 91', '082291831485', '$2y$10$YwNFT5YEM.I8t9tpfpPxeucGpg6mYH8DB6QQbe/lEU.s2/bfVQ3l.', 0, 'aktif', 0, '', 0, '2020-02-11 21:38:51', '2020-02-11 21:38:51'),
+(11, '12', '6', '', '1', '1,2,6', 'Fery', 'fery@gmail.com', 'jl tebet 2 no 80', '082189129321', '$2y$10$LqmNF35fzxbK5IDisOyF/./3y/3RaWSSLg0Jo/fmTPCfK0rk8FbGm', 0, 'aktif', 0, '', 0, '2020-02-12 21:48:06', '2020-02-12 21:48:06'),
+(12, 'b01', '9', '', '1', '1,3,8,9', 'Felina', 'felina@gmail.com', 'Muara kamal 2 no90', '082298132756', '$2y$10$NV2NvKjOovSDNEcJVP9CCODXSUIrXeYAn9/Wb1d1IW9lvPLF9NyOS', 0, 'aktif', 0, '', 0, '2020-02-13 01:58:47', '2020-02-13 01:58:47'),
+(13, 'b02', '12', '', '1', '1,2,6,12', 'Mayer', 'mayer@gmail.com', 'kelapa puan 2 no 23', '0219928132', '$2y$10$cKpn2FqiuCUoL4PT1rf9LeAr6WSZw9F//PiFhwNUCO1nQVxWNy/Qa', 0, 'aktif', 123456789120391, 'asuransi1.pdf', 12345678901234, '2020-02-13 20:34:24', '2020-02-13 20:34:24'),
+(14, 'c01', 'b01', '', '2', '1,3,8,9,b01', 'Dian', 'dian@gmail.com', 'pasar kemis', '0217328293', '$2y$10$kZyEuySkTBsLdirdH0Mbeeyjhu8dkz0lw9WavtH8wE2wKKxnYVTkm', 0, 'aktif', 98217367199919, 'pembayaran1.pdf', 91828783719281, '2020-02-13 20:36:39', '2020-02-13 20:36:39'),
+(15, 'b03', '6', '2', '2', '1,1,2,6', 'Fuad', 'fuad@gmail.com', 'jl kapur barus 2 no 12', '086712731623', '$2y$10$5zX6TGaXkqjMnAKXl4gMVObuY/yEAxEm1GKTbZmbChQuXa3u/ZOnG', 0, 'aktif', 9876351622121, 'C:\\xampp\\tmp\\php657C.tmp', 7281899192345, '2020-02-17 01:12:08', '2020-02-17 01:12:08');
 
 -- --------------------------------------------------------
 
@@ -189,7 +199,8 @@ INSERT INTO `materi` (`id_materi`, `id_produk`, `nama_materi`, `keterangan`, `cr
 (13, 2, 'php.pdf', 'qwer', '2020-01-23 20:39:28', '2020-01-23 20:39:28'),
 (14, 7, 'java.pdf', 'asuransi', '2020-01-28 02:12:59', '2020-01-28 02:12:59'),
 (15, 10, 'asuransi.pdf', 'asuransi anak', '2020-01-28 20:18:37', '2020-01-28 20:18:37'),
-(16, 2, 'pembayaran.pdf', 'asadsda', '2020-02-03 01:45:15', '2020-02-03 01:45:15');
+(16, 2, 'pembayaran.pdf', 'asadsda', '2020-02-03 01:45:15', '2020-02-03 01:45:15'),
+(17, 11, 'pembayaran1.pdf', 'asuransi mobil', '2020-02-11 21:44:50', '2020-02-11 21:44:50');
 
 -- --------------------------------------------------------
 
@@ -222,7 +233,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (12, '2020_01_28_042309_create_komisis_table', 10),
 (14, '2020_01_28_042309_create_komisi_table', 11),
 (15, '2020_02_06_033517_create_email_table', 12),
-(16, '2020_02_10_083700_create_transaksi_produk_table', 13);
+(16, '2020_02_10_083700_create_transaksi_produk_table', 13),
+(20, '2020_02_17_033836_create_request_komisi_table', 14),
+(21, '2020_02_17_095816_create_sub_produks_table', 14),
+(22, '2020_02_17_095837_create_tanggal_produks_table', 14);
 
 -- --------------------------------------------------------
 
@@ -263,7 +277,22 @@ INSERT INTO `produk` (`id_produk`, `nama_produk`, `jumlah`, `sisa`, `terjual`, `
 (3, 'Investasi Syariah', 30, 28, 2, 3000000, '2020-01-27 23:41:48', '2020-01-27 23:41:48'),
 (7, 'Asuransi Jiwa', 30, 9, 21, 350000, '2020-01-28 02:12:59', '2020-01-28 02:12:59'),
 (9, 'Penyakit Kritis', 50, 17, 33, 350000, '2020-01-28 20:17:35', '2020-01-28 20:17:35'),
-(10, 'Asuransi Anak', 40, 5, 9, 40000, '2020-01-28 20:18:37', '2020-01-28 20:18:37');
+(10, 'Asuransi Anak', 40, 5, 9, 400000, '2020-01-28 20:18:37', '2020-01-28 20:18:37'),
+(11, 'Asuransi Mobil', 100, 0, 0, 1000000, '2020-02-11 21:44:50', '2020-02-11 21:44:50');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `request_komisi`
+--
+
+CREATE TABLE `request_komisi` (
+  `id_requestkomisi` bigint(20) UNSIGNED NOT NULL,
+  `jumlah_request` double(8,2) NOT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -278,6 +307,37 @@ CREATE TABLE `sessions` (
   `user_agent` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `payload` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_activity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sub_produk`
+--
+
+CREATE TABLE `sub_produk` (
+  `id_sub_produk` bigint(20) UNSIGNED NOT NULL,
+  `id_produk` int(11) NOT NULL,
+  `nama_produk` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `harga` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keterangan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tanggal_produk`
+--
+
+CREATE TABLE `tanggal_produk` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `id_produk` int(11) NOT NULL,
+  `tanggal aktif` date NOT NULL,
+  `tanggal Expired` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -344,7 +404,9 @@ INSERT INTO `transaksi` (`id_transaksi`, `id_produk`, `id_anggota`, `status`, `j
 (51, 7, 1, 'Diterima', 12, 840000, '2020-02-11 01:04:00', '2020-02-11 01:04:00'),
 (52, 7, 1, 'Pengajuan', 10, 0, '2020-02-11 01:47:16', '2020-02-11 01:47:16'),
 (53, 1, 1, 'Diterima', 2, 400000, '2020-02-11 01:53:41', '2020-02-11 01:53:41'),
-(54, 1, 1, 'Diterima', 2, 400000, '2020-02-11 03:12:45', '2020-02-11 03:12:45');
+(54, 1, 1, 'Diterima', 2, 400000, '2020-02-11 03:12:45', '2020-02-11 03:12:45'),
+(55, 1, 1, 'Ditolak', 6, 0, '2020-02-11 03:40:29', '2020-02-11 03:40:29'),
+(56, 1, 1, 'Pengajuan', 2, 0, '2020-02-11 21:55:36', '2020-02-11 21:55:36');
 
 -- --------------------------------------------------------
 
@@ -398,6 +460,7 @@ CREATE TABLE `users` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `level` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -406,9 +469,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'krisman andrianus', 'krisman9@yahoo.com', NULL, '$2y$10$D3BY8pWRsuYKcH88Zhwde.AQg61vxknGoRG0yMYNULoJUxRus4EnS', NULL, 'aktif', '2020-01-14 01:07:57', '2020-01-14 01:07:57'),
-(5, 'admin', 'admin@yahoo.com', NULL, '$2y$10$Ji5x92TGIphRoGkx28mPcePrJnM7vlvsQKuhi5kSsGCS/WqAU27xa', NULL, 'aktif', '2020-01-28 21:54:46', '2020-01-28 21:54:46');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `status`, `level`, `created_at`, `updated_at`) VALUES
+(1, 'krisman andrianus', 'krisman9@yahoo.com', NULL, '$2y$10$D3BY8pWRsuYKcH88Zhwde.AQg61vxknGoRG0yMYNULoJUxRus4EnS', NULL, 'aktif', 'marketing', '2020-01-14 01:07:57', '2020-01-14 01:07:57'),
+(5, 'admin', 'admin@yahoo.com', NULL, '$2y$10$Ji5x92TGIphRoGkx28mPcePrJnM7vlvsQKuhi5kSsGCS/WqAU27xa', NULL, 'aktif', 'admin', '2020-01-28 21:54:46', '2020-01-28 21:54:46'),
+(6, 'Yuni Arfa', 'yuni@gmail.com', NULL, '$2y$10$4FdJ4ZXAFqUW/.8aN8azM.ra68GU4Lran.67xEpt3bc5MaZKDAq5G', NULL, 'aktif', 'multiadmin', '2020-02-13 01:09:30', '2020-02-13 01:09:30');
 
 --
 -- Indexes for dumped tables
@@ -470,10 +534,28 @@ ALTER TABLE `produk`
   ADD PRIMARY KEY (`id_produk`);
 
 --
+-- Indexes for table `request_komisi`
+--
+ALTER TABLE `request_komisi`
+  ADD PRIMARY KEY (`id_requestkomisi`);
+
+--
 -- Indexes for table `sessions`
 --
 ALTER TABLE `sessions`
   ADD UNIQUE KEY `sessions_id_unique` (`id`);
+
+--
+-- Indexes for table `sub_produk`
+--
+ALTER TABLE `sub_produk`
+  ADD PRIMARY KEY (`id_sub_produk`);
+
+--
+-- Indexes for table `tanggal_produk`
+--
+ALTER TABLE `tanggal_produk`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `transaksi`
@@ -502,7 +584,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `anggota`
 --
 ALTER TABLE `anggota`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `email`
@@ -526,25 +608,43 @@ ALTER TABLE `komisi`
 -- AUTO_INCREMENT for table `materi`
 --
 ALTER TABLE `materi`
-  MODIFY `id_materi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_materi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `request_komisi`
+--
+ALTER TABLE `request_komisi`
+  MODIFY `id_requestkomisi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sub_produk`
+--
+ALTER TABLE `sub_produk`
+  MODIFY `id_sub_produk` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tanggal_produk`
+--
+ALTER TABLE `tanggal_produk`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id_transaksi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `transaksi_produk`
@@ -556,7 +656,7 @@ ALTER TABLE `transaksi_produk`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
