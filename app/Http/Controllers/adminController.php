@@ -12,7 +12,7 @@ class adminController extends Controller
 {
     public function index()
     {
-        if (Session::get('login'))
+        if (Session::get('admin'))
         {
             $admin = DB::table('users')->paginate(10);
             return view('admin/admin', ['admin' => $admin]);
@@ -25,7 +25,7 @@ class adminController extends Controller
 
     public function tambah()
     {
-        if (Session::get('login'))
+        if (Session::get('admin'))
         {
             return view('admin/tambah_admin');
             //return view('../pegawai');
@@ -41,12 +41,14 @@ class adminController extends Controller
     	$this->validate($request,[
             'name' => 'required',
             'email' => 'required|email',
+            'level' => 'required',
             'password' => 'required'
     	]);
  
         user::create([
             'name' => $request->name,
             'email' => $request->email,
+            'level' => $request->level,
             'password' => hash::make($request->password),
             'status' => 'aktif'
     	]);
@@ -62,7 +64,7 @@ class adminController extends Controller
 
     public function edit($id)
     {
-        if (Session::get('login'))
+        if (Session::get('admin'))
         {
             //$anggota = anggota::find($id);
             $admin = DB::table('users')->where('id',$id)->first();
@@ -81,6 +83,7 @@ class adminController extends Controller
         'id' => $request->id,
         'name' => $request->name,
         'email' => $request->email,
+        'level' => $request->level,
         'password' => hash::make($request->password)
         ]);
         return redirect('admin');

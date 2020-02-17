@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\anggota;
 use App\komisi;
+use App\request_komisi;
 use Illuminate\Support\Facades\Session;
 
 class komisiController extends Controller
@@ -16,7 +17,7 @@ class komisiController extends Controller
             $anggota = DB::table('anggota as a')
             ->select('a.id_anggota','a.nama','a.email','a.no_handphone','b.nama_jabatan','a.saldo')
             ->rightjoin('jabatan as b', 'b.id_jabatan', '=', 'a.id_jabatan')
-            ->where('status','aktif')
+            ->where('a.status','aktif')
             ->paginate(10);
             return view('komisi/komisi', ['anggota' => $anggota]);
         }
@@ -30,8 +31,11 @@ class komisiController extends Controller
     {
         if (Session::get('login'))
         {
-            $anggota = DB::table('anggota')->where('id_anggota',$id)->first();
-            return view('komisi/pembayaran_komisi', ['anggota' => $anggota]);
+            $anggota = DB::table('anggota as a')
+                    ->select('a.id_anggota','a.nama','a.email','a.no_handphone','a.saldo','b.jumlah_request')
+                    ->join('request_komisi as b','b.id_anggota','=','a.id_anggota')
+                    ->where('a.id_anggota',$id)->first();
+                    return view('komisi/pembayaran_komisi', ['anggota' => $anggota]);
         }
         else
         {
@@ -67,6 +71,10 @@ class komisiController extends Controller
                     {     
                         DB::table('anggota')-> where('id_anggota', $id)-> update([
                             'saldo' => $selisih,
+                        ]);
+
+                        DB::table('request_komisi')-> where('id_anggota', $id)-> update([
+                            'status' => 'sudah dibayar',
                         ]);
                         
                     // $bukti = DB::table('komisi')
@@ -141,6 +149,95 @@ class komisiController extends Controller
             $ids = $request->session()->get('login');
             $komisi = DB::table('transaksi_produk')->where('id_anggota',$ids)->paginate(10);
             return view('member/komisi/komisi', ['komisi' => $komisi]);
+        }
+    }
+
+    public function requestkomisi(request $request)
+    {
+        if (Session::get('login'))
+        {
+            $ids = $request->session()->get('login');
+            $anggota = DB::table('anggota')->where('id_anggota',$ids)->first();
+            return view ('member/komisi/requestkomisi',['anggota'=>$anggota]);
+        }
+        else
+        {
+            return view('/loginanggota');
+        }
+    }
+    public function trrequestkomisi(request $request)
+    {
+        if (Session::get('login'))
+        {
+            $ids = $request->session()->get('login');
+            $anggota = DB::table('anggota')->where('id_anggota',$ids)->first();
+            $komisi = DB::table('request_komisi')->where('id_anggota',$ids)->first();
+            $a = $komisi->status;
+            if($a == 'belum dibayar')
+            {
+                return redirect('/lihatrequestkomisi');
+            }
+            else{
+            request_komisi::create([
+                'id_anggota' => $ids,
+                'jumlah_request' => $request->requestkomisi,
+                'status' => 'belum dibayar'
+            ]);
+
+            return redirect('/lihatrequestkomisi');
+            }
+        }
+    }
+
+    public function lihatrequestkomisi(request $request)
+    {
+        if (Session::get('login'))
+        {
+            $ids = $request->session()->get('login');
+            $komisi = DB::table('request_komisi as a')
+                    ->select('a.jumlah_request','a.status','b.saldo','a.created_at','a.id_anggota')
+                    ->join('anggota as b','b.id_anggota','=','a.id_anggota')
+                    ->where('a.id_anggota',$ids)
+                    ->paginate();
+    
+            return view('member/komisi/lihatrequestkomisi',['komisi'=>$komisi]);
+        }
+        else
+        {
+            return view('/loginanggota');
+        }
+    }
+
+    public function editrequestkomisi(request $request)
+    {
+        if (Session::get('login'))
+        {
+            $ids = $request->session()->get('login');
+            $anggota = DB::table('request_komisi as a')
+                    ->select('a.jumlah_request','a.status','b.saldo','a.created_at','a.id_anggota','b.nama','a.id_requestkomisi')
+                    ->join('anggota as b','b.id_anggota','=','a.id_anggota')
+                    ->where('a.id_anggota',$ids)
+                    ->first();
+            return view ('member/komisi/editrequestkomisi',['anggota'=>$anggota]);
+        }
+        else
+        {
+            return view('/loginanggota');
+        }
+    }
+
+    public function updaterequestkomisi($id, request $request)
+    {
+        if (Session::get('login'))
+        {
+            $ids = $request->session()->get('login');
+            $anggota = DB::table('anggota')->where('id_anggota',$ids)->first();
+            
+            DB::table('request_komisi')-> where('id_requestkomisi', $id)-> update([
+                //$anggota = anggota::find($id);
+                'jumlah_request' => $request->requestkomisi
+                ]);
+            return redirect('/lihatrequestkomisi');
         }
     }
 }

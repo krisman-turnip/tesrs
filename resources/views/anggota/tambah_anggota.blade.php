@@ -63,7 +63,7 @@
                     <br/>
                     <br/>
                     
-                    <form method="post" action="{{url('anggota/store')}}">
+                    <form method="post" action="{{url('anggota/store')}}" enctype="multipart/form-data">
 
                         {{ csrf_field() }}
 
@@ -168,6 +168,39 @@
                             @endif
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                        <label for="no_ktp" class="col-md-2 col-form-label text-md-right">No KTP</label>
+                        <div class="col-md-6">
+                            <input type="text" name="no_ktp" class="form-control" placeholder="No KTP ..">
+
+                             @if($errors->has('no_ktp'))
+                                <div class="text-danger">
+                                    {{ $errors->first('no_ktp')}}
+                                </div>
+                            @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                        <label for="no_npwp" class="col-md-2 col-form-label text-md-right">No NPWP</label>
+                        <div class="col-md-6">
+                            <input type="text" name="no_npwp" class="form-control" placeholder="No NPWP ..">
+
+                             @if($errors->has('no_npwp'))
+                                <div class="text-danger">
+                                    {{ $errors->first('no_npwp')}}
+                                </div>
+                            @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                    <label for="file_ktp" class="col-md-2 col-form-label text-md-right"> Upload KTP</label>
+                        <div class="col-md-6">
+                            <input type="file" name="file_ktp">
+                        </div>
+                    </div>
 
                         <div class="form-group row">
                         <label for="email" class="col-md-2 col-form-label text-md-right">Password</label>

@@ -18,6 +18,7 @@ Route::get('/anggota/tambah','anggotaController@tambah');
 Route::post('/anggota/store','anggotaController@store');
 Route::get('/anggota/hapus/{id}', 'anggotaController@delete');
 Route::get('/anggota/edit/{id}', 'anggotaController@edit');
+Route::get('/anggota/reset/{id}', 'anggotaController@reset');
 Route::put('/update/{id}', 'anggotaController@update');
 Route::get('/cari', 'anggotaController@loadData')->name("search");
 Route::get('/anggota/profile/{id}', 'anggotaController@profile');
@@ -77,6 +78,8 @@ Route::get('/loginanggota', function () {
 });
 Route::post('/prosesloginanggota','loginanggotaController@login');
 Route::get('/proseslogoutanggota','loginanggotaController@logout');
+Route::get('/reset','loginanggotaController@reset');
+Route::post('/loginanggota/reset','loginanggotaController@loginreset');
 
                 /*route anggota->member */
 Route::get('/beranda','anggotamemberController@index');
@@ -95,9 +98,14 @@ Route::get('/produkanggota/ditolak','transaksiController@ditolak');
                 /* route materi->member */
 Route::get('/materianggota','materianggotaController@index');
 
-                /* route komisi->admin */
+                /* route komisi->anggota */
  Route::get('/komisi','komisiController@index');
  Route::get('/komisianggota','komisiController@komisianggota');
+ Route::get('/requestkomisi','komisiController@requestkomisi');
+ Route::post('/trrequestkomisi','komisiController@trrequestkomisi');
+ Route::get('/lihatrequestkomisi','komisiController@lihatrequestkomisi');
+ Route::get('/komisi/editrequest/{id}','komisiController@editrequestkomisi');
+ Route::post('/updaterequestkomisi/{id}','komisiController@updaterequestkomisi');
  Route::get('/pembayaran/{id}','komisiController@pembayaran');
  Route::put('/bayar/{id}','komisiController@bayar');
  Route::get('/transaksiKomisi','komisiController@transaksiKomisi');

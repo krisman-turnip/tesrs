@@ -34,12 +34,12 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-  @include('layouts.header')
+@include('member.layout.header')
   <!-- Left side column. contains the logo and sidebar -->
-  @include('layouts.sidebar')
+  @include('member.layout.sidebar')
   @if (session('status'))
                         <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                           
                         </div>
                     @endif
   <!-- Content Wrapper. Contains page content -->
@@ -48,93 +48,55 @@
     <div class="container">
             <div class="card mt-3">
                 <div class="card-header text-center">
-                    <H1>TAMBAH PRODUK</h1> 
+                    <strong>Request Komisi</strong> 
                 </div>
                 <div class="card-body">
-                    <a href="../produk" class="btn btn-primary">Kembali</a>
+                    <a href="{{ url('lihatrequestkomisi') }}" class="btn btn-primary">Lihat Request</a>
                     <!-- <a href="../pegawai" class="btn btn-primary">store</a> -->
                     <br/>
                     <br/>
                     
-                    <form method="post" action="{{url('produk/store')}}" enctype="multipart/form-data" id='inForm'>
-
-                        {{ csrf_field() }}
+                    <form method="POST" action="{{url('trrequestkomisi')}}">
+                        @csrf
 
                         <div class="form-group row">
-                        <label for="nama_produk" class="col-md-2 col-form-label text-md-right">Nama Produk</label>
-                            <div class="col-md-6">
-                            <input type="text" name="nama_produk" class="form-control" placeholder="Nama Produk ..">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">Nama</label>
 
-                            @if($errors->has('nama_produk'))
-                                <div class="text-danger">
-                                    {{ $errors->first('nama_produk')}}
-                                </div>
-                            @endif
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $anggota->nama}}">
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="form-group row">
-                        <label for="jumlah" class="col-md-2 col-form-label text-md-right">Jumlah</label>
-                        <div class="col-md-6">
-                            <input type="text" name="jumlah" class="form-control" placeholder="Jumlah ..">
+                            <label for="saldo" class="col-md-4 col-form-label text-md-right">Saldo</label>
 
-                            @if($errors->has('jumlah'))
-                                <div class="text-danger">
-                                    {{ $errors->first('jumlah')}}
-                                </div>
-                            @endif
-                        </div> 
-                        </div>
-
-                        <div class="form-group row">
-                        <label for="harga" class="col-md-2 col-form-label text-md-right">Harga</label>
-                        <div class="col-md-6">
-                            <input type="text" name="harga" class="form-control" placeholder="Harga ..">
-
-                            @if($errors->has('harga'))
-                                <div class="text-danger">
-                                    {{ $errors->first('harga')}}
-                                </div>
-                            @endif
-                        </div>
-                        </div>
-                        <h3>Upload Materi</h3>
-                        <div class="form-group row">
-                        <label for="jumlah" class="col-md-2 col-form-label text-md-right">File Upload</label>
                             <div class="col-md-6">
-                                <input type="file" name="nama_materi">
+                                <input id="saldo" type="text" class="form-control" name="saldo" value="{{ $anggota->saldo}}" >
                             </div>
                         </div>
 
                         <div class="form-group row">
-                        <label for="jumlah" class="col-md-2 col-form-label text-md-right">Keterangan</label>
+                            <label for="request" class="col-md-4 col-form-label text-md-right">Request Komisi</label>
+
                             <div class="col-md-6">
-                                <textarea class="form-control" name="keterangan"></textarea>
+                                <input id="request" type="text" class="form-control" name="requestkomisi" required >
                             </div>
                         </div>
 
-                        <table id='targetTbl'>
-                            <tbody>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>First name</th>
-                                    <th>Opsi</th>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <input type='text' name='name[]' id='name'/>
-                        <input type='text' name='first[]' id='first'/>
-                        <input type='submit' value='add row'/>
-                        <br> 
-                            <input type="hidden" name="_method" value="post">
+                        <input type="hidden" name="_method" value="post">
                             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                         <div class="form-group row mb-0">
-                        <div class="col-md-6 ">
-                            <input type="submit" class="btn btn-success" value="Simpan">
+                        <div class="col-md-6 offset-md-4">
+                                <input type="submit" class="btn btn-primary" value="Simpan">
+                             
+                            </div>
                         </div>
-                        </div>
-
                     </form>
 
                 </div>
@@ -150,41 +112,7 @@
  <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
-<script>
-document.getElementById('inForm').onsubmit = function(e)
-{
-    var newRow,i;
-    e = e || window.event;
-    if (e.preventDefault)
-    {
-        e.preventDefault();
-        e.stopPropagation();
-    }
-    e.returnValue = false;
-    e.cancelBubble = true;
-    newRow = '<tr>';
-    newColumn = '<td>';
-    for(i=0;i<this.elements.length;i++)
-    {
-        if (this.elements[i].tagName.toLowerCase() === 'input' && this.elements[i].type === 'text')
-        {
-            newRow += '<td>'+this.elements[i].value+'</td>';
-            
-        }
-        
-    }
-    newRow += '<td><input type="button" value="Delete" onclick="deleteRow(this)"/></td>';
 
-    document.getElementById('targetTbl').innerHTML += newRow + '</tr>';
-    return false;
-};
-</script>
-<script>
-  function deleteRow(btn) {
-  var row = btn.parentNode.parentNode;
-  row.parentNode.removeChild(row);
-}
-</script>
 <!-- jQuery 3 -->
 <script src="{{url('adminlte/bower_components/jquery/dist/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->

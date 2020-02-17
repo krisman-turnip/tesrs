@@ -47,12 +47,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 class="text-center">
-        Daftar Anggota
+       Pembayaran Komisi
       </h1>
       <div class="container">
             <div class="card mt-5">
                 <div class="card-header text-center">
-                    <strong>EDIT Anggota</strong>
                 </div>
                 <div class="card-body">
                 <a href="{{ url('komisi') }}" class="btn btn-primary">Kembali</a>
@@ -119,14 +118,27 @@
                         </div>
 
                         <div class="form-group row">
+                        <label for="request_komisi" class="col-md-2 col-form-label text-md-right">Request Komisi</label>
+                            <div class="col-md-6">
+                            <input name="request_komisi" class="form-control" value=" {{ $anggota->jumlah_request }}">
+
+                             @if($errors->has('request_komisi'))
+                                <div class="text-danger">
+                                    {{ $errors->first('request_komisi')}}
+                                </div> 
+                            @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                         <label for="pembayaran" class="col-md-2 col-form-label text-md-right">Jumlah Pembayaran</label>
                             <div class="col-md-6">
-                            <textarea name="pembayaran" class="form-control" placeholder="Pembayaran ..">  </textarea>
+                            <input name="pembayaran" class="form-control" placeholder="Pembayaran .." required> 
 
                              @if($errors->has('pembayaran'))
                                 <div class="text-danger">
                                     {{ $errors->first('pembayaran')}}
-                                </div>
+                                </div> 
                             @endif
                             </div>
                         </div>

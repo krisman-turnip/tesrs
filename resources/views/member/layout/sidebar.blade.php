@@ -54,6 +54,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
+            <li><a href="{{ url('requestkomisi') }}"><i class="fa fa-circle-o"></i> Request Komisi </a></li>
+            <li><a href="{{ url('lihatrequestkomisi') }}"><i class="fa fa-circle-o"></i> Status Request Komisi</a></li>
             <li><a href="{{ url('komisianggota') }}"><i class="fa fa-circle-o"></i> Komisi Anggota</a></li>
             <li><a href="{{ url('pembayaran') }}"><i class="fa fa-circle-o"></i> Pembayaran Komisi</a></li>
           </ul>

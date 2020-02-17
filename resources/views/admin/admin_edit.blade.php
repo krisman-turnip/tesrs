@@ -92,6 +92,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="email" class="col-md-2 col-form-label text-md-right">Level</label>
+
+                            <div class="col-md-6">
+                                <select id="email" type="text" class="form-control" name="level" >
+                                <option value="admin">Admin</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="finance">Finance</option>
+                                <option value="akunting">Akunting</option>
+                                <option value="multiadmin">MultiAdmin</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                         <label for="password" class="col-md-2 col-form-label text-md-right">Password</label>
                             <div class="col-md-6">
                             <input type="password" name="password" class="form-control" placeholder="Password .." value=" {{ $admin->password }}">
