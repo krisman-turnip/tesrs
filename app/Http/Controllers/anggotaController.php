@@ -104,34 +104,18 @@ class anggotaController extends Controller
         $i= count($ex);
         $ex[$i]=$a;
         $newData = implode(",", $ex);
-<<<<<<< HEAD
-        anggota::create([
-            'id_anggota' => $request->id_anggota,
-            'id_parent' => $request->id_parent,
-            'id_jabatan' => $request->id_jabatan,
-            'parent_all' => $newData,
-            'nama' => $request->nama,
-            'email' => $request->email,
-            'alamat' => $request->alamat,
-            'no_handphone' => $request->no_handphone,
-            'password' => hash::make($request->password),
-            'saldo' => '0',
-            'status' => 'aktif'
-    	]);
-
-=======
 
         $file = $request->file('file_ktp');
-    
+
         $nama_file = $file->getClientOriginalName();
         $gambar = anggota::where('file_ktp',$nama_file)->count();
         //$a = $gambar->nama_materi;
         if ($gambar==0)
-        {            
+        {
               // isi dengan nama folder tempat kemana file diupload
             $tujuan_upload = 'data_ktp';
             $file->move($tujuan_upload,$nama_file);
-        
+
             anggota::create([
                 'id_anggota' => $request->id_anggota,
                 'id_parent' => $request->id_parent,
@@ -149,7 +133,7 @@ class anggotaController extends Controller
                 'file_ktp' => $request->file_ktp,
                 'no_npwp' => $request->no_npwp,
             ]);
-        
+
         }
         else
         {
@@ -158,8 +142,7 @@ class anggotaController extends Controller
             Alert::message('Nama materi sudah ada', 'Judul Pesan');
             return redirect()->back();
         }
- 
->>>>>>> a0601669239d50341ce10ad4b83ba1c971e758bb
+
         return redirect('home');
     }
 
@@ -169,9 +152,9 @@ class anggotaController extends Controller
            'status' => 'reset',
            'password' => ''
        ]);
-        
+
         return redirect('home');
-    } 
+    }
 
     public function delete($id)
     {
@@ -234,7 +217,7 @@ class anggotaController extends Controller
         $gambar = anggota::where('file_ktp',$nama_file)->count();
         //$a = $gambar->nama_materi;
         if ($gambar==0)
-        {            
+        {
               // isi dengan nama folder tempat kemana file diupload
             $tujuan_upload = 'data_ktp';
             $file->move($tujuan_upload,$nama_file);
@@ -252,7 +235,7 @@ class anggotaController extends Controller
             'file_ktp' => $nama_file,
             'no_npwp' => $request->no_npwp,
             ]);
-           
+
             return redirect('home');
         }
         else
