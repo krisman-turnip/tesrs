@@ -15,10 +15,10 @@ class anggotaController extends Controller
 {
     //  s
     public function index()
-    
+
     {
         if (Session::get('login'))
-        { 
+        {
             // $anggota = anggota::all();
             // return view('anggota/anggota', ['anggota' => $anggota]);
             $anggota = DB::table('anggota as a')
@@ -29,7 +29,7 @@ class anggotaController extends Controller
             ->paginate(10);
             return view('anggota/anggota', ['anggota' => $anggota]);
         }
-        else 
+        else
         {
             return redirect('/');
         }
@@ -45,7 +45,7 @@ class anggotaController extends Controller
             $data = DB::table('anggota')
             ->select('id_anggota','nama')
             ->get();
-            return view('anggota/tambah_anggota',['data'=>$data],['pilihan'=>$pilihan],);
+            return view('anggota/tambah_anggota',['data'=>$data],['pilihan'=>$pilihan]);
         }
         else
         {
@@ -56,14 +56,14 @@ class anggotaController extends Controller
     public function loadData(Request $request)
     {
         // $data = [];
-        // if ($request->has('q')) { 
+        // if ($request->has('q')) {
         //     $cari = $request->q;
         //     $data = DB::table('jabatan')->select('id_jabatan', 'nama_jabatan')->where('nama_jabatan', 'LIKE', '%' .$request . '%')->first();
         //     if (!empty($keywords)) {
         //         //$datas = array("1" => "Belajar", "2" => "select2", "3" => "ajax");
         //        // return response()->json($dataArray, 200);
         //     }
-            
+
             //return json_encode($data);
         //}
         // $keywords = $request->get("search");
@@ -88,13 +88,13 @@ class anggotaController extends Controller
     	$this->validate($request,[
             'id_anggota' => 'required',
             'id_parent' => 'required',
-            'id_jabatan' => 'required', 
+            'id_jabatan' => 'required',
             'nama' => 'required',
             'email' => 'required|email',
             'alamat' => 'required',
             'no_handphone' => 'required',
             'password' => 'required',
-            
+
         ]);
         $a= $request->id_parent;
         $p = DB::table('anggota')->select('parent_all','id_parent')->where('id_anggota',$a)->first();
@@ -106,16 +106,16 @@ class anggotaController extends Controller
         $newData = implode(",", $ex);
 
         $file = $request->file('file_ktp');
-    
+
         $nama_file = $file->getClientOriginalName();
         $gambar = anggota::where('file_ktp',$nama_file)->count();
         //$a = $gambar->nama_materi;
         if ($gambar==0)
-        {            
+        {
               // isi dengan nama folder tempat kemana file diupload
             $tujuan_upload = 'data_ktp';
             $file->move($tujuan_upload,$nama_file);
-        
+
             anggota::create([
                 'id_anggota' => $request->id_anggota,
                 'id_parent' => $request->id_parent,
@@ -133,7 +133,7 @@ class anggotaController extends Controller
                 'file_ktp' => $request->file_ktp,
                 'no_npwp' => $request->no_npwp,
             ]);
-        
+
         }
         else
         {
@@ -142,7 +142,7 @@ class anggotaController extends Controller
             Alert::message('Nama materi sudah ada', 'Judul Pesan');
             return redirect()->back();
         }
- 
+
         return redirect('home');
     }
 
@@ -152,18 +152,18 @@ class anggotaController extends Controller
            'status' => 'reset',
            'password' => ''
        ]);
-        
+
         return redirect('home');
-    } 
+    }
 
     public function delete($id)
     {
        $delete= DB::table('anggota')-> where('id_anggota', $id)-> update([
            'status' => 'tidak aktif',
        ]);
-        
+
         return redirect('home');
-    } 
+    }
     public function edit($id)
     {
         // id','id_anggota','id_parent', 'id_jabatan','parent_all','nama','alamat','email','no_handphone','password','saldo','status','no_ktp','no_npwp','file_ktp',];
@@ -217,7 +217,7 @@ class anggotaController extends Controller
         $gambar = anggota::where('file_ktp',$nama_file)->count();
         //$a = $gambar->nama_materi;
         if ($gambar==0)
-        {            
+        {
               // isi dengan nama folder tempat kemana file diupload
             $tujuan_upload = 'data_ktp';
             $file->move($tujuan_upload,$nama_file);
@@ -235,7 +235,7 @@ class anggotaController extends Controller
             'file_ktp' => $nama_file,
             'no_npwp' => $request->no_npwp,
             ]);
-           
+
             return redirect('home');
         }
         else
@@ -258,9 +258,9 @@ class anggotaController extends Controller
                     ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
                     ->where('a.id_anggota',$id)
                     ->get();
-              
-              
-   
+
+
+
             $parent = DB::table('anggota as a')
                     ->select('b.id_anggota','a.id_parent','b.id_jabatan','b.nama','b.email','b.alamat','b.no_handphone','b.saldo','a.nama as namaParent','c.nama_jabatan')
                     ->join('anggota as b','b.id_parent','=','a.id_anggota')
@@ -268,11 +268,11 @@ class anggotaController extends Controller
                     ->where('a.id_anggota',$id)
                     ->get();
                     $num = 0;
-                    $anak_array = null;   
+                    $anak_array = null;
                     //$anak_array=[];
                     $anak = [];
                     foreach ($parent as $az)
-                        { 
+                        {
                             $sc = $az->id_anggota;
                             //echo $sc;
                             $anak[$sc] =DB::table('anggota as a')
@@ -283,10 +283,10 @@ class anggotaController extends Controller
                                     ->get();
 
                             //$anak_array = Arr::add([$anak_array],$anak);
-                            
+
                     $num++;
                         }
-                        
+
             return view('anggota/anggota_profile', ['anggota' => $anggota, 'parent' => $parent, 'anak' => $anak]);
             //return view('anggota/anggota_edit', ['anggota' => $anggota]);
         }
