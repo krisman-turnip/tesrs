@@ -49,46 +49,103 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 class="text-center">
-        Daftar Anggota
+        Data Anggota
       </h1>
         <div class="container">
-            <div class="card mt-5">
-                <div class="card-body">
-                    <a href="../../home" class="btn btn-primary">Kembali</a>
-                    <br/>
-                    <br/>
-                    <table class="table table-bordered table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th>No </th>
-                                <th>Nama </th>
-                                <th>level</th>
-                                <th>Nama Parent</th>
-                                <th>Email</th>
-                                <th>No Handphone</th>
-                                <th>Saldo</th>
-                                <th>Alamat</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @php $no=1; @endphp
-                            @foreach($anggota as $p)
-                            <tr>
-                                <td>{{ $no++ }}</td>
-                                <td>{{$p->nama}}</td>
-                                <td>{{ $p->nama_jabatan }}</td>
-                                <td>{{ $p->namaParent }}</td>
-                                <td>{{ $p->email }}</td>
-                                <td>{{ $p->no_handphone }}</td>
-                                <td>{{ $p->saldo }}</td>
-                                <td>{{ $p->alamat }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+            @php
+        $numOfCols = 1;
+$rowCount = 0;
+$bootstrapColWidth = 12 / $numOfCols;
+@endphp
+<div class="row">
+        @foreach($anggota as $p)
+        <div class="col-xs-@php echo $bootstrapColWidth; @endphp">
+@php
+$a = $p->nama 
+@endphp
+                <h4 >{{ $p->nama }}</h4>
+                <div class="col-xs-3"><br><img width="250px" height="200px" src="{{ url('/data_ktp/'.$p->file_ktp) }}">ubah poto</div>
+                <div class="col-xs-8">
+                <table class="table table-striped">
+                    <tr>
+                        <td>
+                        Nama Parent
+                        </td>
+                        <td>
+                        {{ $p->namaParent }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        Jabatan
+                        </td>
+                        <td>
+                        {{ $p->nama_jabatan }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        Email
+                        </td>
+                        <td>
+                        {{ $p->email }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        No Hp
+                        </td>
+                        <td>
+                        {{ $p->no_handphone }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        Alamat
+                        </td>
+                        <td>
+                        {{ $p->alamat }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        No KTP
+                        </td>
+                        <td>
+                        {{ $p->no_ktp }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        No NPWP
+                        </td>
+                        <td>
+                        {{ $p->no_npwp }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        Saldo
+                        </td>
+                        <td>
+                        {{ $p->saldo }}
+                        </td>
+                    </tr>
+                 <br>
+                 </table>
+                <a href="../produk/edit/{{ $p->id_anggota }}" class="btn btn-warning">Edit</a>
+                <a href="../produk/hapus/{{ $p->id_anggota }}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Hapus</a>
                 </div>
+            <div id="wrapper">
+        @php
+        $rowCount++;
+    if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
+
+@endphp
+@endforeach
+</div>
             <div class="card-body">
-                    <br/>
+                    <br><br>
                     Downline 1
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
@@ -156,7 +213,7 @@
                 </div>
         </div>
         </div>
-        
+        </div>
       </div>
   <!-- /.content-wrapper -->
 @include('layouts.footer')

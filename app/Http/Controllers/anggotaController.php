@@ -278,13 +278,11 @@ class anggotaController extends Controller
         {
             //$anggota = anggota::find($id);
             $anggota = DB::table('anggota as a')
-                    ->select('b.id_anggota','b.id_parent','b.id_jabatan','a.nama','a.email','a.alamat','a.no_handphone','a.saldo','b.nama as namaParent','c.nama_jabatan')
+                    ->select('b.id_anggota','b.id_parent','b.id_jabatan','a.nama','a.email','a.alamat','a.no_handphone','a.saldo','b.nama as namaParent','c.nama_jabatan','a.file_ktp','a.no_ktp','a.no_npwp')
                     ->join('anggota as b','b.id_anggota','=','a.id_parent')
                     ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
                     ->where('a.id_anggota',$id)
                     ->get();
-
-
 
             $parent = DB::table('anggota as a')
                     ->select('b.id_anggota','a.id_parent','b.id_jabatan','b.nama','b.email','b.alamat','b.no_handphone','b.saldo','a.nama as namaParent','c.nama_jabatan')

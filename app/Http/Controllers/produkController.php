@@ -469,7 +469,7 @@ $idtransaksia=$selectId->id_transaksi;
             $komisi = DB::table('transaksi_produk as a')
             ->select('a.created_at','b.id_anggota','b.saldo','a.komisi')
             ->join('anggota as b','b.id_anggota','=','a.id_anggota')
-            ->where('a.status','belum diproses')
+            ->where(['a.status','belum diproses'])
             ->get();
 
             // $komisidate=date('Y-m-d', strtotime($komisi->created_at));
@@ -489,6 +489,7 @@ $idtransaksia=$selectId->id_transaksi;
                 $s=$qa->saldo;
                 
                 $anggotaid=$qa->id_anggota;
+                $status=$qa->status;
                 print_r($anggotaid);
                 print_r($s);
                 $qe = $l+$s;
@@ -498,15 +499,27 @@ $idtransaksia=$selectId->id_transaksi;
                     // $index = 1;
                     // foreach($produks as $nama_s => $q)
                     // {
-                    $a = DB::table('transaksi_produk')-> update([
-                        'status' => 'sudah diproses'
-                    ]);
+                    if($status=='tidak aktif')
+                    {
+                        $a = DB::table('transaksi_produk')-> update([
+                            'status' => 'suspend'
+                        ]);
+                    }
+                    else
+                    {
+                        $a = DB::table('transaksi_produk')-> update([
+                            'status' => 'sudah diproses'
+                        ]);
+
+                        $anggota = DB::table('anggota')->where('id_anggota',$anggotaid)-> update([
+                            'saldo' => $qe,
+                            ]);
+                    }
+                    
                     // $c = $q->komisi;
                     // $total = $saldo+$c;
 
-                    $anggota = DB::table('anggota')->where('id_anggota',$anggotaid)-> update([
-                        'saldo' => $qe,
-                    ]);
+                   
                     //     $index++;
                     // }
                 }
