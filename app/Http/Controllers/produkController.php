@@ -429,7 +429,7 @@ $idtransaksia=$selectId->id_transaksi;
         if (Session::get('login'))
         { 
             $komisi = DB::table('transaksi_produk as a')
-            ->select('a.created_at','b.id_anggota','b.saldo')
+            ->select('a.created_at','b.id_anggota','b.saldo','a.komisi')
             ->join('anggota as b','b.id_anggota','=','a.id_anggota')
             ->where('a.status','belum diproses')
             ->get();
@@ -446,40 +446,39 @@ $idtransaksia=$selectId->id_transaksi;
                         ->get();
                 $komisidate=date('Y-m-d', strtotime($qa->created_at));
                 $tgl=date('Y-m-d');
-                $saldo=$qa->saldo;
+                $l=$qa->komisi;
+                print_r($l);
+                $s=$qa->saldo;
+                
                 $anggotaid=$qa->id_anggota;
+                print_r($anggotaid);
+                print_r($s);
+                $qe = $l+$s;
+                print_r($qe);
                 if($komisidate>$tgl)
                 {
-                    $index = 1;
-                    foreach($produks as $nama_s => $q)
-                    {
-                        $a = DB::table('transaksi_produk')-> update([
-                            'status' => 'sudah diproses'
-                        ]);
-                        $c = $q->komisi;
-                        $total = $saldo+$c;
+                    // $index = 1;
+                    // foreach($produks as $nama_s => $q)
+                    // {
+                    $a = DB::table('transaksi_produk')-> update([
+                        'status' => 'sudah diproses'
+                    ]);
+                    // $c = $q->komisi;
+                    // $total = $saldo+$c;
 
-                        $anggota = DB::table('anggota')->where('id_anggota',$anggotaid)-> update([
-                            'saldo' => $total,
-                        ]);
-                        $index++;
-                    }
+                    $anggota = DB::table('anggota')->where('id_anggota',$anggotaid)-> update([
+                        'saldo' => $qe,
+                    ]);
+                    //     $index++;
+                    // }
                 }
                 else{
-                    $index = 1;
-                    foreach($produks as $nama_s => $q)
-                    {
-                        $a = DB::table('transaksi_produk')-> update([
-                            'status' => 'sudah diproses'
-                        ]);
-                        $c = $q->komisi;
-                        $total = $saldo+$c;
-
-                        $anggota = DB::table('anggota')->where('id_anggota',$anggotaid)-> update([
-                            'saldo' => $total,
-                        ]);
-                        $index++;
-                    }
+                        // $a = DB::table('transaksi_produk')-> update([
+                        //     'status' => 'sudah diproses'
+                        // ]);
+                        // $anggota = DB::table('anggota')->where('id_anggota',$anggotaid)-> update([
+                        //     'saldo' => $qe,
+                        // ]);
                 }
                 $indexs++;
             }
@@ -489,6 +488,7 @@ $idtransaksia=$selectId->id_transaksi;
                     ->join('produk as c','a.id_produk','=','c.id_produk')
                     ->where('a.status','sudah diproses')
                     ->paginate(10);
+                  
             return view('produk/tampil_transaksi', ['produk' => $produk]);
         }
         else

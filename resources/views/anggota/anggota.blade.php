@@ -80,7 +80,7 @@
                                 <td>
                                     <a href="anggota/profile/{{ $p->id_anggota }}" class="btn btn-warning">Profile</a>
                                     <a href="anggota/edit/{{ $p->id_anggota }}" class="btn btn-warning">Edit</a>
-                                    <a href="anggota/hapus/{{ $p->id_anggota }}" class="btn btn-danger">Hapus</a>
+                                    <a href="anggota/hapus/{{ $p->id_anggota }}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Hapus</a>
                                     <a href="anggota/reset/{{ $p->id_anggota }}" class="btn btn-warning">Reset Password</a>
                                 </td>
                             </tr>

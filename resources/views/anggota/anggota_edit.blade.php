@@ -181,10 +181,10 @@
                         </div>
 
                         <div class="form-group row">
-                    <label for="file_ktp" class="col-md-2 col-form-label text-md-right"> Upload KTP</label>
+                    <label for="file_ktp" class="col-md-2 col-form-label text-md-right"> Upload Foto</label>
                         <div class="col-md-6">
                             <input type="text" name="" value="{{ $anggota->file_ktp }}">
-                            <input type="file" name="file_ktp" >
+                            <input type="file" name="file_ktp" value="{{ $anggota->file_ktp }}">
                         </div>
                     </div>
 

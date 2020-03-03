@@ -80,7 +80,7 @@
                                 <td>{{ $p->harga }}</td>
                                 <td>
                                     <a href="produk/edit/{{ $p->id_produk }}" class="btn btn-warning">Edit</a>
-                                    <a href="produk/hapus/{{ $p->id_produk }}" class="btn btn-danger">Hapus</a>
+                                    <a href="produk/hapus/{{ $p->id_produk }}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Hapus</a>
                                 </td>
                             </tr>
                             @endforeach

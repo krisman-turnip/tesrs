@@ -118,6 +118,13 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="file_ktp" class="col-md-2 col-form-label text-md-right"> Upload Foto</label>
+                            <div class="col-md-6">
+                                <input type="file" name="file_ktp">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                         <label for="email" class="col-md-2 col-form-label text-md-right">Nama Anggota</label>
                         <div class="col-md-6">
                             <input type="text" name="nama" class="form-control" placeholder="Nama Anggota ..">
@@ -195,26 +202,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                    <label for="file_ktp" class="col-md-2 col-form-label text-md-right"> Upload KTP</label>
-                        <div class="col-md-6">
-                            <input type="file" name="file_ktp">
-                        </div>
-                    </div>
-
-                        <div class="form-group row">
-                        <label for="email" class="col-md-2 col-form-label text-md-right">Password</label>
-                        <div class="col-md-6">
-                            <input type="password" name="password" class="form-control" placeholder="Password ..">
-
-                             @if($errors->has('password'))
-                                <div class="text-danger">
-                                    {{ $errors->first('password')}}
-                                </div>
-                                
-                            @endif
-                            </div>
-                        </div>
                         <br>
                             <input type="hidden" name="_method" value="post">
                             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
