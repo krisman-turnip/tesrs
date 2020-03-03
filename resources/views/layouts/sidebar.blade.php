@@ -95,6 +95,20 @@
         @endif
         <li class="treeview">
           <a href="#">
+            <i class="fa fa-table"></i> <span>Komisi Template</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('komisiTemplate') }}"><i class="fa fa-circle-o"></i> Tampil Template Komisi</a></li>
+            <li><a href="{{ url('komisiTemplate/tambah') }}"><i class="fa fa-circle-o"></i> Tambah Template Komisi</a></li>
+            <li><a href="{{ url('komisiTemplate/skema') }}"><i class="fa fa-circle-o"></i> Skema Template Komisi</a></li>
+            <li><a href="{{ url('tampilSkema') }}"><i class="fa fa-circle-o"></i> Skema Komisi</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
             <i class="fa fa-table"></i> <span>Pembayaran Komisi</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>

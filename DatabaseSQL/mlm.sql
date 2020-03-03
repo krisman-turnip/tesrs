@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 17, 2020 at 11:56 AM
+-- Generation Time: Feb 28, 2020 at 11:45 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -141,8 +141,8 @@ CREATE TABLE `jabatan` (
 --
 
 INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`, `komisi`, `keterangan`, `created_at`, `updated_at`) VALUES
-(1, 'Executive', '20%', 'jabatan', '2020-01-16 21:55:11', '2020-01-16 21:55:11'),
-(2, 'Senior', '25%', 'Senior', NULL, NULL);
+(1, 'Mitra', '20%', 'jabatan', '2020-01-16 21:55:11', '2020-01-16 21:55:11'),
+(2, 'Mitra Khusus', '25%', 'Senior', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -176,6 +176,57 @@ INSERT INTO `komisi` (`id_komisi`, `id_anggota`, `komisi`, `bukti_transfer`, `ap
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `komisi_template`
+--
+
+CREATE TABLE `komisi_template` (
+  `id_template_komisi` bigint(20) UNSIGNED NOT NULL,
+  `nama_template` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `komisi_1` double(20,2) NOT NULL,
+  `komisi_2` double(20,2) NOT NULL,
+  `komisi_3` double(20,2) NOT NULL,
+  `poin_1` int(11) NOT NULL,
+  `poin_2` int(11) NOT NULL,
+  `poin_3` int(11) NOT NULL,
+  `status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `komisi_template`
+--
+
+INSERT INTO `komisi_template` (`id_template_komisi`, `nama_template`, `komisi_1`, `komisi_2`, `komisi_3`, `poin_1`, `poin_2`, `poin_3`, `status`, `created_at`, `updated_at`) VALUES
+(2, 'komisi umrah plus', 1000000.00, 500000.00, 250000.00, 1000, 500, 250, 'aktif', '2020-02-28 01:03:56', '2020-02-28 01:03:56');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `komisi_template_trx`
+--
+
+CREATE TABLE `komisi_template_trx` (
+  `id_komisi_template_trx` bigint(20) UNSIGNED NOT NULL,
+  `id_jabatan` int(11) NOT NULL,
+  `id_produk` int(11) NOT NULL,
+  `id_template_komisi` int(11) NOT NULL,
+  `keterangan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `komisi_template_trx`
+--
+
+INSERT INTO `komisi_template_trx` (`id_komisi_template_trx`, `id_jabatan`, `id_produk`, `id_template_komisi`, `keterangan`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 10, 2, 'komisi', 'aktif', '2020-02-28 02:50:33', '2020-02-28 02:50:33');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `materi`
 --
 
@@ -199,8 +250,12 @@ INSERT INTO `materi` (`id_materi`, `id_produk`, `nama_materi`, `keterangan`, `cr
 (13, 2, 'php.pdf', 'qwer', '2020-01-23 20:39:28', '2020-01-23 20:39:28'),
 (14, 7, 'java.pdf', 'asuransi', '2020-01-28 02:12:59', '2020-01-28 02:12:59'),
 (15, 10, 'asuransi.pdf', 'asuransi anak', '2020-01-28 20:18:37', '2020-01-28 20:18:37'),
-(16, 2, 'pembayaran.pdf', 'asadsda', '2020-02-03 01:45:15', '2020-02-03 01:45:15'),
-(17, 11, 'pembayaran1.pdf', 'asuransi mobil', '2020-02-11 21:44:50', '2020-02-11 21:44:50');
+(20, 43, 'aq.pdf', 'asdasdada', '2020-02-18 00:49:50', '2020-02-18 00:49:50'),
+(21, 45, 'kamarku.pdf', 'kamarku', '2020-02-18 02:03:48', '2020-02-18 02:03:48'),
+(22, 61, 'asuransi2.pdf', 'aq', '2020-02-18 02:54:40', '2020-02-18 02:54:40'),
+(23, 73, 'asuransi1.pdf', 'ini produk haji tanah suci', '2020-02-19 20:30:02', '2020-02-19 20:30:02'),
+(24, 75, 'asuransi33.pdf', 'adada', '2020-02-19 20:35:23', '2020-02-19 20:35:23'),
+(25, 79, 'a.jpg', 'asdasdaasasaass', '2020-02-21 02:00:03', '2020-02-21 02:00:03');
 
 -- --------------------------------------------------------
 
@@ -236,7 +291,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (16, '2020_02_10_083700_create_transaksi_produk_table', 13),
 (20, '2020_02_17_033836_create_request_komisi_table', 14),
 (21, '2020_02_17_095816_create_sub_produks_table', 14),
-(22, '2020_02_17_095837_create_tanggal_produks_table', 14);
+(22, '2020_02_17_095837_create_tanggal_produks_table', 14),
+(23, '2020_02_26_085956_create_transaksi_detail_table', 15),
+(24, '2020_02_26_103307_create_komisi_templates_table', 16),
+(25, '2020_02_28_084136_create_komisi_template_trx_controllers_table', 17),
+(26, '2020_02_28_084136_create_komisi_template_trx_table', 18);
 
 -- --------------------------------------------------------
 
@@ -257,12 +316,14 @@ CREATE TABLE `password_resets` (
 --
 
 CREATE TABLE `produk` (
-  `id_produk` int(11) NOT NULL,
+  `id_produk` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nama_produk` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `jumlah` int(11) NOT NULL,
   `sisa` int(11) NOT NULL,
   `terjual` int(11) NOT NULL,
   `harga` float NOT NULL,
+  `keterangan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file_banner` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -271,14 +332,18 @@ CREATE TABLE `produk` (
 -- Dumping data for table `produk`
 --
 
-INSERT INTO `produk` (`id_produk`, `nama_produk`, `jumlah`, `sisa`, `terjual`, `harga`, `created_at`, `updated_at`) VALUES
-(1, 'Haji Plus', 10, 5, 5, 1000000, NULL, NULL),
-(2, 'Umrah', 25, 1, 24, 1700000, '2020-01-16 20:08:12', '2020-01-16 20:08:12'),
-(3, 'Investasi Syariah', 30, 28, 2, 3000000, '2020-01-27 23:41:48', '2020-01-27 23:41:48'),
-(7, 'Asuransi Jiwa', 30, 9, 21, 350000, '2020-01-28 02:12:59', '2020-01-28 02:12:59'),
-(9, 'Penyakit Kritis', 50, 17, 33, 350000, '2020-01-28 20:17:35', '2020-01-28 20:17:35'),
-(10, 'Asuransi Anak', 40, 5, 9, 400000, '2020-01-28 20:18:37', '2020-01-28 20:18:37'),
-(11, 'Asuransi Mobil', 100, 0, 0, 1000000, '2020-02-11 21:44:50', '2020-02-11 21:44:50');
+INSERT INTO `produk` (`id_produk`, `nama_produk`, `jumlah`, `sisa`, `terjual`, `harga`, `keterangan`, `file_banner`, `created_at`, `updated_at`) VALUES
+('1', 'Haji Plus', 10, 5, 5, 1000000, '', '1.jpg', NULL, NULL),
+('10', 'Asuransi Anak', 40, 5, 9, 400000, '', '', '2020-01-28 20:18:37', '2020-01-28 20:18:37'),
+('11', 'Asuransi Mobil', 100, 100, 0, 1000000, '', '', '2020-02-11 21:44:50', '2020-02-11 21:44:50'),
+('2', 'Umrah', 25, 1, 24, 1700000, '', '', '2020-01-16 20:08:12', '2020-01-16 20:08:12'),
+('3', 'Investasi Syariah', 30, 28, 2, 3000000, '', '', '2020-01-27 23:41:48', '2020-01-27 23:41:48'),
+('61', 'andai', 10, 0, 0, 100000, '', 'asuransi2.pdf', '2020-02-18 02:54:39', '2020-02-18 02:54:39'),
+('7', 'Asuransi Jiwa', 30, 9, 21, 350000, '', '', '2020-01-28 02:12:59', '2020-01-28 02:12:59'),
+('76', 'haji tanah suci', 200, 200, 0, 800, '', 'a.jpg', '2020-02-19 20:38:43', '2020-02-19 20:38:43'),
+('77', 'umrah plus', 200, 200, 0, 200000, '', 'bayar4.jpg', '2020-02-19 21:44:51', '2020-02-19 21:44:51'),
+('79', 'jamaah', 1000, 1000, 0, 1000, 'kamar', 'c.jpg', '2020-02-21 02:00:02', '2020-02-21 02:00:02'),
+('9', 'Penyakit Kritis', 50, 17, 33, 350000, '', '', '2020-01-28 20:17:35', '2020-01-28 20:17:35');
 
 -- --------------------------------------------------------
 
@@ -333,6 +398,20 @@ CREATE TABLE `sub_produk` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `sub_produk`
+--
+
+INSERT INTO `sub_produk` (`id_sub_produk`, `id_produk`, `nama_produk`, `harga`, `keterangan`, `created_at`, `updated_at`) VALUES
+(58, 76, 'kamar 4 orang', '2000000', 'kamar kamar khusus untuk 4 orang', '2020-02-19 20:38:43', '2020-02-19 20:38:43'),
+(59, 76, 'kamar 3 orang', '3000000', 'kamar khusus untuk 3 orang', '2020-02-19 20:38:43', '2020-02-19 20:38:43'),
+(61, 77, 'kamar 1 orang', '5000000', 'untuk 1 orang', '2020-02-19 21:44:51', '2020-02-19 21:44:51'),
+(62, 77, 'kamar 2 orang', '4500000', 'untuk  2 orang', '2020-02-19 21:44:51', '2020-02-19 21:44:51'),
+(63, 78, 'qw', '1000', 'asdas', '2020-02-21 01:59:39', '2020-02-21 01:59:39'),
+(64, 78, 'sda', '11222', 'asdas', '2020-02-21 01:59:39', '2020-02-21 01:59:39'),
+(65, 79, 'qw', '1000', 'asdas', '2020-02-21 02:00:02', '2020-02-21 02:00:02'),
+(66, 79, 'sda', '11222', 'asdas', '2020-02-21 02:00:02', '2020-02-21 02:00:02');
+
 -- --------------------------------------------------------
 
 --
@@ -342,11 +421,21 @@ CREATE TABLE `sub_produk` (
 CREATE TABLE `tanggal_produk` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `id_produk` int(11) NOT NULL,
-  `tanggal aktif` date NOT NULL,
-  `tanggal Expired` date NOT NULL,
+  `tanggal_berangkat` date NOT NULL,
+  `tanggal_expired` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tanggal_produk`
+--
+
+INSERT INTO `tanggal_produk` (`id`, `id_produk`, `tanggal_berangkat`, `tanggal_expired`, `created_at`, `updated_at`) VALUES
+(5, 76, '2020-04-30', '2020-03-23', '2020-02-19 20:38:43', '2020-02-19 20:38:43'),
+(6, 77, '2020-04-22', '2020-03-18', '2020-02-19 21:44:51', '2020-02-19 21:44:51'),
+(7, 79, '2020-02-25', '2020-02-26', '2020-02-21 02:00:02', '2020-02-21 02:00:02'),
+(8, 79, '2020-02-26', '2020-02-28', '2020-02-21 02:00:03', '2020-02-21 02:00:03');
 
 -- --------------------------------------------------------
 
@@ -383,38 +472,36 @@ INSERT INTO `transaksi` (`id_transaksi`, `id_produk`, `id_anggota`, `status`, `j
 (22, 1, 2, 'Ditolak', 0, 0, '2020-01-23 21:07:48', '2020-01-23 21:07:48'),
 (23, 1, 2, 'Diterima', 0, 0, '2020-01-23 21:08:57', '2020-01-23 21:08:57'),
 (24, 3, 2, 'Diterima', 0, 0, '2020-01-28 00:20:04', '2020-01-28 00:20:04'),
-(25, 3, 2, 'Diterima', 0, 0, '2020-01-28 00:22:55', '2020-01-28 00:22:55'),
-(26, 3, 2, 'Diterima', 0, 0, '2020-01-28 00:31:36', '2020-01-28 00:31:36'),
-(27, 3, 2, 'Diterima', 0, 0, '2020-01-28 00:31:53', '2020-01-28 00:31:53'),
-(28, 2, 1, 'Diterima', 0, 0, '2020-02-10 00:30:42', '2020-02-10 00:30:42'),
-(29, 10, 1, 'Diterima', 3, 0, '2020-02-10 00:45:31', '2020-02-10 00:45:31'),
-(30, 10, 1, 'Diterima', 9, 0, '2020-02-10 01:11:04', '2020-02-10 01:11:04'),
-(31, 10, 1, 'Batal', 1, 0, '2020-02-10 01:11:20', '2020-02-10 01:11:20'),
-(32, 10, 1, 'Batal', 0, 0, '2020-02-10 01:12:44', '2020-02-10 01:12:44'),
-(33, 10, 1, 'Diterima', 9, 0, '2020-02-10 01:19:41', '2020-02-10 01:19:41'),
-(34, 10, 1, 'Diterima', 9, 0, '2020-02-10 01:20:25', '2020-02-10 01:20:25'),
-(35, 10, 1, 'Diterima', 9, 0, '2020-02-10 01:50:49', '2020-02-10 01:50:49'),
-(36, 10, 1, 'Diterima', 9, 0, '2020-02-10 03:32:40', '2020-02-10 03:32:40'),
-(37, 10, 1, 'Diterima', 9, 0, '2020-02-10 03:35:50', '2020-02-10 03:35:50'),
-(38, 10, 1, 'Diterima', 9, 0, '2020-02-10 20:18:40', '2020-02-10 20:18:40'),
-(39, 10, 1, 'Diterima', 9, 0, '2020-02-10 20:19:49', '2020-02-10 20:19:49'),
-(40, 10, 1, 'Diterima', 9, 0, '2020-02-10 20:21:13', '2020-02-10 20:21:13'),
-(41, 2, 1, 'Diterima', 9, 0, '2020-02-10 20:23:23', '2020-02-10 20:23:23'),
-(42, 7, 1, 'Diterima', 9, 0, '2020-02-10 20:25:45', '2020-02-10 20:25:45'),
-(43, 2, 1, 'Pengajuan', 9, 0, '2020-02-10 20:36:43', '2020-02-10 20:36:43'),
-(44, 10, 1, 'Ditolak', 9, 0, '2020-02-10 21:59:00', '2020-02-10 21:59:00'),
-(45, 10, 1, 'Pengajuan', 7, 0, '2020-02-11 00:03:35', '2020-02-11 00:03:35'),
-(46, 9, 1, 'Diterima', 7, 490000, '2020-02-11 00:04:45', '2020-02-11 00:04:45'),
-(47, 10, 1, 'Batal', 2, 0, '2020-02-11 00:41:29', '2020-02-11 00:41:29'),
-(48, 10, 1, 'Batal', 2, 0, '2020-02-11 00:41:41', '2020-02-11 00:41:41'),
-(49, 10, 1, 'Pengajuan', 12, 0, '2020-02-11 01:01:04', '2020-02-11 01:01:04'),
-(50, 9, 1, 'Diterima', 13, 910000, '2020-02-11 01:01:16', '2020-02-11 01:01:16'),
-(51, 7, 1, 'Diterima', 12, 840000, '2020-02-11 01:04:00', '2020-02-11 01:04:00'),
-(52, 7, 1, 'Pengajuan', 10, 0, '2020-02-11 01:47:16', '2020-02-11 01:47:16'),
-(53, 1, 1, 'Diterima', 2, 400000, '2020-02-11 01:53:41', '2020-02-11 01:53:41'),
-(54, 1, 1, 'Diterima', 2, 400000, '2020-02-11 03:12:45', '2020-02-11 03:12:45'),
-(55, 1, 1, 'Ditolak', 6, 0, '2020-02-11 03:40:29', '2020-02-11 03:40:29'),
-(56, 1, 1, 'Pengajuan', 2, 0, '2020-02-11 21:55:36', '2020-02-11 21:55:36');
+(62, 77, 2, 'pengajuan', 2, 0, '2020-02-26 03:18:38', '2020-02-26 03:18:38');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaksi_detail`
+--
+
+CREATE TABLE `transaksi_detail` (
+  `id_transaksi_detail` bigint(20) UNSIGNED NOT NULL,
+  `id_produk` int(11) NOT NULL,
+  `id_anggota` int(11) NOT NULL,
+  `id_transaksi` int(11) NOT NULL,
+  `id_sub_produk` int(11) NOT NULL,
+  `nama_customer` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ktp_customer` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tanggal_berangkat` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `transaksi_detail`
+--
+
+INSERT INTO `transaksi_detail` (`id_transaksi_detail`, `id_produk`, `id_anggota`, `id_transaksi`, `id_sub_produk`, `nama_customer`, `ktp_customer`, `tanggal_berangkat`, `created_at`, `updated_at`) VALUES
+(1, 77, 2, 1, 6, 'wiwi', '999192929', '0000-00-00', '2020-02-26 02:58:29', '2020-02-26 02:58:29'),
+(2, 77, 2, 1, 2, 'kristin', '192819928', '0000-00-00', '2020-02-26 02:58:29', '2020-02-26 02:58:29'),
+(3, 77, 2, 62, 6, 'andry', '192919919', '2020-04-22', '2020-02-26 03:18:38', '2020-02-26 03:18:38'),
+(4, 77, 2, 62, 2, 'somali', '918201892', '2020-04-22', '2020-02-26 03:18:38', '2020-02-26 03:18:38');
 
 -- --------------------------------------------------------
 
@@ -518,6 +605,18 @@ ALTER TABLE `komisi`
   ADD PRIMARY KEY (`id_komisi`);
 
 --
+-- Indexes for table `komisi_template`
+--
+ALTER TABLE `komisi_template`
+  ADD PRIMARY KEY (`id_template_komisi`);
+
+--
+-- Indexes for table `komisi_template_trx`
+--
+ALTER TABLE `komisi_template_trx`
+  ADD PRIMARY KEY (`id_komisi_template_trx`);
+
+--
 -- Indexes for table `materi`
 --
 ALTER TABLE `materi`
@@ -572,6 +671,12 @@ ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`id_transaksi`);
 
 --
+-- Indexes for table `transaksi_detail`
+--
+ALTER TABLE `transaksi_detail`
+  ADD PRIMARY KEY (`id_transaksi_detail`);
+
+--
 -- Indexes for table `transaksi_produk`
 --
 ALTER TABLE `transaksi_produk`
@@ -613,22 +718,28 @@ ALTER TABLE `komisi`
   MODIFY `id_komisi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT for table `komisi_template`
+--
+ALTER TABLE `komisi_template`
+  MODIFY `id_template_komisi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `komisi_template_trx`
+--
+ALTER TABLE `komisi_template_trx`
+  MODIFY `id_komisi_template_trx` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `materi`
 --
 ALTER TABLE `materi`
-  MODIFY `id_materi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_materi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
---
--- AUTO_INCREMENT for table `produk`
---
-ALTER TABLE `produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `request_komisi`
@@ -640,19 +751,25 @@ ALTER TABLE `request_komisi`
 -- AUTO_INCREMENT for table `sub_produk`
 --
 ALTER TABLE `sub_produk`
-  MODIFY `id_sub_produk` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_sub_produk` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `tanggal_produk`
 --
 ALTER TABLE `tanggal_produk`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id_transaksi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+
+--
+-- AUTO_INCREMENT for table `transaksi_detail`
+--
+ALTER TABLE `transaksi_detail`
+  MODIFY `id_transaksi_detail` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `transaksi_produk`

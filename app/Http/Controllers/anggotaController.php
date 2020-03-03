@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Anggota;
 use App\jabatan;
+use App\transaksi_produk;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -33,6 +34,8 @@ class anggotaController extends Controller
         {
             return redirect('/');
         }
+
+       
     }
 
     public function tambah()

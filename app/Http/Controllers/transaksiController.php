@@ -4,34 +4,58 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\transaksi;
+use App\transaksi_detail;
 use Illuminate\Http\Request;
 
 class transaksiController extends Controller
 {
     public function store(Request $request, $id)
     {
-        $this->validate($request,[
-            'jumlah' => 'required|numeric',
-            
-        ]);
+       
         $id=$id;
       
-        $jumlah=$request->jumlah;
-        echo $jumlah;
+        $jumlah=$request->jumlah_customer;
+        $sum = 0;
+foreach ($jumlah as $item => $a) {
+    $sum += $jumlah[$item];
+}
+print_r($sum);
+        $id_sub_produk=$request->id_sub;
+        $nama_cus = $request->nama_customer;
+        $jumlah_customer = $request->jumlah_customer;
+        $ktp_customer = $request->ktp_customer;
+        $tanggal_berangkat = $request->tanggal;
+        $index = 1;
         if (Session::get('login'))
         {
-        transaksi::create([
+            
+        $a = transaksi::create([
             'id_produk' => $id,
             'id_anggota' => $request->session()->get('login'),
             'status' => 'Pengajuan',
             'komisi' => '0',
-            'jumlah' => $jumlah,
-    	]);
- 
+            'jumlah' => $sum,
+        ]);
+        $lastId = $a->id;
+        foreach($nama_cus as $nama_s => $c)
+            {
+        transaksi_detail::create([
+            'id_produk' => $id,
+            'id_sub_produk' => $id_sub_produk[$nama_s],
+            'id_anggota' => $request->session()->get('login'),
+            'nama_customer' => $nama_cus[$nama_s],
+            'ktp_customer' => $ktp_customer[$nama_s],
+            'id_transaksi' => $lastId,
+            'tanggal_berangkat' => $tanggal_berangkat,
+            ]);
+        $index++;
+            }
+            
         return redirect('produkanggota/pengajuan');
         }
+        return redirect('produkanggota/pengajuan');
     }
-
+    
     public function pengajuan(Request $request)
     {
         if (Session::get('login'))

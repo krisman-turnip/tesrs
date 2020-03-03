@@ -87,6 +87,7 @@ Route::get('/beranda/{id}','anggotamemberController@tab');
 
                /* route produk->member */
 Route::get('/produkanggota','produkanggotaController@index');
+Route::get('/produkanggotainput/{id}','produkanggotaController@input');
 
                 /* route transaksi->member */
 Route::post('/produkanggota/tambah/{id}','transaksiController@store');
@@ -114,3 +115,17 @@ Route::get('/materianggota','materianggotaController@index');
                 /* route komisi->admin */
 Route::get('/pembayaran','pembayarankomisiController@index');
 Route::get('/pembayaran/download/{id}','pembayarankomisiController@download');
+
+                /* route komisi template->admin */
+Route::get('/komisiTemplate','komisi_templateController@index');
+Route::get('/komisiTemplate/tambah','komisi_templateController@input');
+Route::post('/komisiTemplate/store','komisi_templateController@store');
+Route::get('/komisiTemplate/edit/{id}','komisi_templateController@edit');
+Route::post('/komisiTemplate/update/{id}','komisi_templateController@update');
+Route::get('/komisiTemplate/delete/{id}','komisi_templateController@delete');
+Route::get('/komisiTemplate/skema','komisi_templateController@skema');
+Route::post('/komisiTemplate/skemainput','komisi_templateController@storeskema');
+Route::get('/tampilSkema','komisi_templateController@tampilSkema');
+Route::get('/komisiTemplate/skemadelete/{id}','komisi_templateController@deleteskema');
+Route::get('/komisiTemplate/skemaedit/{id}','komisi_templateController@editskema');
+Route::post('/komisiTemplate/skemaupdate/{id}','komisi_templateController@updateSkema');

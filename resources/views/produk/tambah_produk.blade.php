@@ -27,7 +27,17 @@
   <link rel="stylesheet" href="{{url('adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="{{url('adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
-
+  <script src="{{url('adminlte/bower_components/jquery/dist/jquery.js')}}"></script>
+  <script src="{{url('adminlte/bower_components/jquery-ui/jquery-ui.js')}}"></script>
+	<link rel="stylesheet"  href="{{url('adminlte/bower_components/jquery-ui/jquery-ui.css')}}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<script src="../adminlte/bower_components/jquery/jquery-1.12.4.js"></script>
+  <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  -->
+  <script src="../adminlte/bower_components/jquery/jquery-ui.js"></script>
+  
+    
   <!-- Google Font -->
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
 </head>
@@ -98,6 +108,13 @@
                             @endif
                         </div>
                         </div>
+
+                        <div class="form-group row">
+                        <label for="jumlah" class="col-md-2 col-form-label text-md-right">File Banner</label>
+                            <div class="col-md-6">
+                                <input type="file" name="nama_banner">
+                            </div>
+                        </div>
                         <h3>Upload Materi</h3>
                         <div class="form-group row">
                         <label for="jumlah" class="col-md-2 col-form-label text-md-right">File Upload</label>
@@ -112,26 +129,58 @@
                                 <textarea class="form-control" name="keterangan"></textarea>
                             </div>
                         </div>
+                        <INPUT type="button" value="Add Row" onClick="addRow('dataTable')" />
 
-                        <table id='targetTbl'>
-                            <tbody>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>First name</th>
-                                    <th>Opsi</th>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <form action="" method="post" name="f">  
 
-                        <input type='text' name='name[]' id='name'/>
-                        <input type='text' name='first[]' id='first'/>
-                        <input type='submit' value='add row'/>
+                        <TABLE width="425" border="1">
+                        <thead>
+                            <tr>
+                                <th width="94">Nama Produk</th>
+                                <th width="121">Harga</th>
+                                <th width="84">Keterangan</th>
+                                <th width="84">opsi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTable">
+
+                        </tbody>
+                        </TABLE>
+                        <INPUT type="button" value="Add Row" onClick="addRows('dataTables')" />
+
+                        <form action="" method="post" name="f">  
+
+                        <TABLE width="425" border="1">
+                        <thead>
+                            <tr>
+                                <th width="94">Tanggal Keberangkatan</th>
+                                <th width="121">Tanggal Expired</th>
+                                <th width="84">opsi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTables">
+
+                        </tbody>
+                        </TABLE>
+              
                         <br> 
+                        <div class="form-group row">
+                        <!-- <label for="jumlah" class="col-md-2 col-form-label text-md-right">Tanggal Keberangkatan</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="tanggal_berangkat" id="datepicker"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                        <label for="jumlah" class="col-md-2 col-form-label text-md-right">Tanggal Expired</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="tanggal_expired" id="datepicker2"/>
+                            </div>
+                        </div> -->
                             <input type="hidden" name="_method" value="post">
                             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                         <div class="form-group row mb-0">
                         <div class="col-md-6 ">
-                            <input type="submit" class="btn btn-success" value="Simpan">
+                            <input type="submit" class="btn btn-success" value="Simpan" onClick="">
                         </div>
                         </div>
 
@@ -150,41 +199,76 @@
  <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
-<script>
-document.getElementById('inForm').onsubmit = function(e)
-{
-    var newRow,i;
-    e = e || window.event;
-    if (e.preventDefault)
-    {
-        e.preventDefault();
-        e.stopPropagation();
-    }
-    e.returnValue = false;
-    e.cancelBubble = true;
-    newRow = '<tr>';
-    newColumn = '<td>';
-    for(i=0;i<this.elements.length;i++)
-    {
-        if (this.elements[i].tagName.toLowerCase() === 'input' && this.elements[i].type === 'text')
-        {
-            newRow += '<td>'+this.elements[i].value+'</td>';
-            
-        }
-        
-    }
-    newRow += '<td><input type="button" value="Delete" onclick="deleteRow(this)"/></td>';
+<SCRIPT language="javascript">
+     function addRow(tableID) { 
 
-    document.getElementById('targetTbl').innerHTML += newRow + '</tr>';
-    return false;
-};
-</script>
+        var table = document.getElementById(tableID);
+
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+
+        // var cell1 = row.insertCell(0);
+        // var element1 = document.createElement("input");
+        // element1.type = "checkbox";
+        // element1.name="chkbox[]";
+        // cell1.appendChild(element1);
+
+        var cell1 = row.insertCell(0);
+        cell1.innerHTML = "<input type='text' name='nama_sub[]' required>";
+
+        var cell2 = row.insertCell(1);
+        cell2.innerHTML = "<input type='text'  name='harga_sub[]' required/>";
+
+        var cell3 = row.insertCell(2);
+        cell3.innerHTML =  "<input type='text'  name='keterangan_sub[]' required/>";
+        var cell4= row.insertCell(3);
+        cell4.innerHTML =  "<input type='Button'value='delete'onclick='deleteRow(this)' required/>";
+        
+        
+        }
+</SCRIPT>
+<SCRIPT language="javascript">
+     function addRows(tableIDs) { 
+
+        var table = document.getElementById(tableIDs);
+
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+
+
+
+        var cell1 = row.insertCell(0);
+        cell1.innerHTML = " <input type='text' class='form-control' name='tanggal_berangkat[]' id='datepicker' required/>";
+
+        var cell2 = row.insertCell(1);
+        cell2.innerHTML = "<input type='text' class='form-control' name='tanggal_expired[]' id='datepicker2' required/>";
+
+        var cell3= row.insertCell(2);
+        cell3.innerHTML =  "<input type='Button'value='delete'onclick='deleteRow(this)'/>";
+        
+        
+        }
+
+</SCRIPT>
+<script>
+  $( function() {
+    $("#datepicker").datepicker({ format: 'yyyy-mm-dd' });
+  } );
+  </script>
+   <script>
+  $( function() {
+    $( "#datepicker2" ).datepicker({
+        format: 'yyyy-mm-dd'
+    });
+  } );
+  </script>
 <script>
   function deleteRow(btn) {
   var row = btn.parentNode.parentNode;
   row.parentNode.removeChild(row);
 }
 </script>
+
 <!-- jQuery 3 -->
 <script src="{{url('adminlte/bower_components/jquery/dist/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
