@@ -78,7 +78,7 @@
                         <td>{{ $p->keterangan }}</td>
                         <td>
                             <a href="materi/download/{{ $p->id_materi }}" class="btn btn-warning">Download</a>
-                            <a href="materi/hapus/{{ $p->id_materi }}" class="btn btn-danger">Hapus</a>
+                            <a href="materi/hapus/{{ $p->id_materi }}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Hapus</a>
                         </td>
                     </tr>
                     @endforeach 

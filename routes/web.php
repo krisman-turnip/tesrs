@@ -14,6 +14,7 @@ Auth::routes();
 
                 /* route anggota->admin */
 Route::get('/home','anggotaController@index');
+Route::get('/anggotaCari','anggotaController@cari');
 Route::get('/anggota/tambah','anggotaController@tambah');
 Route::post('/anggota/store','anggotaController@store');
 Route::get('/anggota/hapus/{id}', 'anggotaController@delete');
@@ -25,6 +26,8 @@ Route::get('/anggota/profile/{id}', 'anggotaController@profile');
 
                 /* route produk->admin */
 Route::get('/produk','produkController@index');
+Route::get('/produkCari','produkController@cari');
+Route::get('/produkDetail/{id}','produkController@detail');
 Route::get('/produk/tambah','produkController@tambah');
 Route::post('/produk/store','produkController@store');
 Route::get('/produk/hapus/{id}', 'produkController@delete');

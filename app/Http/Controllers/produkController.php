@@ -20,52 +20,52 @@ class produkController extends Controller
     {
         if (Session::get('login'))
         {
-            $produks = DB::table('produk as a')
-            ->select('b.tanggal_expired')
-            ->join('tanggal_produk as b','a.id_produk','=','b.id_produk')
-            ->where('a.status','aktif')
-            ->orderby('b.tanggal_expired','ASC')
-            ->get();
-            // $komisidate=date('Y-m-d', strtotime($komisi->created_at));
-            $indexs = 1;
-            foreach($produks as $namass => $qas)
-            {
-                $produka[] = DB::table('produk')->get();
-                $produkdate=date('Y-m-d', strtotime($qas->tanggal_expired));
-                print_r($produkdate);
-                $tgl=date('Y-m-d');
-                if($produkdate<$tgl)
-                {
-                    $index = 1;
-                    foreach($produka as $nama_s => $q)
-                    {
-                        $a = DB::table('produk as a')
-                            ->join('tanggal_produk as b','a.id_produk','=','b.id_produk')
-                            ->where('b.tanggal_expired',$produkdate)
-                            ->update([
-                            'status' => 'tidak aktif'
-                        ]);
-                        $index++;
-                        print_r($a);
-                    }
-                }
-                else{
-                    $index = 1;
-                    foreach($produka as $nama_s => $q)
-                    {
-                    $a = DB::table('produk as a')
-                            ->join('tanggal_produk as b','a.id_produk','=','b.id_produk')
-                            ->where('b.tanggal_expired',$produkdate)
-                            ->update([
-                            'status' => 'aktif'
-                        ]);
-                        $index++;
-                        print_r($a);
-                            }
-                }
-                $indexs++;
-            }
-            $produk = DB::table('produk')->where('status','aktif')->paginate(10);
+            // $produks = DB::table('produk as a')
+            // ->select('b.tanggal_expired')
+            // ->join('tanggal_produk as b','a.id_produk','=','b.id_produk')
+            // ->where('a.status','aktif')
+            // ->orderby('b.tanggal_expired','ASC')
+            // ->get();
+            // // $komisidate=date('Y-m-d', strtotime($komisi->created_at));
+            // $indexs = 1;
+            // foreach($produks as $namass => $qas)
+            // {
+            //     $produka[] = DB::table('produk')->get();
+            //     $produkdate=date('Y-m-d', strtotime($qas->tanggal_expired));
+            //     print_r($produkdate);
+            //     $tgl=date('Y-m-d');
+            //     if($produkdate<$tgl)
+            //     {
+            //         $index = 1;
+            //         foreach($produka as $nama_s => $q)
+            //         {
+            //             $a = DB::table('produk as a')
+            //                 ->join('tanggal_produk as b','a.id_produk','=','b.id_produk')
+            //                 ->where('b.tanggal_expired',$produkdate)
+            //                 ->update([
+            //                 'status' => 'tidak aktif'
+            //             ]);
+            //             $index++;
+            //             print_r($a);
+            //         }
+            //     }
+            //     else{
+            //         $index = 1;
+            //         foreach($produka as $nama_s => $q)
+            //         {
+            //         $a = DB::table('produk as a')
+            //                 ->join('tanggal_produk as b','a.id_produk','=','b.id_produk')
+            //                 ->where('b.tanggal_expired',$produkdate)
+            //                 ->update([
+            //                 'status' => 'aktif'
+            //             ]);
+            //             $index++;
+            //             print_r($a);
+            //                 }
+            //     }
+            //     $indexs++;
+            // }
+            $produk = DB::table('produk')->where('status','aktif')->paginate(12);
              return view('produk/produk', ['produk' => $produk]);
         }
         else
@@ -86,6 +86,44 @@ class produkController extends Controller
         }
     }
 
+    public function detail(Request $request,$id)
+	{
+        if (Session::get('login'))
+        {
+            $id = $id;
+    		// mengambil data dari table pegawai sesuai pencarian data
+            $produk = DB::table('produk')
+            ->select('id_produk','nama_produk','sisa','file_banner','terjual')
+            ->where([['status','aktif'],['id_produk',$id]])
+            ->paginate(100);
+            $subproduk = DB::table('produk as a')
+            ->select('a.id_produk','c.id_sub_produk','c.nama_produk as namaSubProduk','c.harga as HargaSub')
+            ->join('sub_produk as c','c.id_produk','=','a.id_produk')
+            ->where([['a.status','aktif'],['a.id_produk',$id]])
+            ->paginate(100);
+            $tanggal= DB::table('tanggal_produk as a')
+            ->select('a.id_produk','a.tanggal_berangkat','a.tanggal_expired')
+            ->where('a.id_produk',$id)
+            ->get();
+            return view('produk/produk_detail', ['produk' => $produk,'subproduk'=>$subproduk,'tanggal'=>$tanggal]);
+        }
+        else
+        {
+            return redirect('/');
+        }
+    }
+
+    public function cari(Request $request)
+	{
+		// menangkap data pencarian
+        $cari = $request->cari;
+        $select = $request->select;
+ 
+    		// mengambil data dari table pegawai sesuai pencarian data
+            $produk = DB::table('produk')->where([['status','aktif'],[$select,'like',"%".$cari."%"]])->paginate(12);
+            return view('produk/produk', ['produk' => $produk]);
+ 
+    }
     
     public function store(Request $request)
     {

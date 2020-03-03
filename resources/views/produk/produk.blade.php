@@ -50,11 +50,76 @@
         Daftar Produk
       </h1>
         <div class="container">
-            <div class="card mt-5">
+            <form action="{{url('produkCari')}}" method="GET" class="form-horizontal">
+            <div class="form-group">
+            <div class="col-md-2">
+                <select name="select" class="form-control">
+                    <option value="id_produk">ID Produk</option>
+                    <option value="nama_produk">Nama Produk</option>
+                </select>
+            </div>
+                <div class="col-md-4">
+                    <input type="text" name="cari" class="form-control" placeholder="Cari Pegawai .." value="{{ old('cari') }}">
+                </div>    
+                    <input type="submit" value="CARI">
+                    <input type="hidden" name="_method" value="get">
+                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            </form>
+            </div>
+            </div>
+            <div class="card mt-3">
+            <!-- <a href="{{url('produk/tambah')}}" class="btn btn-primary">Input Produk Baru</a> -->
                 <div class="card-body">
-                    <a href="produk/tambah" class="btn btn-primary">Input Produk Baru</a>
-                
-                    <br/>
+                    @php
+                    $numOfCols = 3;
+                    $rowCount = 0;
+                    $bootstrapColWidth = 12 / $numOfCols;
+                    @endphp
+                        @foreach($produk as $p)
+                        <div class="col-xs-@php echo $bootstrapColWidth; @endphp">
+                        @php
+                         $a = $p->nama_produk 
+                        @endphp
+                        <br>
+                        <!--
+                        <h4 >{{ $p->nama_produk }}</h4>
+                        <div class="col-xs-4 row-xs-2"><img width="270px" height="200px" src="{{ url('/data_banner/'.$p->file_banner) }}" ></div>
+                        <div class="card-body"><h4 >{{ $p->nama_produk }}</h4> -->
+                        <div class="card" style="width: 18rem;">
+                        <img width="270px" height="200px" src="{{ url('/data_banner/'.$p->file_banner) }}" >
+                        <input type="hidden" value="{{$p->id_produk}}">
+                        <h4 class="card-title ">{{ $p->nama_produk }}</h4>
+                        <p class="card-text">Terjual {{ $p->terjual }}.<br>
+                        Sisa {{ $p->sisa }}<br>
+                        {{ $p->keterangan }}</p>
+                        <a href="produkDetail/{{ $p->id_produk }}" class="btn btn-primary">Lihat Detail</a>
+
+                        <!-- <div class="col-xs-3">Tanggal Keberangkatan {{ $p->jumlah }}<br>
+                        Tanggal Expired {{ $p->jumlah }}<br>
+                    
+                        <a href="{{ url('/produkanggotainput/'.(isset($p) ? $p->id_produk : '')) }}" class="btn btn-primary">Pilih</a>
+                        <input data-id="{{ $p->nama_produk }}" data-todo="{{ $p->id_produk }}" data-target="#editTodoDialog" class="open-EditTodo btn btn-warning" data-toggle="modal" type="submit" value="submit"/></div>
+                        <div class="col-xs-4">Tanggal Keberangkatan {{ $p->jumlah }}
+                            <td>
+                                <a href="produk/edit/{{ $p->id_produk }}" class="btn btn-warning">Edit</a>
+                                <a href="produk/hapus/{{ $p->id_produk }}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Hapus</a>
+                            </td>
+                        </div> -->
+                        </div>
+                        <div id="wrapper">
+                    </div>
+                    
+                </div>
+            
+            @php
+        $rowCount++;
+    if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
+
+@endphp
+@endforeach
+<div>
+            <!-- <div id="wrapper"> -->
+                    <!-- <br/>
                     <br/>
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
@@ -85,17 +150,16 @@
                             </tr>
                             @endforeach
                         </tbody>
-                    </table>
-                </div>
+                    </table> -->
             </div>
-            {{ $produk->links() }}
         </div>
-        </div>
-        
-
+       
+</div>
+</div>
+<div class="text-center">{{ $produk->links() }}</div>
   <!-- /.content-wrapper -->
 @include('layouts.footer')
- 
+ </div>
  <!-- Add the sidebar's background. This div must be placed
       immediately after the control sidebar -->
  <div class="control-sidebar-bg"></div>
