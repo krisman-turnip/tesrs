@@ -57,7 +57,7 @@
         <br>
         <div class="form-group">
             <div class="col-md-2">
-                <select name="select" class="form-control">
+                <select name="select" class="form-control" value="{{ old('select') }}">
                     <option value="id_anggota">ID Anggota</option>
                     <option value="nama">Nama Anggota</option>
                     <option value="nama_jabatan">Nama Jabatan</option>

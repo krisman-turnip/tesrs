@@ -320,27 +320,27 @@ class komisiController extends Controller
             if($select=='nama' || $select =='id_anggota'||$select=='no_handphone')
             {
                 $komisi = DB::table('transaksi_produk as a')
-                    ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','a.admin','b.nama','a.tanggal_komisi','c.nama_jabatan','d.nama_produk')
-                    ->join('anggota as b','b.id_anggota','=','a.id_anggota')
-                    ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
-                    ->join('produk as d','d.id_produk','=','a.id_produk')
-                    ->where([['b.status','aktif'],['a.status','dibatalkan'],["b.$select",'like',"%".$cari."%"]])->paginate(20);
+                ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','a.admin','a.tanggal_komisi','b.nama','c.nama_jabatan','d.nama_produk')
+                ->join('anggota as b','b.id_anggota','=','a.id_anggota')
+                ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
+                ->join('produk as d','d.id_produk','=','a.id_produk')
+                ->where([['b.status','aktif'],['a.status','dibatalkan'],["b.$select",'like',"%".$cari."%"]])->paginate(20);
             }
             else
             {
                 $komisi = DB::table('transaksi_produk as a')
-                ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','a.admin','b.nama','a.tanggal_komisi','c.nama_jabatan','d.nama_produk')
-                ->join('anggota as b','b.id_anggota','=','a.id_anggota')
-                ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
-                ->join('produk as d','d.id_produk','=','a.id_produk')
-                ->where([['b.status','aktif'],['a.status','dibatalkan'],["c.$select",'like',"%".$cari."%"]])->paginate(20);
+                    ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','a.admin','a.tanggal_komisi','b.nama','c.nama_jabatan','d.nama_produk')
+                    ->join('anggota as b','b.id_anggota','=','a.id_anggota')
+                    ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
+                    ->join('produk as d','d.id_produk','=','a.id_produk')
+                    ->where([['b.status','aktif'],['a.status','dibatalkan'],["c.$select",'like',"%".$cari."%"]])->paginate(20);
             }
         }
         else
         {
             return view('/loginanggota');
         }
-        return redirect()->back();
+        return view ('komisi/komisi_batal',['komisi'=>$komisi]);
     }
 
     public function batal(request $request)
