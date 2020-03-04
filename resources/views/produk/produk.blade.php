@@ -50,6 +50,8 @@
         Daftar Produk
       </h1>
         <div class="container">
+        <br>
+        <br>
             <form action="{{url('produkCari')}}" method="GET" class="form-horizontal">
             <div class="form-group">
             <div class="col-md-2">

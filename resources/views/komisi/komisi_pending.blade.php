@@ -28,6 +28,8 @@
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="{{url('adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
   <!-- Google Font -->
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
 </head>
@@ -47,41 +49,64 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 class="text-center">
-        Daftar Pengajuan Produk
+        Daftar Pending Komisi
       </h1>
         <div class="container">
+        <form action="{{url('pendingCari')}}" method="GET">
+        <br>
+        <br>
+        <div class="form-group">
+            <div class="col-md-2">
+                <select name="select" class="form-control">
+                    <option value="id_anggota">ID Anggota</option>
+                    <option value="nama">Nama Anggota</option>
+                    <option value="nama_jabatan">Nama Jabatan</option>
+                    <option value="no_handphone">No Hp</option>
+                </select>
+            </div>
+                <div class="col-md-4">
+                    <input type="text" name="cari" class="form-control" placeholder="Cari Pegawai .." value="{{ old('cari') }}">
+                </div>
+                <input type="submit" value="CARI">
+                <input type="hidden" name="_method" value="get">
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            
+        </form>
+        </div>
             <div class="card mt-5">
                 <div class="card-body">
-                    <!-- <a href="produk/tambah" class="btn btn-primary">Input Produk Baru</a> -->
                     <br/>
                     <br/>
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Nama</th>
+                                <th>Nama Jabatan</th>
                                 <th>Nama Produk</th>
-                                <th>Nama Anggota</th>
-                                <th>Jumlah Pengajuan</th>
-                                <th>Produk Tersedia </th>
-                                <th>tanggal Berangkat </th>
-                                <th>Tanggal Pengajuan </th>
-                                <th>Opsi</th>
+                                <th>Jumlah</th>
+                                <th>Komisi</th>
+                                <th>Admin</th>
+                                <th>Tanggal Berangkat</th>
+                                <th>Tanggal Approve</th>
+                                <th>OPSI</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @php $no=1; @endphp 
-                            @foreach($produk as $p)
+                        @php $no=1; @endphp
+                            @foreach($komisi as $p)
                             <tr>
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $p->nama_produk }}</td>
                                 <td>{{ $p->nama }}</td>
+                                <td>{{ $p->nama_jabatan }}</td>
+                                <td>{{ $p->nama_produk }}</td>
                                 <td>{{ $p->jumlah }}</td>
-                                <td>{{ $p->sisa }}</td> 
+                                <td>{{ $p->komisi }}</td>
+                                <td>{{ $p->admin }}</td>
                                 <td>{{ $p->tanggal_berangkat }}</td>
                                 <td>{{ $p->created_at }}</td>
-                                <td>
-                                    <a href="tolak/{{ $p->id_produk }}/{{ $p->id_anggota}}/{{$p->created_at}}" class="btn btn-warning">Tolak</a>
-                                    <a href="terima/{{ $p->id_produk }}/{{ $p->id_anggota}}/{{$p->created_at}}/{{$p->id_transaksi}}" class="btn btn-warning">Terima</a>
+                                <td> 
+                                    <a href="komisiPending/batal/{{ $p->id_transaksi_produk}}" class="btn btn-warning">Batal</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -89,8 +114,9 @@
                     </table>
                 </div>
             </div>
-            {{ $produk->links() }}
+            {{ $komisi->links() }}
         </div>
+        
         </div>
         
 
@@ -104,41 +130,39 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="../adminlte/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="adminlte/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="../adminlte/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<script src="adminlte/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
  $.widget.bridge('uibutton', $.ui.button);
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
-<script src="../adminlte/bower_components/raphael/raphael.min.js"></script>
-<script src="../adminlte/bower_components/morris.js/morris.min.js"></script>
+<script src="adminlte/bower_components/raphael/raphael.min.js"></script>
 <!-- Sparkline -->
-<script src="../adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+<script src="adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
-<script src="../adminlte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="../adminlte/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<script src="adminlte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="adminlte/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <!-- jQuery Knob Chart -->
-<script src="../adminlte/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
+<script src="adminlte/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
-<script src="../adminlte/bower_components/moment/min/moment.min.js"></script>
-<script src="../adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="adminlte/bower_components/moment/min/moment.min.js"></script>
+<script src="adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
 <script src="adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
-<script src="../adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Slimscroll -->
-<script src="../adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="../adminlte/bower_components/fastclick/lib/fastclick.js"></script>
+<script src="adminlte/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="../adminlte/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../adminlte/js/pages/dashboard.js"></script>
+<script src="adminlte/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../adminlte/js/demo.js"></script>
+<script src="adminlte/js/demo.js"></script>
 </body>
 </html>

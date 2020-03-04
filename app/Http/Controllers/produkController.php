@@ -265,7 +265,7 @@ class produkController extends Controller
         if (Session::get('login'))
         { 
             $produk = DB::table('transaksi as a')
-                    ->select('b.id_produk','b.nama_produk','c.nama','c.id_anggota','a.created_at','b.sisa as sisa','a.jumlah','a.id_transaksi')
+                    ->select('b.id_produk','a.tanggal_berangkat','b.nama_produk','c.nama','c.id_anggota','a.created_at','b.sisa as sisa','a.jumlah','a.id_transaksi')
                     ->join('produk as b','b.id_produk','=','a.id_produk')
                     ->join('anggota as c','c.id_anggota','=','a.id_anggota')
                     ->where('a.status','pengajuan')->paginate(10);
@@ -307,6 +307,7 @@ class produkController extends Controller
             $pengajuanIDProduk = $pengajuan->id_produk;
             $pengajuanIDAnggota = $pengajuan->id_anggota;
             $pengajuanProduk = $pengajuan->jumlah;
+            $pengajuanTanggal = date('Y-m-d', strtotime($pengajuan->tanggal_berangkat));  
             $sisa = $jumlah->sisa;
             $terjual = $jumlah->terjual;
             $a = $jumlah->jumlah;
@@ -333,7 +334,7 @@ $trx = DB::table('komisi_template_trx as a')
 ->join('anggota as e','e.id_jabatan','=','d.id_jabatan')
 ->where('e.id_anggota',$anggota)
 ->first();
-
+print_r($anggota);
 $komisi1=$trx->komisi_1;
 $komisi2=$trx->komisi_2;
 $komisi3=$trx->komisi_3;
@@ -381,7 +382,7 @@ $idtransaksia=$selectId->id_transaksi;
                     //     'status' => 'belum diproses',
 
                     // ]);
-
+                        print_r($pengajuanTanggal);
                     transaksi_produk::create([
                         'id_produk' =>$pengajuanIDProduk, 
                         'id_anggota' => $anggota,
@@ -390,6 +391,7 @@ $idtransaksia=$selectId->id_transaksi;
                         'komisi' => $tKomisi1,
                         'admin' =>$namaAdmin,
                         'status' =>'belum diproses',
+                        'tanggal_berangkat'=> $pengajuanTanggal,
                     ]); 
 
                     if($parent1 != 0)
@@ -413,6 +415,7 @@ $idtransaksia=$selectId->id_transaksi;
                             'komisi' => $tKomisi2,
                             'admin' =>$namaAdmin,
                             'status' =>'belum diproses',
+                            'tanggal_berangkat'=> $pengajuanTanggal,
                         ]); 
                     }
 
@@ -437,6 +440,7 @@ $idtransaksia=$selectId->id_transaksi;
                             'komisi' => $tKomisi3,
                             'admin' =>$namaAdmin,
                             'status' =>'belum diproses',
+                            'tanggal_berangkat'=> $pengajuanTanggal,
                         ]); 
                     }
 
@@ -467,7 +471,7 @@ $idtransaksia=$selectId->id_transaksi;
         if (Session::get('login'))
         { 
             $komisi = DB::table('transaksi_produk as a')
-            ->select('a.created_at','b.id_anggota','b.saldo','a.komisi','b.status','a.id_transaksi_produk')
+            ->select('a.created_at','b.id_anggota','b.saldo','a.komisi','b.status','a.id_transaksi_produk','tanggal_berangkat')
             ->join('anggota as b','b.id_anggota','=','a.id_anggota')
             ->where('a.status','belum diproses')
             ->get();
@@ -482,7 +486,7 @@ $idtransaksia=$selectId->id_transaksi;
                         ->join('produk as c','a.id_produk','=','c.id_produk')
                         ->where('a.status','belum diproses')
                         ->get();
-                $komisidate=date('Y-m-d', strtotime($qa->created_at));
+                $komisidate=date('Y-m-d', strtotime($qa->tanggal_berangkat));
                 $tgl=date('Y-m-d');
                 $l=$qa->komisi;
                 $id_transaksi=$qa->id_transaksi_produk;
@@ -495,7 +499,7 @@ $idtransaksia=$selectId->id_transaksi;
                 //print_r($s);
                 $qe = $l+$s;
                 //print_r($qe);
-                if($komisidate<$tgl)
+                if($komisidate>$tgl)
                 {
                     // $index = 1;
                     // foreach($produks as $nama_s => $q)
@@ -518,12 +522,12 @@ $idtransaksia=$selectId->id_transaksi;
                             'saldo' => $qe,
                             ]);
 
-                        print_r($id_transaksi);
-                        print_r($anggotaid);
-                    }
+                    //     print_r($id_transaksi);
+                    //     print_r($anggotaid);
+                     }
                     
                     // $c = $q->komisi;
-                    // $total = $saldo+$c;
+                    //$total = $saldo+$c;
 
                    
                     //     $index++;

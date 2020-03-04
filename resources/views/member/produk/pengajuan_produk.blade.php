@@ -61,6 +61,7 @@
                                 <th>Nama Produk</th>
                                 <th>Sisa</th>
                                 <th>Jumlah Pengajuan</th>
+                                <th>Tanggal Berangkat</th>
                                 <th>Tanggal Pengajuan</th>
                                 <th>Opsi</th>
                             </tr>
@@ -73,6 +74,7 @@
                                 <td>{{ $p->nama_produk }}</td>
                                 <td>{{ $p->sisa }}</td>
                                 <td>{{ $p->jumlah }}</td>
+                                <td>{{ $p->tanggal_berangkat }}</td>
                                 <td>{{ $p->created_at }}</td>
                                 <td>
                                     <a href="batal/{{ $p->id_transaksi }}" class="btn btn-warning">Batal</a>

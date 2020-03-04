@@ -42,15 +42,32 @@ class anggotaController extends Controller
 	{
         if (Session::get('login'))
         {
-		// menangkap data pencarian
+        // menangkap data pencarian
+        $a='a';
+        $b='b';
         $cari = $request->cari;
         $select = $request->select;
-        $anggota = DB::table('anggota as a')
+        if($select=='nama' || $select =='id_anggota'||$select=='no_handphone')
+        {
+            $anggota = DB::table('anggota as a')
         ->select('a.id_anggota as id_anggota','a.id_parent as id_parent','a.nama as nama','a.email as email','a.no_handphone as no_handphone','a.alamat as alamat','b.nama_jabatan as nama_jabatan','c.nama as namaParent')
         ->join('jabatan as b', 'b.id_jabatan', '=', 'a.id_jabatan')
         ->join('anggota as c', 'c.id_anggota' ,'=', 'a.id_parent')
-        ->where([['a.status','aktif'],["a.$select",'like',"%".$cari."%"]])
+        ->where('a.status','aktif')
+        ->where("$a.$select",'like',"%".$cari."%")
         ->paginate(10);
+        }
+        else
+        {
+            $anggota = DB::table('anggota as a')
+        ->select('a.id_anggota as id_anggota','a.id_parent as id_parent','a.nama as nama','a.email as email','a.no_handphone as no_handphone','a.alamat as alamat','b.nama_jabatan as nama_jabatan','c.nama as namaParent')
+        ->join('jabatan as b', 'b.id_jabatan', '=', 'a.id_jabatan')
+        ->join('anggota as c', 'c.id_anggota' ,'=', 'a.id_parent')
+        ->where('a.status','aktif')
+        ->where("$b.$select",'like',"%".$cari."%")
+        ->paginate(10);
+        }
+        
         return view('anggota/anggota', ['anggota' => $anggota]);
     		// mengambil data dari table pegawai sesuai pencarian data
         }

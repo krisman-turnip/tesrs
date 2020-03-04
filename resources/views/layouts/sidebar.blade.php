@@ -109,13 +109,16 @@
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-table"></i> <span>Pembayaran Komisi</span>
+            <i class="fa fa-table"></i> <span>Komisi Anggota</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ url('komisi') }}"><i class="fa fa-circle-o"></i> Tampil Komisi</a></li>
+            <li><a href="{{ url('komisiPending') }}"><i class="fa fa-circle-o"></i> Komisi Pending</a></li>
+            <li><a href="{{ url('komisiBatal') }}"><i class="fa fa-circle-o"></i> Komisi Batal</a></li>
+            <li><a href="{{ url('komisiSukses') }}"><i class="fa fa-circle-o"></i> Komisi Sukses</a></li>
+            <li><a href="{{ url('komisi') }}"><i class="fa fa-circle-o"></i> Komisi Anggota</a></li>
             <li><a href="{{ url('transaksiKomisi') }}"><i class="fa fa-circle-o"></i> Transaksi Komisi</a></li>
           </ul>
         </li>

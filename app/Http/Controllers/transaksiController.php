@@ -35,7 +35,18 @@ print_r($sum);
             'status' => 'Pengajuan',
             'komisi' => '0',
             'jumlah' => $sum,
+            'tanggal_berangkat' => $tanggal_berangkat
         ]);
+        // $b = transaksi_produk::create([
+        //     'id_produk' => $id,
+        //     'id_anggota' => $request->session()->get('login'),
+        //     'id_transaksi' => '',
+        //     'status' => 'Pengajuan',
+        //     'komisi' => '0',
+        //     'jumlah' => $sum,
+        //     'admin' =>'',
+        //     'tanggal_berangkat' =>$tanggal_berangkat
+        // ]);
         $lastId = $a->id;
         foreach($nama_cus as $nama_s => $c)
             {
@@ -62,7 +73,7 @@ print_r($sum);
         {
             $idproduk=$request->session()->get('login');
             $produk = DB::table('transaksi as a')
-                    ->select('b.nama_produk','a.id_transaksi','a.jumlah','b.sisa','a.created_at')
+                    ->select('b.nama_produk','a.id_transaksi','a.jumlah','b.sisa','a.created_at','a.tanggal_berangkat')
                     ->join('produk as b','b.id_produk','=','a.id_produk')
                     ->where([['a.id_anggota',$idproduk],['a.status','Pengajuan'],])->paginate(10);
             return view('member/produk/pengajuan_produk', ['produk' => $produk]);

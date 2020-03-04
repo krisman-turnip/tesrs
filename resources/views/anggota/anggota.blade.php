@@ -53,20 +53,30 @@
       </h1>
         <div class="container">
         <form action="{{url('anggotaCari')}}" method="GET">
-        <select name="select">
-            <option value="id_anggota">ID Anggota</option>
-            <option value="nama">Nama Anggota</option>
-            <option value="nama_jabatan">Nama Jabatan</option>
-            <option value="no_handphone">No Hp</option>
-        </select>
-	<input type="text" name="cari" placeholder="Cari Pegawai .." value="{{ old('cari') }}">
-	<input type="submit" value="CARI">
-    <input type="hidden" name="_method" value="get">
-    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-</form>
+        <br>
+        <br>
+        <div class="form-group">
+            <div class="col-md-2">
+                <select name="select" class="form-control">
+                    <option value="id_anggota">ID Anggota</option>
+                    <option value="nama">Nama Anggota</option>
+                    <option value="nama_jabatan">Nama Jabatan</option>
+                    <option value="no_handphone">No Hp</option>
+                </select>
+            </div>
+                <div class="col-md-4">
+                    <input type="text" name="cari" class="form-control" placeholder="Cari Pegawai .." value="{{ old('cari') }}">
+                </div>
+                <input type="submit" value="CARI">
+                <input type="hidden" name="_method" value="get">
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            
+        </form>
+        </div>
+        <br>
             <div class="card mt-5">
                 <div class="card-body">
-                    <a href="anggota/tambah" class="btn btn-primary">Input Anggota Baru</a>
+                    <!-- <a href="anggota/tambah" class="btn btn-primary">Input Anggota Baru</a> -->
                     <br/>
                     <br/>
                     <table class="table table-bordered table-hover table-striped">

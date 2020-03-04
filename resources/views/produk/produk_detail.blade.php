@@ -35,9 +35,9 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-  @include('member.layout.header')
+  @include('layouts.header')
   <!-- Left side column. contains the logo and sidebar -->
-  @include('member.layout.sidebar')
+  @include('layouts.sidebar')
   @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -64,7 +64,8 @@ $a = $p->nama_produk
 @endphp
                 <h4 >{{ $p->nama_produk }}</h4>
                 <div class="col-xs-4"><img width="320px" height="200px" src="{{ url('/data_banner/'.$p->file_banner) }}" ></div>
-                <div class="col-xs-3">Tanggal Keberangkatan<br>
+                <div class="col-xs-3">
+                Tanggal Keberangkatan<br>
                 Tanggal Expired<br>
                 Produk Terjual<br>
                 Produk Sisa<br>
@@ -73,10 +74,10 @@ $a = $p->nama_produk
                 <a href="../produk/hapus/{{ $p->id_produk }}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Hapus</a>
                 </div>
                 <div class="col-xs-4">
-                @foreach($tanggal as $pp){{ $pp->tanggal_berangkat }}<br>
-                {{ $pp->tanggal_expired }}@endforeach<br>
+                @foreach($tanggal as $pp){{ $pp->tanggal_berangkat }} || @endforeach<br>
+                @foreach($tanggal as $ppe){{ $ppe->tanggal_expired }} || @endforeach<br>
                 {{ $p->terjual }}<br>
-                {{ $p->sisa }}
+                {{ $p->sisa }}<br>
                 </div>
             <div id="wrapper">
         @php
@@ -101,15 +102,15 @@ $a = $p->nama_produk
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="adminlte/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="{{url('adminlte/bower_components/jquery/dist/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="adminlte/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<script src="{{url('adminlte/bower_components/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
  $.widget.bridge('uibutton', $.ui.button);
 </script>
 <!-- Bootstrap 3.3.7 -->
-<script src="adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="{{url('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 <!-- Morris.js charts -->
 <script src="adminlte/bower_components/raphael/raphael.min.js"></script>
 <!-- Sparkline -->
@@ -131,9 +132,9 @@ $a = $p->nama_produk
 <!-- FastClick -->
 <script src="adminlte/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="adminlte/js/adminlte.min.js"></script>
+<script src="{{url('adminlte/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="adminlte/js/demo.js"></script>
+<script src="{{url('adminlte/js/demo.js')}}"></script>
 </body>
 </html>
 <!-- <script>
