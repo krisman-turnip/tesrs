@@ -363,8 +363,6 @@ class produkController extends Controller
             $sisa = $jumlah->sisa;
             $terjual = $jumlah->terjual;
             $a = $jumlah->jumlah;
-            $c = (int)$terjual+(int)$pengajuanProduk;
-            $b= (int)$a-(int)$c;
             $hasil = (int)$sisa-(int)$pengajuanProduk;
             $harga = $jumlah->harga;
             $jumlahKomisi = $pengajuan->jumlah;
@@ -410,6 +408,9 @@ class produkController extends Controller
             $tKomisi1=$komisi1*$transaksijumlahdetail;
             $tKomisi2=$komisi2*$transaksijumlahdetail;
             $tKomisi3=$komisi3*$transaksijumlahdetail;
+
+            $c = (int)$terjual+(int)$transaksijumlahdetail;
+            $b= (int)$a-(int)$c;
 
 $trDetail = DB::table('transaksi as a')
             ->select('a.id_transaksi','b.nama_customer','b.jumlah')
