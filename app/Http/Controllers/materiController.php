@@ -65,6 +65,7 @@ class materiController extends Controller
         {
             $pilihan = DB::table('produk')
             ->select('id_produk','nama_produk')
+            ->where('status','aktif')
             ->get();
             return view('materi/upload_materi',['pilihan'=> $pilihan]);
         }

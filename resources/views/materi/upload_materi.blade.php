@@ -59,7 +59,7 @@
                 <div class="form-group row">
                     <label for="email" class="col-md-2 col-form-label text-md-right">Nama materi</label>
                         <div class="col-md-6">
-                        <select class="form-control select2" name="cari" id="cari">
+                        <select class="form-control select2" name="cari" id="cari" required>
                             <option></option>
                             @foreach($pilihan as $value)
                                 <option value="{{ $value->id_produk }}">{{$value->nama_produk}}
@@ -77,7 +77,7 @@
                     <div class="form-group row">
                     <label for="email" class="col-md-2 col-form-label text-md-right">Keterangan</label>
                         <div class="col-md-6">
-                            <textarea class="form-control" name="keterangan"></textarea>
+                            <textarea class="form-control" name="keterangan" required></textarea>
                         </div>
                     </div>
                     <input type="hidden" name="_method" value="post">

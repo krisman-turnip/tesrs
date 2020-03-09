@@ -68,7 +68,7 @@ Route::put('/admin/update/{id}', 'adminController@update');
 Route::get('/produk/produk_pengajuan','produkController@tampil');
 Route::get('/pengajuanCari','produkController@tampilCari');
 Route::get('/produk/tolak/{id}/{a}/{b}/{c}','produkController@tolak');
-Route::get('/produk/terima/{id}/{a}/{b}/{c}/{d}','produkController@terima');
+Route::get('/produk/terima/{id}/{a}/{b}/{d}','produkController@terima');
 
                 /* Login Admin*/
 Route::get('/', function () {
@@ -85,6 +85,7 @@ Route::post('/prosesloginanggota','loginanggotaController@login');
 Route::get('/proseslogoutanggota','loginanggotaController@logout');
 Route::get('/reset','loginanggotaController@reset');
 Route::post('/loginanggota/reset','loginanggotaController@loginreset');
+Route::get('/set_password','loginanggotaController@set');
 
                 /*route anggota->member */
 Route::get('/beranda','anggotamemberController@index');

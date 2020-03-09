@@ -52,7 +52,7 @@
         <div class="container">
             <div class="card mt-5">
                 <div class="card-body">
-                    <a href="jabatan/tambah" class="btn btn-primary">Input Level Baru</a>
+                    <!-- <a href="jabatan/tambah" class="btn btn-primary">Input Level Baru</a> -->
                     <br/>
                     <br/>
                     <table class="table table-bordered table-hover table-striped">
@@ -60,7 +60,6 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Level</th>
-                                <th>Komisi</th>
                                 <th>Keterangan</th>
                                 <th>OPSI</th>
                             </tr>
@@ -71,7 +70,6 @@
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $p->nama_jabatan }}</td>
-                                <td>{{ $p->komisi }}</td>
                                 <td>{{ $p->keterangan }}</td>
                                 <td>
                                     <a href="jabatan/edit/{{ $p->id_jabatan }}" class="btn btn-warning">Edit</a>

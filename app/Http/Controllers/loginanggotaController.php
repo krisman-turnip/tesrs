@@ -27,12 +27,19 @@ class loginanggotaController extends Controller
         //$jabatan = DB::table('jabatan')->where('id_jabatan',$id)->first();
         //$anggota=count($users);[
         $password = $users->status;
+        $psw= $users->password;
                 if($usersa!=0){
                     if($password=='reset')
                     {
                         session::put('id',$users->id_anggota);
                         
                         return redirect('/reset');
+                    }
+                    else if($psw=='0')
+                    {
+                        session::put('id',$users->id_anggota);
+                        
+                        return redirect('/set_password');
                     }
                     else
                     {
@@ -59,6 +66,18 @@ class loginanggotaController extends Controller
         if (Session::get('id'))
         {
             return view('/loginanggota/reset');
+        }
+        else
+        {
+            return redirect('/loginanggota');
+        }
+    }
+
+    public function set()
+    {
+        if (Session::get('id'))
+        {
+            return view('/loginanggota/set_password');
         }
         else
         {

@@ -62,7 +62,7 @@
                 </select>
             </div>
                 <div class="col-md-4">
-                <input type="text" name="cari" class="form-control" placeholder="Cari Pegawai .." value="{{ old('cari') }}">
+                <input type="text" name="cari" class="form-control" placeholder="Cari .." value="{{ old('cari') }}">
                 </div>
                 <input type="submit" value="CARI">
                 <input type="hidden" name="_method" value="get">
@@ -73,7 +73,7 @@
            <div class="card mt-5">
                 <div class="card-body">
      
-            <a href="materi/upload" class="btn btn-primary">Input Materi Baru</a>
+            <!-- <a href="materi/upload" class="btn btn-primary">Input Materi Baru</a> -->
         
             <br/>
             <br/>

@@ -70,7 +70,7 @@
                         <div class="form-group row">
                         <label for="email" class="col-md-2 col-form-label text-md-right">ID Anggota</label>
                             <div class="col-md-6">
-                            <input type="text" name="id_anggota" class="form-control" placeholder="ID Anggota ..">
+                            <input type="text" name="id_anggota" class="form-control" placeholder="ID Anggota .." required>
 
                             @if($errors->has('id_anggota'))
                                 <div class="text-danger">
@@ -127,7 +127,7 @@
                         <div class="form-group row">
                         <label for="email" class="col-md-2 col-form-label text-md-right">Nama Anggota</label>
                         <div class="col-md-6">
-                            <input type="text" name="nama" class="form-control" placeholder="Nama Anggota ..">
+                            <input type="text" name="nama" class="form-control" placeholder="Nama Anggota .." required>
 
                             @if($errors->has('nama'))
                                 <div class="text-danger">
@@ -140,7 +140,7 @@
                         <div class="form-group row">
                         <label for="email" class="col-md-2 col-form-label text-md-right">Email</label>
                         <div class="col-md-6">
-                            <input type="text" name="email" class="form-control" placeholder="Email ..">
+                            <input type="email" name="email" class="form-control" placeholder="Email .." required>
 
                             @if($errors->has('email'))
                                 <div class="text-danger">
@@ -153,7 +153,7 @@
                         <div class="form-group row">
                         <label for="email" class="col-md-2 col-form-label text-md-right">Alamat Anggota</label>
                         <div class="col-md-6">
-                            <textarea name="alamat" class="form-control" placeholder="Alamat Anggota .."></textarea>
+                            <textarea name="alamat" class="form-control" placeholder="Alamat Anggota .." required></textarea>
 
                              @if($errors->has('alamat'))
                                 <div class="text-danger">
@@ -166,7 +166,7 @@
                         <div class="form-group row">
                         <label for="email" class="col-md-2 col-form-label text-md-right">Handphone</label>
                         <div class="col-md-6">
-                            <input type="text" name="no_handphone" class="form-control" placeholder="Handphone ..">
+                            <input type="text" name="no_handphone" class="form-control" placeholder="Handphone .." required>
 
                              @if($errors->has('alamat'))
                                 <div class="text-danger">
@@ -179,7 +179,7 @@
                         <div class="form-group row">
                         <label for="no_ktp" class="col-md-2 col-form-label text-md-right">No KTP</label>
                         <div class="col-md-6">
-                            <input type="text" name="no_ktp" class="form-control" placeholder="No KTP ..">
+                            <input type="text" name="no_ktp" class="form-control" placeholder="No KTP .." required>
 
                              @if($errors->has('no_ktp'))
                                 <div class="text-danger">

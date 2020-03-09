@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\anggota;
 
 class anggotamemberController extends Controller
 {
@@ -14,7 +15,7 @@ class anggotamemberController extends Controller
             $id = $request->session()->get('login'); 
             //echo $request->session()->get('login'); 
             $anggota = DB::table('anggota as a')
-                    ->select('b.id_anggota','b.id_parent','b.id_jabatan','a.nama','b.email','b.alamat','b.no_handphone','b.saldo','b.nama as namaParent','c.nama_jabatan')
+                    ->select('b.id_anggota','b.id_parent','b.id_jabatan','a.file_ktp','a.no_ktp','a.no_npwp','a.nama','b.email','b.alamat','b.no_handphone','b.saldo','b.nama as namaParent','c.nama_jabatan')
                     ->join('anggota as b','b.id_anggota','=','a.id_parent')
                     ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
                     ->where([['b.status','aktif'],['a.id_anggota',$id],])
@@ -63,7 +64,7 @@ class anggotamemberController extends Controller
             
             //echo $request->session()->get('login'); 
             $anggota = DB::table('anggota as a')
-                    ->select('b.id_anggota','b.id_parent','b.id_jabatan','a.nama','a.email','a.alamat','a.no_handphone','a.saldo','b.nama as namaParent','c.nama_jabatan')
+                    ->select('b.id_anggota','a.file_ktp','a.no_ktp','a.no_npwp','b.id_parent','b.id_jabatan','a.nama','a.email','a.alamat','a.no_handphone','a.saldo','b.nama as namaParent','c.nama_jabatan')
                     ->join('anggota as b','b.id_anggota','=','a.id_parent')
                     ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
                     ->where([['b.status','aktif'],['a.id_anggota',$id],])

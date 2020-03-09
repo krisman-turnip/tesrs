@@ -128,17 +128,18 @@ class anggotaController extends Controller
     public function store(Request $request)
     {
     	$this->validate($request,[
-            'id_anggota' => 'required',
-            'id_parent' => 'required',
-            'id_jabatan' => 'required',
-            'nama' => 'required',
-            'email' => 'required|email',
-            'alamat' => 'required',
-            'no_handphone' => 'required',
-            'password' => 'required',
-
+            'email' => 'required|email'
         ]);
+        $npwps = $request->no_npwp;
         $a= $request->id_parent;
+        if($npwps == '')
+        {
+            $npwp='0';
+        }
+        else
+        {
+            $npwp=$npwps;
+        }
         $p = DB::table('anggota')->select('parent_all','id_parent')->where('id_anggota',$a)->first();
         $parenta = $p->id_parent;
         $pa = $p->parent_all;
@@ -148,7 +149,6 @@ class anggotaController extends Controller
         $newData = implode(",", $ex);
 
         $file = $request->file('file_ktp');
-
         $nama_file = $file->getClientOriginalName();
         $gambar = anggota::where('file_ktp',$nama_file)->count();
         //$a = $gambar->nama_materi;
@@ -168,12 +168,13 @@ class anggotaController extends Controller
                 'email' => $request->email,
                 'alamat' => $request->alamat,
                 'no_handphone' => $request->no_handphone,
-                'password' => hash::make($request->password),
+                'password' => '0',
                 'saldo' => '0',
                 'status' => 'aktif',
                 'no_ktp' => $request->no_ktp,
-                'file_ktp' => $request->file_ktp,
-                'no_npwp' => $request->no_npwp,
+                'file_ktp' => $nama_file,
+                'no_npwp' => $npwp,
+                'poin' =>'0',
             ]);
 
         }
@@ -181,7 +182,7 @@ class anggotaController extends Controller
         {
             //Alert::message('Message', 'Optional Title');
             //return view ('');
-            Alert::message('Nama materi sudah ada', 'Judul Pesan');
+            //Alert::message('Nama anggota sudah ada', 'Judul Pesan');
             return redirect()->back();
         }
 

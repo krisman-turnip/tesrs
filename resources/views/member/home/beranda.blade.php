@@ -52,6 +52,97 @@
         Daftar Anggota
       </h1>
       <div class="container">
+      @php
+        $numOfCols = 1;
+$rowCount = 0;
+$bootstrapColWidth = 12 / $numOfCols;
+@endphp
+<div class="row">
+        @foreach($anggota as $p)
+        <div class="col-xs-@php echo $bootstrapColWidth; @endphp">
+@php
+$a = $p->nama 
+@endphp
+                <h4 >{{ $p->nama }}</h4>
+                <div class="col-xs-3"><br><img width="250px" height="200px" src="{{ url('/data_ktp/'.$p->file_ktp) }}"></div>
+                <div class="col-xs-8">
+                <table class="table table-striped">
+                    <tr>
+                        <td>
+                        Nama Parent
+                        </td>
+                        <td>
+                        {{ $p->namaParent }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        Jabatan
+                        </td>
+                        <td>
+                        {{ $p->nama_jabatan }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        Email
+                        </td>
+                        <td>
+                        {{ $p->email }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        No Hp
+                        </td>
+                        <td>
+                        {{ $p->no_handphone }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        Alamat
+                        </td>
+                        <td>
+                        {{ $p->alamat }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        No KTP
+                        </td>
+                        <td>
+                        {{ $p->no_ktp }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        No NPWP
+                        </td>
+                        <td>
+                        {{ $p->no_npwp }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        Saldo
+                        </td>
+                        <td>
+                        {{ $p->saldo }}
+                        </td>
+                    </tr>
+                 <br>
+                 </table>
+               
+                </div>
+            <div id="wrapper">
+        @php
+        $rowCount++;
+    if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
+
+@endphp
+@endforeach
+</div>
             <div class="card mt-5">
                 <div class="card-body">
                     <br/>

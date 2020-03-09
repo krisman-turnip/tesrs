@@ -264,12 +264,17 @@ class produkController extends Controller
     {
         if (Session::get('login'))
         { 
-            $produk = DB::table('transaksi as a')
-                    ->select('b.id_produk','d.id_transaksi_detail','a.tanggal_berangkat','b.nama_produk','c.nama','c.id_anggota','a.created_at','b.sisa as sisa','d.jumlah','d.nama_customer','a.id_transaksi')
+            // $produk = DB::table('transaksi as a')
+            //         ->select('b.id_produk','d.id_transaksi_detail','a.tanggal_berangkat','b.nama_produk','c.nama','c.id_anggota','a.created_at','b.sisa as sisa','d.jumlah','d.nama_customer','a.id_transaksi')
+            //         ->join('produk as b','b.id_produk','=','a.id_produk')
+            //         ->join('anggota as c','c.id_anggota','=','a.id_anggota')
+            //         ->join('transaksi_detail as d','d.id_transaksi','=','a.id_transaksi')
+
+            $produk = DB::table('transaksi_detail as a')
+                    ->select('a.nama_customer','a.ktp_customer','a.tanggal_berangkat','a.created_at','c.nama','c.id_anggota','a.id_transaksi_detail','b.nama_produk','b.sisa','b.id_produk','b.jumlah')
                     ->join('produk as b','b.id_produk','=','a.id_produk')
-                    ->join('anggota as c','c.id_anggota','=','a.id_anggota')
-                    ->join('transaksi_detail as d','d.id_transaksi','=','a.id_transaksi')
-                    ->where('d.status','pengajuan')->paginate(10);
+                    ->join('anggota as c','a.id_anggota','=','c.id_anggota')
+                    ->where('a.status','pengajuan')->paginate(10);
             return view('produk/produk_pengajuan', ['produk' => $produk]);
         }
         else
@@ -286,36 +291,33 @@ class produkController extends Controller
             $select = $request->select;
             if($select=='nama'||$select=='id_anggota')
             {
-            $produk = DB::table('transaksi as a')
-                    ->select('b.id_produk','a.tanggal_berangkat','b.nama_produk','c.nama','c.id_anggota','a.created_at','b.sisa as sisa','d.jumlah','d.nama_customer','a.id_transaksi')
+                $produk = DB::table('transaksi_detail as a')
+                    ->select('a.nama_customer','a.ktp_customer','a.tanggal_berangkat','a.created_at','c.nama','c.id_anggota','a.id_transaksi_detail','b.nama_produk','b.sisa','b.id_produk','b.jumlah')
                     ->join('produk as b','b.id_produk','=','a.id_produk')
-                    ->join('anggota as c','c.id_anggota','=','a.id_anggota')
-                    ->join('transaksi_detail as d','d.id_transaksi','=','a.id_transaksi')
+                    ->join('anggota as c','a.id_anggota','=','c.id_anggota')
                     ->where('a.status','pengajuan')
                     ->where("c.$select",'like',"%".$cari."%")
                     ->paginate(10);
             }
             else if($select=='nama_customer')
             {
-                $produk = DB::table('transaksi as a')
-                ->select('b.id_produk','a.tanggal_berangkat','b.nama_produk','c.nama','c.id_anggota','a.created_at','b.sisa as sisa','d.jumlah','d.nama_customer','a.id_transaksi')
-                ->join('produk as b','b.id_produk','=','a.id_produk')
-                ->join('anggota as c','c.id_anggota','=','a.id_anggota')
-                ->join('transaksi_detail as d','d.id_transaksi','=','a.id_transaksi')
-                ->where('a.status','pengajuan')
-                ->where("d.$select",'like',"%".$cari."%")
-                ->paginate(10);
+                $produk = DB::table('transaksi_detail as a')
+                    ->select('a.nama_customer','a.ktp_customer','a.tanggal_berangkat','a.created_at','c.nama','c.id_anggota','a.id_transaksi_detail','b.nama_produk','b.sisa','b.id_produk','b.jumlah')
+                    ->join('produk as b','b.id_produk','=','a.id_produk')
+                    ->join('anggota as c','a.id_anggota','=','c.id_anggota')
+                    ->where('a.status','pengajuan')
+                    ->where("a.$select",'like',"%".$cari."%")
+                    ->paginate(10);
             }
             else
             {
-                $produk = DB::table('transaksi as a')
-                ->select('b.id_produk','a.tanggal_berangkat','b.nama_produk','c.nama','c.id_anggota','a.created_at','b.sisa as sisa','d.jumlah','d.nama_customer','a.id_transaksi')
-                ->join('produk as b','b.id_produk','=','a.id_produk')
-                ->join('anggota as c','c.id_anggota','=','a.id_anggota')
-                ->join('transaksi_detail as d','d.id_transaksi','=','a.id_transaksi')
-                ->where('a.status','pengajuan')
-                ->where("b.$select",'like',"%".$cari."%")
-                ->paginate(10);
+                $produk = DB::table('transaksi_detail as a')
+                    ->select('a.nama_customer','a.ktp_customer','a.tanggal_berangkat','a.created_at','c.nama','c.id_anggota','a.id_transaksi_detail','b.nama_produk','b.sisa','b.id_produk','b.jumlah')
+                    ->join('produk as b','b.id_produk','=','a.id_produk')
+                    ->join('anggota as c','a.id_anggota','=','c.id_anggota')
+                    ->where('a.status','pengajuan')
+                    ->where("b.$select",'like',"%".$cari."%")
+                    ->paginate(10);
             }
             return view('produk/produk_pengajuan', ['produk' => $produk]);
         }
@@ -342,7 +344,7 @@ class produkController extends Controller
         return redirect('produk/produk_pengajuan');
     }
 
-    public function terima($id,$a,$b,$d,$e, Request $request)
+    public function terima($id,$a,$b,$e, Request $request)
     {
         if (Session::get('login'))
         {
@@ -352,10 +354,10 @@ class produkController extends Controller
             $produk = $id;
             $anggota =$a;
             $create=$b;
-            $transaksi = $d;
+            //$transaksi = $d;
             $transaksi_detail = $e;
             $jumlah = DB::table('produk')->where('id_produk',$id)->first();
-            $pengajuan = DB::table('transaksi_detail')->where('id_transaksi',$transaksi)->first();
+            $pengajuan = DB::table('transaksi_detail')->where('id_transaksi',$transaksi_detail)->first();
             $pengajuanIDProduk = $pengajuan->id_produk;
             $pengajuanIDAnggota = $pengajuan->id_anggota;
             $pengajuanProduk = $pengajuan->jumlah;
