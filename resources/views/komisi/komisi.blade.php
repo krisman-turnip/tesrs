@@ -50,6 +50,27 @@
         Daftar Komisi
       </h1>
         <div class="container">
+        <form action="{{url('komisiCari')}}" method="GET">
+        <br>
+        <br>
+        <div class="form-group">
+            <div class="col-md-2">
+                <select name="select" class="form-control" value="{{ old('select') }}">
+                    <option value="id_anggota">ID Anggota</option>
+                    <option value="nama">Nama Anggota</option>
+                    <option value="nama_jabatan">Nama Jabatan</option>
+                    <option value="no_handphone">No Hp</option>
+                </select>
+            </div>
+                <div class="col-md-4">
+                <input type="text" name="cari" class="form-control" placeholder="Cari Pegawai .." value="{{ old('cari') }}">
+                </div>
+                <input type="submit" value="CARI">
+                <input type="hidden" name="_method" value="get">
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            
+        </form>
+        </div>
             <div class="card mt-5">
                 <div class="card-body">
                     <!-- <a href="jabatan/tambah" class="btn btn-primary">Input </a> -->

@@ -50,6 +50,26 @@
         Penjualan Produk
       </h1>
         <div class="container">
+        <form action="{{url('produkanggota/diterimaCari')}}" method="GET">
+        <br>
+        <br>
+        <div class="form-group">
+            <div class="col-md-2">
+                <select name="select" class="form-control" value="{{ old('select') }}">
+                    <option value="ktp_customer">KTP Customer</option>
+                    <option value="nama_customer">Nama Customer</option>
+                    <option value="nama_produk">Nama Produk</option>
+                </select>
+            </div>
+                <div class="col-md-4">
+                <input type="text" name="cari" class="form-control" placeholder="Cari Pegawai .." value="{{ old('cari') }}">
+                </div>
+                <input type="submit" value="CARI">
+                <input type="hidden" name="_method" value="get">
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            
+        </form>
+        </div>
             <div class="card mt-5">
                 <div class="card-body">
                     <br/>
@@ -60,8 +80,10 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Produk</th>
-                                <th>Produk Tersedia</th>
+                                <th>Nama Customer</th>
+                                <th>KTP Customer</th>
                                 <th>Komisi</th>
+                                <th>Poin</th>
                                 <th>Tanggal Approve</th>
                             </tr>
                         </thead>
@@ -71,8 +93,10 @@
                             <tr>
                                 <td>{{ $no++ }}</td> 
                                 <td>{{ $p->nama_produk }}</td>
-                                <td>{{ $p->sisa }}</td>
+                                <td>{{ $p->nama_customer }}</td>
+                                <td>{{ $p->ktp_customer }}</td>
                                 <td>{{ $p->komisi }}</td>
+                                <td>{{ $p->poin }}</td>
                                 <td>{{ $p->created_at }}</td>
                             </tr>
                             @endforeach

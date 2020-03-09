@@ -60,6 +60,9 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>Nama Produk</th>
+                        <th>Nama Customer</th>
+                        <th>KTP Customer</th>
                         <th>Komisi</th>
                         <th>Jumlah Produk</th>
                         <th>Tanggal Approval</th>
@@ -70,6 +73,9 @@
                     @foreach($komisi as $p)
                     <tr>
                         <td>{{ $no++ }}</td>
+                        <td>{{ $p->nama_produk }}</td>
+                        <td>{{ $p->nama_customer }}</td>
+                        <td>{{ $p->ktp_customer }}</td>
                         <td>{{ $p->komisi }}</td>
                         <td>{{ $p->jumlah }}</td>
                         <td>{{ $p->created_at }}</td>

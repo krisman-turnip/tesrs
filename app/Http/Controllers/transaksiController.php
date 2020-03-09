@@ -58,6 +58,8 @@ print_r($sum);
             'ktp_customer' => $ktp_customer[$nama_s],
             'id_transaksi' => $lastId,
             'tanggal_berangkat' => $tanggal_berangkat,
+            'status' => 'pengajuan',
+            'jumlah' =>$jumlah[$nama_s],
             ]);
         $index++;
             }
@@ -72,10 +74,45 @@ print_r($sum);
         if (Session::get('login'))
         {
             $idproduk=$request->session()->get('login');
-            $produk = DB::table('transaksi as a')
-                    ->select('b.nama_produk','a.id_transaksi','a.jumlah','b.sisa','a.created_at','a.tanggal_berangkat')
+            // $produk = DB::table('transaksi as a')
+            //         ->select('b.nama_produk','a.id_transaksi','c.jumlah','c.nama_customer','c.ktp_customer','b.sisa','a.created_at','a.tanggal_berangkat')
+            //         ->join('produk as b','b.id_produk','=','a.id_produk')
+            //         ->join('transaksi_detail as c','c.id_transaksi','=','a.id_transaksi')
+
+            $produk = DB::table('transaksi_detail as a')
+                    ->select('a.id_transaksi_detail','a.nama_customer','a.ktp_customer','b.nama_produk','b.sisa','a.jumlah','a.created_at','a.tanggal_berangkat')
                     ->join('produk as b','b.id_produk','=','a.id_produk')
-                    ->where([['a.id_anggota',$idproduk],['a.status','Pengajuan'],])->paginate(10);
+                    ->where([['a.id_anggota',$idproduk],['a.status','Pengajuan'],])->paginate(20);
+            return view('member/produk/pengajuan_produk', ['produk' => $produk]);
+        }
+        else
+        {
+            return redirect('/loginanggota');
+        }
+    }
+
+    public function pengajuanCari(Request $request)
+    {
+        if (Session::get('login'))
+        {
+            $cari = $request->cari;
+            $select = $request->select;
+            if($select=='ktp_customer' || $select =='nama_customer')
+            {
+            $idproduk=$request->session()->get('login');
+            $produk = DB::table('transaksi_detail as a')
+                    ->select('a.id_transaksi_detail','a.nama_customer','a.ktp_customer','b.nama_produk','b.sisa','a.jumlah','a.created_at','a.tanggal_berangkat')
+                    ->join('produk as b','b.id_produk','=','a.id_produk')
+                    ->where([['a.id_anggota',$idproduk],['a.status','Pengajuan'],["a.$select",'like',"%".$cari."%"]])->paginate(20);
+            }
+            else
+            {
+            $idproduk=$request->session()->get('login');
+            $produk = DB::table('transaksi_detail as a')
+                    ->select('a.id_transaksi_detail','a.nama_customer','a.ktp_customer','b.nama_produk','b.sisa','a.jumlah','a.created_at','a.tanggal_berangkat')
+                    ->join('produk as b','b.id_produk','=','a.id_produk')
+                    ->where([['a.id_anggota',$idproduk],['a.status','Pengajuan'],["b.$select",'like',"%".$cari."%"]])->paginate(20);
+            }
             return view('member/produk/pengajuan_produk', ['produk' => $produk]);
         }
         else
@@ -89,10 +126,49 @@ print_r($sum);
         if (Session::get('login'))
         {
             $idproduk=$request->session()->get('login');
-            $produk = DB::table('transaksi as a')
-                    ->select('b.nama_produk','a.id_transaksi','a.komisi','b.sisa','a.created_at')
+           
+            // $produk = DB::table('transaksi as a')
+            //         ->select('b.nama_produk','a.id_transaksi','b.sisa','c.nama_customer','c.ktp_customer','a.created_at','d.komisi','d.poin')
+            //         ->join('produk as b','b.id_produk','=','a.id_produk')
+            //         ->join('transaksi_detail as c','c.id_transaksi','=','a.id_transaksi')
+            //         ->join('transaksi_produk as d','d.id_transaksi_detail','=','c.id_transaksi_detail')
+
+            $produk = DB::table('transaksi_detail as a')
+                    ->select('c.komisi','c.poin','a.created_at','b.nama_produk','a.nama_customer','a.ktp_customer')
                     ->join('produk as b','b.id_produk','=','a.id_produk')
-                    ->where([['a.id_anggota',$idproduk],['a.status','diterima'],])->paginate(10);
+                    ->join('transaksi_produk as c','c.id_transaksi_detail','=','a.id_transaksi_detail')
+                    ->where([['a.id_anggota',$idproduk],['c.id_anggota',$idproduk],['a.status','diterima'],])->paginate(10);
+                    return view('member/produk/produk_diterima', ['produk' => $produk]);
+        }
+        else
+        {
+            return redirect('/loginanggota');
+        }
+    }
+
+    public function diterimaCari(Request $request)
+    {
+        if (Session::get('login'))
+        {
+            $idproduk=$request->session()->get('login');
+            $cari = $request->cari;
+            $select = $request->select;
+            if($select=='ktp_customer' || $select =='nama_customer')
+            {
+                $produk = DB::table('transaksi_detail as a')
+                ->select('c.komisi','c.poin','a.created_at','b.nama_produk','a.nama_customer','a.ktp_customer')
+                ->join('produk as b','b.id_produk','=','a.id_produk')
+                ->join('transaksi_produk as c','c.id_transaksi_detail','=','a.id_transaksi_detail')
+                ->where([['a.id_anggota',$idproduk],['c.id_anggota',$idproduk],['a.status','diterima'],["a.$select",'like',"%".$cari."%"]])->paginate(10);
+            }
+            else
+            {
+                $produk = DB::table('transaksi_detail as a')
+                ->select('c.komisi','c.poin','a.created_at','b.nama_produk','a.nama_customer','a.ktp_customer')
+                ->join('produk as b','b.id_produk','=','a.id_produk')
+                ->join('transaksi_produk as c','c.id_transaksi_detail','=','a.id_transaksi_detail')
+                ->where([['a.id_anggota',$idproduk],['c.id_anggota',$idproduk],['a.status','diterima'],["b.$select",'like',"%".$cari."%"]])->paginate(10);
+            }
             return view('member/produk/produk_diterima', ['produk' => $produk]);
         }
         else
@@ -106,10 +182,45 @@ print_r($sum);
         if (Session::get('login'))
         {
             $idproduk=$request->session()->get('login');
-            $produk = DB::table('transaksi as a')
-                    ->select('b.nama_produk','a.id_transaksi','a.komisi','b.sisa','a.created_at')
-                    ->join('produk as b','b.id_produk','=','a.id_produk')
-                    ->where([['a.id_anggota',$idproduk],['a.status','ditolak'],])->paginate(10);
+            // $produk = DB::table('transaksi as a')
+            // ->select('b.nama_produk','a.id_transaksi','b.sisa','c.nama_customer','c.ktp_customer','a.created_at','d.komisi','d.poin')
+            // ->join('produk as b','b.id_produk','=','a.id_produk')
+            // ->join('transaksi_detail as c','c.id_transaksi','=','a.id_transaksi')
+            // ->join('transaksi_produk as d','d.id_transaksi_detail','=','c.id_transaksi_detail')
+            // ->where([['d.id_anggota',$idproduk],['c.status','diterima'],])->paginate(10);
+            $produk= DB::table('transaksi_detail as a')
+            ->select('b.nama_produk','a.nama_customer','a.ktp_customer','b.created_at')
+            ->join('produk as b','b.id_produk','=','a.id_produk')
+            ->where([['a.id_anggota',$idproduk],['a.status','ditolak'],])->paginate(10);
+            return view('member/produk/produktolak', ['produk' => $produk]);
+        }
+        else
+        {
+            return redirect('/loginanggota');
+        }
+    }
+
+    public function ditolakCari(Request $request)
+    {
+        if (Session::get('login'))
+        {
+            $idproduk=$request->session()->get('login');
+            $cari = $request->cari;
+            $select = $request->select;
+            if($select=='ktp_customer' || $select =='nama_customer')
+            {
+                $produk= DB::table('transaksi_detail as a')
+                ->select('b.nama_produk','a.nama_customer','a.ktp_customer','b.created_at')
+                ->join('produk as b','b.id_produk','=','a.id_produk')
+                ->where([['a.id_anggota',$idproduk],['a.status','ditolak'],["a.$select",'like',"%".$cari."%"]])->paginate(10);
+            }
+            else
+            {
+                $produk= DB::table('transaksi_detail as a')
+                ->select('b.nama_produk','a.nama_customer','a.ktp_customer','b.created_at')
+                ->join('produk as b','b.id_produk','=','a.id_produk')
+                ->where([['a.id_anggota',$idproduk],['a.status','ditolak'],["b.$select",'like',"%".$cari."%"]])->paginate(10);
+            }
             return view('member/produk/produktolak', ['produk' => $produk]);
         }
         else
@@ -122,7 +233,7 @@ print_r($sum);
     {
         if (Session::get('login'))
         {
-            DB::table('transaksi')->where('id_transaksi', $id)-> update([
+            DB::table('transaksi_detail')->where('id_transaksi_detail', $id)-> update([
                 'status' => 'Batal'
             ]);
             return redirect('produkanggota/pengajuan');

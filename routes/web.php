@@ -37,6 +37,7 @@ Route::get('/report','produkController@transaksiProduk');
 
                 /* route materi->admin */
 Route::get('/materi','materiController@index');
+Route::get('/materiCari','materiController@materiCari');
 Route::get('/materi/upload','materiController@upload');
 Route::post('/materi/prosesupload','materiController@proses_upload');
 Route::get('/materi/download/{id}','materiController@download');
@@ -65,8 +66,9 @@ Route::put('/admin/update/{id}', 'adminController@update');
 
                 /* route transaksi->admin */
 Route::get('/produk/produk_pengajuan','produkController@tampil');
-Route::get('/produk/tolak/{id}/{a}/{b}','produkController@tolak');
-Route::get('/produk/terima/{id}/{a}/{b}/{c}','produkController@terima');
+Route::get('/pengajuanCari','produkController@tampilCari');
+Route::get('/produk/tolak/{id}/{a}/{b}/{c}','produkController@tolak');
+Route::get('/produk/terima/{id}/{a}/{b}/{c}/{d}','produkController@terima');
 
                 /* Login Admin*/
 Route::get('/', function () {
@@ -95,9 +97,12 @@ Route::get('/produkanggotainput/{id}','produkanggotaController@input');
                 /* route transaksi->member */
 Route::post('/produkanggota/tambah/{id}','transaksiController@store');
 Route::get('/produkanggota/pengajuan','transaksiController@pengajuan');
+Route::get('/produkanggota/pengajuanCari','transaksiController@pengajuanCari');
 Route::get('/produkanggota/batal/{id}','transaksiController@delete');
 Route::get('/produkanggota/diterima','transaksiController@diterima');
+Route::get('/produkanggota/diterimaCari','transaksiController@diterimaCari');
 Route::get('/produkanggota/ditolak','transaksiController@ditolak');
+Route::get('/produkanggota/ditolakCari','transaksiController@ditolakCari');
 
                 /* route materi->member */
 Route::get('/materianggota','materianggotaController@index');
@@ -110,6 +115,8 @@ Route::get('/materianggota','materianggotaController@index');
  Route::get('/komisiPending/batal/{id}','komisiController@pendingBatal');
  Route::get('/pendingCari','komisiController@pendingCari');
  Route::get('/batalCari','komisiController@batalCari');
+ Route::get('/suksesCari','komisiController@suksesCari');
+ Route::get('/komisiCari','komisiController@komisiCari');
  Route::get('/komisianggota','komisiController@komisianggota');
  Route::get('/requestkomisi','komisiController@requestkomisi');
  Route::post('/trrequestkomisi','komisiController@trrequestkomisi');

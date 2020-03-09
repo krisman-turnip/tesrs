@@ -26,6 +26,39 @@ class materiController extends Controller
         }
     }
 
+    public function materiCari(request $request)
+    {
+        if (Session::get('login'))
+        {
+            
+            $cari = $request->cari;
+            $select = $request->select;
+            if($select=='nama_materi')
+            {
+                $materi = DB::table('materi as a')
+                ->select('a.id_materi','a.nama_materi','a.keterangan','b.nama_produk')
+                ->join('produk as b', 'b.id_produk', '=', 'a.id_produk')
+                ->where("a.$select",'like',"%".$cari."%")
+                ->paginate(10);
+                
+            }
+            else
+            {
+                $materi = DB::table('materi as a')
+                ->select('a.id_materi','a.nama_materi','a.keterangan','b.nama_produk')
+                ->join('produk as b', 'b.id_produk', '=', 'a.id_produk')
+                ->where("b.$select",'like',"%".$cari."%")
+                ->paginate(10);
+                
+            }
+            return view('materi/materi', ['materi' => $materi]);
+        }
+        else
+        {
+            return redirect('/');
+        }
+    }
+
     public function upload()
     {
         if (Session::get('login'))

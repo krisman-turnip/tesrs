@@ -147,8 +147,42 @@ class komisiController extends Controller
         if (Session::get('login'))
         {
             $ids = $request->session()->get('login');
-            $komisi = DB::table('transaksi_produk')->where('id_anggota',$ids)->paginate(10);
+            $komisi = DB::table('transaksi_produk as a')
+                    ->select('a.komisi','a.poin','b.nama_produk','c.nama_customer','c.ktp_customer','a.id_anggota','a.jumlah','a.created_at')
+                    ->join('produk as b','b.id_produk','=','a.id_produk')
+                    ->join('transaksi_detail as c','c.id_transaksi_detail','=','a.id_transaksi_detail')
+                    ->where([['a.id_anggota',$ids],['a.status','sudah diproses']])
+                    ->paginate(20);
             return view('member/komisi/komisi', ['komisi' => $komisi]);
+        }
+    }
+
+    public function komisiCari(request $request)
+    {
+        if (Session::get('login'))
+        {
+            $cari = $request->cari;
+            $select = $request->select;
+            if($select=='nama' || $select =='id_anggota'||$select=='no_handphone')
+            {
+                $anggota = DB::table('anggota as a')
+                ->select('a.id_anggota','a.nama','a.email','a.no_handphone','b.nama_jabatan','a.saldo')
+                ->rightjoin('jabatan as b', 'b.id_jabatan', '=', 'a.id_jabatan')
+                ->where('a.status','aktif')
+                ->where("a.$select",'like',"%".$cari."%")
+                ->paginate(10);
+                
+            }
+            else
+            {
+                $anggota = DB::table('anggota as a')
+                ->select('a.id_anggota','a.nama','a.email','a.no_handphone','b.nama_jabatan','a.saldo')
+                ->rightjoin('jabatan as b', 'b.id_jabatan', '=', 'a.id_jabatan')
+                ->where('a.status','aktif')
+                ->where("b.$select",'like',"%".$cari."%")
+                ->paginate(10);
+            }
+            return view('komisi/komisi', ['anggota' => $anggota]);
         }
     }
 
@@ -341,6 +375,40 @@ class komisiController extends Controller
             return view('/loginanggota');
         }
         return view ('komisi/komisi_batal',['komisi'=>$komisi]);
+    }
+
+    public function suksesCari(request $request)
+    {
+        if (Session::get('login'))
+        {
+            $a='b';
+            $b='c';
+            $cari = $request->cari;
+            $select = $request->select;
+            if($select=='nama' || $select =='id_anggota'||$select=='no_handphone')
+            {
+                $komisi = DB::table('transaksi_produk as a')
+                ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','a.admin','a.tanggal_komisi','b.nama','c.nama_jabatan','d.nama_produk')
+                ->join('anggota as b','b.id_anggota','=','a.id_anggota')
+                ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
+                ->join('produk as d','d.id_produk','=','a.id_produk')
+                ->where([['b.status','aktif'],['a.status','sudah diproses'],["b.$select",'like',"%".$cari."%"]])->paginate(20);
+            }
+            else
+            {
+                $komisi = DB::table('transaksi_produk as a')
+                    ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','a.admin','a.tanggal_komisi','b.nama','c.nama_jabatan','d.nama_produk')
+                    ->join('anggota as b','b.id_anggota','=','a.id_anggota')
+                    ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
+                    ->join('produk as d','d.id_produk','=','a.id_produk')
+                    ->where([['b.status','aktif'],['a.status','sudah diproses'],["c.$select",'like',"%".$cari."%"]])->paginate(20);
+            }
+        }
+        else
+        {
+            return view('/loginanggota');
+        }
+        return view ('komisi/komisi_sukses',['komisi'=>$komisi]);
     }
 
     public function batal(request $request)

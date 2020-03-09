@@ -50,6 +50,27 @@
         Daftar Pengajuan Produk
       </h1>
         <div class="container">
+        <form action="{{url('pengajuanCari')}}" method="GET">
+        <br>
+        <br>
+        <div class="form-group">
+            <div class="col-md-2">
+                <select name="select" class="form-control" value="{{ old('select') }}">
+                    <option value="id_anggota">ID Anggota</option>
+                    <option value="nama">Nama Anggota</option>
+                    <option value="nama_customer">Nama Customer</option>
+                    <option value="nama_produk">Nama Produk</option>
+                </select>
+            </div>
+                <div class="col-md-4">
+                <input type="text" name="cari" class="form-control" placeholder="Cari Pegawai .." value="{{ old('cari') }}">
+                </div>
+                <input type="submit" value="CARI">
+                <input type="hidden" name="_method" value="get">
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            
+        </form>
+        </div>
             <div class="card mt-5">
                 <div class="card-body">
                     <!-- <a href="produk/tambah" class="btn btn-primary">Input Produk Baru</a> -->
@@ -61,6 +82,7 @@
                                 <th>No</th>
                                 <th>Nama Produk</th>
                                 <th>Nama Anggota</th>
+                                <th>Nama Customer</th>
                                 <th>Jumlah Pengajuan</th>
                                 <th>Produk Tersedia </th>
                                 <th>tanggal Berangkat </th>
@@ -75,13 +97,14 @@
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $p->nama_produk }}</td>
                                 <td>{{ $p->nama }}</td>
+                                <td>{{ $p->nama_customer }}</td>
                                 <td>{{ $p->jumlah }}</td>
                                 <td>{{ $p->sisa }}</td> 
                                 <td>{{ $p->tanggal_berangkat }}</td>
                                 <td>{{ $p->created_at }}</td>
                                 <td>
-                                    <a href="tolak/{{ $p->id_produk }}/{{ $p->id_anggota}}/{{$p->created_at}}" class="btn btn-warning">Tolak</a>
-                                    <a href="terima/{{ $p->id_produk }}/{{ $p->id_anggota}}/{{$p->created_at}}/{{$p->id_transaksi}}" class="btn btn-warning">Terima</a>
+                                    <a href="tolak/{{ $p->id_produk }}/{{ $p->id_anggota}}/{{$p->created_at}}/{{$p->id_transaksi_detail}}" class="btn btn-warning">Tolak</a>
+                                    <a href="terima/{{ $p->id_produk }}/{{ $p->id_anggota}}/{{$p->created_at}}/{{$p->id_transaksi}}/{{$p->id_transaksi_detail}}" class="btn btn-warning">Terima</a>
                                 </td>
                             </tr>
                             @endforeach
