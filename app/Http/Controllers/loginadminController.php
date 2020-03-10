@@ -18,7 +18,7 @@ class loginadminController extends Controller
             ['password'=>'required']
             
         );
-
+    try{
         $user = $request->email;
         $pass = $request->password;    
 
@@ -81,7 +81,10 @@ class loginadminController extends Controller
         {
             return redirect('/')->with('failed','Login gagal');
         }
-            
+    } catch (\Exception $e) {
+
+        return $e->getMessage();
+    }   
     }
 
     public function logout(Request $request)

@@ -86,7 +86,7 @@
                             <div class="col-md-6">
                             <!-- <input type="text" name="id_parent" class="form-control" placeholder="ID Parent .."> -->
                             <select class="form-control select2" name="id_parent" id="cari">
-                            <option></option>
+                            <option value=""></option>
                             @foreach($data as $d)
                             <option value="{{$d->id_anggota}}">{{$d->nama}}</option>
                             @endforeach
@@ -104,7 +104,7 @@
                         <div class="col-md-6">
                             <!-- <input type="text" name="id_jabatan" class="form-control" placeholder="ID Jabatan .."> -->
                             <select class="form-control select2" name="id_jabatan" id="carijabatan">
-                            <option></option>
+                            <option value=""></option>
                             @foreach($pilihan as $value)
                                 <option value="{{ $value->id_jabatan }}">{{$value->nama_jabatan}}
                                 </option>
@@ -120,7 +120,7 @@
                         <div class="form-group row">
                             <label for="file_ktp" class="col-md-2 col-form-label text-md-right"> Upload Foto</label>
                             <div class="col-md-6">
-                                <input type="file" name="file_ktp">
+                                <input type="file" name="file_ktp" required>
                             </div>
                         </div>
 

@@ -113,6 +113,7 @@ Route::get('/materianggota','materianggotaController@index');
  Route::get('/komisiPending','komisiController@pending');
  Route::get('/komisiBatal','komisiController@batal');
  Route::get('/komisiSukses','komisiController@sukses');
+ Route::get('/exportSukses', 'komisiController@exportSukses');
  Route::get('/komisiPending/batal/{id}','komisiController@pendingBatal');
  Route::get('/pendingCari','komisiController@pendingCari');
  Route::get('/batalCari','komisiController@batalCari');

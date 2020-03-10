@@ -11,54 +11,63 @@ class loginanggotaController extends Controller
 {
     public function login(Request $request) 
     {
-        $this->validate($request,
+        
+            // Validate the value...
+        
+            $this->validate($request,
 
-            ['email'=>'required'],
+                ['email'=>'required'],
 
-            ['password'=>'required']
-            
-        );
+                ['password'=>'required']
+                
+            );
+            try {
+            $user = $request->email;
+            $pass = $request->password;        
 
-        $user = $request->email;
-        $pass = $request->password;        
-
-        $usersa = DB::table('anggota')->where([['email', $user],])->count();
-        $users = DB::table('anggota')->where([['email', $user],])->first();
-        //$jabatan = DB::table('jabatan')->where('id_jabatan',$id)->first();
-        //$anggota=count($users);[
-        $password = $users->status;
-        $psw= $users->password;
-                if($usersa!=0){
-                    if($password=='reset')
-                    {
-                        session::put('id',$users->id_anggota);
-                        
-                        return redirect('/reset');
-                    }
-                    else if($psw=='0')
-                    {
-                        session::put('id',$users->id_anggota);
-                        
-                        return redirect('/set_password');
+            $usersa = DB::table('anggota')->where([['email', $user],])->count();
+            $users = DB::table('anggota')->where([['email', $user],])->first();
+            //$jabatan = DB::table('jabatan')->where('id_jabatan',$id)->first();
+            //$anggota=count($users);[
+            $password = $users->status;
+            $psw= $users->password;
+                    if($usersa!=0){
+                        if($password=='reset')
+                        {
+                            session::put('id',$users->id_anggota);
+                            
+                            return redirect('/reset');
+                        }
+                        else if($psw=='0')
+                        {
+                            session::put('id',$users->id_anggota);
+                            
+                            return redirect('/set_password');
+                        }
+                        else
+                        {
+                            if($users->email == $user AND Hash::check($pass, $users->password) ){ 
+                                //$users->session()->put('login', 'Selamat anda berhasil login');
+                                //$request->session()->put('id',$users->id_anggota);
+                                Session::put('login', $users->id_anggota);
+                                return redirect('/beranda');
+                            } 
+                            else 
+                            {     
+                                return redirect('/loginanggota')->with('failed','Login gagal');
+                            }
+                        }
                     }
                     else
                     {
-                        if($users->email == $user AND Hash::check($pass, $users->password) ){ 
-                            //$users->session()->put('login', 'Selamat anda berhasil login');
-                            //$request->session()->put('id',$users->id_anggota);
-                            Session::put('login', $users->id_anggota);
-                            return redirect('/beranda');
-                        } 
-                        else 
-                        {     
-                            return redirect('/loginanggota')->with('failed','Login gagal');
-                        }
+                        return redirect('/loginanggota')->with('failed','Login gagal');
                     }
-                }
-                else
-                {
-                    return redirect('/loginanggota')->with('failed','Login gagal');
-                }
+            }
+            catch (\Exception $e) {
+
+                return $e->getMessage();
+            }
+
     }
 
     public function reset()
@@ -91,7 +100,7 @@ class loginanggotaController extends Controller
             'password' => 'required',
             'passwordcheck' => 'required'
     	]);
- 
+        try {
         $id = $request->session()->get('id'); 
             $password = $request->password;
             $passwordchange = $request->passwordcheck;
@@ -110,6 +119,12 @@ class loginanggotaController extends Controller
             }
             session::forget('id');
             session::flush('id');
+
+        }
+        catch (\Exception $e) {
+
+            return $e->getMessage();
+        }
         
     }
     

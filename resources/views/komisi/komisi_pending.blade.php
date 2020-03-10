@@ -77,19 +77,20 @@
                 <div class="card-body">
                     <br/>
                     <br/>
-                    <table class="table table-bordered table-hover table-striped">
+                    <div class="table-responsive">
+                    <table class="table">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Nama Jabatan</th>
-                                <th>Nama Produk</th>
-                                <th>Jumlah</th>
-                                <th>Komisi</th>
-                                <th>Admin</th>
-                                <th>Tanggal Berangkat</th>
-                                <th>Tanggal Approve</th>
-                                <th>OPSI</th>
+                                <th class="th-xs">No</th>
+                                <th class="th-xs">Nama</th>
+                                <th class="th-xs">Nama Customer</th>
+                                <th class="th-xs">Nama Produk</th>
+                                <th class="th-xs">Jumlah</th>
+                                <th class="th-xs">Komisi</th>
+                                <th class="th-xs">Admin</th>
+                                <th class="th-xs">Tanggal Berangkat</th>
+                                <th class="th-xs">Tanggal Approve</th>
+                                <th class="th-xs">OPSI</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -98,7 +99,7 @@
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $p->nama }}</td>
-                                <td>{{ $p->nama_jabatan }}</td>
+                                <td>{{ $p->nama_customer }}</td>
                                 <td>{{ $p->nama_produk }}</td>
                                 <td>{{ $p->jumlah }}</td>
                                 <td>{{ $p->komisi }}</td>
@@ -112,6 +113,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
             {{ $komisi->links() }}

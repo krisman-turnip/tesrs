@@ -359,7 +359,7 @@ print_r($sub);
             //$transaksi = $d;
             $transaksi_detail = $e;
             $jumlah = DB::table('produk')->where('id_produk',$id)->first();
-            $pengajuan = DB::table('transaksi_detail')->where('id_transaksi',$transaksi_detail)->first();
+            $pengajuan = DB::table('transaksi_detail')->where('id_transaksi_detail',$transaksi_detail)->first();
             $pengajuanIDProduk = $pengajuan->id_produk;
             $pengajuanIDAnggota = $pengajuan->id_anggota;
             $pengajuanProduk = $pengajuan->jumlah;
@@ -371,23 +371,32 @@ print_r($sub);
             $harga = $jumlah->harga;
             $jumlahKomisi = $pengajuan->jumlah;
             $z = DB::table('jabatan as b')
-                ->select('b.komisi')
+                ->select('b.komisi','b.id_jabatan')
                 ->join('anggota as a','b.id_jabatan','=','a.id_jabatan')
                 ->where('id_anggota',$anggota)->first();
-            $za = $z->komisi; 
+            $za = $z->komisi;
+            $zas = $z->id_jabatan;
             $komisi= (((int)$za*(int)$harga)/100)*(int)$jumlahKomisi;
             $q = DB::table('anggota')->where('id_anggota',$anggota)->first();
             $saldo=$q->saldo;
             $parent1=$q->id_parent;
             $parent2=$q->id_parent_2;
-        $trx = DB::table('komisi_template_trx as a')
+        $tr = DB::table('komisi_template_trx as a')
         ->select('a.id_produk','a.id_jabatan','a.id_template_komisi','b.komisi_1','b.komisi_2','b.komisi_3','b.poin_1','b.poin_2','b.poin_3','a.id_komisi_template_trx','c.status')
         ->join('komisi_template as b','b.id_template_komisi','=','a.id_template_komisi')
-        ->join('transaksi as c','c.id_produk','=','a.id_produk')
+        ->join('transaksi_detail as c','c.id_produk','=','a.id_produk')
         ->join('jabatan as d','d.id_jabatan','=','a.id_jabatan')
         ->join('anggota as e','e.id_jabatan','=','d.id_jabatan')
         ->where('e.id_anggota',$anggota)
-        ->first();
+        ->get();
+        print_r($zas);
+        print_r($produk);
+        $trx = DB::table('komisi_template_trx as a')
+            ->select('a.id_produk','a.id_produk','a.id_jabatan','a.id_template_komisi','b.komisi_1','b.komisi_2','b.komisi_3','b.poin_1','b.poin_2','b.poin_3','a.id_komisi_template_trx')
+            ->join('komisi_template as b','b.id_template_komisi','=','a.id_template_komisi')
+            ->where([['a.id_produk',$produk],['a.id_jabatan',$zas]])
+            ->first();
+
         $komisi1=$trx->komisi_1;
         $komisi2=$trx->komisi_2;
         $komisi3=$trx->komisi_3;
@@ -395,12 +404,16 @@ print_r($sub);
         $poin1=$trx->poin_1;
         $poin2=$trx->poin_2;
         $poin3=$trx->poin_3;
-
-        $selectId = DB::table('transaksi as a')
-            ->select('a.id_transaksi','b.id_transaksi_detail','b.jumlah')
-            ->join('transaksi_detail as b','a.id_transaksi','=','b.id_transaksi')
-            ->where([['a.id_produk', $produk],['a.id_anggota',$anggota],['a.created_at',$create],['b.id_transaksi_detail',$transaksi_detail]])->first();
-            $idtransaksia=$selectId->id_transaksi;
+        // print_r($komisi1);
+        // print_r($komisi2);
+        // print_r($komisi3);
+        // print_r($poin1);
+        // print_r($poin2);
+        // print_r($poin3);
+        $selectId = DB::table('transaksi_detail as a')
+            ->select('a.id_transaksi_detail','a.id_transaksi_detail','a.jumlah')
+            ->where([['a.id_produk', $produk],['a.id_anggota',$anggota],['a.created_at',$create],['a.id_transaksi_detail',$transaksi_detail]])->first();
+            //$idtransaksia=$selectId->id_transaksi;
             $transaksiDetail=$selectId->id_transaksi_detail;
             $transaksijumlahdetail=$selectId->jumlah;
 
@@ -416,11 +429,11 @@ print_r($sub);
             $c = (int)$terjual+(int)$transaksijumlahdetail;
             $b= (int)$a-(int)$c;
 
-$trDetail = DB::table('transaksi as a')
-            ->select('a.id_transaksi','b.nama_customer','b.jumlah')
-            ->join('transaksi_detail as b','b.id_transaksi','=','a.id_transaksi')
-            ->where('a.id_transaksi',$idtransaksia)
-            ->get();
+// $trDetail = DB::table('transaksi as a')
+//             ->select('a.id_transaksi','b.nama_customer','b.jumlah')
+//             ->join('transaksi_detail as b','b.id_transaksi','=','a.id_transaksi')
+//             ->where('a.id_transaksi',$idtransaksia)
+//             ->get();
             $indexs = 0;
                 
             $saldoAkhir=(int)$komisi+(int)$saldo;
@@ -443,6 +456,13 @@ $trDetail = DB::table('transaksi as a')
                         //$anggota = anggota::find($id);
                         //'id_produk' => $request->id_produk,
                         'b.status' => 'Diterima',
+                    ]);
+
+                    $tr = DB::table('transaksi_detail as a')
+                        ->where([['a.id_produk', $produk],['a.id_anggota',$anggota],['a.created_at',$create],['a.id_transaksi_detail',$transaksi_detail]])-> update([
+                        //$anggota = anggota::find($id);
+                        //'id_produk' => $request->id_produk,
+                        'a.status' => 'Diterima',
                     ]);
                 
                     // DB::table('anggota')-> where('id_anggota', $anggota)-> update([

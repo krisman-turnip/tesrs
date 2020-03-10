@@ -173,6 +173,7 @@
                         </TABLE>
                         </div>
                         </div>
+                        </div>
                         <br> 
                         <div class="form-group row">
                         <!-- <label for="jumlah" class="col-md-2 col-form-label text-md-right">Tanggal Keberangkatan</label>

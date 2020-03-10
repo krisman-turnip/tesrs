@@ -73,6 +73,7 @@
             
         </form>
         </div>
+        <a href="{{url('exportSukses')}}" class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a>
             <div class="card mt-5">
                 <div class="card-body">
                     
