@@ -15,7 +15,7 @@ class anggotamemberController extends Controller
             $id = $request->session()->get('login'); 
             //echo $request->session()->get('login'); 
             $anggota = DB::table('anggota as a')
-                    ->select('b.id_anggota','b.id_parent','b.id_jabatan','a.file_ktp','a.no_ktp','a.no_npwp','a.nama','b.email','b.alamat','b.no_handphone','b.saldo','b.nama as namaParent','c.nama_jabatan')
+                    ->select('b.id_anggota','b.id_parent','b.id_jabatan','a.file_ktp','a.no_ktp','a.no_npwp','a.nama','a.email','a.alamat','a.no_handphone','a.saldo','b.nama as namaParent','c.nama_jabatan')
                     ->join('anggota as b','b.id_anggota','=','a.id_parent')
                     ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
                     ->where([['b.status','aktif'],['a.id_anggota',$id],])
@@ -36,7 +36,7 @@ class anggotamemberController extends Controller
                             $sc = $az->id_anggota;
                             //echo $sc;
                             $anak[$sc] =DB::table('anggota as a')
-                                    ->select('b.id_anggota','a.id_parent','b.id_jabatan','a.nama','b.email','b.alamat','b.no_handphone','b.saldo','b.nama as namaParent','c.nama_jabatan')
+                                    ->select('b.id_anggota','a.id_parent','b.id_jabatan','a.nama','a.email','a.alamat','a.no_handphone','a.saldo','b.nama as namaParent','c.nama_jabatan')
                                     ->join('anggota as b','b.id_parent','=','a.id_anggota')
                                     ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
                                     ->where([['b.status','aktif'],['b.id_parent',$sc],])

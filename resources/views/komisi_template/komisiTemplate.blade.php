@@ -85,7 +85,7 @@
                                 <td>{{ $p->poin_3 }}</td>
                                 <td> 
                                     <a href="komisiTemplate/edit/{{ $p->id_template_komisi}}" class="btn btn-warning">Edit</a>
-                                    <a href="komisiTemplate/delete/{{ $p->id_template_komisi }}" class="btn btn-danger">Hapus</a>
+                                    <a href="komisiTemplate/delete/{{ $p->id_template_komisi }}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Hapus</a>
                                 </td>
                             </tr>
                             @endforeach

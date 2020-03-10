@@ -18,7 +18,7 @@ class materianggotaController extends Controller
             ->join('transaksi as c','c.id_produk','=', 'b.id_produk')
             ->where([['c.status','Diterima'],['c.id_anggota',$id],])
             ->distinct()
-            ->paginate(10);
+            ->paginate(20);
             return view('member/materi/materi', ['materi' => $materi]);
         }
         else

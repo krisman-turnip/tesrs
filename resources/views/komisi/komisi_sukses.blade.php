@@ -49,7 +49,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 class="text-center">
-        Daftar Komisi
+        Daftar Komisi Sukses
       </h1>
         <div class="container">
         <form action="{{url('suksesCari')}}" method="GET">
@@ -65,7 +65,7 @@
                 </select>
             </div>
                 <div class="col-md-4">
-                <input type="text" name="cari" class="form-control" placeholder="Cari Pegawai .." value="{{ old('cari') }}">
+                <input type="text" name="cari" class="form-control" placeholder="Cari .." value="{{ old('cari') }}">
                 </div>
                 <input type="submit" value="CARI">
                 <input type="hidden" name="_method" value="get">

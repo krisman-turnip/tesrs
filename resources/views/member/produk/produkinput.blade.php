@@ -119,7 +119,7 @@ $bootstrapColWidth = 12 / $numOfCols;
 <br>
     <form method="post" action="{{ url('/produkanggota/tambah/'.(isset($p) ? $p->id_produk : '')) }}">
         <div class="form-group row">
-        <input type="text" name="nama_produk" class="form-control col-md-2" placeholder="Nama Produk .." value="{{ $p->id_produk }}">
+        <input type="hidden" name="nama_produk" class="form-control col-md-2" placeholder="Nama Produk .." value="{{ $p->id_produk }}">
         <label for="customer" class="col-md-2 col-form-label text-md-right">Tanggal</label>
         
             <div class="col-md-6">
