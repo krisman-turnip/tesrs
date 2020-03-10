@@ -237,8 +237,10 @@ class produkController extends Controller
             //$anggota = anggota::find($id);
             $produk = DB::table('produk')->where('id_produk',$id)->first();
             $materi = DB::table('materi')->where('id_produk',$id)->get();
-
-            return view('produk/produk_edit', ['produk' => $produk],['materi'=>$materi]);
+            $sub = DB::table('sub_produk')->select('nama_produk as namaProduk')->where('id_produk',$id)->get();
+            $tanggal = DB::table('tanggal_produk')->where('id_produk',$id)->get();
+print_r($sub);
+            return view('produk/produk_edit', ['produk' => $produk,'materi'=>$materi,'sub' => $sub,'tanggal'=>$tanggal]);
         }
         else
         {

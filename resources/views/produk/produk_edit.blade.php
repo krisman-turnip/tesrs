@@ -130,6 +130,54 @@
                             @endif
                             </div>
                         </div>
+                       
+                        <div class="form-group row">
+                        <label for="jumlah" class="col-md-2 col-form-label text-md-right">Sub Produk</label>
+                        <div class="col-md-6">
+                        
+                        <INPUT type="button" value="Add Row" onClick="addRow('dataTable')" />
+                        
+                        <form action="" method="post" name="f">  
+                        
+                            <TABLE width="425" border="1">
+                            <thead>
+                                <tr>
+                                    <th width="94">Nama Produk</th>
+                                    <th width="121">Harga</th>
+                                    <th width="84">Keterangan</th>
+                                    <th width="84">opsi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dataTable">
+
+                            </tbody>
+                            </TABLE>
+                        </div>
+                        </div>
+
+                        <div class="form-group row">
+                        <label for="jumlah" class="col-md-2 col-form-label text-md-right">Tanggal Produk</label>
+                        <div class="col-md-6">
+                        <INPUT type="button" value="Add Row" onClick="addRows('dataTables')" />
+                       
+                        <form action="" method="post" name="f">  
+
+                        <TABLE width="425" border="1">
+                        <thead>
+                            <tr>
+                                <th width="94">Tanggal Keberangkatan</th>
+                                <th width="121">Tanggal Expired</th>
+                                <th width="84">opsi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTables">
+
+                        </tbody>
+                        </TABLE>
+                        </div>
+                        </div>
+                        <br> 
+                        <div class="form-group row">
  
                         <input type="hidden" name="_method" value="put">
                             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
@@ -148,7 +196,9 @@
                
                     <br/>
                     <br/>
-                    
+                    @foreach($sub as $p)
+                        {{$p->namaProduk}}
+                        @endforeach
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
@@ -191,6 +241,75 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
  $.widget.bridge('uibutton', $.ui.button);
+</script>
+<SCRIPT language="javascript">
+     function addRow(tableID) { 
+        
+        var table = document.getElementById(tableID);
+
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+
+        // var cell1 = row.insertCell(0);
+        // var element1 = document.createElement("input");
+        // element1.type = "checkbox";
+        // element1.name="chkbox[]";
+        // cell1.appendChild(element1);
+        
+        var cell1 = row.insertCell(0);
+        cell1.innerHTML = "<input type='text' name='nama_sub[]' value='{{$p->namaProduk}}' required>";
+
+        var cell2 = row.insertCell(1);
+        cell2.innerHTML = "<input type='text'  name='harga_sub[]' required/>";
+
+        var cell3 = row.insertCell(2);
+        cell3.innerHTML =  "<input type='text'  name='keterangan_sub[]' required/>";
+        var cell4= row.insertCell(3);
+        cell4.innerHTML =  "<input type='Button'value='delete'onclick='deleteRow(this)' required/>";
+        
+        
+        }
+</SCRIPT>
+<SCRIPT language="javascript">
+     function addRows(tableIDs) { 
+
+        var table = document.getElementById(tableIDs);
+
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+
+
+
+        var cell1 = row.insertCell(0);
+        cell1.innerHTML = " <input type='text' class='form-control' name='tanggal_berangkat[]' id='datepicker' required/>";
+
+        var cell2 = row.insertCell(1);
+        cell2.innerHTML = "<input type='text' class='form-control' name='tanggal_expired[]' id='datepicker2' required/>";
+
+        var cell3= row.insertCell(2);
+        cell3.innerHTML =  "<input type='Button'value='delete'onclick='deleteRow(this)'/>";
+        
+        
+        }
+
+</SCRIPT>
+<script>
+  $( function() {
+    $("#datepicker").datepicker({ format: 'yyyy-mm-dd' });
+  } );
+  </script>
+   <script>
+  $( function() {
+    $( "#datepicker2" ).datepicker({
+        format: 'yyyy-mm-dd'
+    });
+  } );
+  </script>
+<script>
+  function deleteRow(btn) {
+  var row = btn.parentNode.parentNode;
+  row.parentNode.removeChild(row);
+}
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="../../adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

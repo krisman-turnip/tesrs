@@ -58,7 +58,7 @@
     <div class="container">
             <div class="card mt-3">
                 <div class="card-header text-center">
-                    <H1>TAMBAH PRODUK</h1> 
+                    <h2>Tambah Produk</h2> 
                 </div>
                 <div class="card-body">
                     <a href="../produk" class="btn btn-primary">Kembali</a>
@@ -129,23 +129,32 @@
                                 <textarea class="form-control" name="keterangan"></textarea>
                             </div>
                         </div>
+                        <div class="form-group row">
+                        <label for="jumlah" class="col-md-2 col-form-label text-md-right">Sub Produk</label>
+                        <div class="col-md-6">
                         <INPUT type="button" value="Add Row" onClick="addRow('dataTable')" />
 
                         <form action="" method="post" name="f">  
+                        
+                            <TABLE width="425" border="1">
+                            <thead>
+                                <tr>
+                                    <th width="94">Nama Produk</th>
+                                    <th width="121">Harga</th>
+                                    <th width="84">Keterangan</th>
+                                    <th width="84">opsi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dataTable">
 
-                        <TABLE width="425" border="1">
-                        <thead>
-                            <tr>
-                                <th width="94">Nama Produk</th>
-                                <th width="121">Harga</th>
-                                <th width="84">Keterangan</th>
-                                <th width="84">opsi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="dataTable">
+                            </tbody>
+                            </TABLE>
+                        </div>
+                        </div>
 
-                        </tbody>
-                        </TABLE>
+                        <div class="form-group row">
+                        <label for="jumlah" class="col-md-2 col-form-label text-md-right">Tanggal Produk</label>
+                        <div class="col-md-6">
                         <INPUT type="button" value="Add Row" onClick="addRows('dataTables')" />
 
                         <form action="" method="post" name="f">  
@@ -162,7 +171,8 @@
 
                         </tbody>
                         </TABLE>
-              
+                        </div>
+                        </div>
                         <br> 
                         <div class="form-group row">
                         <!-- <label for="jumlah" class="col-md-2 col-form-label text-md-right">Tanggal Keberangkatan</label>

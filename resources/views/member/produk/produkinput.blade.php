@@ -50,9 +50,9 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1 class="text-center">
-        Daftar Produk
-      </h1>
+      <h3 class="text-center">
+        Tambah Produk
+      </h3>
         <!-- <div class="container">
             <div class="card mt-5">
                 <div class="card-body">
