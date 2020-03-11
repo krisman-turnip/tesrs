@@ -149,7 +149,7 @@ $bootstrapColWidth = 12 / $numOfCols;
                         <th width="300">Tipe Kamar</th>
                         <th width="500">Nama Customer</th>
                         <th width="500">No KTP Customer</th>
-                        <th width="100">Jumlah Customer</th>
+                        <!-- <th width="100">Jumlah Customer</th> -->
                         <th width="100">opsi</th>
                     </tr>
                 </thead>
@@ -185,11 +185,11 @@ $bootstrapColWidth = 12 / $numOfCols;
         var cell3 = row.insertCell(2);
         cell3.innerHTML = "<input type='text' class='form-control' name='ktp_customer[]' id='' required/>";
 
-        var cell4 = row.insertCell(3);
-        cell4.innerHTML = "<input type='text' class='form-control' name='jumlah_customer[]' id='' required/>";
+        // var cell4 = row.insertCell(3);
+        // cell4.innerHTML = "<input type='text' class='form-control' name='jumlah_customer[]' id='' required/>";
 
-        var cell5= row.insertCell(4);
-        cell5.innerHTML =  "<input type='Button' value='delete'onclick='deleteRow(this)' required/>";
+        var cell4= row.insertCell(3);
+        cell4.innerHTML =  "<input type='Button' value='delete'onclick='deleteRow(this)' required/>";
         
         
         }

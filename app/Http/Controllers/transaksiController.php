@@ -13,16 +13,16 @@ class transaksiController extends Controller
     {
        
         $id=$id;
-      
-        $jumlah=$request->jumlah_customer;
+        $jmlh='1';
+        // $jumlah=$request->jumlah_customer;
         $sum = 0;
-foreach ($jumlah as $item => $a) {
-    $sum += $jumlah[$item];
-}
-print_r($sum);
+// foreach ($jumlah as $item => $a) {
+//     $sum += $jumlah[$item];
+// }
+// print_r($sum);
         $id_sub_produk=$request->id_sub;
         $nama_cus = $request->nama_customer;
-        $jumlah_customer = $request->jumlah_customer;
+        // $jumlah_customer = $request->jumlah_customer;
         $ktp_customer = $request->ktp_customer;
         $tanggal_berangkat = $request->tanggal;
         $index = 1;
@@ -59,7 +59,8 @@ print_r($sum);
             'id_transaksi' => $lastId,
             'tanggal_berangkat' => $tanggal_berangkat,
             'status' => 'pengajuan',
-            'jumlah' =>$jumlah[$nama_s],
+            'jumlah' =>$jmlh,
+            'admin' =>'',
             ]);
         $index++;
             }

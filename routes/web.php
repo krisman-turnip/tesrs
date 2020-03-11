@@ -34,6 +34,8 @@ Route::get('/produk/hapus/{id}', 'produkController@delete');
 Route::get('/produk/edit/{id}', 'produkController@edit');
 Route::put('/produk/update/{id}', 'produkController@update');
 Route::get('/report','produkController@transaksiProduk');
+Route::get('/reportCari','produkController@transaksiProdukCari');
+Route::get('/reportBatal/{id}','produkController@transaksiProdukBatal');
 
                 /* route materi->admin */
 Route::get('/materi','materiController@index');
@@ -114,6 +116,8 @@ Route::get('/materianggota','materianggotaController@index');
  Route::get('/komisiBatal','komisiController@batal');
  Route::get('/komisiSukses','komisiController@sukses');
  Route::get('/exportSukses', 'komisiController@exportSukses');
+ Route::get('/exportBatal', 'komisiController@exportBatal');
+ Route::get('/exportPending', 'komisiController@exportPending');
  Route::get('/komisiPending/batal/{id}','komisiController@pendingBatal');
  Route::get('/pendingCari','komisiController@pendingCari');
  Route::get('/batalCari','komisiController@batalCari');

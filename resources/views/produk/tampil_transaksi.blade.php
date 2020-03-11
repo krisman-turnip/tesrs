@@ -47,9 +47,36 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 class="text-center">
-        Daftar Produk
+        Daftar Transaksi Produk
       </h1>
         <div class="container">
+
+        <form action="{{url('reportCari')}}" method="GET">
+        <br>
+        <br>
+        <div class="form-group">
+        <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+                <select name="select" class="form-control" value="{{ old('select') }}">
+                    <option value="nama">Nama Anggota</option>
+                    <option value="nama_customer">Nama customer</option>
+                    <option value="ktp_customer">KTP Customer</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <input type="text" name="cari" class="form-control" placeholder="Cari .." value="{{ old('cari') }}">
+            </div>
+            <div class="col-md-2">
+                <input type="submit" value="CARI">
+                <input type="hidden" name="_method" value="get">
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            </div>
+            <div class="col-md-3.5">
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Report</button>
+            </div>
+            </div>
+        </form>
             <div class="card mt-5">
                 <div class="card-body">
                 
@@ -61,9 +88,11 @@
                                 <th>No</th>
                                 <th>Nama Anggota</th>
                                 <th>Nama Produk</th>
-                                <th>Jumlah</th>
+                                <th>Nama Customer</th>
+                                <th>KTP Customer</th>
                                 <th>Approval</th>
                                 <th>Tanggal Approve</th>
+                                <th>Opsi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,9 +102,13 @@
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $p->nama }}</td>
                                 <td>{{ $p->nama_produk }}</td>
-                                <td>{{ $p->jumlah }}</td>
+                                <td>{{ $p->nama_customer }}</td>
+                                <td>{{ $p->ktp_customer }}</td>
                                 <td>{{ $p->admin }}</td>
                                 <td>{{ $p->created_at }}</td>
+                                <td> 
+                                    <a href="reportBatal/{{ $p->id_transaksi_detail}}"  onclick="return confirm('Are you sure?')" class="btn btn-warning">Batal</a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

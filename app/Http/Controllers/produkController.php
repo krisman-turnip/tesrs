@@ -456,6 +456,7 @@ print_r($sub);
                         //$anggota = anggota::find($id);
                         //'id_produk' => $request->id_produk,
                         'b.status' => 'Diterima',
+                        'b.admin' => $namaAdmin,
                     ]);
 
                     $tr = DB::table('transaksi_detail as a')
@@ -602,7 +603,7 @@ print_r($sub);
                 //print_r($s);
                 $jpoin= $poinanggota+$poin;
                 $qe = $l+$s;
-                print_r($jpoin);
+                //print_r($jpoin);
                 if($komisidate>$tgl)
                 {
                     // $index = 1;
@@ -648,12 +649,12 @@ print_r($sub);
                 }
                 $indexs++;
              }
-            $produk = DB::table('transaksi_produk as a')
-                    ->select('a.jumlah','b.nama','c.nama_produk','a.admin','a.created_at')
+            $produk = DB::table('transaksi_detail as a')
+                    ->select('b.nama','a.id_transaksi_detail','c.nama_produk','a.admin','a.created_at','a.nama_customer','a.ktp_customer')
                     ->join('anggota as b','a.id_anggota','=','b.id_anggota')
                     ->join('produk as c','a.id_produk','=','c.id_produk')
-                    ->where('a.status','sudah diproses')
-                    ->paginate(10);
+                    ->where('a.status','diterima')
+                    ->paginate(20);
                   
             return view('produk/tampil_transaksi', ['produk' => $produk]);
         }
@@ -661,5 +662,81 @@ print_r($sub);
         {
             return redirect('/');
         } 
+    }
+
+    public function transaksiProdukCari(request $request)
+    {
+        if (Session::get('login'))
+        {
+            $cari = $request->cari;
+            $select = $request->select;
+            if($select=='nama')
+            {
+                $produk = DB::table('transaksi_detail as a')
+                ->select('b.nama','a.id_transaksi_detail','c.nama_produk','a.admin','a.created_at','a.nama_customer','a.ktp_customer')
+                ->join('anggota as b','a.id_anggota','=','b.id_anggota')
+                ->join('produk as c','a.id_produk','=','c.id_produk')
+                ->where('a.status','diterima')
+                ->where("b.$select",'like',"%".$cari."%")
+                ->paginate(20);
+            }
+            else
+            {
+                $produk = DB::table('transaksi_detail as a')
+                ->select('b.nama','a.id_transaksi_detail','c.nama_produk','a.admin','a.created_at','a.nama_customer','a.ktp_customer')
+                ->join('anggota as b','a.id_anggota','=','b.id_anggota')
+                ->join('produk as c','a.id_produk','=','c.id_produk')
+                ->where('a.status','diterima')
+                ->where("a.$select",'like',"%".$cari."%")
+                ->paginate(20);
+            }
+
+
+            return view('produk/tampil_transaksi', ['produk' => $produk]);
+        }
+        else
+        {
+            return view('/loginanggota');
+        }
+    }
+
+    public function transaksiProdukBatal($id,request $request)
+    {
+        if (Session::get('login'))
+        {
+            $ids = $request->session()->get('login');
+            $tgl=date('Y-m-d');
+            $admin = DB::table('users')->where('id',$ids)->first();
+            $namaAdmin=$admin->name;     
+            $komisi = DB::table('transaksi_detail')->where('id_transaksi_detail',$id)->update([
+                'status' => 'dibatalkan',
+                'admin'  => $namaAdmin,
+                'updated_at' => $tgl,
+            ]);
+
+            $komisi = DB::table('transaksi_produk')->where('id_transaksi_detail',$id)->update([
+                'status' => 'dibatalkan',
+                'admin'  => $namaAdmin,
+                'updated_at' => $tgl,
+            ]);
+
+            $p = DB::table('transaksi_detail')->where('id_transaksi_detail',$id)->first();
+            $idProduk = $p->id_produk;
+            
+            $produk = DB::table('produk')->where('id_produk',$idProduk)->first();
+            $sisa = $produk->sisa;
+            $terjual = $produk->terjual;
+            $sisa++;
+            $terjual--;
+            $updateProduk = DB::table('produk')->where('id_produk',$idProduk)->update([
+                'sisa' => $sisa,
+                'terjual' => $terjual,
+            ]);
+        }
+        else
+        {
+            return view('/loginanggota');
+        }
+        return redirect()->back();
     }
 }

@@ -7,6 +7,8 @@ use App\anggota;
 use App\komisi;
 use App\request_komisi;
 use App\Exports\SuksesKomisiExport;
+use App\Exports\BatalKomisiExport;
+use App\Exports\PendingKomisiExport;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
@@ -442,7 +444,7 @@ class komisiController extends Controller
                     ->join('anggota as b','b.id_anggota','=','a.id_anggota')
                     ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
                     ->join('produk as d','d.id_produk','=','a.id_produk')
-                    ->where([['b.status','aktif'],['a.status','sudah diproses']])->paginate(20);
+                    ->where([['b.status','aktif'],['a.status','sudah diproses']])->paginate(50);
         }
         else
         {
@@ -451,8 +453,40 @@ class komisiController extends Controller
         return view ('komisi/komisi_sukses',['komisi'=>$komisi]);
     }
 
-    public function exportSukses()
+    public function exportSukses(request $request)
 	{
-		return Excel::download(new SuksesKomisiExport, 'sukseskomisi.xlsx');
-	}
+        $nama=$request->nama;
+        $nama_jabatan=$request->nama_jabatan;
+        $nama_file = 'Komisi_sukses_'.date('Y-m-d_H-i-s').'.xlsx';
+        return Excel::download(new SuksesKomisiExport($nama, $nama_jabatan), $nama_file);
+        // $nama = $request->nama;
+        // $nama_jabatan = $request->nama_jabatan;
+
+        // $komisi = DB::table('transaksi_produk as a')
+        //     ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','a.admin','b.nama','c.nama_jabatan','d.nama_produk')
+        //     ->join('anggota as b','b.id_anggota','=','a.id_anggota')
+        //     ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
+        //     ->join('produk as d','d.id_produk','=','a.id_produk')
+        //     ->where([['b.status','aktif'],['a.status','sudah diproses'],])
+        //     ->whereBetween('a.created_at',[ $nama, $nama_jabatan])
+        //     ->get();
+        // print_r($komisi);
+        // print_r($nama_jabatan);
+    }
+    
+    public function exportBatal(request $request)
+	{
+        $nama=$request->nama;
+        $nama_jabatan=$request->nama_jabatan;
+        $nama_file = 'Komisi_batal_'.date('Y-m-d_H-i-s').'.xlsx';
+        return Excel::download(new BatalKomisiExport($nama, $nama_jabatan), $nama_file);
+    }
+
+    public function exportPending(request $request)
+	{
+        $nama=$request->nama;
+        $nama_jabatan=$request->nama_jabatan;
+        $nama_file = 'Komisi_pending_'.date('Y-m-d_H-i-s').'.xlsx';
+        return Excel::download(new pendingKomisiExport($nama, $nama_jabatan), $nama_file);
+    }
 }

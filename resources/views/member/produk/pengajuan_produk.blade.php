@@ -54,6 +54,8 @@
         <br>
         <br>
         <div class="form-group">
+        <div class="col-md-2">
+            </div>
             <div class="col-md-2">
                 <select name="select" class="form-control" value="{{ old('select') }}">
                     <option value="ktp_customer">KTP Customer</option>
@@ -61,7 +63,7 @@
                     <option value="nama_produk">Nama Produk</option>
                 </select>
             </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                 <input type="text" name="cari" class="form-control" placeholder="Cari .." value="{{ old('cari') }}">
                 </div>
                 <input type="submit" value="CARI">
@@ -82,7 +84,6 @@
                                 <th>Nama Customer</th>
                                 <th>No KTP</th>
                                 <th>Sisa</th>
-                                <th>Jumlah Pengajuan</th>
                                 <th>Tanggal Berangkat</th>
                                 <th>Tanggal Pengajuan</th>
                                 <th>Opsi</th>
@@ -97,11 +98,10 @@
                                 <td>{{ $p->nama_customer }}</td>
                                 <td>{{ $p->ktp_customer }}</td>
                                 <td>{{ $p->sisa }}</td>
-                                <td>{{ $p->jumlah }}</td>
                                 <td>{{ $p->tanggal_berangkat }}</td>
                                 <td>{{ $p->created_at }}</td>
                                 <td>
-                                    <a href="batal/{{ $p->id_transaksi_detail }}" class="btn btn-warning">Batal</a>
+                                    <a href="batal/{{ $p->id_transaksi_detail }}"  onclick="return confirm('Are you sure?')" class="btn btn-warning">Batal</a>
                                 </td>
                             </tr>
                             @endforeach

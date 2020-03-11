@@ -27,7 +27,8 @@
   <link rel="stylesheet" href="{{url('adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="{{url('adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
-
+  <script src="{{url('adminlte/bower_components/jquery/jquery-1.12.4.js')}}"></script>
+  <script src="{{url('adminlte/bower_components/jquery-ui/jquery-ui.js')}}"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
   <!-- Google Font -->
@@ -57,6 +58,8 @@
         <br>
         <div class="form-group">
             <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
                 <select name="select" class="form-control" value="{{ old('select') }}">
                     <option value="id_anggota">ID Anggota</option>
                     <option value="nama">Nama Anggota</option>
@@ -64,19 +67,23 @@
                     <option value="no_handphone">No Hp</option>
                 </select>
             </div>
-                <div class="col-md-4">
+            <div class="col-md-3">
                 <input type="text" name="cari" class="form-control" placeholder="Cari .." value="{{ old('cari') }}">
-                </div>
+            </div>
+            <div class="col-md-2">
                 <input type="submit" value="CARI">
                 <input type="hidden" name="_method" value="get">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-            
-        </form>
+            </div>
+            <div class="col-md-3.5">
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Report</button>
+            </div>
         </div>
-        <a href="{{url('exportSukses')}}" class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a>
+        </form>
+        
+        
             <div class="card mt-5">
                 <div class="card-body">
-                    
                     <br/>
                     <br/>
                     <table class="table table-bordered table-hover table-striped">
@@ -86,7 +93,6 @@
                                 <th>Nama</th>
                                 <th>Nama Jabatan</th>
                                 <th>Nama Produk</th>
-                                <th>Jumlah</th>
                                 <th>Komisi</th>
                                 <th>Admin</th>
                                 <th>Tanggal Komisi</th>
@@ -100,7 +106,6 @@
                                 <td>{{ $p->nama }}</td>
                                 <td>{{ $p->nama_jabatan }}</td>
                                 <td>{{ $p->nama_produk }}</td>
-                                <td>{{ $p->jumlah }}</td>
                                 <td>{{ $p->komisi }}</td>
                                 <td>{{ $p->admin }}</td>
                                 <td>{{ $p->created_at }}</td>
@@ -116,6 +121,55 @@
         
         </div>
         
+        <div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-xl">
+			<!-- konten modal-->
+			<div class="modal-content">
+				<!-- heading modal -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Report Komisi Sukses</h4>
+				</div>
+				<!-- body modal -->
+				<div class="modal-body">
+                <form action="{{url('exportSukses')}}" method="GET">
+                    <br>
+                    <br>
+                        <div class="form-group row">
+                        <label for="file_ktp" class="col-md-2 col-form-label text-md-right"> Tanggal Awal</label>
+                            <div class="col-md-6">
+                            <input type="text" name="nama" id="datepicker1" class="form-control" required placeholder="Tanggal Awal .." >
+                        </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="file_ktp" class="col-md-2 col-form-label text-md-right"> Tanggal Akhir</label>
+                            <div class="col-md-6">
+                            <input type="text" name="nama_jabatan" id="datepicker2" class="form-control" required placeholder="Tanggal Akhir .." >
+                        </div>
+                        </div>
+                        <div class="form-group row">
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="submit" value="Submit">
+                            <input type="hidden" name="_method" value="get">
+                            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                        </div>
+                        </div>
+                        <!-- <div class="col-md-3.5">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Report</button>
+                        </div> -->
+                    </div>
+                    </form>
+                    <!-- <a href= class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a> -->
+				
+				<!-- footer modal -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
   <!-- /.content-wrapper -->
 @include('layouts.footer')
@@ -135,6 +189,17 @@
  $.widget.bridge('uibutton', $.ui.button);
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script>
+  $( function() {
+    $("#datepicker1").datepicker({ format: 'yyyy-mm-dd' });
+  } );
+  </script>
+
+<script>
+  $( function() {
+    $("#datepicker2").datepicker({ format: 'yyyy-mm-dd' });
+  } );
+  </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->

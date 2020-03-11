@@ -54,6 +54,8 @@
         <br>
         <br>
         <div class="form-group">
+        <div class="col-md-2">
+            </div>
             <div class="col-md-2">
                 <select name="select" class="form-control" value="{{ old('select') }}">
                     <option value="id_anggota">ID Anggota</option>
@@ -62,7 +64,7 @@
                     <option value="nama_produk">Nama Produk</option>
                 </select>
             </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                 <input type="text" name="cari" class="form-control" placeholder="Cari .." value="{{ old('cari') }}">
                 </div>
                 <input type="submit" value="CARI">
@@ -83,7 +85,6 @@
                                 <th>Nama Produk</th>
                                 <th>Nama Anggota</th>
                                 <th>Nama Customer</th>
-                                <th>Jumlah Pengajuan</th>
                                 <th>Produk Tersedia </th>
                                 <th>tanggal Berangkat </th>
                                 <th>Tanggal Pengajuan </th>
@@ -98,12 +99,11 @@
                                 <td>{{ $p->nama_produk }}</td>
                                 <td>{{ $p->nama }}</td>
                                 <td>{{ $p->nama_customer }}</td>
-                                <td>{{ $p->jumlah }}</td>
                                 <td>{{ $p->sisa }}</td> 
                                 <td>{{ $p->tanggal_berangkat }}</td>
                                 <td>{{ $p->created_at }}</td>
                                 <td>
-                                    <a href="tolak/{{ $p->id_produk }}/{{ $p->id_anggota}}/{{$p->created_at}}/{{$p->id_transaksi_detail}}" class="btn btn-warning">Tolak</a>
+                                    <a href="tolak/{{ $p->id_produk }}/{{ $p->id_anggota}}/{{$p->created_at}}/{{$p->id_transaksi_detail}}"  onclick="return confirm('Are you sure?')" class="btn btn-warning">Tolak</a>
                                     <a href="terima/{{ $p->id_produk }}/{{ $p->id_anggota}}/{{$p->created_at}}/{{$p->id_transaksi_detail}}" class="btn btn-warning">Terima</a>
                                 </td>
                             </tr>
