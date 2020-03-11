@@ -177,7 +177,7 @@ $bootstrapColWidth = 12 / $numOfCols;
 
         // "<input type='text' class='form-control' name='tipe_kamar[]' id='' required/>";
         var cell1 = row.insertCell(0);
-        cell1.innerHTML = " <select class='form-control select2' name='id_sub' id='cari1' required/><option value=''>pilih kamar</option>@foreach($subproduk as $d)<option value='{{$d->id_sub_produk}}'>{{$d->namaSubProduk}}</option>@endforeach</select>@if($errors->has('id_parent'))<div class='text-danger'>{{ $errors->first('id_parent')}}@endif";
+        cell1.innerHTML = "<select class='form-control select2' name='id_sub[]' id='' required/><option value=''>pilih kamar</option>@foreach($subproduk as $d)<option value='{{$d->id_sub_produk}}'>{{$d->namaSubProduk}}</option>@endforeach</select>";
 
         var cell2 = row.insertCell(1);
         cell2.innerHTML = "<input type='text' class='form-control' name='nama_customer[]' id='' required/>";

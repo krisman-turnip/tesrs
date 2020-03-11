@@ -25,7 +25,7 @@ class transaksiController extends Controller
         // $jumlah_customer = $request->jumlah_customer;
         $ktp_customer = $request->ktp_customer;
         $tanggal_berangkat = $request->tanggal;
-        $index = 1;
+        print_r($id_sub_produk);
         if (Session::get('login'))
         {
             
@@ -47,9 +47,13 @@ class transaksiController extends Controller
         //     'admin' =>'',
         //     'tanggal_berangkat' =>$tanggal_berangkat
         // ]);
+        
         $lastId = $a->id;
+        $index = 0;
         foreach($nama_cus as $nama_s => $c)
             {
+                print_r($id_sub_produk[$nama_s]);
+                print_r($nama_cus[$nama_s]);
         transaksi_detail::create([
             'id_produk' => $id,
             'id_sub_produk' => $id_sub_produk[$nama_s],
@@ -62,8 +66,8 @@ class transaksiController extends Controller
             'jumlah' =>$jmlh,
             'admin' =>'',
             ]);
-        $index++;
-            }
+        
+            }$index++;
             
         return redirect('produkanggota/pengajuan');
         }
