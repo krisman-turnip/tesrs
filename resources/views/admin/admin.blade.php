@@ -89,8 +89,6 @@
         </div>
         
         </div>
-        
-
   <!-- /.content-wrapper -->
 @include('layouts.footer')
  

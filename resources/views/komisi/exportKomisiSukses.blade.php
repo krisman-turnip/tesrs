@@ -5,6 +5,8 @@
                                 <th>Nama</th>
                                 <th>Nama Jabatan</th>
                                 <th>Nama Produk</th>
+                                <th>Nama Customer</th>
+                                <th>KTP Customer</th>
                                 <th>Jumlah</th>
                                 <th>Komisi</th>
                                 <th>Admin</th>
@@ -19,6 +21,8 @@
                                 <td>{{ $p->nama }}</td>
                                 <td>{{ $p->nama_jabatan }}</td>
                                 <td>{{ $p->nama_produk }}</td>
+                                <td>{{ $p->nama_customer }}</td>
+                                <td>{{ $p->ktp_customer }}</td>
                                 <td>{{ $p->jumlah }}</td>
                                 <td>{{ $p->komisi }}</td>
                                 <td>{{ $p->admin }}</td>

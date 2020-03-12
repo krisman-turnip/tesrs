@@ -9,6 +9,7 @@ use App\request_komisi;
 use App\Exports\SuksesKomisiExport;
 use App\Exports\BatalKomisiExport;
 use App\Exports\PendingKomisiExport;
+use App\Exports\SuspendKomisiExport;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
@@ -284,8 +285,7 @@ class komisiController extends Controller
                     ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
                     ->join('produk as d','d.id_produk','=','a.id_produk')
                     ->join('transaksi_detail as e','e.id_transaksi_detail','=','a.id_transaksi_detail')
-                    ->where([['b.status','aktif'],['a.status','belum diproses']])->paginate(20);
-                    
+                    ->where([['b.status','aktif'],['a.status','belum diproses']])->paginate(50);
         }
         else
         {
@@ -309,7 +309,7 @@ class komisiController extends Controller
                         ->join('anggota as b','b.id_anggota','=','a.id_anggota')
                         ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
                         ->join('produk as d','d.id_produk','=','a.id_produk')
-                        ->where([['b.status','aktif'],['a.status','belum diproses'],["b.$select",'like',"%".$cari."%"]])->paginate(20);
+                        ->where([['b.status','aktif'],['a.status','belum diproses'],["b.$select",'like',"%".$cari."%"]])->paginate(50);
             }
             else
             {
@@ -318,7 +318,7 @@ class komisiController extends Controller
                         ->join('anggota as b','b.id_anggota','=','a.id_anggota')
                         ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
                         ->join('produk as d','d.id_produk','=','a.id_produk')
-                        ->where([['b.status','aktif'],['a.status','belum diproses'],["c.$select",'like',"%".$cari."%"]])->paginate(20);
+                        ->where([['b.status','aktif'],['a.status','belum diproses'],["c.$select",'like',"%".$cari."%"]])->paginate(50);
             }
         }
         else
@@ -360,20 +360,22 @@ class komisiController extends Controller
             if($select=='nama' || $select =='id_anggota'||$select=='no_handphone')
             {
                 $komisi = DB::table('transaksi_produk as a')
-                ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','a.admin','a.tanggal_komisi','b.nama','c.nama_jabatan','d.nama_produk')
+                ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','e.nama_customer','e.ktp_customer','a.admin','a.tanggal_komisi','b.nama','c.nama_jabatan','d.nama_produk')
                 ->join('anggota as b','b.id_anggota','=','a.id_anggota')
                 ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
                 ->join('produk as d','d.id_produk','=','a.id_produk')
-                ->where([['b.status','aktif'],['a.status','dibatalkan'],["b.$select",'like',"%".$cari."%"]])->paginate(20);
+                ->join('transaksi_detail as e','e.id_transaksi_detail','=','a.id_transaksi_detail')
+                ->where([['b.status','aktif'],['a.status','dibatalkan'],["b.$select",'like',"%".$cari."%"]])->paginate(50);
             }
             else
             {
                 $komisi = DB::table('transaksi_produk as a')
-                    ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','a.admin','a.tanggal_komisi','b.nama','c.nama_jabatan','d.nama_produk')
+                    ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','e.nama_customer','e.ktp_customer','a.admin','a.tanggal_komisi','b.nama','c.nama_jabatan','d.nama_produk')
                     ->join('anggota as b','b.id_anggota','=','a.id_anggota')
                     ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
                     ->join('produk as d','d.id_produk','=','a.id_produk')
-                    ->where([['b.status','aktif'],['a.status','dibatalkan'],["c.$select",'like',"%".$cari."%"]])->paginate(20);
+                    ->join('transaksi_detail as e','e.id_transaksi_detail','=','a.id_transaksi_detail')
+                    ->where([['b.status','aktif'],['a.status','dibatalkan'],["c.$select",'like',"%".$cari."%"]])->paginate(50);
             }
         }
         else
@@ -394,20 +396,22 @@ class komisiController extends Controller
             if($select=='nama' || $select =='id_anggota'||$select=='no_handphone')
             {
                 $komisi = DB::table('transaksi_produk as a')
-                ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','a.admin','a.tanggal_komisi','b.nama','c.nama_jabatan','d.nama_produk')
+                ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','e.nama_customer','e.ktp_customer','a.admin','a.tanggal_komisi','b.nama','c.nama_jabatan','d.nama_produk')
                 ->join('anggota as b','b.id_anggota','=','a.id_anggota')
                 ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
                 ->join('produk as d','d.id_produk','=','a.id_produk')
-                ->where([['b.status','aktif'],['a.status','sudah diproses'],["b.$select",'like',"%".$cari."%"]])->paginate(20);
+                ->join('transaksi_detail as e','e.id_transaksi_detail','=','a.id_transaksi_detail')
+                ->where([['b.status','aktif'],['a.status','sudah diproses'],["b.$select",'like',"%".$cari."%"]])->paginate(50);
             }
             else
             {
                 $komisi = DB::table('transaksi_produk as a')
-                    ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','a.admin','a.tanggal_komisi','b.nama','c.nama_jabatan','d.nama_produk')
+                    ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','e.nama_customer','e.ktp_customer','a.admin','a.tanggal_komisi','b.nama','c.nama_jabatan','d.nama_produk')
                     ->join('anggota as b','b.id_anggota','=','a.id_anggota')
                     ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
                     ->join('produk as d','d.id_produk','=','a.id_produk')
-                    ->where([['b.status','aktif'],['a.status','sudah diproses'],["c.$select",'like',"%".$cari."%"]])->paginate(20);
+                    ->join('transaksi_detail as e','e.id_transaksi_detail','=','a.id_transaksi_detail')
+                    ->where([['b.status','aktif'],['a.status','sudah diproses'],["c.$select",'like',"%".$cari."%"]])->paginate(50);
             }
         }
         else
@@ -422,11 +426,12 @@ class komisiController extends Controller
         if (Session::get('login'))
         {
             $komisi = DB::table('transaksi_produk as a')
-                    ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','a.admin','a.tanggal_komisi','b.nama','c.nama_jabatan','d.nama_produk')
+                    ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','e.nama_customer','e.ktp_customer','a.admin','a.tanggal_komisi','b.nama','c.nama_jabatan','d.nama_produk')
                     ->join('anggota as b','b.id_anggota','=','a.id_anggota')
                     ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
                     ->join('produk as d','d.id_produk','=','a.id_produk')
-                    ->where([['b.status','aktif'],['a.status','dibatalkan']])->paginate(20);
+                    ->join('transaksi_detail as e','e.id_transaksi_detail','=','a.id_transaksi_detail')
+                    ->where([['b.status','aktif'],['a.status','dibatalkan']])->paginate(50);
         }
         else
         {
@@ -440,10 +445,11 @@ class komisiController extends Controller
         if (Session::get('login'))
         {
             $komisi = DB::table('transaksi_produk as a')
-                    ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','a.admin','b.nama','c.nama_jabatan','d.nama_produk')
+                    ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','e.nama_customer','e.ktp_customer','a.admin','b.nama','c.nama_jabatan','d.nama_produk')
                     ->join('anggota as b','b.id_anggota','=','a.id_anggota')
                     ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
                     ->join('produk as d','d.id_produk','=','a.id_produk')
+                    ->join('transaksi_detail as e','e.id_transaksi_detail','=','a.id_transaksi_detail')
                     ->where([['b.status','aktif'],['a.status','sudah diproses']])->paginate(50);
         }
         else
@@ -451,6 +457,61 @@ class komisiController extends Controller
             return view('/loginanggota');
         }
         return view ('komisi/komisi_sukses',['komisi'=>$komisi]);
+    }
+
+    public function suspend(request $request)
+    {
+        if (Session::get('login'))
+        {
+            $komisi = DB::table('transaksi_produk as a')
+                    ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','e.nama_customer','e.ktp_customer','a.admin','b.nama','c.nama_jabatan','d.nama_produk')
+                    ->join('anggota as b','b.id_anggota','=','a.id_anggota')
+                    ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
+                    ->join('produk as d','d.id_produk','=','a.id_produk')
+                    ->join('transaksi_detail as e','e.id_transaksi_detail','=','a.id_transaksi_detail')
+                    ->where([['b.status','suspend'],['a.status','suspend']])->paginate(50);
+        }
+        else
+        {
+            return view('/loginanggota');
+        }
+        return view ('komisi/komisi_suspend',['komisi'=>$komisi]);
+    }
+
+    public function suspendCari(request $request)
+    {
+        if (Session::get('login'))
+        {
+            $a='b';
+            $b='c';
+            $cari = $request->cari;
+            $select = $request->select;
+            if($select=='nama' || $select =='id_anggota'||$select=='no_handphone')
+            {
+                $komisi = DB::table('transaksi_produk as a')
+                ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','a.admin','e.nama_customer','e.ktp_customer','a.tanggal_komisi','b.nama','c.nama_jabatan','d.nama_produk')
+                ->join('anggota as b','b.id_anggota','=','a.id_anggota')
+                ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
+                ->join('produk as d','d.id_produk','=','a.id_produk')
+                ->join('transaksi_detail as e','e.id_transaksi_detail','=','a.id_transaksi_detail')
+                ->where([['b.status','suspend'],['a.status','suspend'],["b.$select",'like',"%".$cari."%"]])->paginate(50);
+            }
+            else
+            {
+                $komisi = DB::table('transaksi_produk as a')
+                    ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','a.admin','e.nama_customer','e.ktp_customer','a.tanggal_komisi','b.nama','c.nama_jabatan','d.nama_produk')
+                    ->join('anggota as b','b.id_anggota','=','a.id_anggota')
+                    ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
+                    ->join('produk as d','d.id_produk','=','a.id_produk')
+                    ->join('transaksi_detail as e','e.id_transaksi_detail','=','a.id_transaksi_detail')
+                    ->where([['b.status','suspend'],['a.status','suspend'],["c.$select",'like',"%".$cari."%"]])->paginate(50);
+            }
+        }
+        else
+        {
+            return view('/loginanggota');
+        }
+        return view ('komisi/komisi_suspend',['komisi'=>$komisi]);
     }
 
     public function exportSukses(request $request)
@@ -488,5 +549,13 @@ class komisiController extends Controller
         $nama_jabatan=$request->nama_jabatan;
         $nama_file = 'Komisi_pending_'.date('Y-m-d_H-i-s').'.xlsx';
         return Excel::download(new pendingKomisiExport($nama, $nama_jabatan), $nama_file);
+    }
+
+    public function exportSuspend(request $request)
+	{
+        $nama=$request->nama;
+        $nama_jabatan=$request->nama_jabatan;
+        $nama_file = 'Komisi_suspend_'.date('Y-m-d_H-i-s').'.xlsx';
+        return Excel::download(new SuspendKomisiExport($nama, $nama_jabatan), $nama_file);
     }
 }

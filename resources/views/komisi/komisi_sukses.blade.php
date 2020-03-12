@@ -93,6 +93,8 @@
                                 <th>Nama</th>
                                 <th>Nama Jabatan</th>
                                 <th>Nama Produk</th>
+                                <th>Nama Customer</th>
+                                <th>KTP Customer</th>
                                 <th>Komisi</th>
                                 <th>Admin</th>
                                 <th>Tanggal Komisi</th>
@@ -106,6 +108,8 @@
                                 <td>{{ $p->nama }}</td>
                                 <td>{{ $p->nama_jabatan }}</td>
                                 <td>{{ $p->nama_produk }}</td>
+                                <td>{{ $p->nama_customer }}</td>
+                                <td>{{ $p->ktp_customer }}</td>
                                 <td>{{ $p->komisi }}</td>
                                 <td>{{ $p->admin }}</td>
                                 <td>{{ $p->created_at }}</td>

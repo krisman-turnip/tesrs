@@ -61,7 +61,7 @@
             </div>
             <div class="col-md-2">
                 <select name="select" class="form-control" value="{{ old('select') }}">
-                    <option value="id_anggota">ID Materi</option>
+                    <option value="id_anggota">ID Anggota</option>
                     <option value="nama">Nama Anggota</option>
                     <option value="nama_jabatan">Nama Jabatan</option>
                     <option value="no_handphone">No Hp</option>
@@ -92,6 +92,8 @@
                                 <th>Nama</th>
                                 <th>Nama Jabatan</th>
                                 <th>Nama Produk</th>
+                                <th>Nama Customer</th>
+                                <th>KTP Customer</th>
                                 <th>Komisi</th>
                                 <th>Admin</th>
                                 <th>Tanggal Batal</th>
@@ -105,6 +107,8 @@
                                 <td>{{ $p->nama }}</td>
                                 <td>{{ $p->nama_jabatan }}</td>
                                 <td>{{ $p->nama_produk }}</td>
+                                <td>{{ $p->nama_customer }}</td>
+                                <td>{{ $p->ktp_customer }}</td>
                                 <td>{{ $p->komisi }}</td>
                                 <td>{{ $p->admin }}</td>
                                 <td>{{ $p->tanggal_komisi }}</td>

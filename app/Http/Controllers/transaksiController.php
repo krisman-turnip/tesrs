@@ -37,16 +37,8 @@ class transaksiController extends Controller
             'jumlah' => $sum,
             'tanggal_berangkat' => $tanggal_berangkat
         ]);
-        // $b = transaksi_produk::create([
-        //     'id_produk' => $id,
-        //     'id_anggota' => $request->session()->get('login'),
-        //     'id_transaksi' => '',
-        //     'status' => 'Pengajuan',
-        //     'komisi' => '0',
-        //     'jumlah' => $sum,
-        //     'admin' =>'',
-        //     'tanggal_berangkat' =>$tanggal_berangkat
-        // ]);
+        // 
+        
         
         $lastId = $a->id;
         $index = 0;

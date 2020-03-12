@@ -8,28 +8,16 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
-class SuksesKomisiExport implements FromView
+class SuspendKomisiExport implements FromView
 {
     /**
     * @return \Illuminate\Support\Collection
     */
-
     public function __construct( $nama,  $nama_jabatan)
     {
         $this->nama = $nama;
         $this->nama_jabatan = $nama_jabatan;
     }
-    // public function collection()
-    // {
-    //     $a =(['id','komisi','jumlah']);
-    //     $komisi = DB::table('transaksi_produk as a')
-    //     ->select('a.id_transaksi_produk','a.komisi','a.jumlah','a.created_at','a.admin','b.nama','c.nama_jabatan','d.nama_produk')
-    //     ->join('anggota as b','b.id_anggota','=','a.id_anggota')
-    //     ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
-    //     ->join('produk as d','d.id_produk','=','a.id_produk')
-    //     ->where([['b.status','aktif'],['a.status','sudah diproses']])->paginate(20);
-    //     return ($komisi);
-    // }
 
     public function view(): View
     {   
@@ -42,7 +30,7 @@ class SuksesKomisiExport implements FromView
             ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
             ->join('produk as d','d.id_produk','=','a.id_produk')
             ->join('transaksi_detail as e','e.id_transaksi_detail','=','a.id_transaksi_detail')
-            ->where([['b.status','aktif'],['a.status','sudah diproses'],])
+            ->where([['b.status','suspend'],['a.status','suspend'],])
             ->whereBetween('a.created_at',[ $nama, $nama_jabatan])
             ->get()
 

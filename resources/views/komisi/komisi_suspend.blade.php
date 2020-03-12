@@ -27,6 +27,9 @@
   <link rel="stylesheet" href="{{url('adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="{{url('adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
+  <script src="{{url('adminlte/bower_components/jquery/jquery-1.12.4.js')}}"></script>
+  <script src="{{url('adminlte/bower_components/jquery-ui/jquery-ui.js')}}"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
   <!-- Google Font -->
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
@@ -47,21 +50,21 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 class="text-center">
-        Daftar Transaksi Produk
+        Daftar Komisi Sukses
       </h1>
         <div class="container">
-
-        <form action="{{url('reportCari')}}" method="GET">
+        <form action="{{url('suspendCari')}}" method="GET">
         <br>
         <br>
         <div class="form-group">
-        <div class="col-md-2">
+            <div class="col-md-2">
             </div>
             <div class="col-md-2">
                 <select name="select" class="form-control" value="{{ old('select') }}">
+                    <option value="id_anggota">ID Anggota</option>
                     <option value="nama">Nama Anggota</option>
-                    <option value="nama_customer">Nama customer</option>
-                    <option value="ktp_customer">KTP Customer</option>
+                    <option value="nama_jabatan">Nama Jabatan</option>
+                    <option value="no_handphone">No Hp</option>
                 </select>
             </div>
             <div class="col-md-3">
@@ -75,53 +78,102 @@
             <div class="col-md-3.5">
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Report</button>
             </div>
-            </div>
+        </div>
         </form>
+        
+        
             <div class="card mt-5">
                 <div class="card-body">
-                
                     <br/>
                     <br/>
-                    <div class="table-responsive">          
-                    <table class="table table-xs table-dark table-hover table-striped">
-                    <!-- <table class="table table-bordered table-hover table-striped"> -->
+                    <table class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Nama Anggota</th>
-                                <th scope="col">Nama Produk</th>
-                                <th scope="col">Nama Customer</th>
-                                <th scope="col">KTP Customer</th>
-                                <th scope="col">Approval</th>
-                                <th scope="col">Tanggal Approve</th>
-                                <th scope="col">Opsi</th>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Nama Jabatan</th>
+                                <th>Nama Produk</th>
+                                <th>Nama Customer</th>
+                                <th>KTP Customer</th>
+                                <th>Komisi</th>
+                                <th>Admin</th>
+                                <th>Tanggal Komisi</th>
                             </tr>
                         </thead>
                         <tbody>
                         @php $no=1; @endphp
-                            @foreach($produk as $p)
+                            @foreach($komisi as $p)
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $p->nama }}</td>
+                                <td>{{ $p->nama_jabatan }}</td>
                                 <td>{{ $p->nama_produk }}</td>
                                 <td>{{ $p->nama_customer }}</td>
                                 <td>{{ $p->ktp_customer }}</td>
+                                <td>{{ $p->komisi }}</td>
                                 <td>{{ $p->admin }}</td>
                                 <td>{{ $p->created_at }}</td>
-                                <td> 
-                                    <a href="reportBatal/{{ $p->id_transaksi_detail}}"  onclick="return confirm('Are you sure?')" class="btn btn-warning">Batal</a>
-                                </td>
+                              
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
-                </div>
             </div>
-            {{ $produk->links() }}
-        </div>
+            {{ $komisi->links() }}
         </div>
         
+        </div>
+        
+        <div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-xl">
+			<!-- konten modal-->
+			<div class="modal-content">
+				<!-- heading modal -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Report Komisi Sukses</h4>
+				</div>
+				<!-- body modal -->
+				<div class="modal-body">
+                <form action="{{url('exportSuspend')}}" method="GET">
+                    <br>
+                    <br>
+                        <div class="form-group row">
+                        <label for="file_ktp" class="col-md-2 col-form-label text-md-right"> Tanggal Awal</label>
+                            <div class="col-md-6">
+                            <input type="text" name="nama" id="datepicker1" class="form-control" required placeholder="Tanggal Awal .." >
+                        </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="file_ktp" class="col-md-2 col-form-label text-md-right"> Tanggal Akhir</label>
+                            <div class="col-md-6">
+                            <input type="text" name="nama_jabatan" id="datepicker2" class="form-control" required placeholder="Tanggal Akhir .." >
+                        </div>
+                        </div>
+                        <div class="form-group row">
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="submit" value="Submit">
+                            <input type="hidden" name="_method" value="get">
+                            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                        </div>
+                        </div>
+                        <!-- <div class="col-md-3.5">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Report</button>
+                        </div> -->
+                    </div>
+                    </form>
+                    <!-- <a href= class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a> -->
+				
+				<!-- footer modal -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
   <!-- /.content-wrapper -->
 @include('layouts.footer')
@@ -133,18 +185,29 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="{{url('adminlte/bower_components/jquery/dist/jquery.min.js')}}"></script>
+<script src="adminlte/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="{{url('adminlte/bower_components/jquery-ui/jquery-ui.min.js')}}"></script>
+<script src="adminlte/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
  $.widget.bridge('uibutton', $.ui.button);
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script>
+  $( function() {
+    $("#datepicker1").datepicker({ format: 'yyyy-mm-dd' });
+  } );
+  </script>
+
+<script>
+  $( function() {
+    $("#datepicker2").datepicker({ format: 'yyyy-mm-dd' });
+  } );
+  </script>
 <!-- Bootstrap 3.3.7 -->
-<script src="{{url('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+<script src="adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
 <script src="adminlte/bower_components/raphael/raphael.min.js"></script>
-<script src="adminlte/bower_components/morris.js/morris.min.js"></script>
 <!-- Sparkline -->
 <script src="adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
@@ -165,8 +228,6 @@
 <script src="adminlte/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="adminlte/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="adminlte/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="adminlte/js/demo.js"></script>
 </body>

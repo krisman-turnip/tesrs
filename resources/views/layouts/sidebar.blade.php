@@ -103,7 +103,7 @@
           <ul class="treeview-menu">
             <li><a href="{{ url('komisiTemplate') }}"><i class="fa fa-circle-o"></i> Tampil Template Komisi</a></li>
             <li><a href="{{ url('komisiTemplate/tambah') }}"><i class="fa fa-circle-o"></i> Tambah Template Komisi</a></li>
-            <li><a href="{{ url('komisiTemplate/skema') }}"><i class="fa fa-circle-o"></i> Skema Template Komisi</a></li>
+            <!-- <li><a href="{{ url('komisiTemplate/skema') }}"><i class="fa fa-circle-o"></i> Skema Template Komisi</a></li> -->
             <li><a href="{{ url('tampilSkema') }}"><i class="fa fa-circle-o"></i> Skema Komisi</a></li>
           </ul>
         </li>
@@ -117,6 +117,7 @@
           <ul class="treeview-menu">
             <li><a href="{{ url('komisiPending') }}"><i class="fa fa-circle-o"></i> Komisi Pending</a></li>
             <li><a href="{{ url('komisiBatal') }}"><i class="fa fa-circle-o"></i> Komisi Batal</a></li>
+            <li><a href="{{ url('komisiSuspend') }}"><i class="fa fa-circle-o"></i> Komisi Suspend</a></li>
             <li><a href="{{ url('komisiSukses') }}"><i class="fa fa-circle-o"></i> Komisi Sukses</a></li>
             <li><a href="{{ url('komisi') }}"><i class="fa fa-circle-o"></i> Komisi Anggota</a></li>
             <li><a href="{{ url('transaksiKomisi') }}"><i class="fa fa-circle-o"></i> Transaksi Komisi</a></li>

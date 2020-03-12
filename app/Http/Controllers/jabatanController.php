@@ -35,17 +35,16 @@ class jabatanController extends Controller
 
     public function store(Request $request)
     {
-    	$this->validate($request,[
-            'id_jabatan' => 'required',
-            'nama_jabatan' => 'required',
-            'komisi' => 'required',
-            'keterangan' => 'required'
-    	]);
+    	// $this->validate($request,[
+        //     'id_jabatan' => 'required',
+        //     'nama_jabatan' => 'required',
+        //     'keterangan' => 'required'
+    	// ]);
  
         jabatan::create([
-            'id_jabatan' => $request->id_jabatan,
+            // 'id_jabatan' => $request->id_jabatan,
             'nama_jabatan' => $request->nama_jabatan,
-            'komisi' => $request->komisi,
+            'komisi' => '0',
             'keterangan' => $request->keterangan
     	]);
  
@@ -86,7 +85,7 @@ class jabatanController extends Controller
         DB::table('jabatan')-> where('id_jabatan', $request-> id)-> update([
         //$anggota = anggota::find($id);
         'nama_jabatan' => $request->nama_jabatan,
-        'komisi' => $request->komisi,
+        'komisi' => '0',
         'keterangan' => $request->keterangan
         ]);
         return redirect('jabatan');

@@ -79,18 +79,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                        <label for="komisi" class="col-md-2 col-form-label text-md-right">Komisi</label>
-                            <div class="col-md-6">
-                            <input type="text" name="komisi" class="form-control" placeholder="Komisi .." value=" {{ $jabatan->komisi }}">
-
-                            @if($errors->has('komisi'))
-                                <div class="text-danger">
-                                    {{ $errors->first('komisi')}}
-                                </div>
-                            @endif
-                            </div>
-                        </div>
 
                         <div class="form-group row">
                         <label for="keterangan" class="col-md-2 col-form-label text-md-right">Keterangan</label>

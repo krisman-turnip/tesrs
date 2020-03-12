@@ -154,9 +154,9 @@ $a = $p->nama
                                 <th>Nama</th> 
                                 <th>level</th>
                                 <th>Nama Parent</th>
-                                <th>Email</th>
+                                <!-- <th>Email</th>
                                 <th>No Handphone</th>
-                                <th>Alamat</th>
+                                <th>Alamat</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -167,9 +167,9 @@ $a = $p->nama
                                 <td><a href="../../anggota/profile/{{ $q->id_anggota }}" target="_blank">{{ $q->nama }}</a></td>
                                 <td>{{ $q->nama_jabatan }}</td>
                                 <td>{{ $q->namaParent }}</td>
-                                <td>{{ $q->email }}</td>
+                                <!-- <td>{{ $q->email }}</td>
                                 <td>{{ $q->no_handphone }}</td>
-                                <td>{{ $q->alamat }}</td>
+                                <td>{{ $q->alamat }}</td> -->
                             </tr>
                             @endforeach
                             
@@ -187,9 +187,9 @@ $a = $p->nama
                                 <th>Nama </th>
                                 <th>level</th>
                                 <th>Nama Parent</th>
-                                <th>Email</th>
+                                <!-- <th>Email</th>
                                 <th>No Handphone</th>
-                                <th>Alamat</th>
+                                <th>Alamat</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -201,9 +201,9 @@ $a = $p->nama
                                 <td><a href="../../anggota/profile/{{ $sas->id_anggota }}" target="_blank">{{ $sas->namaParent }}</a></td>
                                 <td>{{ $sas->nama_jabatan }}</td>
                                 <td>{{$sas->nama}}</td>
-                                <td>{{ $sas->email }}</td>
+                                <!-- <td>{{ $sas->email }}</td>
                                 <td>{{ $sas->no_handphone }}</td>
-                                <td>{{ $sas->alamat }}</td>
+                                <td>{{ $sas->alamat }}</td> -->
                             </tr>
                             @endforeach
                         @endforeach

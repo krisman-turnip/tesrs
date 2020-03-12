@@ -58,7 +58,7 @@
     <div class="container">
             <div class="card mt-3">
                 <div class="card-header text-center">
-                    <h2>Tambah Produk</h2> 
+                    <h3>Tambah Produk</h3> 
                 </div>
                 <div class="card-body">
                     <a href="../produk" class="btn btn-primary">Kembali</a>
@@ -73,7 +73,7 @@
                         <div class="form-group row">
                         <label for="nama_produk" class="col-md-2 col-form-label text-md-right">Nama Produk</label>
                             <div class="col-md-6">
-                            <input type="text" name="nama_produk" class="form-control" placeholder="Nama Produk ..">
+                            <input type="text" name="nama_produk" class="form-control" placeholder="Nama Produk .." required>
 
                             @if($errors->has('nama_produk'))
                                 <div class="text-danger">
@@ -86,7 +86,7 @@
                         <div class="form-group row">
                         <label for="jumlah" class="col-md-2 col-form-label text-md-right">Jumlah</label>
                         <div class="col-md-6">
-                            <input type="text" name="jumlah" class="form-control" placeholder="Jumlah ..">
+                            <input type="text" name="jumlah" class="form-control" placeholder="Jumlah .." required>
 
                             @if($errors->has('jumlah'))
                                 <div class="text-danger">
@@ -94,19 +94,6 @@
                                 </div>
                             @endif
                         </div> 
-                        </div>
-
-                        <div class="form-group row">
-                        <label for="harga" class="col-md-2 col-form-label text-md-right">Harga</label>
-                        <div class="col-md-6">
-                            <input type="text" name="harga" class="form-control" placeholder="Harga ..">
-
-                            @if($errors->has('harga'))
-                                <div class="text-danger">
-                                    {{ $errors->first('harga')}}
-                                </div>
-                            @endif
-                        </div>
                         </div>
 
                         <div class="form-group row">
@@ -126,17 +113,17 @@
                         <div class="form-group row">
                         <label for="jumlah" class="col-md-2 col-form-label text-md-right">Keterangan</label>
                             <div class="col-md-6">
-                                <textarea class="form-control" name="keterangan"></textarea>
+                                <textarea class="form-control" name="keterangan" require></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
                         <label for="jumlah" class="col-md-2 col-form-label text-md-right">Sub Produk</label>
                         <div class="col-md-6">
-                        <INPUT type="button" value="Add Row" onClick="addRow('dataTable')" />
+                        <INPUT type="button" value="Tambah Sub Produk" onClick="addRow('dataTable')" />
 
                         <form action="" method="post" name="f">  
                         
-                            <TABLE width="425" border="1">
+                            <TABLE width="550" border="1">
                             <thead>
                                 <tr>
                                     <th width="94">Nama Produk</th>
@@ -155,27 +142,45 @@
                         <div class="form-group row">
                         <label for="jumlah" class="col-md-2 col-form-label text-md-right">Tanggal Produk</label>
                         <div class="col-md-6">
-                        <INPUT type="button" value="Add Row" onClick="addRows('dataTables')" />
-
-                        <form action="" method="post" name="f">  
-
-                        <TABLE width="425" border="1">
-                        <thead>
-                            <tr>
-                                <th width="94">Tanggal Keberangkatan</th>
-                                <th width="121">Tanggal Expired</th>
-                                <th width="84">opsi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="dataTables">
-
-                        </tbody>
-                        </TABLE>
+                            <INPUT type="button" value="Tambah Tanggal" onClick="addRows('dataTables')" />
+                            <form action="" method="post" name="f">  
+                                <TABLE width="550" border="1">
+                                <thead>
+                                    <tr>
+                                        <th width="94">Tanggal Keberangkatan</th>
+                                        <th width="121">Tanggal Expired</th>
+                                        <th width="54">opsi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dataTables">
+                                </tbody>
+                                </TABLE>
                         </div>
                         </div>
-                        </div>
-                        <br> 
+
                         <div class="form-group row">
+                        <label for="jumlah" class="col-md-2 col-form-label text-md-right">Skema Komisi Produk</label>
+                        <div class="col-md-5">
+                        <INPUT type="button" value="Tambah Skema" onClick="addRowq('dataTableskema')" />
+                        <form action="" method="post" name="skema">  
+                            <TABLE width="550" border="1">
+                            <thead>
+                                <tr>
+                                    <th width="114">Nama Jabatan</th>
+                                    <th width="121">Nama Skema</th>
+                                    <th width="134">Keterangan</th>
+                                    <th width="84">opsi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dataTableskema">
+                            </tbody>
+                            </TABLE>
+                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Lihat Template</button>
+                        </div>
+                        
+                        <div class="col-md-2">
+                        
+                        </div></div>
                         <!-- <label for="jumlah" class="col-md-2 col-form-label text-md-right">Tanggal Keberangkatan</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control" name="tanggal_berangkat" id="datepicker"/>
@@ -187,23 +192,73 @@
                                 <input type="text" class="form-control" name="tanggal_expired" id="datepicker2"/>
                             </div>
                         </div> -->
-                            <input type="hidden" name="_method" value="post">
+                            <input type="hidden" class="col-md-2" name="_method" value="post">
                             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                        <div class="form-group row mb-0">
-                        <div class="col-md-6 ">
+                            </div>
                             <input type="submit" class="btn btn-success" value="Simpan" onClick="">
-                        </div>
-                        </div>
-
-                    </form>
-
+                      
+                        <br>
+        <br>
                 </div>
-            </div>
+         
         </div>
         </div>
         
   <!-- /.content-wrapper -->
 @include('layouts.footer')
+
+<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-xl">
+			<!-- konten modal-->
+			<div class="modal-content">
+				<!-- heading modal -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title text-center" >Template Komisi</h4>
+				</div>
+                <a href="{{url('komisiTemplate/tambah')}}" class="btn btn-info" target="_blank">Input Template</a>
+             
+				<!-- body modal -->
+				<div class="modal-body">
+                <table class="table table-bordered table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Template</th>
+                                <th>Komisi Level 1</th>
+                                <th>Komisi Level 2</th>
+                                <th>Komisi Level 3</th>
+                                <th>Poin Level 1</th>
+                                <th>Poin Level 2</th>
+                                <th>Poin Level 3</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @php $no=1; @endphp
+                            @foreach($komisi as $p)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $p->nama_template }}</td>
+                                <td>{{ $p->komisi_1 }}</td>
+                                <td>{{ $p->komisi_2 }}</td>
+                                <td>{{ $p->komisi_3 }}</td>
+                                <td>{{ $p->poin_1 }}</td>
+                                <td>{{ $p->poin_2 }}</td>
+                                <td>{{ $p->poin_3 }}</td>
+                                
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <!-- <a href= class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a> -->
+				
+				<!-- footer modal -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+				</div>
+			</div>
+		</div>
+	</div>
  
  <!-- Add the sidebar's background. This div must be placed
       immediately after the control sidebar -->
@@ -235,7 +290,6 @@
         var cell4= row.insertCell(3);
         cell4.innerHTML =  "<input type='Button'value='delete'onclick='deleteRow(this)' required/>";
         
-        
         }
 </SCRIPT>
 <SCRIPT language="javascript">
@@ -246,8 +300,6 @@
         var rowCount = table.rows.length;
         var row = table.insertRow(rowCount);
 
-
-
         var cell1 = row.insertCell(0);
         cell1.innerHTML = " <input type='text' class='form-control' name='tanggal_berangkat[]' id='datepicker' required/>";
 
@@ -256,8 +308,31 @@
 
         var cell3= row.insertCell(2);
         cell3.innerHTML =  "<input type='Button'value='delete'onclick='deleteRow(this)'/>";
-        
-        
+        }
+
+</SCRIPT>
+
+<SCRIPT language="javascript">
+     function addRowq(tableIDskema) { 
+
+        var table = document.getElementById(tableIDskema);
+
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+
+
+
+        var cell1 = row.insertCell(0);
+        cell1.innerHTML = "<select class='form-control select2' name='nama_jabatan[]' id='' required/><option value=''>pilih jabatan</option>@foreach($jabatan as $d)<option value='{{$d->id_jabatan}}'>{{$d->nama_jabatan}}</option>@endforeach</select>";
+
+        var cell2 = row.insertCell(1);
+        cell2.innerHTML = "<select class='form-control select2' name='nama_skema[]' id='' required/><option value=''>pilih template</option>@foreach($skema as $d)<option value='{{$d->id_template_komisi}}'>{{$d->nama_template}}</option>@endforeach</select>";
+
+        var cell3 = row.insertCell(2);
+        cell3.innerHTML = "<input type='text' class='form-control' name='keterangan_skema[]' id='' required/>";
+
+        var cell4= row.insertCell(3);
+        cell4.innerHTML =  "<input type='Button'value='delete'onclick='deleteRow(this)'/>";
         }
 
 </SCRIPT>

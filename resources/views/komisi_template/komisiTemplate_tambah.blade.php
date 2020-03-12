@@ -48,7 +48,7 @@
     <div class="container">
             <div class="card mt-4">
                 <div class="card-header text-center">
-                    <strong>Tambah Template</strong> 
+                    <h3>Tambah Template</h3> 
                 </div>
                 <div class="card-body">
                     <a href="{{url('komisiTemplate')}}" class="btn btn-primary">Kembali</a>

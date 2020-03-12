@@ -55,12 +55,14 @@
             <form action="{{url('produkCari')}}" method="GET" class="form-horizontal">
             <div class="form-group">
             <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
                 <select name="select" class="form-control">
-                    <option value="id_produk">ID Produk</option>
                     <option value="nama_produk">Nama Produk</option>
+                    <option value="id_produk">ID Produk</option>
                 </select>
             </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <input type="text" name="cari" class="form-control" placeholder="Cari .." value="{{ old('cari') }}">
                 </div>    
                     <input type="submit" value="CARI">
@@ -120,6 +122,7 @@
 @endphp
 @endforeach
 <div>
+
             <!-- <div id="wrapper"> -->
                     <!-- <br/>
                     <br/>
@@ -154,14 +157,15 @@
                         </tbody>
                     </table> -->
             </div>
+            </div>
+            {{ $produk->links() }}
+            </div>
+            
         </div>
-       
-</div>
-</div>
-<div class="text-center">{{ $produk->links() }}</div>
+        
   <!-- /.content-wrapper -->
 @include('layouts.footer')
- </div>
+ 
  <!-- Add the sidebar's background. This div must be placed
       immediately after the control sidebar -->
  <div class="control-sidebar-bg"></div>

@@ -54,6 +54,8 @@
         <br>
         <br>
         <div class="form-group">
+        <div class="col-md-2">
+        </div>
             <div class="col-md-2">
                 <select name="select" class="form-control" value="{{ old('select') }}">
                     <option value="id_anggota">ID Anggota</option>
@@ -62,7 +64,7 @@
                     <option value="no_handphone">No Hp</option>
                 </select>
             </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                 <input type="text" name="cari" class="form-control" placeholder="Cari .." value="{{ old('cari') }}">
                 </div>
                 <input type="submit" value="CARI">

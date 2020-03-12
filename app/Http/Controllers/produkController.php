@@ -78,7 +78,12 @@ class produkController extends Controller
     {
         if (Session::get('login'))
         {
-            return view('produk/tambah_produk');
+            $komisi = DB::table('komisi_template')->where('status','aktif')->paginate(10);
+            $jabatan = DB::table('jabatan')->get();
+            $produk = DB::table('produk')->get();
+            $skema = DB::table('komisi_template')->get();
+            // return view('komisi_template/komisiSkema', ['jabatan' => $jabatan ,'produk'=>$produk, 'skema'=>$skema]);
+            return view('produk/tambah_produk',['jabatan' => $jabatan , 'skema'=>$skema, 'komisi' => $komisi]);
         }
         else
         {
@@ -129,10 +134,9 @@ class produkController extends Controller
     {
     	$this->validate($request,[
             'nama_produk' => 'required',
-            'jumlah' => 'required|numeric',
-            'harga' => 'required|numeric'
+            'jumlah' => 'required|numeric'
     	]);
- 
+  
         $filew = $request->file('nama_banner');
    
         $nama_files = $filew->getClientOriginalName();
@@ -143,20 +147,18 @@ class produkController extends Controller
         $tujuan_upload = 'data_banner';
         $filew->move($tujuan_upload,$nama_files);
     
-    
+            // komen aktif
         $a = produk::create([
             'nama_produk' => $request->nama_produk,
             'jumlah' => $request->jumlah,
             'sisa' => $request->jumlah,
             'terjual' => '0',
-            'harga' => $request->harga,
+            'harga' => '0',
             'file_banner' => $nama_files,
             'keterangan' => 'kamar',
             'status' =>'aktif'
         ]);
     
-  
-
         //dd($a->id);
         $lastId = $a->id;
         $nama_sub = $request->nama_sub;
@@ -165,6 +167,7 @@ class produkController extends Controller
         $index = 1;
         foreach($nama_sub as $nama_s => $q)
         {
+            // komen aktif
             $a = sub_produk::create([
                 'id_produk' => $lastId,
                 'nama_produk' => $q,
@@ -179,14 +182,31 @@ class produkController extends Controller
         $indexa = 1;
         foreach($tanggalBerangkat as $tanggal_s => $q)
         {
-        tanggal_produk::create([
+            // komen aktif
+            tanggal_produk::create([
             'id_produk' =>$lastId, 
             'tanggal_berangkat' => $tanggalBerangkat[$tanggal_s],
             'tanggal_expired' => $tanggalExpired[$tanggal_s],
         ]);
         $index++;
         }
-
+        $namaJabatan = $request->nama_jabatan;
+        $idProduk = '1';
+        $namaSkema = $request->nama_skema;
+        $keteranganSkema=$request->keterangan_skema;
+        $indexskema=1;
+        foreach($namaJabatan as $namaJab =>$nj)
+        {
+            komisi_template_trx::create([
+                //$anggota = anggota::find($id);
+                'id_jabatan' => $namaJabatan[$namaJab],
+                'id_produk' => $lastId,
+                'id_template_komisi' => $namaSkema[$namaJab],
+                'keterangan' => $keteranganSkema[$namaJab],
+                'status' => 'aktif',
+                ]);
+                $indexskema++;
+        }
         // $produk = DB::table('produk')
         //         ->orderBy('id_produk','desc')
         //         ->first();
@@ -226,6 +246,9 @@ class produkController extends Controller
     {
         produk::where('id_produk', $id)->update([
             'status'=> 'tidak aktif',
+        ]);
+        komisi_template_trx::where('id_produk',$id)->update([
+            'status' => 'tidak aktif',
         ]);
         return redirect('produk');
     }
@@ -573,7 +596,7 @@ print_r($sub);
         if (Session::get('login'))
         { 
             $komisi = DB::table('transaksi_produk as a')
-            ->select('a.created_at','b.id_anggota','b.saldo','a.komisi','b.poin as poinAnggota','a.poin','b.status','a.id_transaksi_produk','tanggal_berangkat')
+            ->select('a.created_at','b.id_anggota','b.saldo','a.id_transaksi_detail','a.komisi','b.poin as poinAnggota','a.poin','b.status','a.id_transaksi_produk','tanggal_berangkat')
             ->join('anggota as b','b.id_anggota','=','a.id_anggota')
             ->where('a.status','belum diproses')
             ->get();
@@ -599,8 +622,8 @@ print_r($sub);
                 
                 $anggotaid=$qa->id_anggota;
                 $status=$qa->status;
-                //print_r($anggotaid);
-                //print_r($s);
+                // print_r($anggotaid);
+                // print_r($status);
                 $jpoin= $poinanggota+$poin;
                 $qe = $l+$s;
                 //print_r($jpoin);
@@ -609,7 +632,7 @@ print_r($sub);
                     // $index = 1;
                     // foreach($produks as $nama_s => $q)
                     // {
-                    if($status=='tidak aktif')
+                    if($status=='tidak aktif'||$status=='suspend')
                     {
                         $a = DB::table('transaksi_produk')->where('id_transaksi_produk',$id_transaksi)->update([
                             'status' => 'suspend'
