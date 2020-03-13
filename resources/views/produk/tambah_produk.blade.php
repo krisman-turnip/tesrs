@@ -167,12 +167,23 @@
                             <thead>
                                 <tr>
                                     <th width="114">Nama Jabatan</th>
-                                    <th width="121">Nama Skema</th>
+                                    <th width="121">Nama Template</th>
                                     <th width="134">Keterangan</th>
                                     <th width="84">opsi</th>
                                 </tr>
                             </thead>
                             <tbody id="dataTableskema">
+                            <tr>
+                                <td>1
+                                </td>
+                                <td>2
+                                </td>
+                                <td>3
+                                </td>
+                                <td>
+                                <input type="Button" value="delete" onclick="deleteRow(this)" />;
+                                </td>
+                                </tr>
                             </tbody>
                             </TABLE>
                         <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Lihat Template</button>
@@ -180,7 +191,7 @@
                         
                         <div class="col-md-2">
                         
-                        </div></div>
+                        </div></div> 
                         <!-- <label for="jumlah" class="col-md-2 col-form-label text-md-right">Tanggal Keberangkatan</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control" name="tanggal_berangkat" id="datepicker"/>
@@ -191,13 +202,38 @@
                             <div class="col-md-6">
                                 <input type="text" class="form-control" name="tanggal_expired" id="datepicker2"/>
                             </div>
-                        </div> -->
+                        </div>
+                        
+                        <div class="form-group row">
+                        <label for="template" class="col-md-2 col-form-label text-md-right">Template Komisi Produk</label>
+                        <div class="col-md-5">
+                        <INPUT type="button" value="Tambah Skema" onClick="addRowT('dataTabletemplate')" />
+                        <form action="" method="post" name="template">  
+                            <TABLE width="800" border="1">
+                            <thead>
+                                <tr>
+                                    <th width="250">Nama Template</th>
+                                    <th width="130">Komisi 1</th>
+                                    <th width="130">Komisi 2</th>
+                                    <th width="130">Komisi 3</th>
+                                    <th width="110">Poin 1</th>
+                                    <th width="110">Poin 2</th>
+                                    <th width="110">Poin 3</th>
+                                    <th width="90">opsi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dataTabletemplate">
+                            </tbody>
+                            </TABLE>
+                        <!-- <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Lihat Template</button> -->
+                        </div>
+                     </div>
                             <input type="hidden" class="col-md-2" name="_method" value="post">
                             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                             </div>
                             <input type="submit" class="btn btn-success" value="Simpan" onClick="">
                       
-                        <br>
+        <br>
         <br>
                 </div>
          
@@ -292,6 +328,48 @@
         
         }
 </SCRIPT>
+
+<SCRIPT language="javascript">
+     function addRowT(tableIDTemplate) { 
+
+        var table = document.getElementById(tableIDTemplate);
+
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+
+        // var cell1 = row.insertCell(0);
+        // var element1 = document.createElement("input");
+        // element1.type = "checkbox";
+        // element1.name="chkbox[]";
+        // cell1.appendChild(element1);
+        var cell1 = row.insertCell(0);
+        cell1.innerHTML = "<input type='text'class='form-control' name='nama_template[]' required>";
+
+        var cell2 = row.insertCell(1);
+        cell2.innerHTML = "<input type='text' class='form-control' name='komisi1[]' required/>";
+
+        var cell3 = row.insertCell(2);
+        cell3.innerHTML =  "<input type='text' class='form-control' name='komisi2[]' required/>";
+
+        var cell4 = row.insertCell(3);
+        cell4.innerHTML =  "<input type='text' class='form-control' name='komisi3[]' required/>";
+
+        var cell5 = row.insertCell(4);
+        cell5.innerHTML = "<input type='text' class='form-control' name='poin1[]' required/>";
+
+        var cell6 = row.insertCell(5);
+        cell6.innerHTML =  "<input type='text' class='form-control' name='poin2[]' required/>";
+
+        var cell7 = row.insertCell(6);
+        cell7.innerHTML =  "<input type='text' class='form-control' name='poin3[]' required/>";
+        
+        var cell8= row.insertCell(7);
+        cell8.innerHTML =  "<input type='Button'value='delete'onclick='deleteRow(this)' required/>";
+        
+        
+        }
+</SCRIPT>
+
 <SCRIPT language="javascript">
      function addRows(tableIDs) { 
 

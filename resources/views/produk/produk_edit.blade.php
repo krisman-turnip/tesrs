@@ -149,7 +149,15 @@
                                 </tr>
                             </thead>
                             <tbody id="dataTable">
-
+                            @foreach($sub as $p)
+                            <tr>
+                            <td><input type='text' name='nama_sub[]' value="{{$p->namaProduk}}" required></td>
+                            <td><input type='text' name='harga_sub[]' value="{{$p->harga}}" required></td>
+                            <td><input type='text' name='keterangan_sub[]' value="{{$p->keterangan}}" required></td>
+                                <td><input type="Button" value="delete" onclick="deleteRow(this)" />
+                                </td>
+                            </tr>
+                            @endforeach
                             </tbody>
                             </TABLE>
                         </div>
@@ -171,7 +179,14 @@
                             </tr>
                         </thead>
                         <tbody id="dataTables">
-
+                        @foreach($tanggal as $p)
+                            <tr>
+                                <td><input type='text' name='tanggal_berangkat[]' value="{{$p->tanggal_berangkat}}" required></td>
+                                <td><input type='text' name='tanggal_expired[]' value="{{$p->tanggal_expired}}" required></td>
+                                <td><input type="Button" value="delete" onclick="deleteRow(this)" />
+                                </td>
+                            </tr>
+                            @endforeach
                         </tbody>
                         </TABLE>
                         </div>
@@ -187,44 +202,9 @@
                     </form>
                 </div>
             </div>
-
-            <div class="container">
-            <div class="card mt-5">
-                <div class="card-header text-center">
-                </div>
-                <div class="card-body">
-               
-                    <br/>
-                    <br/>
-                    @foreach($sub as $p)
-                        {{$p->namaProduk}}
-                        @endforeach
-                    <table class="table table-bordered table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Materi</th>
-                                <th>Keterangan</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @php $no=1; @endphp
-                            @foreach($materi as $p)
-                            <tr>
-                                <td>{{ $no++ }}</td>
-                                <td>{{ $p->nama_materi }}</td>
-                                <td>{{ $p->keterangan }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+            </div>
             </div>
         </div>
-        <a href="{{ url('materi/upload') }}" class="btn btn-primary">Upload</a>
-        </div>
-        </div>
-        
   <!-- /.content-wrapper -->
 @include('layouts.footer')
  
@@ -257,7 +237,7 @@
         // cell1.appendChild(element1);
         
         var cell1 = row.insertCell(0);
-        cell1.innerHTML = "<input type='text' name='nama_sub[]' value='{{$p->namaProduk}}' required>";
+        cell1.innerHTML = "<input type='text' name='nama_sub[]' required>";
 
         var cell2 = row.insertCell(1);
         cell2.innerHTML = "<input type='text'  name='harga_sub[]' required/>";
@@ -307,8 +287,15 @@
   </script>
 <script>
   function deleteRow(btn) {
-  var row = btn.parentNode.parentNode;
+    var result = confirm("Are you sure you want to delete this item?");
+if (result) {
+    var row = btn.parentNode.parentNode;
   row.parentNode.removeChild(row);
+    //Logic to delete the item
+}
+else{
+    return false;
+}
 }
 </script>
 <!-- Bootstrap 3.3.7 -->

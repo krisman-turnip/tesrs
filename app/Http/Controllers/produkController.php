@@ -259,10 +259,10 @@ class produkController extends Controller
         { 
             //$anggota = anggota::find($id);
             $produk = DB::table('produk')->where('id_produk',$id)->first();
-            $materi = DB::table('materi')->where('id_produk',$id)->get();
-            $sub = DB::table('sub_produk')->select('nama_produk as namaProduk')->where('id_produk',$id)->get();
-            $tanggal = DB::table('tanggal_produk')->where('id_produk',$id)->get();
-print_r($sub);
+            $materi = DB::table('materi')->where('id_produk',$id)->first();
+            $sub = DB::table('sub_produk')->select('nama_produk as namaProduk','harga','keterangan')->where('id_produk',$id)->get();
+            $tanggal = DB::table('tanggal_produk')->select('tanggal_expired','tanggal_berangkat')->where('id_produk',$id)->get();
+
             return view('produk/produk_edit', ['produk' => $produk,'materi'=>$materi,'sub' => $sub,'tanggal'=>$tanggal]);
         }
         else
@@ -282,7 +282,22 @@ print_r($sub);
         'terjual' => $request->terjual,
         'harga' => $request->harga
         ]);
-        return redirect('produk');
+
+        $tanggalBerangkat = $request->tanggal_berangkat;
+        $tanggalExpired = $request->tanggal_expired;
+        $indexa = 1;
+        foreach($tanggalBerangkat as $tanggal_s => $q)
+        {
+            // komen aktif
+            $a=DB::table('tanggal_produk')->where('id_produk',$request->id)->update([
+            'tanggal_berangkat' => $tanggalBerangkat[$tanggal_s],
+            'tanggal_expired' => $tanggalExpired[$tanggal_s],
+           
+        ]);
+        print_r($a);
+        $indexa++;
+        }
+        ///return redirect('produk');
     }
 
     public function tampil()

@@ -98,6 +98,7 @@ class materiController extends Controller
                 'id_produk' =>'2',  
                 'nama_materi' => $nama_file,
                 'keterangan' => $request->keterangan,
+                'status' =>'aktif'
             ]);
         
             return redirect('materi');
