@@ -35,6 +35,7 @@
             <li><a href="{{ url('produk/tambah') }}"><i class="fa fa-circle-o"></i> Tambah Produk</a></li>
             <li><a href="{{ url('produk/produk_pengajuan') }}"><i class="fa fa-circle-o"></i> Pengajuan Produk</a></li>
             <li><a href="{{ url('report') }}"><i class="fa fa-circle-o"></i> Transaksi Produk</a></li>
+            <li><a href="{{ url('produk/terjual') }}"><i class="fa fa-circle-o"></i> Penjualan Produk</a></li>
           </ul>
         </li>
         @endif

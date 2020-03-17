@@ -13,7 +13,7 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="{{url('adminlte/bower_components/Ionicons/css/ionicons.min.css')}}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{url('adminlte/css/AdminLTE.min.css')}}"> 
+  <link rel="stylesheet" href="{{url('adminlte/css/AdminLTE.min.css')}}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{url('adminlte/css/skins/_all-skins.min.css')}}">
@@ -27,8 +27,7 @@
   <link rel="stylesheet" href="{{url('adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="{{url('adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
   <!-- Google Font -->
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
 </head>
@@ -48,52 +47,81 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 class="text-center">
-        Detail Produk
+        Daftar Transaksi Produk
       </h1>
-      <a href="{{url('produk')}}" class="btn btn-primary">Kembali</a>
-        @php
-        $numOfCols = 1;
-$rowCount = 0;
-$bootstrapColWidth = 12 / $numOfCols;
-@endphp
-<div class="row">
-        @foreach($produk as $p)
-        <div class="col-xs-@php echo $bootstrapColWidth; @endphp">
-@php
-$a = $p->nama_produk 
-@endphp
-                <h4 >{{ $p->nama_produk }}</h4>
-                <div class="col-xs-4"><img width="320px" height="200px" src="{{ url('/data_banner/'.$p->file_banner) }}" ></div>
-                <div class="col-xs-3">
-                Tanggal Keberangkatan<br>
-                Tanggal Expired<br>
-                Produk Terjual<br>
-                Produk Sisa<br>
-                @foreach($subproduk as $ppp) {{ $ppp->namaSubProduk }} Harga {{ $ppp->HargaSub }}<br> @endforeach  <br>
-                <a href="../produk/edit/{{ $p->id_produk }}" class="btn btn-warning">Edit</a>
-                <a href="../produk/hapus/{{ $p->id_produk }}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Hapus</a>
-                </div>
-                <div class="col-xs-4">
-                @foreach($tanggal as $pp){{ $pp->tanggal_berangkat }} || @endforeach<br>
-                @foreach($tanggal as $ppe){{ $ppe->tanggal_expired }} || @endforeach<br>
-                {{ $p->terjual }}<br>
-                {{ $p->sisa }}<br>
-                </div>
-            <div id="wrapper">
-        @php
-        $rowCount++;
-    if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
+        <div class="container">
 
-@endphp
-@endforeach
-
-        </div>
-        </div>
+        <form action="{{url('reportCari')}}" method="GET">
+        <br>
+        <br>
+        <div class="form-group">
+        <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+                <select name="select" class="form-control" value="{{ old('select') }}">
+                    <option value="nama">Nama Anggota</option>
+                    <option value="nama_customer">Nama customer</option>
+                    <option value="ktp_customer">KTP Customer</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <input type="text" name="cari" class="form-control" placeholder="Cari .." value="{{ old('cari') }}">
+            </div>
+            <div class="col-md-2">
+                <input type="submit" value="CARI">
+                <input type="hidden" name="_method" value="get">
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            </div>
+            <div class="col-md-3.5">
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Report</button>
+            </div>
+            </div>
+        </form>
+            <div class="card mt-5">
+                <div class="card-body">
+                
+                    <br/>
+                    <br/>
+                    <div class="table-responsive">          
+                    <table class="table table-xs table-dark table-hover table-striped">
+                    <!-- <table class="table table-bordered table-hover table-striped"> -->
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Nama Anggota</th>
+                                <th scope="col">Nama Produk</th>
+                                <th scope="col">Nama Customer</th>
+                                <th scope="col">KTP Customer</th>
+                                <th scope="col">Approval</th>
+                                <th scope="col">Tanggal Approve</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @php $no=1; @endphp
+                            @foreach($produk as $p)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $p->nama }}</td>
+                                <td>{{ $p->nama_produk }}</td>
+                                <td>{{ $p->nama_customer }}</td>
+                                <td>{{ $p->ktp_customer }}</td>
+                                <td>{{ $p->admin }}</td>
+                                <td>{{ $p->created_at }}</td>
+                               
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+            {{ $produk->links() }}
         </div>
         </div>
         
+
   <!-- /.content-wrapper -->
-@include('member.layout.footer')
+@include('layouts.footer')
  
  <!-- Add the sidebar's background. This div must be placed
       immediately after the control sidebar -->
@@ -113,6 +141,7 @@ $a = $p->nama_produk
 <script src="{{url('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 <!-- Morris.js charts -->
 <script src="adminlte/bower_components/raphael/raphael.min.js"></script>
+<script src="adminlte/bower_components/morris.js/morris.min.js"></script>
 <!-- Sparkline -->
 <script src="adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
@@ -133,23 +162,9 @@ $a = $p->nama_produk
 <script src="adminlte/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="{{url('adminlte/js/adminlte.min.js')}}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="{{url('dminlte/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{url('adminlte/js/demo.js')}}"></script>
+<script src="adminlte/js/demo.js"></script>
 </body>
 </html>
-<!-- <script>
-  $(document).on("click", ".open-homeEvents", function () {
-     var eventId = $(this).data('id');
-     $('#idHolder').html( eventId );
-});
-</script>  -->
-
-<script>
-$(document).on("click", ".open-EditTodo", function () {
-    var todoId = $(this).data('id');
-
-var todoName = $(this).data('todo');
-    $(".modal-body #todoId").val( todoName );
-    $(".modal-body #todoName").val( todoId );
-});
-</script>

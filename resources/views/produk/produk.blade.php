@@ -158,9 +158,9 @@
                     </table> -->
             </div>
             </div>
-            {{ $produk->links() }}
+          
             </div>
-            
+            {{ $produk->links() }}
         </div>
         
   <!-- /.content-wrapper -->

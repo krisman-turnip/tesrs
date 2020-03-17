@@ -64,7 +64,7 @@ $bootstrapColWidth = 12 / $numOfCols;
 $a = $p->nama 
 @endphp
                 <h4 >{{ $p->nama }}</h4>
-                <div class="col-xs-3"><br><img width="250px" height="200px" src="{{ url('/data_ktp/'.$p->file_ktp) }}">ubah poto</div>
+                <div class="col-xs-3"><br><img width="250px" height="200px" src="{{ url('/data_ktp/'.$p->file_ktp) }}"><a href="{{ url('/updatePhoto/'.$p->id_anggota) }}">ubah poto</a></div>
                 <div class="col-xs-8">
                 <table class="table table-striped">
                     <tr>
@@ -131,10 +131,27 @@ $a = $p->nama
                         {{ $p->saldo }}
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                        Status
+                        </td>
+                        <td>
+                        {{ $p->status }}
+                        </td>
+                    </tr>
                  <br>
                  </table>
-                <a href="../produk/edit/{{ $p->id_anggota }}" class="btn btn-warning">Edit</a>
-                <a href="../produk/hapus/{{ $p->id_anggota }}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Hapus</a>
+<!--                  
+                 $a = {{$p->status}}; 
+                 print_r($a); -->
+                 @if($p->status=='aktif')
+                 <a href="{{url('/anggota/suspend/'.(isset($p) ? $p->id_anggota : ''))}}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Suspend</a>
+                 @else
+                    <a href="{{url('/anggota/aktif/'.(isset($p) ? $p->id_anggota : ''))}}" onclick="return confirm('Are you sure?')" class="btn btn-warning">Aktifkan</a>
+                 @endif
+                <a href="{{url('/anggota/edit/'.(isset($p) ? $p->id_anggota : ''))}}" class="btn btn-warning">Edit</a>
+                <a href="{{url('/anggota/reset/'.(isset($p) ? $p->id_anggota : ''))}}" onclick="return confirm('Are you sure?')" class="btn btn-info">Reset Password</a>
+                <a href="{{url('/anggota/hapus/'.(isset($p) ? $p->id_anggota : ''))}}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Hapus</a>
                 </div>
             <div id="wrapper">
         @php

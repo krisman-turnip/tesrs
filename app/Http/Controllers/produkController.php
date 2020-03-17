@@ -456,13 +456,13 @@ class produkController extends Controller
             $transaksijumlahdetail=$selectId->jumlah;
 
 
-            $tpoin1=$poin1*$transaksijumlahdetail;
+            $tpoin1=$poin3*$transaksijumlahdetail;
             $tpoin2=$poin2*$transaksijumlahdetail;
-            $tpoin3=$poin3*$transaksijumlahdetail;
+            $tpoin3=$poin1*$transaksijumlahdetail;
 
-            $tKomisi1=$komisi1*$transaksijumlahdetail;
+            $tKomisi1=$komisi3*$transaksijumlahdetail;
             $tKomisi2=$komisi2*$transaksijumlahdetail;
-            $tKomisi3=$komisi3*$transaksijumlahdetail;
+            $tKomisi3=$komisi1*$transaksijumlahdetail;
 
             $c = (int)$terjual+(int)$transaksijumlahdetail;
             $b= (int)$a-(int)$c;
@@ -621,7 +621,7 @@ class produkController extends Controller
             foreach($komisi as $namas => $qa)
             {
                 $produks[] = DB::table('transaksi_produk as a')
-                        ->select('a.id_transaksi_produk','a.jumlah','b.nama','c.nama_produk','a.admin','a.created_at','a.komisi')
+                        ->select('a.id_transaksi_produk','a.jumlah','b.nama','c.nama_produk','a.admin','a.created_at','a.komisi','a.id_transaksi_detail')
                         ->join('anggota as b','a.id_anggota','=','b.id_anggota')
                         ->join('produk as c','a.id_produk','=','c.id_produk')
                         ->where('a.status','belum diproses')
@@ -632,6 +632,7 @@ class produkController extends Controller
                 $poinanggota=$qa->poinAnggota;
                 $poin=$qa->poin;
                 $id_transaksi=$qa->id_transaksi_produk;
+                $id_transaksi_detail =$qa->id_transaksi_detail;
                 //print_r($poin);
                 $s=$qa->saldo;
                 
@@ -659,6 +660,10 @@ class produkController extends Controller
                     {
                         $a = DB::table('transaksi_produk')->where('id_transaksi_produk',$id_transaksi)->update([
                             'status' => 'sudah diproses'
+                        ]);
+
+                        $b = DB::table('transaksi_detail')->where('id_transaksi_detail',$id_transaksi_detail)->update([
+                            'status' => 'expired'
                         ]);
 
                         $anggota = DB::table('anggota')->where('id_anggota',$anggotaid)-> update([
@@ -777,4 +782,23 @@ class produkController extends Controller
         }
         return redirect()->back();
     }
+
+    public function terjual(request $request)
+    {
+        if (Session::get('login'))
+        {
+            $produk = DB::table('transaksi_detail as a')
+            ->select('b.nama','a.id_transaksi_detail','c.nama_produk','a.admin','a.created_at','a.nama_customer','a.ktp_customer')
+            ->join('anggota as b','a.id_anggota','=','b.id_anggota')
+            ->join('produk as c','a.id_produk','=','c.id_produk')
+            ->where('a.status','expired')
+            ->paginate(20);
+        }
+        else
+        {
+            return view('/loginanggota');
+        }
+        return view('produk/tampil_terjual', ['produk' => $produk]);
+    }
+
 }

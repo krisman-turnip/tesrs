@@ -26,7 +26,7 @@ class anggotaController extends Controller
             ->select('a.id_anggota','a.id_parent','a.nama','a.email','a.no_handphone','a.alamat','b.nama_jabatan','c.nama as namaParent')
             ->join('jabatan as b', 'b.id_jabatan', '=', 'a.id_jabatan')
             ->join('anggota as c', 'c.id_anggota' ,'=', 'a.id_parent')
-            ->where('a.status','aktif')
+            // ->where('a.status','aktif')
             ->paginate(10);
             return view('anggota/anggota', ['anggota' => $anggota]);
         }
@@ -189,14 +189,43 @@ class anggotaController extends Controller
         return redirect('home');
     }
 
+    public function updatePhoto($id,request $request)
+    {
+        $id_anggota = $id;
+        print_r($id_anggota);
+        // $updatepoto = DB::table('anggota')->where('id_anggota',$id_anggota)->update([
+        //     'file_ktp' => 
+        // ]);
+
+    }
+
+    public function suspend($id,request $request)
+    {
+        $id_anggota = $id;
+        print_r($id_anggota);
+        $updatepoto = DB::table('anggota')->where('id_anggota',$id_anggota)->update([
+            'status' => 'suspend',
+        ]);
+        return redirect()->back();
+    }
+
+    public function aktif($id,request $request)
+    {
+        $id_anggota = $id;
+        print_r($id_anggota);
+        $updatepoto = DB::table('anggota')->where('id_anggota',$id_anggota)->update([
+            'status' => 'aktif',
+        ]);
+        return redirect()->back();
+    }
+
     public function reset($id)
     {
        $delete= DB::table('anggota')-> where('id_anggota', $id)-> update([
            'status' => 'reset',
            'password' => ''
        ]);
-
-        return redirect('home');
+        return redirect()->back();
     }
 
     public function delete($id)
@@ -296,7 +325,7 @@ class anggotaController extends Controller
         {
             //$anggota = anggota::find($id);
             $anggota = DB::table('anggota as a')
-                    ->select('b.id_anggota','b.id_parent','b.id_jabatan','a.nama','a.email','a.alamat','a.no_handphone','a.saldo','b.nama as namaParent','c.nama_jabatan','a.file_ktp','a.no_ktp','a.no_npwp')
+                    ->select('a.id_anggota','b.id_parent','b.id_jabatan','a.nama','a.email','a.alamat','a.no_handphone','a.saldo','b.nama as namaParent','c.nama_jabatan','a.file_ktp','a.no_ktp','a.no_npwp','a.status')
                     ->join('anggota as b','b.id_anggota','=','a.id_parent')
                     ->join('jabatan as c','c.id_jabatan','=','b.id_jabatan')
                     ->where('a.id_anggota',$id)

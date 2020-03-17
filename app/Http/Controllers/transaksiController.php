@@ -134,7 +134,9 @@ class transaksiController extends Controller
                     ->select('c.komisi','c.poin','a.created_at','b.nama_produk','a.nama_customer','a.ktp_customer')
                     ->join('produk as b','b.id_produk','=','a.id_produk')
                     ->join('transaksi_produk as c','c.id_transaksi_detail','=','a.id_transaksi_detail')
-                    ->where([['a.id_anggota',$idproduk],['c.id_anggota',$idproduk],['a.status','diterima'],])->paginate(10);
+                    ->where([['a.id_anggota',$idproduk],['c.id_anggota',$idproduk],['a.status','diterima'],])
+                    ->orwhere([['a.id_anggota',$idproduk],['c.id_anggota',$idproduk],['a.status','expired'],])
+                    ->paginate(10);
                     return view('member/produk/produk_diterima', ['produk' => $produk]);
         }
         else
@@ -156,7 +158,9 @@ class transaksiController extends Controller
                 ->select('c.komisi','c.poin','a.created_at','b.nama_produk','a.nama_customer','a.ktp_customer')
                 ->join('produk as b','b.id_produk','=','a.id_produk')
                 ->join('transaksi_produk as c','c.id_transaksi_detail','=','a.id_transaksi_detail')
-                ->where([['a.id_anggota',$idproduk],['c.id_anggota',$idproduk],['a.status','diterima'],["a.$select",'like',"%".$cari."%"]])->paginate(10);
+                ->where([['a.id_anggota',$idproduk],['c.id_anggota',$idproduk],['a.status','diterima'],["a.$select",'like',"%".$cari."%"]])
+                ->orwhere([['a.id_anggota',$idproduk],['c.id_anggota',$idproduk],['a.status','expired'],["a.$select",'like',"%".$cari."%"]])
+                ->paginate(10);
             }
             else
             {
@@ -164,7 +168,9 @@ class transaksiController extends Controller
                 ->select('c.komisi','c.poin','a.created_at','b.nama_produk','a.nama_customer','a.ktp_customer')
                 ->join('produk as b','b.id_produk','=','a.id_produk')
                 ->join('transaksi_produk as c','c.id_transaksi_detail','=','a.id_transaksi_detail')
-                ->where([['a.id_anggota',$idproduk],['c.id_anggota',$idproduk],['a.status','diterima'],["b.$select",'like',"%".$cari."%"]])->paginate(10);
+                ->where([['a.id_anggota',$idproduk],['c.id_anggota',$idproduk],['a.status','diterima'],["b.$select",'like',"%".$cari."%"]])
+                ->orwhere([['a.id_anggota',$idproduk],['c.id_anggota',$idproduk],['a.status','expired'],["a.$select",'like',"%".$cari."%"]])
+                ->paginate(10);
             }
             return view('member/produk/produk_diterima', ['produk' => $produk]);
         }

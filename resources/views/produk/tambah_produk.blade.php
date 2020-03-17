@@ -173,7 +173,7 @@
                                 </tr>
                             </thead>
                             <tbody id="dataTableskema">
-                            <tr>
+                            <!-- <tr>
                                 <td>1
                                 </td>
                                 <td>2
@@ -183,7 +183,7 @@
                                 <td>
                                 <input type="Button" value="delete" onclick="deleteRow(this)" />;
                                 </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                             </TABLE>
                         <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Lihat Template</button>

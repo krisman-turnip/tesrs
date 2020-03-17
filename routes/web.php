@@ -20,7 +20,10 @@ Route::post('/anggota/store','anggotaController@store');
 Route::get('/anggota/hapus/{id}', 'anggotaController@delete');
 Route::get('/anggota/edit/{id}', 'anggotaController@edit');
 Route::get('/anggota/reset/{id}', 'anggotaController@reset');
+Route::get('/anggota/suspend/{id}', 'anggotaController@suspend');
+Route::get('/anggota/aktif/{id}', 'anggotaController@aktif');
 Route::put('/update/{id}', 'anggotaController@update');
+Route::get('/updatePhoto/{id}', 'anggotaController@updatePhoto');
 Route::get('/cari', 'anggotaController@loadData')->name("search");
 Route::get('/anggota/profile/{id}', 'anggotaController@profile');
 
@@ -36,6 +39,7 @@ Route::put('/produk/update/{id}', 'produkController@update');
 Route::get('/report','produkController@transaksiProduk');
 Route::get('/reportCari','produkController@transaksiProdukCari');
 Route::get('/reportBatal/{id}','produkController@transaksiProdukBatal');
+Route::get('/produk/terjual','produkController@terjual');
 
                 /* route materi->admin */
 Route::get('/materi','materiController@index');
