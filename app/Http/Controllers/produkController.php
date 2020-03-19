@@ -13,6 +13,9 @@ use App\komisi_template_trx;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\transaksiExport;
+use App\Exports\penjualanExport;
 
 class produkController extends Controller
 {
@@ -215,17 +218,18 @@ class produkController extends Controller
         if ($file !=0)
         {
             $nama_file = $file->getClientOriginalName();
-            $gambar = materi::where('nama_materi',$nama_file)->count();
+            $nama_f = $nama_file.date('Y-m-d_H-i-s');
+            $gambar = materi::where('nama_materi',$nama_f)->count();
             //$a = $gambar->nama_materi;
             if ($gambar==0)
             {            
                 // isi dengan nama folder tempat kemana file diupload
                 $tujuan_upload = 'data_file';
-                $file->move($tujuan_upload,$nama_file);
+                $file->move($tujuan_upload,$nama_f);
      
                 materi::create([
                     'id_produk' =>$lastId, 
-                    'nama_materi' => $nama_file,
+                    'nama_materi' => $nama_f,
                     'keterangan' => $request->keterangan,
                 ]); 
             
@@ -488,20 +492,21 @@ class produkController extends Controller
                     'sisa' =>$b,
                     ])]);
                     
-                    $tr = DB::table('transaksi as a')
-                        ->join('transaksi_detail as b','a.id_transaksi','=','b.id_transaksi')
-                        ->where([['a.id_produk', $produk],['a.id_anggota',$anggota],['a.created_at',$create],['b.id_transaksi_detail',$transaksi_detail]])-> update([
-                        //$anggota = anggota::find($id);
-                        //'id_produk' => $request->id_produk,
-                        'b.status' => 'Diterima',
-                        'b.admin' => $namaAdmin,
-                    ]);
+                    // $tr = DB::table('transaksi as a')
+                    //     ->join('transaksi_detail as b','a.id_transaksi','=','b.id_transaksi')
+                    //     ->where([['a.id_produk', $produk],['a.id_anggota',$anggota],['a.created_at',$create],['b.id_transaksi_detail',$transaksi_detail]])-> update([
+                    //     //$anggota = anggota::find($id);
+                    //     //'id_produk' => $request->id_produk,
+                    //     'b.status' => 'Diterima',
+                    //     'b.admin' => $namaAdmin,
+                    // ]);
 
                     $tr = DB::table('transaksi_detail as a')
                         ->where([['a.id_produk', $produk],['a.id_anggota',$anggota],['a.created_at',$create],['a.id_transaksi_detail',$transaksi_detail]])-> update([
                         //$anggota = anggota::find($id);
                         //'id_produk' => $request->id_produk,
                         'a.status' => 'Diterima',
+                        'a.admin' => $namaAdmin,
                     ]);
                 
                     // DB::table('anggota')-> where('id_anggota', $anggota)-> update([
@@ -643,7 +648,7 @@ class produkController extends Controller
                 $jpoin= $poinanggota+$poin;
                 $qe = $l+$s;
                 //print_r($jpoin);
-                if($komisidate>$tgl)
+                if($komisidate<$tgl)
                 {
                     // $index = 1;
                     // foreach($produks as $nama_s => $q)
@@ -693,7 +698,7 @@ class produkController extends Controller
                 $indexs++;
              }
             $produk = DB::table('transaksi_detail as a')
-                    ->select('b.nama','a.id_transaksi_detail','c.nama_produk','a.admin','a.created_at','a.nama_customer','a.ktp_customer')
+                    ->select('b.nama','a.id_transaksi_detail','c.nama_produk','a.admin','a.created_at as date','a.nama_customer','a.ktp_customer')
                     ->join('anggota as b','a.id_anggota','=','b.id_anggota')
                     ->join('produk as c','a.id_produk','=','c.id_produk')
                     ->where('a.status','diterima')
@@ -801,4 +806,61 @@ class produkController extends Controller
         return view('produk/tampil_terjual', ['produk' => $produk]);
     }
 
+    public function terjualCari(request $request)
+    {
+        if (Session::get('login'))
+        {
+            $cari = $request->cari;
+            $select = $request->select;
+            if($select=='nama')
+            {
+            $produk = DB::table('transaksi_detail as a')
+                    ->select('b.nama','a.id_transaksi_detail','c.nama_produk','a.admin','a.created_at','a.nama_customer','a.ktp_customer')
+                    ->join('anggota as b','a.id_anggota','=','b.id_anggota')
+                    ->join('produk as c','a.id_produk','=','c.id_produk')
+                    ->where([['a.status','expired'],["b.$select",'like',"%".$cari."%"],])
+                    ->paginate(50);
+            }
+            else if($select=='nama_customer'||$select=='ktp_customer')
+            {
+            $produk = DB::table('transaksi_detail as a')
+                    ->select('b.nama','a.id_transaksi_detail','c.nama_produk','a.admin','a.created_at','a.nama_customer','a.ktp_customer')
+                    ->join('anggota as b','a.id_anggota','=','b.id_anggota')
+                    ->join('produk as c','a.id_produk','=','c.id_produk')
+                    ->where([['a.status','expired'],["a.$select",'like',"%".$cari."%"],])
+                    ->paginate(50);
+            }
+            else
+            {
+            $produk = DB::table('transaksi_detail as a')
+                    ->select('b.nama','a.id_transaksi_detail','c.nama_produk','a.admin','a.created_at','a.nama_customer','a.ktp_customer')
+                    ->join('anggota as b','a.id_anggota','=','b.id_anggota')
+                    ->join('produk as c','a.id_produk','=','c.id_produk')
+                    ->where([['a.status','expired'],["c.$select",'like',"%".$cari."%"],])
+                    ->paginate(50);
+            }
+            return view('produk/tampil_terjual', ['produk' => $produk]);
+        }
+        else
+        {
+            return view('/loginanggota');
+        }
+       
+    }
+
+    public function exporttransaksi(request $request)
+	{
+        $nama=$request->nama;
+        $nama_jabatan=$request->nama_jabatan;
+        $nama_file = 'transaksi_'.date('Y-m-d_H-i-s').'.xlsx';
+        return Excel::download(new transaksiExport($nama, $nama_jabatan), $nama_file);
+    }
+
+    public function exportpenjualan(request $request)
+	{
+        $nama=$request->nama;
+        $nama_jabatan=$request->nama_jabatan;
+        $nama_file = 'transaksiPenjualan_'.date('Y-m-d_H-i-s').'.xlsx';
+        return Excel::download(new penjualanExport($nama, $nama_jabatan), $nama_file);
+    }
 }

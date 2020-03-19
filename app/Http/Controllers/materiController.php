@@ -85,18 +85,19 @@ class materiController extends Controller
         $file = $request->file('nama_materi');
     
         $nama_file = $file->getClientOriginalName();
-        $gambar = materi::where('nama_materi',$nama_file)->count();
+        $nama_f = $nama_file.date('Y-m-d_H-i-s');
+        $gambar = materi::where('nama_materi',$nama_f)->count();
         //$a = $gambar->nama_materi;
         if ($gambar==0)
         {            
               // isi dengan nama folder tempat kemana file diupload
             $tujuan_upload = 'data_file';
-            $file->move($tujuan_upload,$nama_file);
+            $file->move($tujuan_upload,$nama_f);
         
         
             materi::create([
                 'id_produk' =>'2',  
-                'nama_materi' => $nama_file,
+                'nama_materi' => $nama_f,
                 'keterangan' => $request->keterangan,
                 'status' =>'aktif'
             ]);

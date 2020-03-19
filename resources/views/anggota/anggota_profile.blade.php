@@ -64,7 +64,7 @@ $bootstrapColWidth = 12 / $numOfCols;
 $a = $p->nama 
 @endphp
                 <h4 >{{ $p->nama }}</h4>
-                <div class="col-xs-3"><br><img width="250px" height="200px" src="{{ url('/data_ktp/'.$p->file_ktp) }}"><a href="{{ url('/updatePhoto/'.$p->id_anggota) }}">ubah poto</a></div>
+                <div class="col-xs-3"><br><img width="250px" height="200px" src="{{ url('/data_ktp/'.$p->file_ktp) }}"><a href="{{ url('/anggota/editPoto/'.$p->id_anggota) }}">ubah poto</a></div>
                 <div class="col-xs-8">
                 <table class="table table-striped">
                     <tr>

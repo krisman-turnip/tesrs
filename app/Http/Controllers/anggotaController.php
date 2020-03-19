@@ -150,13 +150,14 @@ class anggotaController extends Controller
 
         $file = $request->file('file_ktp');
         $nama_file = $file->getClientOriginalName();
-        $gambar = anggota::where('file_ktp',$nama_file)->count();
+        $nama_f = $nama_file.date('Y-m-d_H-i-s');
+        $gambar = anggota::where('file_ktp',$nama_f)->count();
         //$a = $gambar->nama_materi;
         if ($gambar==0)
         {
               // isi dengan nama folder tempat kemana file diupload
             $tujuan_upload = 'data_ktp';
-            $file->move($tujuan_upload,$nama_file);
+            $file->move($tujuan_upload,$nama_f);
 
             anggota::create([
                 'id_anggota' => $request->id_anggota,
@@ -172,7 +173,7 @@ class anggotaController extends Controller
                 'saldo' => '0',
                 'status' => 'aktif',
                 'no_ktp' => $request->no_ktp,
-                'file_ktp' => $nama_file,
+                'file_ktp' => $nama_f,
                 'no_npwp' => $npwp,
                 'poin' =>'0',
             ]);
@@ -282,40 +283,90 @@ class anggotaController extends Controller
         $i= count($ex);
         $ex[$i]=$a;
         $newData = implode(",", $ex);
-        $gambar = anggota::where('id_anggota',$request-> id)->first();
-        File::delete('data_ktp/'.$gambar->file_ktp);
-        $file = $request->file('file_ktp');
-        $nama_file = $file->getClientOriginalName();
-        $gambar = anggota::where('file_ktp',$nama_file)->count();
-        //$a = $gambar->nama_materi;
-        if ($gambar==0)
-        {
+        // $gambar = anggota::where('id_anggota',$request-> id)->first();
+        // File::delete('data_ktp/'.$gambar->file_ktp);
+        // $file = $request->file('file_ktp');
+        // $nama_file = $file->getClientOriginalName();
+        // $gambar = anggota::where('file_ktp',$nama_file)->count();
+        // //$a = $gambar->nama_materi;
+        // if ($gambar==0)
+        // {
               // isi dengan nama folder tempat kemana file diupload
-            $tujuan_upload = 'data_ktp';
-            $file->move($tujuan_upload,$nama_file);
+            // $tujuan_upload = 'data_ktp';
+            // $file->move($tujuan_upload,$nama_file);
             DB::table('anggota')-> where('id_anggota', $request-> id)-> update([
             //$anggota = anggota::find($id);
             'id_parent' => $request->id_parent,
             'id_jabatan' => $request->id_jabatan,
-            'id_parent_2' => $request->$parenta,
             'parent_all' => $newData,
             'nama' => $request->nama,
             'email' => $request->email,
             'alamat' => $request->alamat,
             'no_handphone' => $request->no_handphone,
             'no_ktp' => $request->no_ktp,
-            'file_ktp' => $nama_file,
+            // 'file_ktp' => $nama_file,
             'no_npwp' => $request->no_npwp,
             ]);
 
             return redirect('home');
-        }
-        else
-        {
+        
             //Alert::message('Message', 'Optional Title');
             //return view ('');
             //Alert::message('Nama materi sudah ada', 'Judul Pesan');
-            return redirect()->back();
+            
+        
+    }
+
+    public function editPoto($id)
+    {
+        if (Session::get('login'))
+        {
+            //$anggota = anggota::find($id);
+            $anggota = DB::table('anggota as a')
+                    ->select('c.nama as namaParent','a.id_anggota','a.id_parent','a.id_jabatan','a.parent_all','a.nama','a.alamat','a.email','a.no_handphone','a.password','a.saldo','a.status','a.no_ktp','a.no_npwp','a.file_ktp','b.nama_jabatan')
+                    ->join('jabatan as b','a.id_jabatan','=','b.id_jabatan')
+                    ->join('anggota as c','c.id_anggota','=','a.id_parent')
+                    ->where('a.id_anggota',$id)
+                    ->first();
+
+            return view('anggota/anggota_editPoto', ['anggota' => $anggota]);
+        }
+        else
+        {
+            return redirect('/');
+        }
+    }
+
+    public function updatePoto(request $request)
+    {
+        if (Session::get('login'))
+        {
+            $id = $request->id_anggota;
+            print_r($id);
+            $gambar = anggota::where('id_anggota',$id)->first();
+        File::delete('data_ktp/'.$gambar->file_ktp);
+        $file = $request->file('file_ktp');
+        $nama_file = $file->getClientOriginalName();
+        $nama_f = $nama_file.date('Y-m-d_H-i-s');
+        $gambar = anggota::where('file_ktp',$nama_f)->count();
+        //$a = $gambar->nama_materi;
+        
+        if ($gambar==0)
+        {
+            //   isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'data_ktp';
+            $file->move($tujuan_upload,$nama_f);
+            $anggota = anggota::find($id);
+            DB::table('anggota')-> where('id_anggota', $id)-> update([
+
+                'file_ktp' => $nama_f,
+                ]);
+            }
+            // return view('anggota/anggota_editPoto', ['anggota' => $anggota]);
+        }
+        else
+        {
+            return redirect('home');
         }
     }
 

@@ -19,11 +19,12 @@ Route::get('/anggota/tambah','anggotaController@tambah');
 Route::post('/anggota/store','anggotaController@store');
 Route::get('/anggota/hapus/{id}', 'anggotaController@delete');
 Route::get('/anggota/edit/{id}', 'anggotaController@edit');
+Route::get('/anggota/editPoto/{id}', 'anggotaController@editPoto');
 Route::get('/anggota/reset/{id}', 'anggotaController@reset');
 Route::get('/anggota/suspend/{id}', 'anggotaController@suspend');
 Route::get('/anggota/aktif/{id}', 'anggotaController@aktif');
 Route::put('/update/{id}', 'anggotaController@update');
-Route::get('/updatePhoto/{id}', 'anggotaController@updatePhoto');
+Route::put('/updatePoto', 'anggotaController@updatePoto');
 Route::get('/cari', 'anggotaController@loadData')->name("search");
 Route::get('/anggota/profile/{id}', 'anggotaController@profile');
 
@@ -40,6 +41,9 @@ Route::get('/report','produkController@transaksiProduk');
 Route::get('/reportCari','produkController@transaksiProdukCari');
 Route::get('/reportBatal/{id}','produkController@transaksiProdukBatal');
 Route::get('/produk/terjual','produkController@terjual');
+Route::get('/terjualCari','produkController@terjualCari');
+Route::get('/exporttransaksi','produkController@exporttransaksi');
+Route::get('/exportpenjualan','produkController@exportpenjualan');
 
                 /* route materi->admin */
 Route::get('/materi','materiController@index');

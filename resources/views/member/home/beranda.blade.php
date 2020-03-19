@@ -131,6 +131,14 @@ $a = $p->nama
                         {{ $p->saldo }}
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                        Status
+                        </td>
+                        <td color="red">
+                        {{ $p->status }}
+                        </td>
+                    </tr>
                  <br>
                  </table>
                
@@ -156,6 +164,7 @@ $a = $p->nama
                                 <th>No Handphone</th>
                                 <th>Alamat</th>
                                 <th>Saldo Komisi</th>
+                                
                             </tr>
                         </thead>
                         <tbody>

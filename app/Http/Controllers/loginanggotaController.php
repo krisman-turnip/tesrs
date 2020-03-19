@@ -44,7 +44,7 @@ class loginanggotaController extends Controller
                             
                             return redirect('/set_password');
                         }
-                        else if($password=='suspend' || $password=='tidak aktif')
+                        else if( $password=='tidak aktif')
                         {
                             return redirect('/loginanggota')->with('failed','Login gagal');
                         }

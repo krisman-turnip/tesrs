@@ -513,7 +513,7 @@ class komisiController extends Controller
         }
         return view ('komisi/komisi_suspend',['komisi'=>$komisi]);
     }
-
+//rthyareggta
     public function exportSukses(request $request)
 	{
         $nama=$request->nama;
