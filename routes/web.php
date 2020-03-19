@@ -98,6 +98,7 @@ Route::post('/loginanggota/reset','loginanggotaController@loginreset');
 Route::get('/set_password','loginanggotaController@set');
 
                 /*route anggota->member */
+Route::get('/homeanggota','anggotamemberController@home');
 Route::get('/beranda','anggotamemberController@index');
 Route::get('/beranda/{id}','anggotamemberController@tab');
 

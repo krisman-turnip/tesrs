@@ -49,7 +49,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 class="text-center">
-        Daftar Anggota
+        Daftar Anggota 
       </h1>
       <div class="container">
       @php

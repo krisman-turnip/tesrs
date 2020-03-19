@@ -58,6 +58,18 @@ class anggotamemberController extends Controller
         }
     }
 
+    public function home(request $request)
+    {
+        if (Session::get('login'))
+        {
+            return view('member/home/homeanggota');
+        }
+        else
+        {
+            return redirect('/');
+        }
+    }
+
     public function tab($id, Request $request) 
     {
         if (Session::get('login'))

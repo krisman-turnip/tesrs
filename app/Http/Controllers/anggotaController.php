@@ -237,6 +237,7 @@ class anggotaController extends Controller
 
        return redirect()->back();
     }
+
     public function edit($id)
     {
         // id','id_anggota','id_parent', 'id_jabatan','parent_all','nama','alamat','email','no_handphone','password','saldo','status','no_ktp','no_npwp','file_ktp',];

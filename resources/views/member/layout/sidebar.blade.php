@@ -14,6 +14,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
+            <li><a href="{{ url('homeanggota') }}"><i class="fa fa-circle-o"></i> Home</a></li>
             <li><a href="{{ url('beranda') }}"><i class="fa fa-circle-o"></i> Profile</a></li>
             
           </ul>
