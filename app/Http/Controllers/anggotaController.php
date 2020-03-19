@@ -235,7 +235,7 @@ class anggotaController extends Controller
            'status' => 'tidak aktif',
        ]);
 
-        return redirect('home');
+       return redirect()->back();
     }
     public function edit($id)
     {
