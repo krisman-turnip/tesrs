@@ -14,7 +14,7 @@ class produkanggotaController extends Controller
             $produk = DB::table('produk as a')
                     ->select('a.id_produk','a.nama_produk','a.sisa','a.file_banner','c.tanggal_berangkat','c.tanggal_expired')
                     ->join('tanggal_produk as c','c.id_produk','=','a.id_produk')
-                    ->where('a.sisa','>','0')
+                    ->where([['a.sisa','>','0'],['a.status','aktif'],])
                     ->paginate(100);
             $subproduk = DB::table('produk as a')
                     ->select('a.id_produk','a.nama_produk','a.sisa','a.file_banner','c.id_sub_produk','c.nama_produk as namaSubProduk','c.harga as HargaSub')
