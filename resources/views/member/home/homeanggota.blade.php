@@ -52,8 +52,8 @@
         
       </h1>
       <div class="container">
-      <h2 class="text-center"> What's on Indah Wisata</h2>
-      <div class="col-md-10 col-md-offset-0">
+      <!-- <h2 class="text-center"> What's on Indah Wisata</h2> -->
+      <div class="col-md-11 col-md-offset-0">
   <h2></h2>  
   <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -72,7 +72,7 @@
     <div class="item"> 
     @endif
     
-        <img  src="{{ url('/image_dash/'.$p->file) }}" alt="Los Angeles" style="width:1000px;">
+        <img  src="{{ url('/image_dash/'.$p->file) }}" alt="Los Angeles" style="width:1200px;">
         <div class="carousel-caption">
         <h3 data-animation="animated bounceInLeft">{{ $p->judul }}</h3>
           <p>{{ $p->deskripsi }}</p>
