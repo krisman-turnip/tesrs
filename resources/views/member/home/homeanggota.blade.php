@@ -64,7 +64,7 @@
     </ol>
     @php $no=1; @endphp
     <!-- Wrapper for slides -->
-    <div class="carousel-inner">
+    <div class="carousel-inner" role="listbox">
     @foreach($hl as $p)
     @if($no==1)
       <div class="item active"> 

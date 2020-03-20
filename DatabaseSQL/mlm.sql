@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2020 at 11:39 AM
--- Server version: 10.4.8-MariaDB
--- PHP Version: 7.3.11
+-- Waktu pembuatan: 20 Mar 2020 pada 11.34
+-- Versi server: 10.1.37-MariaDB
+-- Versi PHP: 7.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `anggota`
+-- Struktur dari tabel `anggota`
 --
 
 CREATE TABLE `anggota` (
@@ -51,7 +51,7 @@ CREATE TABLE `anggota` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `anggota`
+-- Dumping data untuk tabel `anggota`
 --
 
 INSERT INTO `anggota` (`id`, `id_anggota`, `id_parent`, `id_parent_2`, `id_jabatan`, `parent_all`, `nama`, `email`, `alamat`, `no_handphone`, `password`, `saldo`, `poin`, `status`, `no_ktp`, `file_ktp`, `no_npwp`, `created_at`, `updated_at`) VALUES
@@ -78,7 +78,7 @@ INSERT INTO `anggota` (`id`, `id_anggota`, `id_parent`, `id_parent_2`, `id_jabat
 -- --------------------------------------------------------
 
 --
--- Table structure for table `email`
+-- Struktur dari tabel `email`
 --
 
 CREATE TABLE `email` (
@@ -91,7 +91,7 @@ CREATE TABLE `email` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `email`
+-- Dumping data untuk tabel `email`
 --
 
 INSERT INTO `email` (`id_email`, `penerima`, `judul`, `body`, `created_at`, `updated_at`) VALUES
@@ -114,7 +114,7 @@ INSERT INTO `email` (`id_email`, `penerima`, `judul`, `body`, `created_at`, `upd
 -- --------------------------------------------------------
 
 --
--- Table structure for table `failed_jobs`
+-- Struktur dari tabel `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -123,13 +123,40 @@ CREATE TABLE `failed_jobs` (
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jabatan`
+-- Struktur dari tabel `highlight`
+--
+
+CREATE TABLE `highlight` (
+  `id_highlight` bigint(20) UNSIGNED NOT NULL,
+  `judul` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `deskripsi` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keterangan` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `highlight`
+--
+
+INSERT INTO `highlight` (`id_highlight`, `judul`, `file`, `deskripsi`, `keterangan`, `status`, `created_at`, `updated_at`) VALUES
+(3, 'pembayaran', 'bayar.jpg2020-03-20_09-19-34', 'pembayaran', 'pembayaran', 'aktif', '2020-03-20 02:19:34', '2020-03-20 02:19:34'),
+(4, 'produk baru', 'bayar1.jpg2020-03-20_09-23-02', 'produk baru', 'pembayaran', 'aktif', '2020-03-20 02:23:02', '2020-03-20 02:23:02'),
+(6, 'unggulan', 'bayar4.jpg2020-03-20_09-25-40', 'unggulan', 'unggulan', 'aktif', '2020-03-20 02:25:40', '2020-03-20 02:25:40'),
+(7, 'ini adalah berita produk', 'bayar3.jpg2020-03-20_09-26-39', 'ini adalah berita produk', 'berita produk', 'tidak aktif', '2020-03-20 02:26:39', '2020-03-20 02:26:39');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `jabatan`
 --
 
 CREATE TABLE `jabatan` (
@@ -142,7 +169,7 @@ CREATE TABLE `jabatan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `jabatan`
+-- Dumping data untuk tabel `jabatan`
 --
 
 INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`, `komisi`, `keterangan`, `created_at`, `updated_at`) VALUES
@@ -152,7 +179,7 @@ INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`, `komisi`, `keterangan`, `cr
 -- --------------------------------------------------------
 
 --
--- Table structure for table `komisi`
+-- Struktur dari tabel `komisi`
 --
 
 CREATE TABLE `komisi` (
@@ -166,7 +193,7 @@ CREATE TABLE `komisi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `komisi`
+-- Dumping data untuk tabel `komisi`
 --
 
 INSERT INTO `komisi` (`id_komisi`, `id_anggota`, `komisi`, `bukti_transfer`, `approval`, `created_at`, `updated_at`) VALUES
@@ -181,7 +208,7 @@ INSERT INTO `komisi` (`id_komisi`, `id_anggota`, `komisi`, `bukti_transfer`, `ap
 -- --------------------------------------------------------
 
 --
--- Table structure for table `komisi_suspend`
+-- Struktur dari tabel `komisi_suspend`
 --
 
 CREATE TABLE `komisi_suspend` (
@@ -198,7 +225,7 @@ CREATE TABLE `komisi_suspend` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `komisi_suspend`
+-- Dumping data untuk tabel `komisi_suspend`
 --
 
 INSERT INTO `komisi_suspend` (`id_komisi_transaksi`, `id_anggota`, `id_produk`, `id_transaksi`, `jumlah`, `nominal`, `approve`, `status`, `created_at`, `updated_at`) VALUES
@@ -212,7 +239,7 @@ INSERT INTO `komisi_suspend` (`id_komisi_transaksi`, `id_anggota`, `id_produk`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `komisi_template`
+-- Struktur dari tabel `komisi_template`
 --
 
 CREATE TABLE `komisi_template` (
@@ -230,7 +257,7 @@ CREATE TABLE `komisi_template` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `komisi_template`
+-- Dumping data untuk tabel `komisi_template`
 --
 
 INSERT INTO `komisi_template` (`id_template_komisi`, `nama_template`, `komisi_1`, `komisi_2`, `komisi_3`, `poin_1`, `poin_2`, `poin_3`, `status`, `created_at`, `updated_at`) VALUES
@@ -251,7 +278,7 @@ INSERT INTO `komisi_template` (`id_template_komisi`, `nama_template`, `komisi_1`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `komisi_template_trx`
+-- Struktur dari tabel `komisi_template_trx`
 --
 
 CREATE TABLE `komisi_template_trx` (
@@ -266,7 +293,7 @@ CREATE TABLE `komisi_template_trx` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `komisi_template_trx`
+-- Dumping data untuk tabel `komisi_template_trx`
 --
 
 INSERT INTO `komisi_template_trx` (`id_komisi_template_trx`, `id_jabatan`, `id_produk`, `id_template_komisi`, `keterangan`, `status`, `created_at`, `updated_at`) VALUES
@@ -281,7 +308,7 @@ INSERT INTO `komisi_template_trx` (`id_komisi_template_trx`, `id_jabatan`, `id_p
 -- --------------------------------------------------------
 
 --
--- Table structure for table `materi`
+-- Struktur dari tabel `materi`
 --
 
 CREATE TABLE `materi` (
@@ -295,7 +322,7 @@ CREATE TABLE `materi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `materi`
+-- Dumping data untuk tabel `materi`
 --
 
 INSERT INTO `materi` (`id_materi`, `id_produk`, `nama_materi`, `keterangan`, `status`, `created_at`, `updated_at`) VALUES
@@ -316,7 +343,7 @@ INSERT INTO `materi` (`id_materi`, `id_produk`, `nama_materi`, `keterangan`, `st
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Struktur dari tabel `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -326,7 +353,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `migrations`
+-- Dumping data untuk tabel `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -357,7 +384,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_resets`
+-- Struktur dari tabel `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -369,7 +396,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `produk`
+-- Struktur dari tabel `produk`
 --
 
 CREATE TABLE `produk` (
@@ -387,7 +414,7 @@ CREATE TABLE `produk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `produk`
+-- Dumping data untuk tabel `produk`
 --
 
 INSERT INTO `produk` (`id_produk`, `nama_produk`, `jumlah`, `sisa`, `terjual`, `harga`, `keterangan`, `status`, `file_banner`, `created_at`, `updated_at`) VALUES
@@ -406,7 +433,7 @@ INSERT INTO `produk` (`id_produk`, `nama_produk`, `jumlah`, `sisa`, `terjual`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `request_komisi`
+-- Struktur dari tabel `request_komisi`
 --
 
 CREATE TABLE `request_komisi` (
@@ -419,7 +446,7 @@ CREATE TABLE `request_komisi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `request_komisi`
+-- Dumping data untuk tabel `request_komisi`
 --
 
 INSERT INTO `request_komisi` (`id_requestkomisi`, `id_anggota`, `jumlah_request`, `status`, `created_at`, `updated_at`) VALUES
@@ -428,14 +455,14 @@ INSERT INTO `request_komisi` (`id_requestkomisi`, `id_anggota`, `jumlah_request`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sessions`
+-- Struktur dari tabel `sessions`
 --
 
 CREATE TABLE `sessions` (
   `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text COLLATE utf8mb4_unicode_ci,
   `payload` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_activity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -443,7 +470,7 @@ CREATE TABLE `sessions` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sub_produk`
+-- Struktur dari tabel `sub_produk`
 --
 
 CREATE TABLE `sub_produk` (
@@ -457,7 +484,7 @@ CREATE TABLE `sub_produk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `sub_produk`
+-- Dumping data untuk tabel `sub_produk`
 --
 
 INSERT INTO `sub_produk` (`id_sub_produk`, `id_produk`, `nama_produk`, `harga`, `keterangan`, `created_at`, `updated_at`) VALUES
@@ -476,7 +503,7 @@ INSERT INTO `sub_produk` (`id_sub_produk`, `id_produk`, `nama_produk`, `harga`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tanggal_produk`
+-- Struktur dari tabel `tanggal_produk`
 --
 
 CREATE TABLE `tanggal_produk` (
@@ -489,7 +516,7 @@ CREATE TABLE `tanggal_produk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `tanggal_produk`
+-- Dumping data untuk tabel `tanggal_produk`
 --
 
 INSERT INTO `tanggal_produk` (`id`, `id_produk`, `tanggal_berangkat`, `tanggal_expired`, `created_at`, `updated_at`) VALUES
@@ -504,7 +531,7 @@ INSERT INTO `tanggal_produk` (`id`, `id_produk`, `tanggal_berangkat`, `tanggal_e
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transaksi`
+-- Struktur dari tabel `transaksi`
 --
 
 CREATE TABLE `transaksi` (
@@ -520,7 +547,7 @@ CREATE TABLE `transaksi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `transaksi`
+-- Dumping data untuk tabel `transaksi`
 --
 
 INSERT INTO `transaksi` (`id_transaksi`, `id_produk`, `id_anggota`, `status`, `jumlah`, `komisi`, `tanggal_berangkat`, `created_at`, `updated_at`) VALUES
@@ -581,7 +608,7 @@ INSERT INTO `transaksi` (`id_transaksi`, `id_produk`, `id_anggota`, `status`, `j
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transaksi_detail`
+-- Struktur dari tabel `transaksi_detail`
 --
 
 CREATE TABLE `transaksi_detail` (
@@ -601,7 +628,7 @@ CREATE TABLE `transaksi_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `transaksi_detail`
+-- Dumping data untuk tabel `transaksi_detail`
 --
 
 INSERT INTO `transaksi_detail` (`id_transaksi_detail`, `id_produk`, `id_anggota`, `id_transaksi`, `id_sub_produk`, `nama_customer`, `ktp_customer`, `tanggal_berangkat`, `jumlah`, `status`, `admin`, `created_at`, `updated_at`) VALUES
@@ -665,7 +692,7 @@ INSERT INTO `transaksi_detail` (`id_transaksi_detail`, `id_produk`, `id_anggota`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transaksi_produk`
+-- Struktur dari tabel `transaksi_produk`
 --
 
 CREATE TABLE `transaksi_produk` (
@@ -685,7 +712,7 @@ CREATE TABLE `transaksi_produk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `transaksi_produk`
+-- Dumping data untuk tabel `transaksi_produk`
 --
 
 INSERT INTO `transaksi_produk` (`id_transaksi_produk`, `id_anggota`, `id_produk`, `id_transaksi_detail`, `komisi`, `poin`, `jumlah`, `status`, `admin`, `tanggal_komisi`, `tanggal_berangkat`, `created_at`, `updated_at`) VALUES
@@ -777,7 +804,7 @@ INSERT INTO `transaksi_produk` (`id_transaksi_produk`, `id_anggota`, `id_produk`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -794,7 +821,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `status`, `level`, `created_at`, `updated_at`) VALUES
@@ -807,238 +834,50 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 --
 
 --
--- Indexes for table `anggota`
---
-ALTER TABLE `anggota`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `anggota_email_unique` (`email`);
-
---
--- Indexes for table `email`
+-- Indeks untuk tabel `email`
 --
 ALTER TABLE `email`
   ADD PRIMARY KEY (`id_email`);
 
 --
--- Indexes for table `failed_jobs`
+-- Indeks untuk tabel `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `jabatan`
+-- Indeks untuk tabel `highlight`
+--
+ALTER TABLE `highlight`
+  ADD PRIMARY KEY (`id_highlight`);
+
+--
+-- Indeks untuk tabel `jabatan`
 --
 ALTER TABLE `jabatan`
   ADD PRIMARY KEY (`id_jabatan`);
 
 --
--- Indexes for table `komisi`
+-- Indeks untuk tabel `komisi`
 --
 ALTER TABLE `komisi`
   ADD PRIMARY KEY (`id_komisi`);
 
 --
--- Indexes for table `komisi_suspend`
+-- Indeks untuk tabel `komisi_suspend`
 --
 ALTER TABLE `komisi_suspend`
   ADD PRIMARY KEY (`id_komisi_transaksi`);
 
 --
--- Indexes for table `komisi_template`
---
-ALTER TABLE `komisi_template`
-  ADD PRIMARY KEY (`id_template_komisi`);
-
---
--- Indexes for table `komisi_template_trx`
---
-ALTER TABLE `komisi_template_trx`
-  ADD PRIMARY KEY (`id_komisi_template_trx`);
-
---
--- Indexes for table `materi`
---
-ALTER TABLE `materi`
-  ADD PRIMARY KEY (`id_materi`);
-
---
--- Indexes for table `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`);
-
---
--- Indexes for table `produk`
---
-ALTER TABLE `produk`
-  ADD PRIMARY KEY (`id_produk`);
-
---
--- Indexes for table `request_komisi`
---
-ALTER TABLE `request_komisi`
-  ADD PRIMARY KEY (`id_requestkomisi`);
-
---
--- Indexes for table `sessions`
---
-ALTER TABLE `sessions`
-  ADD UNIQUE KEY `sessions_id_unique` (`id`);
-
---
--- Indexes for table `sub_produk`
---
-ALTER TABLE `sub_produk`
-  ADD PRIMARY KEY (`id_sub_produk`);
-
---
--- Indexes for table `tanggal_produk`
---
-ALTER TABLE `tanggal_produk`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `transaksi`
---
-ALTER TABLE `transaksi`
-  ADD PRIMARY KEY (`id_transaksi`);
-
---
--- Indexes for table `transaksi_detail`
---
-ALTER TABLE `transaksi_detail`
-  ADD PRIMARY KEY (`id_transaksi_detail`);
-
---
--- Indexes for table `transaksi_produk`
---
-ALTER TABLE `transaksi_produk`
-  ADD PRIMARY KEY (`id_transaksi_produk`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
-
---
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `anggota`
+-- AUTO_INCREMENT untuk tabel `highlight`
 --
-ALTER TABLE `anggota`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
--- AUTO_INCREMENT for table `email`
---
-ALTER TABLE `email`
-  MODIFY `id_email` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `jabatan`
---
-ALTER TABLE `jabatan`
-  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `komisi`
---
-ALTER TABLE `komisi`
-  MODIFY `id_komisi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `komisi_suspend`
---
-ALTER TABLE `komisi_suspend`
-  MODIFY `id_komisi_transaksi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `komisi_template`
---
-ALTER TABLE `komisi_template`
-  MODIFY `id_template_komisi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT for table `komisi_template_trx`
---
-ALTER TABLE `komisi_template_trx`
-  MODIFY `id_komisi_template_trx` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `materi`
---
-ALTER TABLE `materi`
-  MODIFY `id_materi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
---
--- AUTO_INCREMENT for table `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
---
--- AUTO_INCREMENT for table `produk`
---
-ALTER TABLE `produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
-
---
--- AUTO_INCREMENT for table `request_komisi`
---
-ALTER TABLE `request_komisi`
-  MODIFY `id_requestkomisi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `sub_produk`
---
-ALTER TABLE `sub_produk`
-  MODIFY `id_sub_produk` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
-
---
--- AUTO_INCREMENT for table `tanggal_produk`
---
-ALTER TABLE `tanggal_produk`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT for table `transaksi`
---
-ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
-
---
--- AUTO_INCREMENT for table `transaksi_detail`
---
-ALTER TABLE `transaksi_detail`
-  MODIFY `id_transaksi_detail` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
-
---
--- AUTO_INCREMENT for table `transaksi_produk`
---
-ALTER TABLE `transaksi_produk`
-  MODIFY `id_transaksi_produk` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE `highlight`
+  MODIFY `id_highlight` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
