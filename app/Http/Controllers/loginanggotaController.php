@@ -54,7 +54,7 @@ class loginanggotaController extends Controller
                                 //$users->session()->put('login', 'Selamat anda berhasil login');
                                 //$request->session()->put('id',$users->id_anggota);
                                 Session::put('login', $users->id_anggota);
-                                return redirect('/beranda');
+                                return redirect('/homeanggota');
                             } 
                             else 
                             {     
