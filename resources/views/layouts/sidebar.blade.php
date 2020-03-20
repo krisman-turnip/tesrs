@@ -56,6 +56,22 @@
           </ul>
         </li>
        @endif
+
+       <li class="treeview">
+          <a href="#">
+            <i class="fa fa-laptop"></i>
+            <span>Highlight</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('highlightBeranda') }}"><i class="fa fa-circle-o"></i> Tampil Highlight</a></li>        
+            <li><a href="{{ url('highlight/upload') }}"><i class="fa fa-circle-o"></i> Upload Highlight </a></li>
+            
+          </ul>
+        </li>
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-edit"></i> <span>Level Jabatan</span>

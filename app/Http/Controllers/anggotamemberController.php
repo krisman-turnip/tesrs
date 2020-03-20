@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\anggota;
+use App\highlight;
 
 class anggotamemberController extends Controller
 {
@@ -62,7 +63,11 @@ class anggotamemberController extends Controller
     {
         if (Session::get('login'))
         {
-            return view('member/home/homeanggota');
+            $hl = DB::table('highlight as a')
+            ->select('a.id_highlight','a.judul','a.deskripsi','a.keterangan','a.file')
+            ->where('a.status','aktif')
+            ->paginate(30);
+            return view('member/home/homeanggota', ['hl'=> $hl]);
         }
         else
         {

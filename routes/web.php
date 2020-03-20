@@ -163,3 +163,9 @@ Route::get('/tampilSkema','komisi_templateController@tampilSkema');
 Route::get('/komisiTemplate/skemadelete/{id}','komisi_templateController@deleteskema');
 Route::get('/komisiTemplate/skemaedit/{id}','komisi_templateController@editskema');
 Route::post('/komisiTemplate/skemaupdate/{id}','komisi_templateController@updateSkema');
+
+                /* route komisi template->highlight */
+Route::get('/highlightBeranda','highlightController@index');
+Route::get('/highlight/upload','highlightController@upload');
+Route::post('/highlight/prosesupload','highlightController@prosesupload');
+Route::get('/highlight/nonaktif/{id}','highlightController@nonaktif');
