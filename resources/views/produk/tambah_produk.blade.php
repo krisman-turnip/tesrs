@@ -366,7 +366,7 @@
 
         var cell4= row.insertCell(3);
         cell4.innerHTML =  "<input type='Button'value='delete'onclick='deleteRow(this)'/>";
-        }
+        }k
 
 </SCRIPT>
 <script>
