@@ -2,7 +2,7 @@
 <html> 
   @include('layouts.header')
   <!-- Left side column. contains the logo and sidebar -->
-  @include('layouts.sidebar')
+  @include('layouts.sidebar') 
   @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
