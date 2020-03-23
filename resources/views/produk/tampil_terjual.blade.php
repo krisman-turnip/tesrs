@@ -91,7 +91,7 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Report Transaksi Sukses</h4>
 				</div>
-				<!-- body modal -->
+				<!-- body modal --> 
 				<div class="modal-body">
                 <form action="{{url('exportpenjualan')}}" method="GET">
                     <br>

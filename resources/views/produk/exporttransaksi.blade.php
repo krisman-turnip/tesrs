@@ -12,7 +12,7 @@
                                 <th>Opsi</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody> 
                         @php $no=1; @endphp
                             @foreach($produk as $p)
                             <tr>
