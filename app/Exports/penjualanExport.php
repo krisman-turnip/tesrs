@@ -26,7 +26,7 @@ class penjualanExport implements FromView
         $nama_jabatan=$this->nama_jabatan;
             return view('produk/exporttransaksi', [
             'produk' => DB::table('transaksi_detail as a')
-            ->select('b.nama','a.id_transaksi_detail','c.nama_produk','a.admin','a.created_at as dates','a.nama_customer','a.ktp_customer')
+            ->select('b.nama','a.id_transaksi_detail','c.nama_produk','a.admin','a.created_at as date','a.nama_customer','a.ktp_customer')
             ->join('anggota as b','a.id_anggota','=','b.id_anggota')
             ->join('produk as c','a.id_produk','=','c.id_produk')
             ->where('a.status','expired')

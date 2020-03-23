@@ -93,4 +93,17 @@ class loginadminController extends Controller
         session::flush();
         return redirect('/');
     }
+
+    public function admin($id)
+    {
+        if (Session::get('login'))
+        {
+            $users = DB::table('users')->where([['email', $user],['status', 'aktif'],])->first();
+            return view('komisi/pembayaran_komisi', ['anggota' => $anggota]);
+        }
+        else
+        {
+            return redirect('/');
+        }
+    }
 }

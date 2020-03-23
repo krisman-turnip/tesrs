@@ -1,4 +1,4 @@
-<aside class="main-sidebar">
+<aside class="main-sidebar control-sidebar-light">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
@@ -96,7 +96,7 @@
             <li><a href="{{ url('emailtampil') }}"><i class="fa fa-circle-o"></i> Tampil Email </a></li>
           </ul>
         </li>
-        @if(session()->has('admin'))
+        @if(session()->has('multiadmin')||session()->has('multiadmin'))
         <li class="treeview">
           <a href="#">
             <i class="fa fa-table"></i> <span>Admin</span>
@@ -140,7 +140,7 @@
             <li><a href="{{ url('transaksiKomisi') }}"><i class="fa fa-circle-o"></i> Transaksi Komisi</a></li>
           </ul>
         </li>
-        <li class="treeview">
+        <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-table"></i> <span>LogOut </span>
             <span class="pull-right-container">
@@ -150,7 +150,7 @@
           <ul class="treeview-menu">
             <li><a href="{{ url('proseslogoutadmin') }}"><i class="fa fa-circle-o"></i> LogOut </a></li>
           </ul>
-        </li>
+        </li> -->
         
         
       </ul>
