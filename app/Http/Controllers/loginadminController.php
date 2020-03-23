@@ -38,6 +38,7 @@ class loginadminController extends Controller
                     //$request->session()->put('id',$users->id_anggota);
                     Session::put('login', $users->id);
                     Session::put('admin', $users->level);
+                    Session::put('name', $users->name);
                     return redirect('/home'); 
                 }
                 else 
@@ -53,6 +54,7 @@ class loginadminController extends Controller
                     //$request->session()->put('id',$users->id_anggota);
                     Session::put('login', $users->id);
                     Session::put('marketing', $users->level);
+                    Session::put('name', $users->name);
                     return redirect('/produk'); 
                 } 
                 else 
@@ -68,6 +70,7 @@ class loginadminController extends Controller
                     //$request->session()->put('id',$users->id_anggota);
                     Session::put('login', $users->id);
                     Session::put('multiadmin', $users->level);
+                    Session::put('name', $users->name);
                     return redirect('/home'); 
                 } 
                 else 
