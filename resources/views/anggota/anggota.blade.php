@@ -43,45 +43,58 @@
         </form>
         </div>
         <br>
-            <div class="card mt-5">
+        <div class="row">
                 <div class="card-body">
+                <div class="col-md-11">
+                    <div class="box">
                     <!-- <a href="anggota/tambah" class="btn btn-primary">Input Anggota Baru</a> -->
                     <br/>
                     <br/>
-                    <table class="table table-bordered table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>level</th>
-                                <th>Nama Parent</th>
-                                <th>Email</th>
-                                <th>OPSI</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @php $no=1; @endphp
-                            @foreach($anggota as $p)
-                            <tr>
-                                <td>{{ $no++ }}</td>
-                                <td>{{ $p->nama }}</td>
-                                <td>{{ $p->nama_jabatan }}</td>
-                                <td>{{ $p->namaParent }}</td>
-                                <td>{{ $p->email }}</td>
-                                <td>
-                                    <a href="anggota/profile/{{ $p->id_anggota }}" class="btn btn-warning">Profile</a>
-                                    <!-- <a href="anggota/edit/{{ $p->id_anggota }}" class="btn btn-warning">Edit</a>
-                                    <a href="anggota/hapus/{{ $p->id_anggota }}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Hapus</a> -->
-                                    <!-- <a href="anggota/reset/{{ $p->id_anggota }}" onclick="return confirm('Are you sure?')" class="btn btn-warning">Reset Password</a> -->
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>level</th>
+                                            <th>Nama Parent</th>
+                                            <th>Email</th>
+                                            <th>OPSI</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @php $no=1; @endphp
+                                        @foreach($anggota as $p)
+                                        <tr>
+                                            <td>{{ $no++ }}</td>
+                                            <td>{{ $p->nama }}</td>
+                                            <td>{{ $p->nama_jabatan }}</td>
+                                            <td>{{ $p->namaParent }}</td>
+                                            <td>{{ $p->email }}</td>
+                                            <td>
+                                                <a href="anggota/profile/{{ $p->id_anggota }}" class="btn btn-warning">Profile</a>
+                                                <!-- <a href="anggota/edit/{{ $p->id_anggota }}" class="btn btn-warning">Edit</a>
+                                                <a href="anggota/hapus/{{ $p->id_anggota }}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Hapus</a> -->
+                                                <!-- <a href="anggota/reset/{{ $p->id_anggota }}" onclick="return confirm('Are you sure?')" class="btn btn-warning">Reset Password</a> -->
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="text-center">
         {{ $anggota->links() }}
+        </div>
+        </div>
         </div>
         
       

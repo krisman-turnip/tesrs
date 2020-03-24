@@ -14,14 +14,19 @@
     <div class="container">
             <div class="card mt-3">
                 <div class="card-header text-center">
-                    <strong>TAMBAH ADMIN</strong> 
+                    <h3>Tambah Skema</h3> 
                 </div>
                 <div class="card-body">
                     <a href="{{url('tampilSkema')}}" class="btn btn-primary">Kembali</a>
                     <!-- <a href="../pegawai" class="btn btn-primary">store</a> -->
                     <br/>
                     <br/>
-                    
+                    <div class="row">
+                    <div class="col-md-11">
+                    <div class="box">
+                    <div class="box-body">
+                    <div class="row">
+                    <div class="col-md-12">
                     <form method="POST" action="{{ url('/komisiTemplate/skemaupdate/'.(isset($komisi) ? $komisi->id_komisi_template_trx : '')) }}">
                         @csrf
 
@@ -87,7 +92,12 @@
                             </div>
                         </div>
                     </form>
-
+                    </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
                 </div>
             </div>
         </div>

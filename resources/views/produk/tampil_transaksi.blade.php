@@ -48,6 +48,12 @@
                 
                     <br/>
                     <br/>
+                    <div class="row">
+                    <div class="col-md-11">
+                    <div class="box">
+                    <div class="box-body">
+                    <div class="row">
+                    <div class="col-md-12">
                     <div class="table-responsive">          
                     <table class="table table-lg table-dark table-hover table-striped">
                     <!-- <table class="table table-bordered table-hover table-striped"> -->
@@ -84,7 +90,15 @@
                 </div>
                 </div>
                 </div>
+                </div>
+                </div>
+                </div>
+                
             {{ $produk->links() }}
+            </div>
+                </div>
+                </div>
+                </div>
         </div>
         </div>
         <div id="myModal" class="modal fade" role="dialog">

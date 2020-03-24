@@ -25,7 +25,12 @@
                     <br/>
                     <br/>
                     
-
+                    <div class="row">
+                    <div class="col-md-11">
+                    <div class="box">
+                    <div class="box-body">
+                    <div class="row">
+                    <div class="col-md-12">
                     <!-- <form method="post" action="{{url('pegawai/update/$pegawai->id' )}}"> -->
                     <form method="post" action="{{ url('/bayar/'.(isset($anggota) ? $anggota->id_anggota : '')) }}"  enctype="multipart/form-data">
 
@@ -124,6 +129,12 @@
                             <input type="submit" class="btn btn-success" value="Simpan">
                         </div>
                     </form>
+                    </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
                 </div>
             </div>
         </div>

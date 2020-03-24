@@ -46,7 +46,13 @@
         </form>
                     <br/>
                     <br/>
-                    <div class="table-responsive">          
+                    <div class="row">
+                    <div class="col-md-11">
+                    <div class="box">
+                    <div class="box-body">
+                    <div class="row">
+                    <div class="col-md-12">
+                    <div class="table-responsive">           
                     <table class="table table-sm table-dark table-hover table-striped">
                     <!-- <table class="table table-bordered table-hover table-striped"> -->
                         <thead>
@@ -76,6 +82,13 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
                 </div>
                 </div>
             </div>

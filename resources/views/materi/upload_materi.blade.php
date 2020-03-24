@@ -16,8 +16,14 @@
            
         <div class="card mt-3">
                 <div class="card-header text-center">
-                    <H1>TAMBAH MATERI</h1> 
+                    <H3>Tambah Materi</h3> 
                 </div>
+                <div class="row">
+                <div class="col-md-11">
+                <div class="box">
+                <div class="box-body">
+                <div class="row">
+                <div class="col-md-12">
                 <form method="POST" enctype="multipart/form-data" action="{{url('materi/prosesupload')}}">
                 
                 <div class="form-group row">
@@ -51,6 +57,12 @@
                 </div>
 
         </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     

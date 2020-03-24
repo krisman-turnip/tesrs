@@ -14,14 +14,19 @@
     <div class="container">
             <div class="card mt-5">
                 <div class="card-header text-center">
-                    <strong>TAMBAH JABATAN</strong> 
+                    <h3>Tambah Jabatan</h3> 
                 </div>
                 <div class="card-body">
                     <a href="../jabatan" class="btn btn-primary">Kembali</a>
                     <!-- <a href="../pegawai" class="btn btn-primary">store</a> -->
                     <br/>
                     <br/>
-                    
+                    <div class="row">
+                    <div class="col-md-11">
+                    <div class="box">
+                    <div class="box-body">
+                    <div class="row">
+                    <div class="col-md-12">
                     <form method="post" action="{{url('jabatan/store')}}">
 
                         {{ csrf_field() }}
@@ -63,7 +68,12 @@
                         </div>
 
                     </form>
-
+                    </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
                 </div>
             </div>
         </div>

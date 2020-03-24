@@ -45,6 +45,12 @@
         
             <br/>
             <br/>
+            <div class="row">
+            <div class="col-md-11">
+            <div class="box">
+            <div class="box-body">
+            <div class="row">
+            <div class="col-md-12">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
@@ -72,6 +78,12 @@
                 </tbody>
             </table>
             </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
           </div>
           {{ $materi->links() }}
         </div>

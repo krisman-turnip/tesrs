@@ -19,6 +19,12 @@
                     <br>
                     <br>
                 </div>
+                <div class="row">
+                    <div class="col-md-11">
+                    <div class="box">
+                    <div class="box-body">
+                    <div class="row">
+                    <div class="col-md-12">
                 <form method="POST" enctype="multipart/form-data" action="{{url('highlight/prosesupload')}}">
                 
                 <div class="form-group row">
@@ -52,7 +58,12 @@
                     <input type="submit" value="Upload" class="btn btn-primary">
                 </form>
                 </div>
-
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
         </div>
     </div>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

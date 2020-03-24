@@ -13,15 +13,21 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1 class="text-center">
+      <h3 class="text-center">
         Daftar Highlight
-      </h1>
+      </h3>
         <div class="container">
             <div class="card mt-5">
                 <div class="card-body">
                     <!-- <a href="admin/tambah" class="btn btn-primary">Input Admin Baru</a> -->
                     <br/>
                     <br/>
+                    <div class="row">
+                    <div class="col-md-11">
+                    <div class="box">
+                    <div class="box-body">
+                    <div class="row">
+                    <div class="col-md-12">
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
@@ -49,6 +55,12 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
             </div>
             {{ $hl->links() }}
         </div>

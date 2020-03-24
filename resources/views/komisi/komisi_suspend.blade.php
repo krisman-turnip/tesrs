@@ -12,9 +12,9 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1 class="text-center">
+      <h3 class="text-center">
         Daftar Komisi Suspen atau Tidak Aktif
-      </h1>
+      </h3>
         <div class="container">
         <form action="{{url('suspendCari')}}" method="GET">
         <br>
@@ -49,6 +49,13 @@
                 <div class="card-body">
                     <br/>
                     <br/>
+                    <div class="row">
+                    <div class="col-md-11">
+                    <div class="box">
+                    <div class="box-body">
+                    <div class="row">
+                    <div class="col-md-12">
+                    <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
@@ -81,9 +88,18 @@
                             @endforeach
                         </tbody>
                     </table>
+                    </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
                 </div>
             </div>
+            </div>
+            <div class="text-center">
             {{ $komisi->links() }}
+            </div>
         </div>
         
         </div>

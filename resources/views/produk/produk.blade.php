@@ -20,6 +20,7 @@
         <div class="container">
         <br>
         <br>
+        
             <form action="{{url('produkCari')}}" method="GET" class="form-horizontal">
             <div class="form-group">
             <div class="col-md-2">
@@ -39,9 +40,15 @@
             </form>
             </div>
             </div>
-            <div class="card mt-3">
+            <div class="card mt-4">
             <!-- <a href="{{url('produk/tambah')}}" class="btn btn-primary">Input Produk Baru</a> -->
                 <div class="card-body">
+                <div class="row">
+                <div class="col-md-12">
+                <div class="box">
+                <div class="box-body">
+                <div class="row">
+                
                     @php
                     $numOfCols = 3;
                     $rowCount = 0;
@@ -64,8 +71,9 @@
                         <p class="card-text">Terjual {{ $p->terjual }}.<br>
                         Sisa {{ $p->sisa }}<br>
                         {{ $p->keterangan }}</p>
+                        <div class="text-center">
                         <a href="produkDetail/{{ $p->id_produk }}" class="btn btn-primary">Lihat Detail</a>
-
+                        </div>
                         <!-- <div class="col-xs-3">Tanggal Keberangkatan {{ $p->jumlah }}<br>
                         Tanggal Expired {{ $p->jumlah }}<br>
                     
@@ -126,9 +134,15 @@
                     </table> -->
             </div>
             </div>
-          
             </div>
+                </div>
+                </div>
+                </div>
+                </div>
+            </div>
+            <div class="text-center">
             {{ $produk->links() }}
+            </div>
         </div>
         
   <!-- /.content-wrapper -->

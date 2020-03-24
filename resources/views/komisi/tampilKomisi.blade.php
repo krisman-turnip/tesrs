@@ -22,6 +22,12 @@
                     <!-- <a href="admin/tambah" class="btn btn-primary">Input Admin Baru</a> -->
                     <br/>
                     <br/>
+                    <div class="row">
+                    <div class="col-md-11">
+                    <div class="box">
+                    <div class="box-body">
+                    <div class="row">
+                    <div class="col-md-12">
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
@@ -51,7 +57,15 @@
                     </table>
                 </div>
             </div>
+            </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                <div class="text-center">
             {{ $komisi->links() }}
+            </div>
         </div>
         
         </div>

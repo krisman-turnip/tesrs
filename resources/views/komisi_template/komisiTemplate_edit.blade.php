@@ -14,9 +14,14 @@
     <div class="container">
             <div class="card mt-4">
                 <div class="card-header text-center">
-                    <strong>Tambah Template</strong> 
+                    <h3>Tambah Template</he> 
                 </div>
-                <div class="card-body">
+                <div class="row">
+                    <div class="col-md-11">
+                    <div class="box">
+                    <div class="box-body">
+                    <div class="row">
+                    <div class="col-md-12">
                     <a href="{{url('komisiTemplate')}}" class="btn btn-primary">Kembali</a>
                     <!-- <a href="../pegawai" class="btn btn-primary">store</a> -->
                     <br/>
@@ -94,7 +99,12 @@
                             </div>
                         </div>
                     </form>
-
+                    </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
                 </div>
             </div>
         </div>

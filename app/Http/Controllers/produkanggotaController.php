@@ -22,7 +22,7 @@ class produkanggotaController extends Controller
                     ->where('a.sisa','>','0')
                     ->paginate(100);
             //echo $request->session()->get('login');
-            return view('member/produk/produk', ['produk' => $produk],['subproduk'=>$subproduk],);
+            return view('member/produk/produk', ['produk' => $produk],['subproduk'=>$subproduk]);
         } 
         else
         {
@@ -51,7 +51,7 @@ class produkanggotaController extends Controller
             ->where('a.id_produk',$id)
             ->get();
             //echo $request->session()->get('login');
-            return view('member/produk/produkinput', ['produk' => $produk,'subproduk'=>$subproduk,'tanggal'=>$tanggal],);
+            return view('member/produk/produkinput', ['produk' => $produk,'subproduk'=>$subproduk,'tanggal'=>$tanggal]);
         }
         else
         {

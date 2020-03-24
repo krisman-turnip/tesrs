@@ -55,13 +55,13 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ url('requestkomisi') }}"><i class="fa fa-circle-o"></i> Request Komisi </a></li>
-            <li><a href="{{ url('lihatrequestkomisi') }}"><i class="fa fa-circle-o"></i> Status Request Komisi</a></li>
+            <!-- <li><a href="{{ url('requestkomisi') }}"><i class="fa fa-circle-o"></i> Request Komisi </a></li>
+            <li><a href="{{ url('lihatrequestkomisi') }}"><i class="fa fa-circle-o"></i> Status Request Komisi</a></li> -->
             <li><a href="{{ url('komisianggota') }}"><i class="fa fa-circle-o"></i> Komisi Anggota</a></li>
             <li><a href="{{ url('pembayaran') }}"><i class="fa fa-circle-o"></i> Pembayaran Komisi</a></li>
           </ul>
         </li>
-        <li class="treeview">
+        <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-table"></i> <span>LogOut</span>
             <span class="pull-right-container">
@@ -70,9 +70,9 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ url('proseslogoutanggota') }}"><i class="fa fa-circle-o"></i> LogOut </a></li>
-          </ul>
-        </li>
-       
+          </ul> -->
+        <!-- </li> -->
+        
       </ul>
     </section>
     <!-- /.sidebar -->

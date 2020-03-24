@@ -22,7 +22,12 @@
                     <!-- <a href="../pegawai" class="btn btn-primary">store</a> -->
                     <br/>
                     <br/>
-                    
+                    <div class="row">
+                    <div class="col-md-11">
+                    <div class="box">
+                    <div class="box-body">
+                    <div class="row">
+                    <div class="col-md-12">
                     <form method="POST" action="{{url('komisiTemplate/store')}}">
                         @csrf
 
@@ -95,7 +100,12 @@
                             </div>
                         </div>
                     </form>
-
+                    </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
                 </div>
             </div>
         </div>

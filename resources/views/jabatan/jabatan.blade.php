@@ -21,6 +21,12 @@
                     <!-- <a href="jabatan/tambah" class="btn btn-primary">Input Level Baru</a> -->
                     <br/>
                     <br/>
+                    <div class="row">
+                    <div class="col-md-11">
+                    <div class="box">
+                    <div class="box-body">
+                    <div class="row">
+                    <div class="col-md-12">
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
@@ -47,7 +53,15 @@
                     </table>
                 </div>
             </div>
+            </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                <div class="text-center">
             {{ $jabatan->links() }}
+            </div>
         </div>
         </div>
         

@@ -21,7 +21,12 @@
                     <!-- <a href="../pegawai" class="btn btn-primary">store</a> -->
                     <br/>
                     <br/>
-                    
+                    <div class="row">
+                    <div class="col-md-11">
+                    <div class="box">
+                    <div class="box-body">
+                    <div class="row">
+                    <div class="col-md-12">
                     <form method="post" action="{{url('produk/store')}}" enctype="multipart/form-data" id='inForm'>
 
                         {{ csrf_field() }}
@@ -181,18 +186,24 @@
                             <tbody id="dataTabletemplate">
                             </tbody>
                             </TABLE>
-                        <!-- <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Lihat Template</button> -->
+                       <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Lihat Template</button> -->
                         </div>
                      </div>
                             <input type="hidden" class="col-md-2" name="_method" value="post">
                             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                             </div>
+                            <div class="col-md-2">
                             <input type="submit" class="btn btn-success" value="Simpan" onClick="">
-                      
+                            </div>
         <br>
         <br>
                 </div>
-         
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
         </div>
         </div>
         

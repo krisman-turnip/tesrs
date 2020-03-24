@@ -20,14 +20,19 @@
     <div class="container">
             <div class="card mt-5">
                 <div class="card-header text-center">
-                    <strong>TAMBAH ANGGOTA</strong> 
+                    <h3>Tambah Anggota</h3> 
                 </div>
                 <div class="card-body">
                     <a href="../home" class="btn btn-primary">Kembali</a>
                     <!-- <a href="../pegawai" class="btn btn-primary">store</a> -->
                     <br/>
                     <br/>
-                    
+                    <div class="row">
+                    <div class="col-md-11">
+                    <div class="box">
+                    <div class="box-body">
+                    <div class="row">
+                    <div class="col-md-12">
                     <form method="post" action="{{url('anggota/store')}}" enctype="multipart/form-data">
 
                         {{ csrf_field() }}
@@ -179,7 +184,12 @@
                     </form>
 
                 </div>
-      
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
             </div>
         </div>
         </div>

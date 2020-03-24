@@ -45,6 +45,13 @@
                     <!-- <a href="produk/tambah" class="btn btn-primary">Input Produk Baru</a> -->
                     <br/>
                     <br/>
+                    <div class="row">
+                    <div class="col-md-11">
+                    <div class="box">
+                    <div class="box-body">
+                    <div class="row">
+                    <div class="col-md-12">
+                    <div class="table-responsive">  
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
@@ -77,9 +84,18 @@
                             @endforeach
                         </tbody>
                     </table>
+                    </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
                 </div>
             </div>
+            <div class="text-center">
             {{ $produk->links() }}
+            </div>
         </div>
         </div>
         

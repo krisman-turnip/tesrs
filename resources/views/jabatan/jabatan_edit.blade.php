@@ -24,7 +24,12 @@
                     <br/>
                     <br/>
                     
-
+                    <div class="row">
+                    <div class="col-md-11">
+                    <div class="box">
+                    <div class="box-body">
+                    <div class="row">
+                    <div class="col-md-12">
                     <!-- <form method="post" action="{{url('pegawai/update/$pegawai->id' )}}"> -->
                     <form method="post" action="{{ url('/jabatan/update/'.(isset($jabatan) ? $jabatan->id_jabatan : '')) }}">
 
@@ -67,6 +72,12 @@
                     </form>
                 </div>
             </div>
+            </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
         </div>
         </div>
         
