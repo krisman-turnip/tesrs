@@ -6,10 +6,11 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="{{url('adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{url('adminlte/bower_components/font-awesome/css/font-awesome.min.css')}}">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="{{url('adminlte/bower_components/Ionicons/css/ionicons.min.css')}}">
+  <link rel="stylesheet" href="{{url('adminlte/css/animate.css')}}">
+  <link rel="stylesheet" href="{{url('adminlte/css/flaticon.css')}}">
+  <link rel="stylesheet" href="{{url('adminlte/css/font-awesome.min.css')}}">
+  <link rel="stylesheet" href="{{url('adminlte/css/style.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{url('adminlte/css/AdminLTE.min.css')}}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -34,17 +35,16 @@
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
 </head>
 
-<body class="sidebar-mini skin-green" data-gr-c-s-loaded="true" style="height: auto; min-height: 100%;">
+<body class="sidebar-mini skin-green sidebar-collapse" data-gr-c-s-loaded="true" style="height: auto; min-height: 100%;">
 <div class="wrapper">
   <!-- Main Header -->
   <header class="main-header ">
-
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b> </b> </span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>{{print_r(session()->get('name'))}} </b></span>
+      <span class="logo-lg"><b>@php print_r(session()->get('name')) @endphp </b></span>
     </a>
 
     <!-- Header Navbar -->
@@ -56,17 +56,21 @@
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          
+        @php $a = session()->get('gbr'); @endphp
           <!-- User Account Menu -->
-          <!-- <li class="dropdown user user-menu"> -->
-            <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown"> -->
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <!-- <img src="https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
+              <img src="{{ url('/data_ktp/'.$a) }}" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <!-- <span class="hidden-xs"> {{print_r(session()->get('name'))}} </span>
+               <span class="hidden-xs"> @php print_r(session()->get('name')) @endphp </span>
             </a>
+          </li>
+          <!-- <li>
+          @php 
+        print_r(session()->get('gbr'))
+        @endphp
           </li> -->
-          <!-- Control Sidebar Toggle Button -->
           <li>
             <a href="{{ url('proseslogoutanggota') }}"> Log Out </a>
           </li>
@@ -74,4 +78,4 @@
       </div>
     </nav>
   </header>
-</body>
+

@@ -55,6 +55,8 @@ class loginanggotaController extends Controller
                                 //$request->session()->put('id',$users->id_anggota);
                                 Session::put('login', $users->id_anggota);
                                 Session::put('name', $users->nama);
+                                Session::put('gbr', $users->file_ktp);
+                                //print_r(session()->get('gbr'));
                                 return redirect('/homeanggota');
                             } 
                             else 

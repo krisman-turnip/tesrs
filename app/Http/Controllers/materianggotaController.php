@@ -19,7 +19,11 @@ class materianggotaController extends Controller
             ->where([['c.status','Diterima'],['c.id_anggota',$id],])
             ->distinct()
             ->paginate(20);
-            return view('member/materi/materi', ['materi' => $materi]);
+            $hl = DB::table('highlight as a')
+            ->select('a.id_highlight','a.judul','a.deskripsi','a.keterangan','a.file')
+            ->where('a.status','aktif')
+            ->get();
+            return view('member/materi/materi', ['materi' => $materi],['hl'=>$hl]);
         }
         else
         {

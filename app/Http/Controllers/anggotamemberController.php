@@ -48,7 +48,11 @@ class anggotamemberController extends Controller
                             
                     $num++;
                         }
-            return view('member/home/beranda',['anggota' => $anggota, 'parent' => $parent, 'anak' => $anak]);
+            $hl = DB::table('highlight as a')
+            ->select('a.id_highlight','a.judul','a.deskripsi','a.keterangan','a.file')
+            ->where('a.status','aktif')
+            ->get();
+            return view('member/home/beranda',['anggota' => $anggota, 'parent' => $parent, 'anak' => $anak, 'hl'=>$hl]);
             //return view('');
              
             //return view('member/home/beranda', ['parent' => $parent]);
@@ -74,6 +78,22 @@ class anggotamemberController extends Controller
             return redirect('/');
         }
     }
+
+    // public function homes(request $request)
+    // {
+    //     if (Session::get('login'))
+    //     {
+    //         $hl = DB::table('highlight as a')
+    //         ->select('a.id_highlight','a.judul','a.deskripsi','a.keterangan','a.file')
+    //         ->where('a.status','aktif')
+    //         ->paginate(30);
+    //         return view('member/layout/headerBaru', ['hl'=> $hl]);
+    //     }
+    //     else
+    //     {
+    //         return redirect('/');
+    //     }
+    // }
 
     public function tab($id, Request $request) 
     {
