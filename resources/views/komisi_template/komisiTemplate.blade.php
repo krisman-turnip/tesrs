@@ -15,18 +15,18 @@
       <h1 class="text-center">
         Daftar Template Komisi
       </h1>
-        <div class="container">
+    </section>
+        <div class="content">
             <div class="card mt-2">
                 <div class="card-body">
                     <a href="{{ url('komisiTemplate/tambah') }}" class="btn btn-primary">Input Template Baru</a>
                     <br/>
                     <br/>
                     <div class="row">
-                    <div class="col-md-11">
+                    <div class="col-md-12">
                     <div class="box">
                     <div class="box-body">
-                    <div class="row">
-                    <div class="col-md-12">
+                    <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
@@ -63,7 +63,6 @@
                     </table>
                 </div>
                 </div>
-            </div>
             </div>
             </div>
             </div>

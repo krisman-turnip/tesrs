@@ -6,25 +6,21 @@
   @include('layouts.header')
   <!-- Left side column. contains the logo and sidebar -->
   @include('layouts.sidebar')
-  @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 class="text-center">
         Daftar Anggota
       </h1>
-        <div class="container">
-        <form action="{{url('anggotaCari')}}" method="GET">
-        <br>
-        <br>
-        <div class="form-group">
-            <div class="col-md-2">
-            </div>
+    </section>
+    <section class="content">
+            <form action="{{url('anggotaCari')}}" method="GET">
+            <br>
+            <br>
+            <div class="form-group">
+                <div class="col-md-2">
+                </div>
             <div class="col-md-2">
                 <select name="select" class="form-control">
                     <option value="id_anggota">ID Anggota</option>
@@ -36,7 +32,9 @@
                 <div class="col-md-3">
                     <input type="text" name="cari" class="form-control" placeholder="Cari Pegawai .." value="{{ old('cari') }}">
                 </div>
+                <div class="col-md-2">
                 <input type="submit" value="CARI">
+            </div>
                 <input type="hidden" name="_method" value="get">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             
@@ -45,7 +43,7 @@
         <br>
         <div class="row">
                 <div class="card-body">
-                <div class="col-md-11">
+                <div class="col-md-12">
                     <div class="box">
                     <!-- <a href="anggota/tambah" class="btn btn-primary">Input Anggota Baru</a> -->
                     <br/>
@@ -54,6 +52,7 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-12">
+                                <div class="table-responsive">
                                 <table class="table table-bordered table-hover table-striped">
                                     <thead>
                                         <tr>
@@ -83,6 +82,7 @@
                                         </tr>
                                         @endforeach
                                     </tbody>
+                                </table>
                                 </table>
                             </div>
                         </div>

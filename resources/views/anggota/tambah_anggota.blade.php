@@ -9,30 +9,23 @@
                         </div>
                     @endif 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="container">
-  <br/>
-  <div class="col-md-8">
-  <!-- <select class="form-control select2" style="width:500px;" name="cari" id="cari"></select> -->
-  </div>
-</div>
-    <div class="container">
-            <div class="card mt-5">
-                <div class="card-header text-center">
-                    <h3>Tambah Anggota</h3> 
-                </div>
-                <div class="card-body">
+    <section class="content">
+    <br/>
+        <div class="card mt-3">
+            <div class="card-header text-center">
+                <h3>Tambah Anggota</h3> 
+            </div>
+            <div class="card-body">
                     <a href="../home" class="btn btn-primary">Kembali</a>
                     <!-- <a href="../pegawai" class="btn btn-primary">store</a> -->
                     <br/>
                     <br/>
                     <div class="row">
-                    <div class="col-md-11">
+                    <div class="col-md-12">
                     <div class="box">
                     <div class="box-body">
-                    <div class="row">
-                    <div class="col-md-12">
                     <form method="post" action="{{url('anggota/store')}}" enctype="multipart/form-data">
 
                         {{ csrf_field() }}
@@ -49,7 +42,6 @@
                             @endif
                             </div>
                         </div>
-
 
                         <div class="form-group row">
                         <label for="email" class="col-md-2 col-form-label text-md-right">ID Parent</label>
@@ -188,9 +180,6 @@
                 </div>
                 </div>
                 </div>
-                </div>
-                </div>
-            </div>
         </div>
         </div>
       

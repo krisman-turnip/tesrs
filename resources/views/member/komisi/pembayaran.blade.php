@@ -1,72 +1,57 @@
 <!DOCTYPE html>
 <html>
-  @include('member.layout.header')
-  <!-- Left side column. contains the logo and sidebar -->
-  @include('member.layout.sidebar')
-  @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-  <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+  @include('member.layout.headerBaru')
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1 class="text-center">
-        Daftar Pembayaran Komisi
-      </h1>
-        <div class="container">
-           <br>
-           <div class="card mt-5">
-                <div class="card-body">
- 
-            <br/>
-            <br/>
-            <div class="row">
-            <div class="col-md-11">
-            <div class="box">
-            <div class="box-body">
-            <div class="row">
+<section class="content-header">
+  <h1 class="text-center">
+    Daftar Pembayaran Komisi
+  </h1>
+</section>
+<div class="container">
+  <br/>
+  <br/>
+  <div class="row">
+    <div class="col-md-11">
+      <div class="box">
+        <div class="box-body">
+          <div class="row">
             <div class="col-md-12">
-            <table class="table table-bordered table-hover table-striped">
-                <thead>
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                  <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Komisi</th>
-                        <th>Bukti Transfer</th>
-                        <th>Tanggal Pembayaran</th>
-                        <th>OPSI</th>
+                      <th>No</th>
+                      <th>Komisi</th>
+                      <th>Bukti Transfer</th>
+                      <th>Tanggal Pembayaran</th>
+                      <th>OPSI</th>
                     </tr>
-                </thead>
-                <tbody>
-                @php $no=1; @endphp
+                  </thead>
+                  <tbody>
+                    @php $no=1; @endphp
                     @foreach($komisi as $p)
                     <tr>
-                        <td>{{ $no++ }}</td>
-                        <td>{{ $p->komisi }}</td>
-                        <td>{{ $p->bukti_transfer }}</td>
-                        <td>{{ $p->created_at }}</td>
-                        <td>
-                            <a href="pembayaran/download/{{ $p->id_komisi }}" class="btn btn-danger">Download</a>
-                        </td> 
+                      <td>{{ $no++ }}</td>
+                      <td>{{ $p->komisi }}</td>
+                      <td>{{ $p->bukti_transfer }}</td>
+                      <td>{{ $p->created_at }}</td>
+                      <td>
+                          <a href="pembayaran/download/{{ $p->id_komisi }}" class="btn btn-danger">Download</a>
+                      </td> 
                     </tr>
                     @endforeach 
-                </tbody>
-            </table>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-          </div>
-          </div>
-          </div>
-          </div>
-          </div>
-          </div>
-          </div>
-          <div class="text-center">
-          {{ $komisi->links() }}
         </div>
+      </div>
     </div>
-        
+    <div class="text-center">
+          {{ $komisi->links() }}
+    </div>
+  </div>
   <!-- /.content-wrapper -->
 @include('member.layout.footer')
  

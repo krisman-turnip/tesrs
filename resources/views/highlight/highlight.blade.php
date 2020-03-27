@@ -16,18 +16,17 @@
       <h3 class="text-center">
         Daftar Highlight
       </h3>
-        <div class="container">
+    </section>
+        <div class="content">
             <div class="card mt-5">
                 <div class="card-body">
                     <!-- <a href="admin/tambah" class="btn btn-primary">Input Admin Baru</a> -->
                     <br/>
-                    <br/>
-                    <div class="row">
-                    <div class="col-md-11">
-                    <div class="box">
-                    <div class="box-body">
                     <div class="row">
                     <div class="col-md-12">
+                    <div class="box">
+                    <div class="box-body">
+                    <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
@@ -62,9 +61,9 @@
             </div>
             </div>
             </div>
+            <div class="text-center">
             {{ $hl->links() }}
-        </div>
-        
+            </div>
         </div>
   <!-- /.content-wrapper -->
 @include('layouts.footer')

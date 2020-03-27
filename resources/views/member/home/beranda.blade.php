@@ -181,7 +181,7 @@
                                     </div>
                                 </div>
                             </div>
-                    <!-- ./box-body -->
+                        <!-- ./box-body -->
                         </div>
                         <!-- /.box-footer -->
                     </div>
@@ -189,8 +189,7 @@
                 </div>
                     <!-- /.col -->
             </div>
-        </div>
-        <div class="row">
+      
             <div class="col-md-6">
                 <div class="box">
                     <div class="panel-group">

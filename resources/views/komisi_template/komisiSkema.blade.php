@@ -11,10 +11,10 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="container">
+    <div class="content">
             <div class="card mt-3">
                 <div class="card-header text-center">
-                    <strong>TAMBAH ADMIN</strong> 
+                    <H3>Tambah Skema</h3> 
                 </div>
                 <div class="card-body">
                     <a href="{{url('tampilSkema')}}" class="btn btn-primary">Kembali</a>

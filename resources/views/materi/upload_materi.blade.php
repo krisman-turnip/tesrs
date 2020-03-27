@@ -4,26 +4,18 @@
   @include('layouts.header')
   <!-- Left side column. contains the logo and sidebar -->
   @include('layouts.sidebar')
-  @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
   <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
-        <div class="container">
-           
+    <div class="content">
         <div class="card mt-3">
-                <div class="card-header text-center">
-                    <H3>Tambah Materi</h3> 
-                </div>
-                <div class="row">
-                <div class="col-md-11">
-                <div class="box">
-                <div class="box-body">
+            <div class="card-header text-center">
+                <H3>Tambah Materi</h3> 
+            </div>
                 <div class="row">
                 <div class="col-md-12">
+                <div class="box">
+                <div class="box-body">
                 <form method="POST" enctype="multipart/form-data" action="{{url('materi/prosesupload')}}">
                 
                 <div class="form-group row">
@@ -57,8 +49,6 @@
                 </div>
 
         </div>
-    </div>
-    </div>
     </div>
     </div>
     </div>

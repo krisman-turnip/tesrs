@@ -18,7 +18,11 @@ class pembayarankomisiController extends Controller
             $komisi = DB::table('komisi')
                     ->where('id_anggota',$id)
                     ->paginate(10);
-            return view('member/komisi/pembayaran', ['komisi' => $komisi]);
+            $hl = DB::table('highlight as a')
+                    ->select('a.id_highlight','a.judul','a.deskripsi','a.keterangan','a.file')
+                    ->where('a.status','aktif')
+                    ->get();
+            return view('member/komisi/pembayaran', ['komisi' => $komisi],['hl'=>$hl]);
         
         $book_cover = komisi::where('id_komisi', $id)->first();
         $path = public_path(). '/data_transfer/'. $book_cover->bukti_transfer;

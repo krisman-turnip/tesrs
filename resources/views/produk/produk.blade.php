@@ -11,61 +11,104 @@
                         </div>
                     @endif
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 class="text-center">
         Daftar Produk
       </h1>
-        <div class="container">
+    </section>
+    <section class="content">
         <br>
         <br>
-        
-            <form action="{{url('produkCari')}}" method="GET" class="form-horizontal">
+        <form action="{{url('produkCari')}}" method="GET" class="form-horizontal">
             <div class="form-group">
-            <div class="col-md-2">
-            </div>
-            <div class="col-md-2">
-                <select name="select" class="form-control">
-                    <option value="nama_produk">Nama Produk</option>
-                    <option value="id_produk">ID Produk</option>
-                </select>
-            </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                    <select name="select" class="form-control">
+                        <option value="nama_produk">Nama Produk</option>
+                        <option value="id_produk">ID Produk</option>
+                    </select>
+                </div>
                 <div class="col-md-3">
                     <input type="text" name="cari" class="form-control" placeholder="Cari .." value="{{ old('cari') }}">
-                </div>    
+                </div>  
+                <div class="col-md-3">  
                     <input type="submit" value="CARI">
+                </div>
                     <input type="hidden" name="_method" value="get">
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             </form>
             </div>
-            </div>
-            <div class="card mt-4">
             <!-- <a href="{{url('produk/tambah')}}" class="btn btn-primary">Input Produk Baru</a> -->
-                <div class="card-body">
-                <div class="row">
-                <div class="col-md-12">
+            <div class="row">
                 <div class="box">
-                <div class="box-body">
-                <div class="row">
-                
-                    @php
-                    $numOfCols = 3;
-                    $rowCount = 0;
-                    $bootstrapColWidth = 12 / $numOfCols;
-                    @endphp
-                        @foreach($produk as $p)
-                        <div class="col-xs-@php echo $bootstrapColWidth; @endphp">
-                        @php
-                         $a = $p->nama_produk 
-                        @endphp
-                        <br>
+                    <div class="box-body">
+                @foreach($produk as $p)
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon"><img width="100%" height="100%" src="{{ url('/data_banner/'.$p->file_banner) }}" ></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">{{ $p->nama_produk }}</span>
+                                    <span class="info-box-number"></span>
+                                    <p class="card-text">Terjual {{ $p->terjual }}.<br>
+                                    Sisa {{ $p->sisa }}<br>
+                                    {{ $p->keterangan }}</p>
+                                    <div class="text-center">
+                                        <a href="produkDetail/{{ $p->id_produk }}" class="btn btn-primary">Lihat Detail</a>
+                                    </div>
+                                </div>
+                    <!-- /.info-box-content -->
+                            </div>
+                <!-- /.info-box -->
+                        </div>
+                <!-- /.col -->
+                @endforeach
+                    </div>
+                </div>
+            </div>
+        <div class="text-center">
+            {{ $produk->links() }}
+        </div>
+</div>
+        
+                <!-- </div>
+                </div> -->
+            <!-- </div> -->
+           
+        <!-- </div> -->
+        
+  <!-- /.content-wrapper -->
+@include('layouts.footer')
+
+
+
+
+
+
+
+                <!-- <div class="col-md-12 col-sm-6 col-xs-12">
+                    <div class="box">
+                        <div class="box-body">
+                            @php
+                            $numOfCols = 3;
+                            $rowCount = 0;
+                            $bootstrapColWidth = 12 / $numOfCols;
+                            @endphp
+                            @foreach($produk as $p)
+                                <div class="col-xs-@php echo $bootstrapColWidth; @endphp">
+                            @php
+                                $a = $p->nama_produk 
+                            @endphp
+                            <br> -->
                         <!--
                         <h4 >{{ $p->nama_produk }}</h4>
                         <div class="col-xs-4 row-xs-2"><img width="270px" height="200px" src="{{ url('/data_banner/'.$p->file_banner) }}" ></div>
                         <div class="card-body"><h4 >{{ $p->nama_produk }}</h4> -->
-                        <div class="card" style="width: 18rem;">
-                        <img width="270px" height="200px" src="{{ url('/data_banner/'.$p->file_banner) }}" >
+                        <!-- <div class="card" style="width: 18rem;">
+                        <img width="100%" height="100%" src="{{ url('/data_banner/'.$p->file_banner) }}" >
                         <input type="hidden" value="{{$p->id_produk}}">
                         <h4 class="card-title ">{{ $p->nama_produk }}</h4>
                         <p class="card-text">Terjual {{ $p->terjual }}.<br>
@@ -73,7 +116,7 @@
                         {{ $p->keterangan }}</p>
                         <div class="text-center">
                         <a href="produkDetail/{{ $p->id_produk }}" class="btn btn-primary">Lihat Detail</a>
-                        </div>
+                        </div> -->
                         <!-- <div class="col-xs-3">Tanggal Keberangkatan {{ $p->jumlah }}<br>
                         Tanggal Expired {{ $p->jumlah }}<br>
                     
@@ -85,19 +128,21 @@
                                 <a href="produk/hapus/{{ $p->id_produk }}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Hapus</a>
                             </td>
                         </div> -->
-                        </div>
+                        <!-- </div>
                         <div id="wrapper">
                     </div>
                     
-                </div>
+                </div> -->
             
-            @php
+            <!-- @php
         $rowCount++;
     if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
 
 @endphp
 @endforeach
-<div>
+<div> -->
+
+
 
             <!-- <div id="wrapper"> -->
                     <!-- <br/>
@@ -132,19 +177,6 @@
                             @endforeach
                         </tbody>
                     </table> -->
-            </div>
-            </div>
-            </div>
-                </div>
-                </div>
-                </div>
-                </div>
-            </div>
-            <div class="text-center">
-            {{ $produk->links() }}
-            </div>
-        </div>
-        
-  <!-- /.content-wrapper -->
-@include('layouts.footer')
+  
+            
   

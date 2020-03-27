@@ -1,26 +1,21 @@
 <!DOCTYPE html>
 <html>
-  @include('member.layout.header')
-  <!-- Left side column. contains the logo and sidebar -->
-  @include('member.layout.sidebar')
-  @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+  @include('member.layout.headerBaru')
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h3 class="text-center">
         Tambah Produk
       </h3>
+    </section>
+    <div class="container">
       <div class="row">
-        <div class="col-md-12">
-        <div class="box">
-        <div class="box-body">
-        <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
+            <div class="box">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-sm-12">
         <!-- <div class="container">
             <div class="card mt-5">
                 <div class="card-body">
@@ -58,98 +53,100 @@
             </div>
             {{ $produk->links() }}
         </div> -->
-        @php
-        $numOfCols = 1;
-$rowCount = 0;
-$bootstrapColWidth = 12 / $numOfCols;
-@endphp
-    <div class="row">
-        <div class="col-xs-@php echo $bootstrapColWidth; @endphp">
-                <h4 >{{ $p->nama_produk }}</h4>
-                <div class="col-xs-4"><img width="320px" height="200px" src="{{ url('/data_banner/'.$p->file_banner) }}" ></div>
-                <div class="col-xs-3">Tanggal Keberangkatan {{ $p->tanggal_berangkat }}<br>
-                Tanggal Expired {{ $p->tanggal_expired }}<br>
-                @foreach($subproduk as $ppp) {{ $ppp->namaSubProduk }} Harga {{ $ppp->HargaSub }}<br> @endforeach  <br>
-                <!-- <a href="{{ url('/produkanggota/input/'.(isset($p) ? $p->id_produk : '')) }}" class="btn btn-primary">Pilih</a>
-                <input data-id="{{ $p->nama_produk }}" data-todo="{{ $p->id_produk }}" data-target="#editTodoDialog" class="open-EditTodo btn btn-warning" data-toggle="modal" type="submit" value="submit"/>--></div>
-                <div class="col-xs-4">Tanggal Keberangkatan {{ $p->tanggal_berangkat }}
-                
-            </div>
-        </div>
+                                @php
+                                $numOfCols = 1;
+                                $rowCount = 0;
+                                $bootstrapColWidth = 12 / $numOfCols;
+                                @endphp
+                                <div class="row">
+                                    <div class="col-sm-@php echo $bootstrapColWidth; @endphp">
+                                        <h4 >{{ $p->nama_produk }}</h4>
+                                        <div class="col-sm-4" class="responsive"><img width="100%" height="100%" src="{{ url('/data_banner/'.$p->file_banner) }}" class="responsive" ></div>
+                                        <div class="col-sm-3">Tanggal Keberangkatan {{ $p->tanggal_berangkat }}<br>
+                                        Tanggal Expired {{ $p->tanggal_expired }}<br>
+                                        @foreach($subproduk as $ppp) {{ $ppp->namaSubProduk }} Harga {{ $ppp->HargaSub }}<br> @endforeach  <br>
+                                        <!-- <a href="{{ url('/produkanggota/input/'.(isset($p) ? $p->id_produk : '')) }}" class="btn btn-primary">Pilih</a>
+                                        <input data-id="{{ $p->nama_produk }}" data-todo="{{ $p->id_produk }}" data-target="#editTodoDialog" class="open-EditTodo btn btn-warning" data-toggle="modal" type="submit" value="submit"/>-->
+                                        </div>
+                                        <div class="col-sm-4">Tanggal Keberangkatan {{ $p->tanggal_berangkat }}  
+                                        </div>
+                                    </div>
            
-        @php
-        $rowCount++;
-    if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
-
-@endphp
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-<div class="container">
-<div class="row">
-        <div class="col-md-11">
-        <div class="box">
-        <div class="box-body">
-        <div class="row">
-        <div class="col-md-12">
-<br>
-    <form method="post" action="{{ url('/produkanggota/tambah/'.(isset($p) ? $p->id_produk : '')) }}">
-        <div class="form-group row">
-        <input type="hidden" name="nama_produk" class="form-control col-md-2" placeholder="Nama Produk .." value="{{ $p->id_produk }}">
-        <label for="customer" class="col-md-2 col-form-label text-md-right">Tanggal</label>
-        
-            <div class="col-md-6">
-                <select class="form-control select2" name="tanggal" id="cari"  required>
-                <option value=""></option>
-                @foreach($tanggal as $d)
-                <option value="{{$d->tanggal_berangkat}}">{{$d->tanggal_berangkat}}</option>
-                @endforeach
-                </select>
-                @if($errors->has('id_parent'))
-                    <div class="text-danger">
-                        {{ $errors->first('id_parent')}}
+                                    @php
+                                    $rowCount++;
+                                    if($rowCount % $numOfCols == 0) echo '
+                                </div>
+                                <div class="row">';
+                                    @endphp
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                @endif
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-11">
+                            <div class="box">
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <br>
+                                            <form method="post" action="{{ url('/produkanggota/tambah/'.(isset($p) ? $p->id_produk : '')) }}">
+                                                <div class="form-group row">
+                                                    <input type="hidden" name="nama_produk" class="form-control col-md-2" placeholder="Nama Produk .." value="{{ $p->id_produk }}">
+                                                    <label for="customer" class="col-md-2 col-form-label text-md-right">Tanggal</label>   
+                                                    <div class="col-md-6">
+                                                        <select class="form-control select2" name="tanggal" id="cari"  required>
+                                                            <option value=""></option>
+                                                            @foreach($tanggal as $d)
+                                                            <option value="{{$d->tanggal_berangkat}}">{{$d->tanggal_berangkat}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @if($errors->has('id_parent'))
+                                                        <div class="text-danger">
+                                                            {{ $errors->first('id_parent')}}
+                                                        </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="customer" class="col-md-2 col-form-label text-md-right">Tambah Customer</label>
+                                                    <div class="col-md-6">
+                                                        <INPUT type="button" value="Add Row"  onClick="addRows('dataTables')" />
+                                                        <br>
+                                                        <div class="table-responsive">  
+                                                            <TABLE width="650" border="1">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th width="300">Tipe Kamar</th>
+                                                                        <th width="500">Nama Customer</th>
+                                                                        <th width="500">No KTP Customer</th>
+                                                                        <!-- <th width="100">Jumlah Customer</th> -->
+                                                                        <th width="100">opsi</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="dataTables">
+                                                                </tbody>
+                                                            </TABLE>
+                                                        </div>
+                                                        <input type="hidden" name="_method" value="post">
+                                                        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                                                        <br>
+                                                        <input type="submit" class="btn btn-success" value="Simpan" onClick="">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="form-group row">
-        <label for="customer" class="col-md-2 col-form-label text-md-right">Tambah Customer</label>
-        <div class="col-md-6">
-        <INPUT type="button" value="Add Row"  onClick="addRows('dataTables')" />
-            <br>
-
-            <TABLE width="650" border="1">
-                <thead>
-                    <tr>
-                        <th width="300">Tipe Kamar</th>
-                        <th width="500">Nama Customer</th>
-                        <th width="500">No KTP Customer</th>
-                        <!-- <th width="100">Jumlah Customer</th> -->
-                        <th width="100">opsi</th>
-                    </tr>
-                </thead>
-            <tbody id="dataTables">
-            </tbody>
-            </TABLE>
-            <input type="hidden" name="_method" value="post">
-                            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-            <br>
-            <input type="submit" class="btn btn-success" value="Simpan" onClick="">
-            </form>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
     </div>
-    </div>
-    </div>
+</div>
         <SCRIPT language="javascript">
      function addRows(tableIDs) { 
 

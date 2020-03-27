@@ -158,8 +158,12 @@ class komisiController extends Controller
                     ->join('produk as b','b.id_produk','=','a.id_produk')
                     ->join('transaksi_detail as c','c.id_transaksi_detail','=','a.id_transaksi_detail')
                     ->where([['a.id_anggota',$ids],['a.status','sudah diproses']])
-                    ->paginate(20);
-            return view('member/komisi/komisi', ['komisi' => $komisi]);
+                    ->paginate(50);
+            $hl = DB::table('highlight as a')
+                    ->select('a.id_highlight','a.judul','a.deskripsi','a.keterangan','a.file')
+                    ->where('a.status','aktif')
+                    ->get();
+            return view('member/komisi/komisi', ['komisi' => $komisi],['hl'=>$hl]);
         }
     }
 

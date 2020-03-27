@@ -12,8 +12,8 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="container">
-            <div class="card mt-4">
+    <div class="content">
+            <div class="card mt-3">
                 <div class="card-header text-center">
                     <h3>Tambah Template</h3> 
                 </div>
@@ -23,11 +23,9 @@
                     <br/>
                     <br/>
                     <div class="row">
-                    <div class="col-md-11">
+                    <div class="col-md-12">
                     <div class="box">
                     <div class="box-body">
-                    <div class="row">
-                    <div class="col-md-12">
                     <form method="POST" action="{{url('komisiTemplate/store')}}">
                         @csrf
 
@@ -101,8 +99,6 @@
                         </div>
                     </form>
                     </div>
-                </div>
-                </div>
                 </div>
                 </div>
                 </div>

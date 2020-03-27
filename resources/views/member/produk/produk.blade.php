@@ -1,28 +1,26 @@
 <!DOCTYPE html>
 <html>
 
-  @include('member.layout.header')
-  <!-- Left side column. contains the logo and sidebar -->
-  @include('member.layout.sidebar')
+  @include('member.layout.headerBaru')
   @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1 class="text-center">
-        Daftar Produk
-      </h1>
-      <br>
-      <div class="row">
-                    <div class="col-md-11">
-                    <div class="box">
-                    <div class="box-body">
+<section class="content-header">
+    <h1 class="text-center">
+    Daftar Produk
+    </h1>
+    <br>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-body">
                     <div class="row">
-                    <div class="col-md-12">
+                        <div class="col-md-12">
         <!-- <div class="container">
             <div class="card mt-5">
                 <div class="card-body">
@@ -61,141 +59,103 @@
             </div>
             {{ $produk->links() }}
         </div> -->
-        @php
-        $numOfCols = 1;
-$rowCount = 0;
-$bootstrapColWidth = 12 / $numOfCols;
-@endphp
-<div class="row">
-        @foreach($produk as $p)
-        <div class="col-xs-@php echo $bootstrapColWidth; @endphp">
+                            @php
+                            $numOfCols = 1;
+                            $rowCount = 0;
+                            $bootstrapColWidth = 12 / $numOfCols;
+                            @endphp
+                            <div class="row">
+                            @foreach($produk as $p)
+                                <div class="col-xs-@php echo $bootstrapColWidth; @endphp">
             <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
             <!-- @php
             for ($c='A'; $c!="AD"; $c++) 
             echo "$c ";
             $abs=$rowCount;
 @endphp --> 
-@php
-$a = $p->nama_produk 
-@endphp
-                <h4 >{{ $p->nama_produk }}</h4>
-                <div class="col-xs-4"><img width="320px" height="200px" src="{{ url('/data_banner/'.$p->file_banner) }}" ></div>
-                <div class="col-xs-3">Tanggal Keberangkatan {{ $p->tanggal_berangkat }}<br>
-                Tanggal Expired {{ $p->tanggal_expired }}<br>
-                @foreach($subproduk as $ppp) {{ $ppp->namaSubProduk }} Harga {{ $ppp->HargaSub }}<br> @endforeach  <br>
-                <a href="{{ url('/produkanggotainput/'.(isset($p) ? $p->id_produk : '')) }}" class="btn btn-primary">Pilih</a>
-                <input data-id="{{ $p->nama_produk }}" data-todo="{{ $p->id_produk }}" data-target="#editTodoDialog" class="open-EditTodo btn btn-warning" data-toggle="modal" type="submit" value="submit"/></div>
-                <div class="col-xs-4">Tanggal Keberangkatan {{ $p->tanggal_berangkat }}
+                                    @php
+                                    $a = $p->nama_produk 
+                                    @endphp
+                                    <h4 >{{ $p->nama_produk }}</h4>
+                                        <div class="col-sm-4"><img width="100%" height="100%" src="{{ url('/data_banner/'.$p->file_banner) }}" ></div>
+                                        <div class="col-sm-3">Tanggal Keberangkatan {{ $p->tanggal_berangkat }}<br>
+                                            Tanggal Expired {{ $p->tanggal_expired }}<br>
+                                            @foreach($subproduk as $ppp) {{ $ppp->namaSubProduk }} Harga {{ $ppp->HargaSub }}<br> @endforeach  <br>
+                                            <a href="{{ url('/produkanggotainput/'.(isset($p) ? $p->id_produk : '')) }}" class="btn btn-primary">Pilih</a>
+                                            <!-- <input data-id="{{ $p->nama_produk }}" data-todo="{{ $p->id_produk }}" data-target="#editTodoDialog" class="open-EditTodo btn btn-warning" data-toggle="modal" type="submit" value="submit"/></div> -->
+                                                <div class="col-sm-4">Tanggal Keberangkatan {{ $p->tanggal_berangkat }}    
+                                                </div>
+                                            </div>
+                                            <div id="wrapper">  
+                                        </div>
+                                        @php
+                                        $rowCount++;
+                                        if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
+                                        @endphp
+                                        @endforeach
+                                        <div class="modal fade" tabindex="-1" role="dialog"  id="editTodoDialog">
+                                            <div class="modal-dialog modal-lg">
                 
+                                        <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">Form Submit</h4>
+                                                        </div>
+                                                    <div class="modal-body">
+                                                        <form method="post" action="tambahkaryawan.php">
+                                                        <div class="form-group row">
+                                                            <input type="hidden" name="todoId" id="todoId" value="" class="form-control" style="width: 230px;">
+                                                            <label for="jumlah" class="col-md-2 col-form-label text-md-right">Nama Produk</label>
+                                                            <div class="col-md-6">
+                                                                <input type="text" name="todoName" id="todoName" value="" class="form-control" style="width: 230px;">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="customer" class="col-md-2 col-form-label text-md-right">Tanggal</label>
+                                                            <div class="col-md-6">
+                                                                <input type='text' class='form-control' name='tanggal_berangkat[]' id='datepicker' required/>
+                                                            </div>
+                                                        </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-md-6">
+                                                            <INPUT type="button" value="Add Row" onClick="addRows('dataTables')" />
+                                                        </div>
+                                                    </div>
+                                                    <form action="" method="post" name="f">  
+                                                        <TABLE width="425" border="1">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th width="94">Tipe Kamar</th>
+                                                                    <th width="220">Nama Customer</th>
+                                                                    <th width="94">Jumlah Customer</th>
+                                                                    <th width="84">opsi</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="dataTables">
+                                                            </tbody>
+                                                        </TABLE>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            <input type="submit" class="btn btn-success" value="Simpan" onClick="">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        {{$produk->links()}}
+                    </div>
                 </div>
             </div>
-            <div id="wrapper">
-            <!-- @php
-            echo "$c";
-            echo $rowCount;
-
-            @endphp -->
-            <!-- <input class="open-homeEvents btn btn-primary" data-id="{{ $p->nama_produk }}"  data-toggle="modal" data-target="#modalHomeEvents" type="submit" value="submit"/>	 -->
-            
-        <!-- <form name="@php echo $rowCount; @endphp"id="@php echo $rowCount; @endphp" hidden>
-        <tr>
-            <td>{{ $p->nama_produk }}
-            </td>
-            <td>minum
-            </td>
-            <td>
-            <input onclick="click()" class="btn btn-primary" type="submit" value="submit"/>
-            </td>
-        </tr>
-        </from> -->
         </div>
-        <!-- <script type="text/javascript">
-            function @php echo $c;echo $rowCount; @endphp() 
-            {
-                var form = document.getElementById("@php echo $rowCount; @endphp");
-            form.style.display = "block";
-            return false;
-            }
-        </script>
-        <script type="text/javascript">
-            function click() 
-            {
-                var form = document.getElementById("regForm");
-                form.style.display = "none";
-            }
-        </script> -->
-
-        @php
-        $rowCount++;
-    if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
-
-@endphp
-@endforeach
-<div class="modal fade" tabindex="-1" role="dialog"  id="editTodoDialog">
-        <div class="modal-dialog modal-lg">
-                
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Form Submit</h4>
-                    </div>
-                    <div class="modal-body">
-                    <form method="post" action="tambahkaryawan.php">
-                        <div class="form-group row">
-                        <input type="hidden" name="todoId" id="todoId" value="" class="form-control" style="width: 230px;">
-                          <label for="jumlah" class="col-md-2 col-form-label text-md-right">Nama Produk</label>
-                            <div class="col-md-6">
-                            <input type="text" name="todoName" id="todoName" value="" class="form-control" style="width: 230px;">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                        <label for="customer" class="col-md-2 col-form-label text-md-right">Tanggal</label>
-                            <div class="col-md-6">
-                              <input type='text' class='form-control' name='tanggal_berangkat[]' id='datepicker' required/>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6">
-                              <INPUT type="button" value="Add Row" onClick="addRows('dataTables')" />
-                            </div>
-                        </div>
-                          <form action="" method="post" name="f">  
-
-                          <TABLE width="425" border="1">
-                          <thead>
-                              <tr>
-                                  <th width="94">Tipe Kamar</th>
-                                  <th width="220">Nama Customer</th>
-                                  <th width="94">Jumlah Customer</th>
-                                  <th width="84">opsi</th>
-                              </tr>
-                          </thead>
-                          <tbody id="dataTables">
-
-                          </tbody>
-                          </TABLE>
-                        <div class="modal-footer">
-                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                           <input type="submit" class="btn btn-success" value="Simpan" onClick="">
-                        </div>
-                    </form>
-      </div>
     </div>
-  </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="text-center">
-{{$produk->links()}}
-</div>
-</div>
-</div>
-
         <!-- @foreach($produk as $p)
         <div class="container">
             <h1>Hello World!</h1>
@@ -216,8 +176,7 @@ $a = $p->nama_produk
             
         </div> 
         @endforeach -->
-        </div>
-        </div>
+        
         <SCRIPT language="javascript">
      function addRows(tableIDs) { 
 

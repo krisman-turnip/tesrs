@@ -21,8 +21,12 @@ class produkanggotaController extends Controller
                     ->join('sub_produk as c','c.id_produk','=','a.id_produk')
                     ->where('a.sisa','>','0')
                     ->paginate(100);
+            $hl = DB::table('highlight as a')
+                    ->select('a.id_highlight','a.judul','a.deskripsi','a.keterangan','a.file')
+                    ->where('a.status','aktif')
+                    ->get();
             //echo $request->session()->get('login');
-            return view('member/produk/produk', ['produk' => $produk],['subproduk'=>$subproduk]);
+            return view('member/produk/produk', ['produk' => $produk,'subproduk'=>$subproduk, 'hl'=>$hl]);
         } 
         else
         {
@@ -50,8 +54,12 @@ class produkanggotaController extends Controller
             ->select('a.id_produk','a.tanggal_berangkat')
             ->where('a.id_produk',$id)
             ->get();
+            $hl = DB::table('highlight as a')
+            ->select('a.id_highlight','a.judul','a.deskripsi','a.keterangan','a.file')
+            ->where('a.status','aktif')
+            ->get();
             //echo $request->session()->get('login');
-            return view('member/produk/produkinput', ['produk' => $produk,'subproduk'=>$subproduk,'tanggal'=>$tanggal]);
+            return view('member/produk/produkinput', ['produk' => $produk,'subproduk'=>$subproduk,'tanggal'=>$tanggal,'hl'=>$hl]);
         }
         else
         {

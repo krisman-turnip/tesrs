@@ -47,5 +47,12 @@
 <script src="{{url('adminlte/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{url('adminlte/js/demo.js')}}"></script>
+<script src="{{url('adminlte/js/jquery.slicknav.js')}}"></script>
+<script src="{{url('adminlte/js/gijgo.js')}}"></script>
+<script src="{{url('adminlte/js/nice-select.min.js')}}"></script>
+<script src="{{url('adminlte/js/plugins.js')}}"></script>
+<script src="{{url('adminlte/js/popper.min.js')}}"></script>
+<!-- <script src="{{url('adminlte/js/demo.js')}}"></script>
+<script src="{{url('adminlte/js/demo.js')}}"></script> -->
 </body>
 </html>

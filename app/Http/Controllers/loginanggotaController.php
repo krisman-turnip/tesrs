@@ -72,7 +72,7 @@ class loginanggotaController extends Controller
             }
             catch (\Exception $e) {
 
-                return $e->getMessage();
+                echo 'data yang kamu masukkan salah';
             }
 
     }

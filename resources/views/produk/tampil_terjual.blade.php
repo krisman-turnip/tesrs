@@ -1,27 +1,22 @@
 <!DOCTYPE html>
 <html>
-  @include('layouts.header')
-  <!-- Left side column. contains the logo and sidebar -->
-  @include('layouts.sidebar')
-  @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+@include('layouts.header')
+<!-- Left side column. contains the logo and sidebar -->
+@include('layouts.sidebar')
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 class="text-center">
         Daftar Penjualan Produk
       </h1>
-        <div class="container">
-
+    </section>
+        <div class="content">
         <form action="{{url('exporttransaksi')}}" method="GET">
         <br>
         <br>
         <div class="form-group">
-        <div class="col-md-2">
+            <div class="col-md-2">
             </div>
             <div class="col-md-2">
                 <select name="select" class="form-control" value="{{ old('select') }}">
@@ -44,57 +39,57 @@
             </div>
             </div>
         </form>
-                    <br/>
-                    <br/>
-                    <div class="row">
-                    <div class="col-md-11">
-                    <div class="box">
+        <br/>
+        <br/>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
                     <div class="box-body">
-                    <div class="row">
-                    <div class="col-md-12">
-                    <div class="table-responsive">           
-                    <table class="table table-sm table-dark table-hover table-striped">
-                    <!-- <table class="table table-bordered table-hover table-striped"> -->
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Nama Anggota</th>
-                                <th scope="col">Nama Produk</th>
-                                <th scope="col">Nama Customer</th>
-                                <th scope="col">KTP Customer</th>
-                                <th scope="col">Approval</th>
-                                <th scope="col">Tanggal Approve</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @php $no=1; @endphp
-                            @foreach($produk as $p)
-                            <tr>
-                                <td>{{ $no++ }}</td>
-                                <td>{{ $p->nama }}</td>
-                                <td>{{ $p->nama_produk }}</td>
-                                <td>{{ $p->nama_customer }}</td>
-                                <td>{{ $p->ktp_customer }}</td>
-                                <td>{{ $p->admin }}</td>
-                                <td>{{ $p->created_at }}</td>
-                               
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                </div>
-                </div>
-                </div>
-                </div>
-                </div>
-                </div>
-                </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">           
+                                    <table class="table table-sm table-dark table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">No</th>
+                                                <th scope="col">Nama Anggota</th>
+                                                <th scope="col">Nama Produk</th>
+                                                <th scope="col">Nama Customer</th>
+                                                <th scope="col">KTP Customer</th>
+                                                <th scope="col">Approval</th>
+                                                <th scope="col">Tanggal Approve</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php $no=1; @endphp
+                                                @foreach($produk as $p)
+                                                <tr>
+                                                    <td>{{ $no++ }}</td>
+                                                    <td>{{ $p->nama }}</td>
+                                                    <td>{{ $p->nama_produk }}</td>
+                                                    <td>{{ $p->nama_customer }}</td>
+                                                    <td>{{ $p->ktp_customer }}</td>
+                                                    <td>{{ $p->admin }}</td>
+                                                    <td>{{ $p->created_at }}</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="text-center">
             {{ $produk->links() }}
         </div>
-        </div>
+</div>
+
+            
+        
         <div id="myModal" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-xl">
 			<!-- konten modal-->

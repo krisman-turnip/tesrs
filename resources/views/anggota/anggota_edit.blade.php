@@ -16,7 +16,8 @@
       <h1 class="text-center">
         Edit Anggota
       </h1>
-      <div class="container">
+    </section>
+    <section class="content">
             <div class="card mt-5">
                 <div class="card-header text-center">
                 </div>
@@ -25,7 +26,7 @@
                     <br/>
                     <br/>
                     <div class="row">
-                    <div class="col-md-11">
+                    <div class="col-md-12">
                     <div class="box">
                     <div class="box-body">
                     <div class="row">
@@ -60,7 +61,7 @@
                             <div class="col-md-6">
                             <!-- <input type="text" name="id_jabatan" class="form-control" placeholder="ID Jabatan  .." value=" {{ $anggota->id_jabatan }}"> -->
                             <select class="form-control select2" name="id_jabatan" id="carijabatan" value=" ">
-                            <option value=" {{ $anggota->id_jabatan }}">{{ $anggota->nama_jabatan }}</option>
+                            <option value="{{ $anggota->id_jabatan }}">{{ $anggota->nama_jabatan }}</option>
                             @foreach($pilihan as $value)
                             <option value="{{ $value->id_jabatan }}">{{$value->nama_jabatan}}
                                 </option>
@@ -173,7 +174,7 @@
                 </div>
                 </div>
             </div>
-        </div>
+        </section>
         </div>
         
 

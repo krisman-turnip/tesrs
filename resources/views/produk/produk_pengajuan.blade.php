@@ -16,7 +16,8 @@
       <h1 class="text-center">
         Daftar Pengajuan Produk
       </h1>
-        <div class="container">
+    <section>
+        <div class="content">
         <form action="{{url('pengajuanCari')}}" method="GET">
         <br>
         <br>
@@ -34,7 +35,9 @@
                 <div class="col-md-3">
                 <input type="text" name="cari" class="form-control" placeholder="Cari .." value="{{ old('cari') }}">
                 </div>
+                <div class="col-md-1">
                 <input type="submit" value="CARI">
+                </div>
                 <input type="hidden" name="_method" value="get">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             
@@ -46,7 +49,7 @@
                     <br/>
                     <br/>
                     <div class="row">
-                    <div class="col-md-11">
+                    <div class="col-md-12">
                     <div class="box">
                     <div class="box-body">
                     <div class="row">
