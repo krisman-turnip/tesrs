@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Mar 2020 pada 11.34
+-- Waktu pembuatan: 30 Mar 2020 pada 10.07
 -- Versi server: 10.1.37-MariaDB
 -- Versi PHP: 7.2.14
 
@@ -61,7 +61,7 @@ INSERT INTO `anggota` (`id`, `id_anggota`, `id_parent`, `id_parent_2`, `id_jabat
 (4, '4', '2', '', '1', '1,2', 'Marwan', 'marwan@gmail.com', 'jl. mangga raya no 19 Tangerang', '085611192919', '$2y$10$7GZeumMycwQgGkhII.Y16OYojrkq.CRWVhcDSIu1rEtoFp40.gW62', 1600000, 1600, 'aktif', 0, '', 0, NULL, NULL),
 (5, '6', '2', '1', '2', '1,1,2', 'Randy', 'randy@gmail.com', 'jl. Mustika Ratu no 80 Jakarta', '082199230182', '$2y$10$QZwjhyyCRtcEFCi22.YfzOR.RsGs9Exqg6GECHdYOsfPvj9HMUAb.', 6000000, 4000, 'aktif', 987654321, 'ktp.pdf', 543216789, NULL, NULL),
 (6, '3', '1', '', '1', '1,1,1', 'Satria', 'satria@gmail.com', 'Jl. mulawarman 2 no 19', '085698128345', '$2y$10$i3kqCTu9RcRkTSdrwRr5QuATBhok2xfHUoX4U3RDvYKT4sTfWk/oC', 1500000, 1500, 'suspend', 0, '', 0, NULL, NULL),
-(7, '7', '3', '1', '2', '1,3', 'Deni', 'deni@gmail.com', 'Jl. Kamal Raya No 86', '085618217263', '$2y$10$3/DIzUSpbnxhd6hP7vrLpuzwIuH4d9oef8L/.CLxrFo8OhQ2ocWEe', 5250000, 5250, 'aktif', 0, '', 0, '2020-02-04 20:51:43', '2020-02-04 20:51:43'),
+(7, '7', '3', '1', '2', '1,3', 'Deni', 'deni@gmail.com', 'Jl. Kamal Raya No 86', '085618217263', '$2y$10$3/DIzUSpbnxhd6hP7vrLpuzwIuH4d9oef8L/.CLxrFo8OhQ2ocWEe', 5150000, 5250, 'aktif', 0, '', 0, '2020-02-04 20:51:43', '2020-02-04 20:51:43'),
 (8, '8', '3', '', '2', '1,1,1,3', 'Andry', 'andry@gmail.com', 'Jl pluit raya no 12', '086727163427', '$2y$10$rNs4/Ocrqb5jcIdEqbC3qOswGhkvF1pEGCWaZWm7vNMhNO./lS9gm', 0, 0, 'aktif', 192819889891212, 'asuransi2.pdf', 121398171899899, '2020-02-04 22:04:24', '2020-02-04 22:04:24'),
 (9, '9', '8', '', '1', '1,3,8', 'Dion', 'dion@gmail.com', 'Jl. duren sawit 2 no 19', '085727314857', '$2y$10$Uy/ritxWj/FFasrEDuHQE.ExfUHWkXdgtaMJ.acYavMjwjjvArNEm', 0, 0, 'aktif', 0, '', 0, '2020-02-04 23:49:28', '2020-02-04 23:49:28'),
 (10, '10', '6', '', '1', '1,2,6', 'ahmad', 'ahmad@gmail.com', 'Jl. tembaga raya no 91', '082291831485', '$2y$10$YwNFT5YEM.I8t9tpfpPxeucGpg6mYH8DB6QQbe/lEU.s2/bfVQ3l.', 0, 0, 'aktif', 0, '', 0, '2020-02-11 21:38:51', '2020-02-11 21:38:51'),
@@ -148,9 +148,9 @@ CREATE TABLE `highlight` (
 --
 
 INSERT INTO `highlight` (`id_highlight`, `judul`, `file`, `deskripsi`, `keterangan`, `status`, `created_at`, `updated_at`) VALUES
-(3, 'pembayaran', 'bayar.jpg2020-03-20_09-19-34', 'pembayaran', 'pembayaran', 'aktif', '2020-03-20 02:19:34', '2020-03-20 02:19:34'),
-(4, 'produk baru', 'bayar1.jpg2020-03-20_09-23-02', 'produk baru', 'pembayaran', 'aktif', '2020-03-20 02:23:02', '2020-03-20 02:23:02'),
-(6, 'unggulan', 'bayar4.jpg2020-03-20_09-25-40', 'unggulan', 'unggulan', 'aktif', '2020-03-20 02:25:40', '2020-03-20 02:25:40'),
+(3, 'pembayaran', 'banner2.png', 'pembayaran', 'pembayaran', 'aktif', '2020-03-20 02:19:34', '2020-03-20 02:19:34'),
+(4, 'produk baru', 'banner.png', 'produk baru', 'pembayaran', 'aktif', '2020-03-20 02:23:02', '2020-03-20 02:23:02'),
+(6, 'unggulan', 'about_banner.png', 'unggulan', 'unggulan', 'aktif', '2020-03-20 02:25:40', '2020-03-20 02:25:40'),
 (7, 'ini adalah berita produk', 'bayar3.jpg2020-03-20_09-26-39', 'ini adalah berita produk', 'berita produk', 'tidak aktif', '2020-03-20 02:26:39', '2020-03-20 02:26:39');
 
 -- --------------------------------------------------------
@@ -203,7 +203,8 @@ INSERT INTO `komisi` (`id_komisi`, `id_anggota`, `komisi`, `bukti_transfer`, `ap
 (6, '2', 700000.00, 'bayar1.jpg', 'admin', '2020-02-10 21:25:24', '2020-02-10 21:25:24'),
 (7, '1', 60000.00, 'bayar2.jpg', 'admin', '2020-02-10 21:26:32', '2020-02-10 21:26:32'),
 (8, '1', 500000.00, 'bayar3.jpg', 'admin', '2020-02-10 21:28:04', '2020-02-10 21:28:04'),
-(9, '1', 200000.00, 'bayar4.jpg', 'krisman andrianus', '2020-02-10 21:33:38', '2020-02-10 21:33:38');
+(9, '1', 200000.00, 'bayar4.jpg', 'krisman andrianus', '2020-02-10 21:33:38', '2020-02-10 21:33:38'),
+(10, '7', 100000.00, 'bayar4.jpg2020-03-30_05-05-04', 'Yuni Arfa', '2020-03-29 22:05:04', '2020-03-29 22:05:04');
 
 -- --------------------------------------------------------
 
@@ -878,6 +879,12 @@ ALTER TABLE `komisi_suspend`
 --
 ALTER TABLE `highlight`
   MODIFY `id_highlight` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT untuk tabel `komisi`
+--
+ALTER TABLE `komisi`
+  MODIFY `id_komisi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
