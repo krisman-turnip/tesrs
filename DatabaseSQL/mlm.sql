@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 30 Mar 2020 pada 10.07
+-- Waktu pembuatan: 30 Mar 2020 pada 10.24
 -- Versi server: 10.1.37-MariaDB
 -- Versi PHP: 7.2.14
 
@@ -73,7 +73,8 @@ INSERT INTO `anggota` (`id`, `id_anggota`, `id_parent`, `id_parent_2`, `id_jabat
 (16, '16', '6', '2', '1', '1,1,2,6', 'ade', 'ade@gmail.com', 'Jl kenanga blok 2 no 3', '0219928132', '$2y$10$GcqSn1GDHKMKEz7.Bd7jP.F2tW/ItwV8LKlk6WZT8pm5mRghenmDi', 0, 0, 'aktif', 91829031032912, 'C:\\xampp\\tmp\\php5501.tmp', 121398171899899, '2020-03-09 01:44:07', '2020-03-09 01:44:07'),
 (17, '17', 'b01', '9', '1', '1,3,8,9,b01', 'Vivi', 'vivi@gmail.com', 'Jl puspita blok 2 no 123', '0219928567', '$2y$10$Rs909vs.JtNSRohXPer01.CwIG9pX/5pmy47iNyWz..H85BQX0sv.', 0, 0, 'aktif', 9182903103291234, 'C:\\xampp\\tmp\\php8A6F.tmp', 0, '2020-03-09 01:47:37', '2020-03-09 01:47:37'),
 (18, '18', 'c01', 'b01', '1', '1,3,8,9,b01,c01', 'Oki', 'oki@gmail.com', 'Gading Serpong', '09281928391', '$2y$10$TjMash5KpRE/YtjO/kzhcOja.0QolhLvfLv/oXoEP.d801rb.SkLW', 0, 0, 'aktif', 9817728391, 'C:\\xampp\\tmp\\phpE9C2.tmp', 0, '2020-03-09 01:49:07', '2020-03-09 01:49:07'),
-(19, 'b12', 'b01', '9', '1', '1,3,8,9,b01', 'Imran', 'imran@gmail.com', 'jl. puri beta blok 2 no 31', '09817263719', '0', 0, 0, 'aktif', 123187910028199, 'bayar4.jpg2020-03-18_10-38-46', 912931891238718, '2020-03-18 03:38:46', '2020-03-18 03:38:46');
+(19, 'b12', 'b01', '9', '1', '1,3,8,9,b01', 'Imran', 'imran@gmail.com', 'jl. puri beta blok 2 no 31', '09817263719', '0', 0, 0, 'aktif', 123187910028199, 'bayar4.jpg2020-03-18_10-38-46', 912931891238718, '2020-03-18 03:38:46', '2020-03-18 03:38:46'),
+(20, 'c20', '5', '2', '1', '1,1,1,1,1,2,5', 'Ilham jaya', 'ilham@gmail.com', 'jalan cisadane 2 no 3 Tangerang', '085698921029', '0', 0, 0, 'aktif', 98765432, 'bayar1.jpg2020-03-30_08-14-33', 12345674, '2020-03-30 01:14:34', '2020-03-30 01:14:34');
 
 -- --------------------------------------------------------
 
@@ -835,6 +836,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 --
 
 --
+-- Indeks untuk tabel `anggota`
+--
+ALTER TABLE `anggota`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `email`
 --
 ALTER TABLE `email`
@@ -871,8 +878,74 @@ ALTER TABLE `komisi_suspend`
   ADD PRIMARY KEY (`id_komisi_transaksi`);
 
 --
+-- Indeks untuk tabel `komisi_template`
+--
+ALTER TABLE `komisi_template`
+  ADD PRIMARY KEY (`id_template_komisi`);
+
+--
+-- Indeks untuk tabel `komisi_template_trx`
+--
+ALTER TABLE `komisi_template_trx`
+  ADD PRIMARY KEY (`id_komisi_template_trx`);
+
+--
+-- Indeks untuk tabel `materi`
+--
+ALTER TABLE `materi`
+  ADD PRIMARY KEY (`id_materi`);
+
+--
+-- Indeks untuk tabel `produk`
+--
+ALTER TABLE `produk`
+  ADD PRIMARY KEY (`id_produk`);
+
+--
+-- Indeks untuk tabel `sub_produk`
+--
+ALTER TABLE `sub_produk`
+  ADD PRIMARY KEY (`id_sub_produk`);
+
+--
+-- Indeks untuk tabel `tanggal_produk`
+--
+ALTER TABLE `tanggal_produk`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `transaksi`
+--
+ALTER TABLE `transaksi`
+  ADD PRIMARY KEY (`id_transaksi`);
+
+--
+-- Indeks untuk tabel `transaksi_detail`
+--
+ALTER TABLE `transaksi_detail`
+  ADD PRIMARY KEY (`id_transaksi_detail`);
+
+--
+-- Indeks untuk tabel `transaksi_produk`
+--
+ALTER TABLE `transaksi_produk`
+  ADD PRIMARY KEY (`id_transaksi_produk`);
+
+--
+-- Indeks untuk tabel `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
+
+--
+-- AUTO_INCREMENT untuk tabel `anggota`
+--
+ALTER TABLE `anggota`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT untuk tabel `highlight`
@@ -885,6 +958,66 @@ ALTER TABLE `highlight`
 --
 ALTER TABLE `komisi`
   MODIFY `id_komisi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT untuk tabel `komisi_template`
+--
+ALTER TABLE `komisi_template`
+  MODIFY `id_template_komisi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT untuk tabel `komisi_template_trx`
+--
+ALTER TABLE `komisi_template_trx`
+  MODIFY `id_komisi_template_trx` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT untuk tabel `materi`
+--
+ALTER TABLE `materi`
+  MODIFY `id_materi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT untuk tabel `produk`
+--
+ALTER TABLE `produk`
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+
+--
+-- AUTO_INCREMENT untuk tabel `sub_produk`
+--
+ALTER TABLE `sub_produk`
+  MODIFY `id_sub_produk` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+
+--
+-- AUTO_INCREMENT untuk tabel `tanggal_produk`
+--
+ALTER TABLE `tanggal_produk`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT untuk tabel `transaksi`
+--
+ALTER TABLE `transaksi`
+  MODIFY `id_transaksi` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+
+--
+-- AUTO_INCREMENT untuk tabel `transaksi_detail`
+--
+ALTER TABLE `transaksi_detail`
+  MODIFY `id_transaksi_detail` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+
+--
+-- AUTO_INCREMENT untuk tabel `transaksi_produk`
+--
+ALTER TABLE `transaksi_produk`
+  MODIFY `id_transaksi_produk` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+
+--
+-- AUTO_INCREMENT untuk tabel `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
