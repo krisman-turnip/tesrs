@@ -38,8 +38,8 @@ class komisiController extends Controller
         if (Session::get('login'))
         {
             $anggota = DB::table('anggota as a')
-                    ->select('a.id_anggota','a.nama','a.email','a.no_handphone','a.saldo','b.jumlah_request')
-                    ->join('request_komisi as b','b.id_anggota','=','a.id_anggota')
+                    ->select('a.id_anggota','a.nama','a.email','a.no_handphone','a.saldo')
+                    // ->join('request_komisi as b','b.id_anggota','=','a.id_anggota')
                     ->where('a.id_anggota',$id)->first();
                     return view('komisi/pembayaran_komisi', ['anggota' => $anggota]);
         }
@@ -64,6 +64,7 @@ class komisiController extends Controller
             $b = $request->pembayaran;
             $id_anggota = $request->id_anggota;
             $selisih = (int)$a-(int)$b;
+            print_r($selisih);
             if((int)$a != 0)
             { 
                 if((int)$a >= (int)$b)
@@ -72,43 +73,33 @@ class komisiController extends Controller
                 
                     $nama_file = $file->getClientOriginalName();
                     $gambar = komisi::where('bukti_transfer',$nama_file)->count();
-                    //$a = $gambar->nama_materi;
-                    if ($gambar==0)
-                    {     
-                        DB::table('anggota')-> where('id_anggota', $id)-> update([
-                            'saldo' => $selisih,
-                        ]);
+                    //$a = $gambar->nama_materi;   
+                    DB::table('anggota')-> where('id_anggota', $id)-> update([
+                        'saldo' => $selisih,
+                    ]);
 
-                        DB::table('request_komisi')-> where('id_anggota', $id)-> update([
-                            'status' => 'sudah dibayar',
-                        ]);
+                        // DB::table('request_komisi')-> where('id_anggota', $id)-> update([
+                        //     'status' => 'sudah dibayar',
+                        // ]);
                         
                     // $bukti = DB::table('komisi')
                     // ->orderBy('id_komisi','desc')
                     // ->first();
                     // $a = $bukti->id_komisi;
-                          
+                    $nama_files = $nama_file.date('Y-m-d_H-i-s');
                             // isi dengan nama folder tempat kemana file diupload
-                            $tujuan_upload = 'data_transfer';
-                            $file->move($tujuan_upload,$nama_file);
-                        
-                        
-                            komisi::create([
-                                'id_anggota' =>$request->id_anggota,
-                                'bukti_transfer' => $nama_file,
-                                'komisi' => $b,
-                                'approval' => $namaadmin,
-                            ]);
-                        
-                            return redirect('transaksiKomisi');
-                        }
-                        else
-                        {
-                            //Alert::message('Message', 'Optional Title');
-                            //return view ('');
-                            return redirect()->back()->with('alert','Nama materi sudah ada');
-                        }
-                    return redirect()->back();
+                    $tujuan_upload = 'data_transfer';
+                    $file->move($tujuan_upload,$nama_files);
+                
+                
+                    komisi::create([
+                        'id_anggota' =>$request->id_anggota,
+                        'bukti_transfer' => $nama_files,
+                        'komisi' => $b,
+                        'approval' => $namaadmin,
+                    ]);
+                
+                    return redirect('transaksiKomisi');
                 }
                 else
                 {

@@ -15,7 +15,8 @@
       <h1 class="text-center">
         Daftar Komisi Batal
       </h1>
-        <div class="container">
+    </section>
+        <div class="content">
         <form action="{{url('batalCari')}}" method="GET">
         <br>
         <br>
@@ -49,11 +50,10 @@
                     <br/>
                     <br/>
                     <div class="row">
-                    <div class="col-md-11">
+                    <div class="col-md-12">
                     <div class="box">
                     <div class="box-body">
-                    <div class="row">
-                    <div class="col-md-12">
+                    <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
@@ -87,7 +87,6 @@
                         </tbody>
                     </table>
                     </div>
-                </div>
                 </div>
                 </div>
                 </div>

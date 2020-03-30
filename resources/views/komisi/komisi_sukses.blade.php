@@ -15,7 +15,8 @@
       <h1 class="text-center">
         Daftar Komisi Sukses
       </h1>
-        <div class="container">
+    </section>
+        <div class="content">
         <form action="{{url('suksesCari')}}" method="GET">
         <br>
         <br>
@@ -43,18 +44,14 @@
             </div>
         </div>
         </form>
-        
-        
             <div class="card mt-5">
                 <div class="card-body">
                     <br/>
                     <br/>
                     <div class="row">
-                    <div class="col-md-11">
+                    <div class="col-md-12">
                     <div class="box">
                     <div class="box-body">
-                    <div class="row">
-                    <div class="col-md-12">
                     <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
@@ -93,8 +90,6 @@
                 </div>
                 </div>
                 </div>
-                    </div>
-                    </div>
                 </div>
             </div>
             <div class="text-center">
