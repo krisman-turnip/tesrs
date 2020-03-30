@@ -96,7 +96,7 @@
             <li><a href="{{ url('emailtampil') }}"><i class="fa fa-circle-o"></i> Tampil Email </a></li>
           </ul>
         </li>
-        @if(session()->has('multiadmin')||session()->has('multiadmin'))
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-table"></i> <span>Admin</span>
@@ -109,7 +109,7 @@
             <li><a href="{{ url('admin/tambah') }}"><i class="fa fa-circle-o"></i> Tambah Admin</a></li>
           </ul>
         </li>
-        @endif
+      
         <li class="treeview">
           <a href="#">
             <i class="fa fa-table"></i> <span>Komisi Template</span>

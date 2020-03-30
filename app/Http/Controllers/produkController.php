@@ -156,7 +156,7 @@ class produkController extends Controller
             'jumlah' => $request->jumlah,
             'sisa' => $request->jumlah,
             'terjual' => '0',
-            'harga' => '0',
+            // 'harga' => '0',
             'file_banner' => $nama_files,
             'keterangan' => 'kamar',
             'status' =>'aktif'
@@ -284,7 +284,7 @@ class produkController extends Controller
         'jumlah' => $request->jumlah,
         'sisa' => $request->sisa,
         'terjual' => $request->terjual,
-        'harga' => $request->harga
+        // 'harga' => $request->harga
         ]);
 
         $tanggalBerangkat = $request->tanggal_berangkat;

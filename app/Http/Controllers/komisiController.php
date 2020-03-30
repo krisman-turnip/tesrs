@@ -91,7 +91,6 @@ class komisiController extends Controller
                     $tujuan_upload = 'data_transfer';
                     $file->move($tujuan_upload,$nama_files);
                 
-                
                     komisi::create([
                         'id_anggota' =>$request->id_anggota,
                         'bukti_transfer' => $nama_files,

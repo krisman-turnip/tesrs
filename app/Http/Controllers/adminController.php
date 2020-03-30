@@ -12,7 +12,7 @@ class adminController extends Controller
 {
     public function index()
     {
-        if (Session::get('admin'))
+        if (Session::get('login'))
         {
             $admin = DB::table('users')->paginate(10);
             return view('admin/admin', ['admin' => $admin]);
@@ -25,7 +25,7 @@ class adminController extends Controller
 
     public function tambah()
     {
-        if (Session::get('admin'))
+        if (Session::get('login'))
         {
             return view('admin/tambah_admin');
             //return view('../pegawai');
@@ -64,7 +64,7 @@ class adminController extends Controller
 
     public function edit($id)
     {
-        if (Session::get('admin'))
+        if (Session::get('login'))
         {
             //$anggota = anggota::find($id);
             $admin = DB::table('users')->where('id',$id)->first();
