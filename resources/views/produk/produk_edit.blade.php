@@ -152,7 +152,7 @@
                         <tbody id="dataTables">
                         @foreach($tanggal as $p)
                             <tr>
-                                <td><input type='text' name='tanggal_berangkat[]' value="{{$p->tanggal_berangkat}}" required></td>
+                                <td><input type='text' name='tanggal_berangkat[]' value="{{$p->tanggal_berangkat}}"  id="datepicker" required></td>
                                 <td><input type='text' name='tanggal_expired[]' value="{{$p->tanggal_expired}}" required></td>
                                 <td><input type="Button" value="delete" onclick="deleteRow(this)" />
                                 </td>
