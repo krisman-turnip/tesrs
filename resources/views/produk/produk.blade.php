@@ -42,36 +42,106 @@
             </form>
             </div>
             <!-- <a href="{{url('produk/tambah')}}" class="btn btn-primary">Input Produk Baru</a> -->
-            <div class="row">
+            <!-- <div class="row">
                 <div class="box">
                     <div class="box-body">
                 @foreach($produk as $p)
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="info-box">
-                                <span class="info-box-icon"><img width="100%" height="100%" src="{{ url('/data_banner/'.$p->file_banner) }}" ></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">{{ $p->nama_produk }}</span>
-                                    <span class="info-box-number"></span>
-                                    <p class="card-text">Terjual {{ $p->terjual }}.<br>
-                                    Sisa {{ $p->sisa }}<br>
-                                    {{ $p->keterangan }}</p>
-                                    <div class="text-center">
-                                        <a href="produkDetail/{{ $p->id_produk }}" class="btn btn-primary">Lihat Detail</a>
-                                    </div>
-                                </div>
-                    <!-- /.info-box-content -->
-                            </div>
+                                
+                     /.info-box-content -->
+                            <!-- </div> -->
                 <!-- /.info-box -->
-                        </div>
+                        <!-- </div> -->
                 <!-- /.col -->
-                @endforeach
-                    </div>
+                <!-- @endforeach -->
+                    <!-- </div> -->
+                <!-- </div>
+            </div>  -->
+            <div class="content">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            @foreach($produk as $p) 
+                            <div class="col-md-12">
+                                <div class="box">
+                                    <div class="box-body">
+                                        <h4 >{{ $p->nama_produk }}</h4>
+                                        <div class="col-sm-4"><img width="100%" height="100%" src="{{ url('/data_banner/'.$p->file_banner) }}" ></div>
+                                            <div class="col-sm-5">
+                                                <!-- @foreach($subproduk as $ppp) {{ $ppp->namaSubProduk }} Harga {{ $ppp->HargaSub }}<br> @endforeach  <br> -->
+                                                
+                                                <!-- <a href="{{ url('/produkanggotainput/'.(isset($p) ? $p->id_produk : '')) }}" class="btn btn-primary">Edit</a> -->
+                                                <!-- <input data-id="{{ $p->nama_produk }}" data-todo="{{ $p->id_produk }}" data-target="#editTodoDialog" class="open-EditTodo btn btn-warning" data-toggle="modal" type="submit" value="submit"/></div> -->
+                                                    <!-- <div class="col-sm-4">Tanggal Keberangkatan {{ $p->tanggal_berangkat }}    
+                                                    </div> -->
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped">
+                                                        <tr>
+                                                            <td>
+                                                            Nama
+                                                            </td>
+                                                            <td>
+                                                            Tanggal Expired
+                                                            </td>
+                                                            <td>
+                                                            Opsi
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                            {{ $p->namaSProduk}}
+                                                            </td>
+                                                            <td>
+                                                            {{ $p->tanggal_expired }}
+                                                            </td>
+                                                            <td>
+                                                            <a href="produkS/hapus/{{ $p->id_sub_produk }}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Hapus</a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped">
+                                                        <tr>
+                                                            <td>
+                                                            Tanggal Keberangkatan
+                                                            </td>
+                                                            <td>
+                                                            Tanggal Expired
+                                                            </td>
+                                                            <td>
+                                                            Opsi
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                            {{ $p->tanggal_berangkat }}
+                                                            </td>
+                                                            <td>
+                                                            {{ $p->tanggal_expired }}
+                                                            </td>
+                                                            <td>
+                                                            <a href="produkT/hapus/{{ $p->idProduk }}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Hapus</a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <a href="produk/edit/{{ $p->id_produk }}" class="btn btn-warning">Edit</a>
+                                                <a href="produk/hapus/{{ $p->id_produk }}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Hapus</a>
+                                            </div>
+                                        </div>
+                                  
+                                </div>   
+                            </div>
+                            @endforeach
+                        </div>
                 </div>
             </div>
         <div class="text-center">
             {{ $produk->links() }}
         </div>
+    </div>
 </div>
         
                 <!-- </div>
@@ -105,30 +175,7 @@
                             <br> -->
                         <!--
                         <h4 >{{ $p->nama_produk }}</h4>
-                        <div class="col-xs-4 row-xs-2"><img width="270px" height="200px" src="{{ url('/data_banner/'.$p->file_banner) }}" ></div>
-                        <div class="card-body"><h4 >{{ $p->nama_produk }}</h4> -->
-                        <!-- <div class="card" style="width: 18rem;">
-                        <img width="100%" height="100%" src="{{ url('/data_banner/'.$p->file_banner) }}" >
-                        <input type="hidden" value="{{$p->id_produk}}">
-                        <h4 class="card-title ">{{ $p->nama_produk }}</h4>
-                        <p class="card-text">Terjual {{ $p->terjual }}.<br>
-                        Sisa {{ $p->sisa }}<br>
-                        {{ $p->keterangan }}</p>
-                        <div class="text-center">
-                        <a href="produkDetail/{{ $p->id_produk }}" class="btn btn-primary">Lihat Detail</a>
-                        </div> -->
-                        <!-- <div class="col-xs-3">Tanggal Keberangkatan {{ $p->jumlah }}<br>
-                        Tanggal Expired {{ $p->jumlah }}<br>
-                    
-                        <a href="{{ url('/produkanggotainput/'.(isset($p) ? $p->id_produk : '')) }}" class="btn btn-primary">Pilih</a>
-                        <input data-id="{{ $p->nama_produk }}" data-todo="{{ $p->id_produk }}" data-target="#editTodoDialog" class="open-EditTodo btn btn-warning" data-toggle="modal" type="submit" value="submit"/></div>
-                        <div class="col-xs-4">Tanggal Keberangkatan {{ $p->jumlah }}
-                            <td>
-                                <a href="produk/edit/{{ $p->id_produk }}" class="btn btn-warning">Edit</a>
-                                <a href="produk/hapus/{{ $p->id_produk }}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Hapus</a>
-                            </td>
-                        </div> -->
-                        <!-- </div>
+                        
                         <div id="wrapper">
                     </div>
                     
@@ -144,39 +191,5 @@
 
 
 
-            <!-- <div id="wrapper"> -->
-                    <!-- <br/>
-                    <br/>
-                    <table class="table table-bordered table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Produk</th>
-                                <th>Jumlah</th>
-                                <th>Sisa</th>
-                                <th>Terjual</th>
-                                <th>Harga</th>
-                                <th>OPSI</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @php $no=1; @endphp
-                            @foreach($produk as $p)
-                            <tr>
-                                <td>{{ $no++ }}</td>
-                                <td>{{ $p->nama_produk }}</td>
-                                <td>{{ $p->jumlah }}</td>
-                                <td>{{ $p->sisa }}</td>
-                                <td>{{ $p->terjual }}</td>
-                                <td>{{ $p->harga }}</td>
-                                <td>
-                                    <a href="produk/edit/{{ $p->id_produk }}" class="btn btn-warning">Edit</a>
-                                    <a href="produk/hapus/{{ $p->id_produk }}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Hapus</a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table> -->
-  
             
   

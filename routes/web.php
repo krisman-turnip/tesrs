@@ -44,6 +44,8 @@ Route::get('/produk/terjual','produkController@terjual');
 Route::get('/terjualCari','produkController@terjualCari');
 Route::get('/exporttransaksi','produkController@exporttransaksi');
 Route::get('/exportpenjualan','produkController@exportpenjualan');
+Route::get('/produkS/hapus/{id}','produkController@deleteSub');
+Route::get('/produkT/hapus/{id}','produkController@deleteTanggal');
 
                 /* route materi->admin */
 Route::get('/materi','materiController@index');

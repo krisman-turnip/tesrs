@@ -32,7 +32,6 @@
                                         <!-- <div class="col-sm-4">Tanggal Keberangkatan {{ $p->tanggal_berangkat }}    
                                         </div> -->
                             </div>
-                                    
                         </div>  
                     </div>   
                 </div>

@@ -68,8 +68,26 @@ class produkController extends Controller
             //     }
             //     $indexs++;
             // }
-            $produk = DB::table('produk')->where('status','aktif')->paginate(12);
-             return view('produk/produk', ['produk' => $produk]);
+            // $produk = DB::table('produk')->where('status','aktif')->paginate(12);
+            $produk = DB::table('produk as a')
+                    ->select('a.id_produk','a.nama_produk','a.sisa','d.id_sub_produk','a.file_banner','c.id as idProduk','d.nama_produk as namaSProduk','c.tanggal_berangkat','c.tanggal_expired')
+                    ->join('tanggal_produk as c','c.id_produk','=','a.id_produk')
+                    ->join('sub_produk as d','d.id_produk','=','a.id_produk')
+                    ->where([['a.sisa','>','0'],['a.status','aktif'],['d.status','aktif'],['c.status','aktif']])
+                    ->paginate(100);
+            $subproduk = DB::table('produk as a')
+                    ->select('a.id_produk','a.nama_produk','a.sisa','a.file_banner','c.id_sub_produk','c.nama_produk as namaSubProduk','c.harga as HargaSub')
+                    ->join('sub_produk as c','c.id_produk','=','a.id_produk')
+                    ->where('a.sisa','>','0')
+                    ->where('c.status','aktif')
+                    ->paginate(100);
+            $hl = DB::table('highlight as a')
+                    ->select('a.id_highlight','a.judul','a.deskripsi','a.keterangan','a.file')
+                    ->where('a.status','aktif')
+                    ->get();
+            //echo $request->session()->get('login');
+            // return view('member/produk/produk', ['produk' => $produk,'subproduk'=>$subproduk, 'hl'=>$hl]);
+             return view('produk/produk', ['produk' => $produk,'subproduk'=>$subproduk, 'hl'=>$hl]);
         }
         else
         {
@@ -175,7 +193,8 @@ class produkController extends Controller
                 'id_produk' => $lastId,
                 'nama_produk' => $q,
                 'harga' => $harga_sub[$nama_s],
-                'keterangan' => $keterangan_sub[$nama_s]
+                'keterangan' => $keterangan_sub[$nama_s],
+                'status'=>'aktif',
             ]);
             $index++;
         }
@@ -190,6 +209,7 @@ class produkController extends Controller
             'id_produk' =>$lastId, 
             'tanggal_berangkat' => $tanggalBerangkat[$tanggal_s],
             'tanggal_expired' => $tanggalExpired[$tanggal_s],
+            'status' => 'aktif'
         ]);
         $index++;
         }
@@ -257,6 +277,24 @@ class produkController extends Controller
         ]);
         return redirect('produk');
     }
+
+    public function deleteTanggal($id)
+    {
+        tanggal_produk::where('id', $id)->update([
+            'status'=> 'tidak aktif',
+        ]);
+        return redirect('produk');
+    }
+
+    public function deleteSub($id)
+    {
+        sub_produk::where('id_sub_produk', $id)->update([
+            'status'=> 'tidak aktif',
+        ]);
+       
+        return redirect('produk');
+    }
+
 
     public function edit($id)
     {
