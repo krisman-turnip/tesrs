@@ -4,6 +4,7 @@
   @include('layouts.header')
   <!-- Left side column. contains the logo and sidebar -->
   @include('layouts.sidebar')
+  <div class="content-wrapper">
 <section class="content-header">
     <h1 class="text-center">
     Pembayaran Komisi

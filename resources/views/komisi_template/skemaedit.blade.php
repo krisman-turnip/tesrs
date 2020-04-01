@@ -14,7 +14,7 @@
     <div class="container">
             <div class="card mt-3">
                 <div class="card-header text-center">
-                    <h3>Tambah Skema</h3> 
+                    <h3>Edit Skema</h3> 
                 </div>
                 <div class="card-body">
                     <a href="{{url('tampilSkema')}}" class="btn btn-primary">Kembali</a>

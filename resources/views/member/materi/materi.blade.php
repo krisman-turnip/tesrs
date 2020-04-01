@@ -10,8 +10,11 @@
     <h1 class="text-center">
       Daftar Materi
     </h1>
+  <section>
     <br>
-    
+    <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading">
       <div class="row">
         <div class="box">
           <div class="box-header with-border">
@@ -46,6 +49,9 @@
                 @endforeach 
           </tbody>
         </table>
+      </div>
+      </div>
+      </div>
       </div>
     </div>
   {{ $materi->links() }}

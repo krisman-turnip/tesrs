@@ -15,12 +15,41 @@
     <br>
 </section>
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box">
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                @foreach($produk as $p) 
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-body">
+                            <h4 >{{ $p->nama_produk }}</h4>
+                            <div class="col-sm-4"><img width="100%" height="100%" src="{{ url('/data_banner/'.$p->file_banner) }}" ></div>
+                                <div class="col-sm-3">Tanggal Keberangkatan {{ $p->tanggal_berangkat }}<br>
+                                    Tanggal Expired {{ $p->tanggal_expired }}<br>
+                                    @foreach($subproduk as $ppp) {{ $ppp->namaSubProduk }} Harga {{ $ppp->HargaSub }}<br> @endforeach  <br>
+                                    <a href="{{ url('/produkanggotainput/'.(isset($p) ? $p->id_produk : '')) }}" class="btn btn-primary">Pilih</a>
+                                    <!-- <input data-id="{{ $p->nama_produk }}" data-todo="{{ $p->id_produk }}" data-target="#editTodoDialog" class="open-EditTodo btn btn-warning" data-toggle="modal" type="submit" value="submit"/></div> -->
+                                        <!-- <div class="col-sm-4">Tanggal Keberangkatan {{ $p->tanggal_berangkat }}    
+                                        </div> -->
+                            </div>
+                                    
+                        </div>  
+                    </div>   
+                </div>
+                @endforeach
+            </div>
+        <div class="text-center">
+            {{$produk->links()}}
+        </div>
+    </div>
+</div>
+                
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
         <!-- <div class="container">
             <div class="card mt-5">
                 <div class="card-body">
@@ -59,45 +88,33 @@
             </div>
             {{ $produk->links() }}
         </div> -->
-                            @php
+                            <!-- @php
                             $numOfCols = 1;
                             $rowCount = 0;
                             $bootstrapColWidth = 12 / $numOfCols;
-                            @endphp
-                            <div class="row">
-                            @foreach($produk as $p)
-                                <div class="col-xs-@php echo $bootstrapColWidth; @endphp">
+                            @endphp -->
+                            
+                                <!-- <div class="col-sm-@php echo $bootstrapColWidth; @endphp"> -->
             <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
             <!-- @php
             for ($c='A'; $c!="AD"; $c++) 
             echo "$c ";
             $abs=$rowCount;
 @endphp --> 
-                                    @php
+                                    <!-- @php
                                     $a = $p->nama_produk 
-                                    @endphp
-                                    <h4 >{{ $p->nama_produk }}</h4>
-                                        <div class="col-sm-4"><img width="100%" height="100%" src="{{ url('/data_banner/'.$p->file_banner) }}" ></div>
-                                        <div class="col-sm-3">Tanggal Keberangkatan {{ $p->tanggal_berangkat }}<br>
-                                            Tanggal Expired {{ $p->tanggal_expired }}<br>
-                                            @foreach($subproduk as $ppp) {{ $ppp->namaSubProduk }} Harga {{ $ppp->HargaSub }}<br> @endforeach  <br>
-                                            <a href="{{ url('/produkanggotainput/'.(isset($p) ? $p->id_produk : '')) }}" class="btn btn-primary">Pilih</a>
-                                            <!-- <input data-id="{{ $p->nama_produk }}" data-todo="{{ $p->id_produk }}" data-target="#editTodoDialog" class="open-EditTodo btn btn-warning" data-toggle="modal" type="submit" value="submit"/></div> -->
-                                                <div class="col-sm-4">Tanggal Keberangkatan {{ $p->tanggal_berangkat }}    
-                                                </div>
-                                            </div>
-                                            <div id="wrapper">  
-                                        </div>
-                                        @php
+                                    @endphp -->
+                            
+                                        <!-- @php
                                         $rowCount++;
                                         if($rowCount % $numOfCols == 0) echo '</div><div class="row">';
-                                        @endphp
-                                        @endforeach
-                                        <div class="modal fade" tabindex="-1" role="dialog"  id="editTodoDialog">
+                                        @endphp -->
+                                       
+                                        <!-- <div class="modal fade" tabindex="-1" role="dialog"  id="editTodoDialog">
                                             <div class="modal-dialog modal-lg">
-                
+                 -->
                                         <!-- Modal content-->
-                                                <div class="modal-content">
+                                                <!-- <div class="modal-content">
                                                     <div class="modal-header">
                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                         <h4 class="modal-title">Form Submit</h4>
@@ -144,18 +161,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        {{$produk->links()}}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                                </div> -->
+                           
         <!-- @foreach($produk as $p)
         <div class="container">
             <h1>Hello World!</h1>

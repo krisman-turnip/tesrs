@@ -3,6 +3,7 @@
   @include('layouts.header')
   <!-- Left side column. contains the logo and sidebar -->
   @include('layouts.sidebar')
+  <div class="content-wrapper">
 <section class="content-header">
     <h3 class="text-center">
     Daftar Komisi Suspen atau Tidak Aktif
@@ -31,9 +32,9 @@
                     <input type="hidden" name="_method" value="get">
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 </div>
-                <div class="col-md-3.5">
+                <!-- <div class="col-md-3.5">
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Report</button>
-                </div>
+                </div> -->
             </div>
         </form>
         <div class="card mt-5">
@@ -136,7 +137,6 @@
 					<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
 				</div>
 			</div>
-		</div>
 	</div>
 
   <!-- /.content-wrapper -->

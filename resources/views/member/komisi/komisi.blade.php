@@ -7,15 +7,16 @@
       Daftar Komisi
     </h1>
   </section>
-<div class="container">
+  <br>
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading">
   <br/>
   <br/>
-  <div class="row">
-    <div class="col-md-11">
-      <div class="box">
-        <div class="box-body">
-          <div class="row">
-            <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-11">
+          <div class="box">
+            <div class="box-body">
               <div class="table-responsive">
                 <table class="table table-bordered table-hover table-striped">
                   <thead>
@@ -50,11 +51,9 @@
         </div>
       </div>
     </div>
+    <div class="text-center">
+    {{ $komisi->links() }}
     </div>
-  </div>
-  <div class="text-center">
-  {{ $komisi->links() }}
-  </div>
 </div>
         
   <!-- /.content-wrapper -->

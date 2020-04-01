@@ -2,20 +2,20 @@
 <html>
   @include('member.layout.headerBaru')
   <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h3 class="text-center">
         Tambah Produk
       </h3>
     </section>
+    <div class="content">
     <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading">
       <div class="row">
         <div class="col-sm-12">
             <div class="box">
                 <div class="box-body">
-                    <div class="row">
-                        <div class="col-sm-12">
         <!-- <div class="container">
             <div class="card mt-5">
                 <div class="card-body">
@@ -111,7 +111,7 @@
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="customer" class="col-md-2 col-form-label text-md-right">Tambah Customer</label>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <INPUT type="button" value="Add Row"  onClick="addRows('dataTables')" />
                                                         <br>
                                                         <div class="table-responsive">  

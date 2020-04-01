@@ -2,48 +2,86 @@
 <html>
   @include('member.layout.headerBaru')
   <!-- Content Wrapper. Contains page content -->
-<br>
-<div class="row">
+  <div class="content">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+      </ol>
+      @php $no=1; @endphp
+      
+      <div class="carousel-inner" role="listbox">
+        @foreach($hl as $p)
+        @if($no==1)
+          <div class="item active"> 
+        @else
+        <div class="item"> 
+        @endif
+        <img  src="{{ url('/image_dash/'.$p->file) }}" alt="Los Angeles" style="width:1400px;">
+          <div class="carousel-caption">
+            <h3 data-animation="animated bounceInLeft">{{ $p->judul }}</h3>
+            <p>{{ $p->deskripsi }}</p>
+          </div>
+        </div>
+        @php $no++ @endphp
+        @endforeach
+      </div>
+
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+      </a>
+      </div>
+    </div>
+  </div>
+<!-- <div class="row">
   <div class="col-md-2">
   </div>
   <div class="col-md-4">
     <div class="box">
       <div class="box-header with-border">
       <i class="fa fa-shopping-basket fa-5x"></i>
-<!-- <h2 class="text-center"> What's on Indah Wisata</h2> -->
+<h2 class="text-center"> What's on Indah Wisata</h2>
       </div>
     </div>
-  </div>
+  </div> -->
 
-  <div class="col-md-4">
+  <!-- <div class="col-md-4">
     <div class="box">
       <div class="box-header with-border">
         <i class="fa fa-shopping-basket fa-10x"></i>
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
-<div class="row">
+<!-- <div class="row">
   <div class="col-md-2">
   </div>
   <div class="col-md-4">
     <div class="box">
       <div class="box-header with-border">
       <i class="fa fa-shopping-basket fa-5x"></i>
-<!-- <h2 class="text-center"> What's on Indah Wisata</h2> -->
+<h2 class="text-center"> What's on Indah Wisata</h2>
       </div>
     </div>
-  </div>
+  </div> -->
 
-  <div class="col-md-4">
+  <!-- <div class="col-md-4">
     <div class="box">
       <div class="box-header with-border">
         <i class="fa fa-shopping-basket fa-10x"></i>
       </div>
     </div>
   </div>
-</div>
+</div> -->
         
   <!-- /.content-wrapper -->
 @include('member.layout.footer')

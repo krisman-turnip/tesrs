@@ -14,7 +14,7 @@
     <div class="container">
             <div class="card mt-4">
                 <div class="card-header text-center">
-                    <h3>Tambah Template</he> 
+                    <h3>Edit Template</he> 
                 </div>
                 <div class="row">
                     <div class="col-md-11">
@@ -100,7 +100,6 @@
                         </div>
                     </form>
                     </div>
-                </div>
                 </div>
                 </div>
                 </div>

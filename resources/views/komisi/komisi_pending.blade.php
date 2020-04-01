@@ -39,9 +39,9 @@
                 <input type="hidden" name="_method" value="get">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             </div>
-            <div class="col-md-3.5">
+            <!-- <div class="col-md-3.5">
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Report</button>
-            </div>
+            </div> -->
             </div>
         </form>
             <div class="card mt-5">
