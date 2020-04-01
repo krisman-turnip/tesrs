@@ -156,7 +156,7 @@ class produkController extends Controller
             'jumlah' => $request->jumlah,
             'sisa' => $request->jumlah,
             'terjual' => '0',
-            // 'harga' => '0',
+            'harga' => '0',
             'file_banner' => $nama_files,
             'keterangan' => 'kamar',
             'status' =>'aktif'
@@ -221,8 +221,8 @@ class produkController extends Controller
             $nama_f = $nama_file.date('Y-m-d_H-i-s');
             $gambar = materi::where('nama_materi',$nama_f)->count();
             //$a = $gambar->nama_materi;
-            if ($gambar==0)
-            {            
+            // if ($gambar==0)
+            // {            
                 // isi dengan nama folder tempat kemana file diupload
                 $tujuan_upload = 'data_file';
                 $file->move($tujuan_upload,$nama_f);
@@ -231,16 +231,17 @@ class produkController extends Controller
                     'id_produk' =>$lastId, 
                     'nama_materi' => $nama_f,
                     'keterangan' => $request->keterangan,
+                    'status' => 'aktif'
                 ]); 
             
                 return redirect('produk');
-            }
-            else
-            {
-                //Alert::message('Message', 'Optional Title');
-                //return view ('');
-                return redirect()->back()->with('alert','Nama materi sudah ada');
-            }
+            // }
+            // else
+            // {
+            //     //Alert::message('Message', 'Optional Title');
+            //     //return view ('');
+            //     return redirect()->back()->with('alert','Nama materi sudah ada');
+            // }
         }
        
         return redirect('produk');

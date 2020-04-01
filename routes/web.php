@@ -169,3 +169,9 @@ Route::get('/highlightBeranda','highlightController@index');
 Route::get('/highlight/upload','highlightController@upload');
 Route::post('/highlight/prosesupload','highlightController@prosesupload');
 Route::get('/highlight/nonaktif/{id}','highlightController@nonaktif');
+
+                /* route komisi report admin */
+Route::get('/reportSukses','reportController@reportSukses');
+Route::get('/reportPending','reportController@reportPending');
+Route::get('/reportBatal','reportController@reportBatal');
+Route::get('/reportPenjualanProduk','reportController@reportPenjualanProduk');

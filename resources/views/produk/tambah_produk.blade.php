@@ -104,6 +104,7 @@
                         <label for="jumlah" class="col-md-2 col-form-label text-md-right">Tanggal Produk</label>
                         <div class="col-md-6">
                             <INPUT type="button" value="Tambah Tanggal" onClick="addRows('dataTables')" />
+                            <br>
                             <form action="" method="post" name="f">  
                                 <TABLE width="550" border="1">
                                 <thead>
@@ -123,6 +124,7 @@
                         <label for="jumlah" class="col-md-2 col-form-label text-md-right">Skema Komisi Produk</label>
                         <div class="col-md-5">
                         <INPUT type="button" value="Tambah Skema" onClick="addRowq('dataTableskema')" />
+                        <br>
                         <form action="" method="post" name="skema">  
                             <TABLE width="550" border="1">
                             <thead>
@@ -381,9 +383,23 @@
 
 </SCRIPT>
 <script>
-  $( function() {
-    $("#datepicker").datepicker({ format: 'yyyy-mm-dd' });
-  } );
+ $( function() {
+        $(document).ready(function () {
+            $('#datepicker').datepicker({
+                format: "dd-M-yyyy",
+                daysOfWeekDisabled: [0, 7],
+                autoclose: true
+            });
+
+            //Alternativ way
+            $('#datepicker').datepicker({
+                format: "dd-M-yyyy"
+            }).on('change', function(){
+                $('.datepicker').hide();
+            });
+
+        });
+    } );
   </script>
    <script>
   $( function() {

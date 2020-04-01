@@ -140,6 +140,21 @@
             <li><a href="{{ url('transaksiKomisi') }}"><i class="fa fa-circle-o"></i> Transaksi Komisi</a></li>
           </ul>
         </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-table"></i> <span>Report</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('reportSukses') }}"><i class="fa fa-circle-o"></i> Report Komisi Sukses</a></li>
+            <li><a href="{{ url('reportPending') }}"><i class="fa fa-circle-o"></i> Report Komisi Pending</a></li>
+            <li><a href="{{ url('reportBatal') }}"><i class="fa fa-circle-o"></i> Report Komisi Batal</a></li>
+            <li><a href="{{ url('reportPenjualanProduk') }}"><i class="fa fa-circle-o"></i> Report Penjualan Produk</a></li>
+          </ul>
+        </li>
         <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-table"></i> <span>LogOut </span>
