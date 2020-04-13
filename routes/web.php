@@ -12,168 +12,30 @@
 */
 Auth::routes();
 
-                /* route anggota->admin */
-Route::get('/home','anggotaController@index');
-Route::get('/anggotaCari','anggotaController@cari');
-Route::get('/anggota/tambah','anggotaController@tambah');
-Route::post('/anggota/store','anggotaController@store');
-Route::get('/anggota/hapus/{id}', 'anggotaController@delete');
-Route::get('/anggota/edit/{id}', 'anggotaController@edit');
-Route::get('/anggota/editPoto/{id}', 'anggotaController@editPoto');
-Route::get('/anggota/reset/{id}', 'anggotaController@reset');
-Route::get('/anggota/suspend/{id}', 'anggotaController@suspend');
-Route::get('/anggota/aktif/{id}', 'anggotaController@aktif');
-Route::put('/update/{id}', 'anggotaController@update');
-Route::put('/updatePoto', 'anggotaController@updatePoto');
-Route::get('/cari', 'anggotaController@loadData')->name("search");
-Route::get('/anggota/profile/{id}', 'anggotaController@profile');
-
-                /* route produk->admin */
-Route::get('/produk','produkController@index');
-Route::get('/produkCari','produkController@cari');
-Route::get('/produkDetail/{id}','produkController@detail');
-Route::get('/produk/tambah','produkController@tambah');
-Route::post('/produk/store','produkController@store');
-Route::get('/produk/hapus/{id}', 'produkController@delete');
-Route::get('/produk/edit/{id}', 'produkController@edit');
-Route::put('/produk/update/{id}', 'produkController@update');
-Route::get('/report','produkController@transaksiProduk');
-Route::get('/reportCari','produkController@transaksiProdukCari');
-Route::get('/reportBatal/{id}','produkController@transaksiProdukBatal');
-Route::get('/produk/terjual','produkController@terjual');
-Route::get('/terjualCari','produkController@terjualCari');
-Route::get('/exporttransaksi','produkController@exporttransaksi');
-Route::get('/exportpenjualan','produkController@exportpenjualan');
-Route::get('/produkS/hapus/{id}','produkController@deleteSub');
-Route::get('/produkT/hapus/{id}','produkController@deleteTanggal');
-
-                /* route materi->admin */
-Route::get('/materi','materiController@index');
-Route::get('/materiCari','materiController@materiCari');
-Route::get('/materi/upload','materiController@upload');
-Route::post('/materi/prosesupload','materiController@proses_upload');
-Route::get('/materi/download/{id}','materiController@download');
-Route::get('/materi/hapus/{id}', 'materiController@delete');
-
-                /* route jabatan->admin */
-Route::get('/jabatan','jabatanController@index');
-Route::get('/jabatan/tambah','jabatanController@tambah');
-Route::post('/jabatan/store','jabatanController@store');
-Route::get('/jabatan/hapus/{id}', 'jabatanController@delete');
-Route::get('/jabatan/edit/{id}', 'jabatanController@edit');
-Route::put('/jabatan/update/{id}', 'jabatanController@update');
-
-                /* route email->admin */
-Route::get('/email','emailController@index');
-Route::post('/email/kirim','emailController@emailKirim');
-Route::get('/emailtampil','emailController@emailtampil');
-
-                /* route admin->admin */
-Route::get('/admin','adminController@index');
-Route::get('/admin/tambah','adminController@tambah');
-Route::post('/admin/store','adminController@store');
-Route::get('/admin/hapus/{id}', 'adminController@delete');
-Route::get('/admin/edit/{id}', 'adminController@edit');
-Route::put('/admin/update/{id}', 'adminController@update');
-
-                /* route transaksi->admin */
-Route::get('/produk/produk_pengajuan','produkController@tampil');
-Route::get('/pengajuanCari','produkController@tampilCari');
-Route::get('/produk/tolak/{id}/{a}/{b}/{c}','produkController@tolak');
-Route::get('/produk/terima/{id}/{a}/{b}/{d}','produkController@terima');
-
-                /* Login Admin*/
+/* Login Admin*/
 Route::get('/', function () {
     return view('loginadmin/login');
 });
 Route::post('/prosesloginadmin','loginadminController@login');
 Route::get('/proseslogoutadmin','loginadminController@logout');
 
-                /* login anggota  */
-Route::get('/loginanggota', function () {
-    return view('loginanggota/login');
-});
-Route::post('/prosesloginanggota','loginanggotaController@login');
-Route::get('/proseslogoutanggota','loginanggotaController@logout');
-Route::get('/reset','loginanggotaController@reset');
-Route::post('/loginanggota/reset','loginanggotaController@loginreset');
-Route::get('/set_password','loginanggotaController@set');
+/* User */
+Route::get('/user','userController@index');
+Route::get('/user/tambah','userController@usertambah');
+Route::post('/user/prosestambah','userController@store');
+Route::get('/user/edit/{id}','userController@edit');
+Route::post('/user/update','userController@update');
 
-                /*route anggota->member */
-Route::get('/homeanggota','anggotamemberController@home');
-Route::get('/beranda','anggotamemberController@index');
-Route::get('/beranda/{id}','anggotamemberController@tab');
+/* Karyawan */
+Route::get('/karyawan','karyawanController@index');
+Route::get('/karyawan/tambah','karyawanController@karyawantambah');
+Route::post('/karyawan/prosestambah','karyawanController@store');
+Route::get('/karyawan/edit/{id}','karyawanController@edit');
+Route::post('/karyawan/update','karyawanController@update');
 
-               /* route produk->member */
-Route::get('/produkanggota','produkanggotaController@index');
-Route::get('/produkanggotainput/{id}','produkanggotaController@input');
-
-                /* route transaksi->member */
-Route::post('/produkanggota/tambah/{id}','transaksiController@store');
-Route::get('/produkanggota/pengajuan','transaksiController@pengajuan');
-Route::get('/produkanggota/pengajuanCari','transaksiController@pengajuanCari');
-Route::get('/produkanggota/batal/{id}','transaksiController@delete');
-Route::get('/produkanggota/diterima','transaksiController@diterima');
-Route::get('/produkanggota/diterimaCari','transaksiController@diterimaCari');
-Route::get('/produkanggota/ditolak','transaksiController@ditolak');
-Route::get('/produkanggota/ditolakCari','transaksiController@ditolakCari');
-
-                /* route materi->member */
-Route::get('/materianggota','materianggotaController@index');
-
-                /* route komisi->anggota */
- Route::get('/komisi','komisiController@index');
- Route::get('/komisiPending','komisiController@pending');
- Route::get('/komisiBatal','komisiController@batal');
- Route::get('/komisiSukses','komisiController@sukses');
- Route::get('/komisiSuspend','komisiController@suspend');
- Route::get('/suspendCari','komisiController@suspendCari');
- Route::get('/exportSukses', 'komisiController@exportSukses');
- Route::get('/exportBatal', 'komisiController@exportBatal');
- Route::get('/exportPending', 'komisiController@exportPending');
- Route::get('/exportSuspend', 'komisiController@exportSuspend');
- Route::get('/komisiPending/batal/{id}','komisiController@pendingBatal');
- Route::get('/pendingCari','komisiController@pendingCari');
- Route::get('/batalCari','komisiController@batalCari');
- Route::get('/suksesCari','komisiController@suksesCari');
- Route::get('/komisiCari','komisiController@komisiCari');
- Route::get('/komisianggota','komisiController@komisianggota');
- Route::get('/requestkomisi','komisiController@requestkomisi');
- Route::post('/trrequestkomisi','komisiController@trrequestkomisi');
- Route::get('/lihatrequestkomisi','komisiController@lihatrequestkomisi');
- Route::get('/komisi/editrequest/{id}','komisiController@editrequestkomisi');
- Route::post('/updaterequestkomisi/{id}','komisiController@updaterequestkomisi');
- Route::get('/pembayaran/{id}','komisiController@pembayaran');
- Route::put('/bayar/{id}','komisiController@bayar');
- Route::get('/transaksiKomisi','komisiController@transaksiKomisi');
- Route::get('/komisi/download/{id}','komisiController@download');
-
-                /* route komisi->admin */
-Route::get('/pembayaran','pembayarankomisiController@index');
-Route::get('/pembayaran/download/{id}','pembayarankomisiController@download');
-
-                /* route komisi template->admin */
-Route::get('/komisiTemplate','komisi_templateController@index');
-Route::get('/komisiTemplate/tambah','komisi_templateController@input');
-Route::post('/komisiTemplate/store','komisi_templateController@store');
-Route::get('/komisiTemplate/edit/{id}','komisi_templateController@edit');
-Route::post('/komisiTemplate/update/{id}','komisi_templateController@update');
-Route::get('/komisiTemplate/delete/{id}','komisi_templateController@delete');
-Route::get('/komisiTemplate/skema','komisi_templateController@skema');
-Route::post('/komisiTemplate/skemainput','komisi_templateController@storeskema');
-Route::get('/tampilSkema','komisi_templateController@tampilSkema');
-Route::get('/komisiTemplate/skemadelete/{id}','komisi_templateController@deleteskema');
-Route::get('/komisiTemplate/skemaedit/{id}','komisi_templateController@editskema');
-Route::post('/komisiTemplate/skemaupdate/{id}','komisi_templateController@updateSkema');
-
-                /* route komisi template->highlight */
-Route::get('/highlightBeranda','highlightController@index');
-Route::get('/highlight/upload','highlightController@upload');
-Route::post('/highlight/prosesupload','highlightController@prosesupload');
-Route::get('/highlight/nonaktif/{id}','highlightController@nonaktif');
-
-                /* route komisi report admin */
-Route::get('/reportSukses','reportController@reportSukses');
-Route::get('/reportPending','reportController@reportPending');
-Route::get('/reportBatal','reportController@reportBatal');
-Route::get('/reportPenjualanProduk','reportController@reportPenjualanProduk');
+/* Satuan */
+Route::get('/satuan','satuanController@index');
+Route::get('/satuan/tambah','satuanController@satuantambah');
+Route::post('/satuan/prosestambah','satuanController@store');
+Route::get('/satuan/edit/{id}','satuanController@edit');
+Route::post('/satuan/update','satuanController@update');

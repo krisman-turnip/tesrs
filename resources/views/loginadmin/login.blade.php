@@ -22,7 +22,7 @@
                 <form method="POST" action="{{url('prosesloginadmin')}}">
                 @csrf
                     <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Enter Email" name="email">
+                    <input type="text" class="form-control" placeholder="Enter Username" name="email">
                     </div>
                     <div class="form-group">
                     <input type="password" class="form-control" placeholder="Enter Password" name="password">

@@ -6,6 +6,7 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="{{url('adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{url('adminlte/bower_components/bootstrap/dist/css/bootstrap-datatable.min.css')}}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{url('adminlte/bower_components/font-awesome/css/font-awesome.min.css')}}">
   <!-- Ionicons -->
@@ -30,11 +31,12 @@
   <script src="{{url('adminlte/bower_components/jquery/dist/jquery.js')}}"></script>
   <script src="{{url('adminlte/bower_components/jquery-ui/jquery-ui.js')}}"></script>
 	<link rel="stylesheet"  href="{{url('adminlte/bower_components/jquery-ui/jquery-ui.css')}}">
+  
   <!-- Google Font -->
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
 </head>
 
-<body class="sidebar-mini skin-green" data-gr-c-s-loaded="true" style="height: auto; min-height: 100%;">
+<body class="sidebar-mini skin-blue" data-gr-c-s-loaded="true" style="height: auto; min-height: 100%;">
 <div class="wrapper">
   <!-- Main Header -->
   <header class="main-header ">
@@ -58,20 +60,27 @@
         <ul class="nav navbar-nav">
           
           <!-- User Account Menu -->
-          <li>
-            <a href="#" >
+          <!-- <li>
+            <a href="#" > -->
               <!-- The user image in the navbar -->
               <!-- <img src="https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-sm"> @php 
+              <!-- <span class="hidden-sm"> @php 
             print_r(session()->get('name'))
             @endphp </span> 
             </a>
-          </li>
+          </li> -->
           <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="{{ url('proseslogoutadmin') }}"> Log Out </a>
-          </li>
+         
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="hidden-sm"> @php 
+            print_r(session()->get('name'))
+            @endphp </span> 
+            <span class="caret"></span></a>
+					  <ul class="dropdown-menu">
+              <li><a href="{{url('proseslogoutadmin')}}"><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
+					  </ul>
+				  </li>
           <!-- <li>
             <a href=""> Log Out </a>
           </li> -->

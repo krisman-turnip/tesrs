@@ -5,169 +5,44 @@
      
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-      @if(session()->has('admin')||session()->has('multiadmin'))
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Anggota</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a> 
-          <ul class="treeview-menu">
-      
-            <li><a href="{{ url('home') }}"><i class="fa fa-circle-o"></i> Data Anggota</a></li>
-            <li><a href="{{ url('anggota/tambah') }}"><i class="fa fa-circle-o"></i> Tambah Anggota</a></li>
-        
-          </ul>
-        </li>
-        @endif
-        @if(session()->has('marketing')||session()->has('multiadmin'))
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-pie-chart"></i>
-            <span>Produk</span>
+            <i class="fa fa-user"></i> <span>User</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ url('produk') }}"><i class="fa fa-circle-o"></i> List Produk</a></li>
-            <li><a href="{{ url('produk/tambah') }}"><i class="fa fa-circle-o"></i> Tambah Produk</a></li>
-            <li><a href="{{ url('produk/produk_pengajuan') }}"><i class="fa fa-circle-o"></i> Pengajuan Produk</a></li>
-            <li><a href="{{ url('report') }}"><i class="fa fa-circle-o"></i> Transaksi Produk</a></li>
-            <li><a href="{{ url('produk/terjual') }}"><i class="fa fa-circle-o"></i> Penjualan Produk</a></li>
-          </ul>
-        </li>
-        @endif
-        @if(session()->has('marketing')||session()->has('multiadmin'))
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-laptop"></i>
-            <span>Bahan Materi</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{ url('materi') }}"><i class="fa fa-circle-o"></i> Tampil Materi</a></li>
-            
-            <li><a href="{{ url('materi/upload') }}"><i class="fa fa-circle-o"></i> Upload Materi </a></li>
-            
-          </ul>
-        </li>
-       @endif
-
-       <li class="treeview">
-          <a href="#">
-            <i class="fa fa-laptop"></i>
-            <span>Highlight</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{ url('highlightBeranda') }}"><i class="fa fa-circle-o"></i> Tampil Highlight</a></li>        
-            <li><a href="{{ url('highlight/upload') }}"><i class="fa fa-circle-o"></i> Upload Highlight </a></li>
-            
+            <li><a href="{{ url('user') }}"><i class="fa fa-circle-o"></i> Tampil User</a></li>
+            <li><a href="{{ url('user/tambah') }}"><i class="fa fa-circle-o"></i> Tambah User</a></li>
           </ul>
         </li>
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-edit"></i> <span>Level Jabatan</span>
+            <i class="fa fa-address-card"></i> <span>Karyawan</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ url('jabatan') }}"><i class="fa fa-circle-o"></i> Tampil Level</a></li>
-            <li><a href="{{ url('jabatan/tambah') }}"><i class="fa fa-circle-o"></i> Tambah Level</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-table"></i> <span>Email</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{ url('email') }}"><i class="fa fa-circle-o"></i> Kirim Email </a></li>
-            <li><a href="{{ url('emailtampil') }}"><i class="fa fa-circle-o"></i> Tampil Email </a></li>
+            <li><a href="{{ url('karyawan') }}"><i class="fa fa-circle-o"></i> Tampil Karyawan</a></li>
+            <li><a href="{{ url('karyawan/tambah') }}"><i class="fa fa-circle-o"></i> Tambah Karyawan</a></li>
           </ul>
         </li>
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-table"></i> <span>Admin</span>
+            <i class="fa fa-underline"></i> <span>Satuan</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ url('admin') }}"><i class="fa fa-circle-o"></i> Tampil Admin</a></li>
-            <li><a href="{{ url('admin/tambah') }}"><i class="fa fa-circle-o"></i> Tambah Admin</a></li>
+            <li><a href="{{ url('satuan') }}"><i class="fa fa-circle-o"></i> Tampil Satuan</a></li>
+            <li><a href="{{ url('satuan/tambah') }}"><i class="fa fa-circle-o"></i> Tambah Satuan</a></li>
           </ul>
         </li>
-      
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-table"></i> <span>Komisi Template</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{ url('komisiTemplate') }}"><i class="fa fa-circle-o"></i> Tampil Template Komisi</a></li>
-            <li><a href="{{ url('komisiTemplate/tambah') }}"><i class="fa fa-circle-o"></i> Tambah Template Komisi</a></li>
-            <!-- <li><a href="{{ url('komisiTemplate/skema') }}"><i class="fa fa-circle-o"></i> Skema Template Komisi</a></li> -->
-            <li><a href="{{ url('tampilSkema') }}"><i class="fa fa-circle-o"></i> Skema Komisi</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-table"></i> <span>Komisi Anggota</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{ url('komisiPending') }}"><i class="fa fa-circle-o"></i> Komisi Pending</a></li>
-            <li><a href="{{ url('komisiBatal') }}"><i class="fa fa-circle-o"></i> Komisi Batal</a></li>
-            <li><a href="{{ url('komisiSuspend') }}"><i class="fa fa-circle-o"></i> Komisi Suspend</a></li>
-            <li><a href="{{ url('komisiSukses') }}"><i class="fa fa-circle-o"></i> Komisi Sukses</a></li>
-            <li><a href="{{ url('komisi') }}"><i class="fa fa-circle-o"></i> Komisi Anggota</a></li>
-            <li><a href="{{ url('transaksiKomisi') }}"><i class="fa fa-circle-o"></i> Transaksi Komisi</a></li>
-          </ul>
-        </li>
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-table"></i> <span>Report</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{ url('reportSukses') }}"><i class="fa fa-circle-o"></i> Report Komisi Sukses</a></li>
-            <li><a href="{{ url('reportPending') }}"><i class="fa fa-circle-o"></i> Report Komisi Pending</a></li>
-            <li><a href="{{ url('reportBatal') }}"><i class="fa fa-circle-o"></i> Report Komisi Batal</a></li>
-            <li><a href="{{ url('reportPenjualanProduk') }}"><i class="fa fa-circle-o"></i> Report Penjualan Produk</a></li>
-          </ul>
-        </li>
-        <!-- <li class="treeview">
-          <a href="#">
-            <i class="fa fa-table"></i> <span>LogOut </span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{ url('proseslogoutadmin') }}"><i class="fa fa-circle-o"></i> LogOut </a></li>
-          </ul>
-        </li> -->
-        
-        
       </ul>
     </section>
     <!-- /.sidebar -->

@@ -22,63 +22,30 @@ class loginadminController extends Controller
         $user = $request->email;
         $pass = $request->password;    
 
-        $usersa = DB::table('users')->where([['email', $user],['status','aktif'],])->count();
-        $users = DB::table('users')->where([['email', $user],['status', 'aktif'],])->first();
+        $usersa = DB::table('tbl_m_user')->where([['username', $user],])->count();
+        $users = DB::table('tbl_m_user')->where([['username', $user],])->first();
         //$jabatan = DB::table('jabatan')->where('id_jabatan',$id)->first();
         //$anggota=count($users);[
-        $level = $users->level;
         $admin = 'admin';
-        echo $level;
+        $date =date('Y-m-d H-i-s');
+        if($usersa!=0)
+        {
+            if($users->username == $user AND  Hash::check($pass, $users->password) ){ 
+                //$users->session()->put('login', 'Selamat anda berhasil login');
+                //$request->session()->put('id',$users->id_anggota);
+                Session::put('login', $users->user_id);
+                Session::put('name', $users->username);
+                DB::table('tbl_m_user')-> where('username', $user)-> update([
+                    'date_login' => $date,
+                ]);
+                return redirect('/user');
+            }
             
-        if($usersa!=0){
-            if($level=='admin')
-            {
-                if($users->email == $user AND Hash::check($pass, $users->password) ){ 
-                    //$users->session()->put('login', 'Selamat anda berhasil login');
-                    //$request->session()->put('id',$users->id_anggota);
-                    Session::put('login', $users->id);
-                    Session::put('admin', $users->level);
-                    Session::put('name', $users->name);
-                    return redirect('/home'); 
-                }
-                else 
-                {    
-                    echo $level;
-                    return redirect('/')->with('failed','Login gagal');
-                }
+            else 
+            {    
+                return redirect('/')->with('failed','Login gagal');
             }
-            if($level=='marketing')
-            {
-                if($users->email == $user AND Hash::check($pass, $users->password) ){ 
-                    //$users->session()->put('login', 'Selamat anda berhasil login');
-                    //$request->session()->put('id',$users->id_anggota);
-                    Session::put('login', $users->id);
-                    Session::put('marketing', $users->level);
-                    Session::put('name', $users->name);
-                    return redirect('/produk'); 
-                } 
-                else 
-                {    
-                    echo $level;
-                    return redirect('/')->with('failed','Login gagal');
-                }
-            }
-            if($level=='multiadmin')
-            {
-                if($users->email == $user AND Hash::check($pass, $users->password) ){ 
-                    //$users->session()->put('login', 'Selamat anda berhasil login');
-                    //$request->session()->put('id',$users->id_anggota);
-                    Session::put('login', $users->id);
-                    Session::put('multiadmin', $users->level);
-                    Session::put('name', $users->name);
-                    return redirect('/home'); 
-                } 
-                else 
-                {    
-                    echo $level;
-                    return redirect('/')->with('failed','Login gagal');
-                }
-            }
+            
         }
         else
         {

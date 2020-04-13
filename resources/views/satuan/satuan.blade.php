@@ -11,13 +11,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 class="text-center">
-        Daftar Admin
+        Daftar Satuan
       </h1>
     <section>
         <div class="content">
             <div class="card mt-5">
                 <div class="card-body">
-                    <a href="admin/tambah" class="btn btn-primary">Input Admin Baru</a>
+                    <a href="{{url('satuan/tambah')}}" class="btn btn-primary">Input Satuan Baru</a>
                     <br/>
                     <br/>
                     <div class="row">
@@ -29,23 +29,19 @@
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Nama</th>
-                                                    <th>Email</th>
-                                                    <th>Level</th>
+                                                    <th>Nama Satuan</th>
                                                     <th>OPSI</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                             @php $no=1; @endphp
-                                                @foreach($admin as $p)
+                                                @foreach($satuan as $p)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
-                                                    <td>{{ $p->name }}</td>
-                                                    <td>{{ $p->email }}</td>
-                                                    <td>{{ $p->level }}</td>
+                                                    <td>{{ $p->nama_satuan }}</td>
                                                     <td> 
-                                                        <a href="admin/edit/{{ $p->id}}" class="btn btn-warning">Edit</a>
-                                                        <a href="admin/hapus/{{ $p->id }}" class="btn btn-danger">Hapus</a>
+                                                        <a href="satuan/edit/{{ $p->satuan_id}}" class="btn btn-warning">Edit</a>
+                                                        <a href="satuan/hapus/{{ $p->satuan_id }}" class="btn btn-danger">Hapus</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -57,9 +53,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="text-center">
-            {{ $admin->links() }}
             </div>
         </div>
         
