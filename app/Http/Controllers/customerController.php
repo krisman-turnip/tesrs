@@ -69,6 +69,6 @@ class customerController extends Controller
             'fax' => $request->fax,
             'contact_person' => $request->contact_person,
         ]);
-         //return redirect('customer');
+         return redirect('customer');
     }
 }
