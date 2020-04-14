@@ -75,7 +75,7 @@
                                         <label for="menu" class="col-md-4 col-form-label text-md-right">Join Date</label>
 
                                         <div class="col-md-6">
-                                            <input id="menu" type="text" class="form-control @error('password') is-invalid @enderror" name="join_date" value="{{$karyawan->join_date}}">
+                                            <input id="datepicker1" type="text" class="form-control @error('password') is-invalid @enderror" name="join_date" value="{{$karyawan->join_date}}">
 
                                         </div>
                                     </div>
@@ -99,4 +99,8 @@
         
   <!-- /.content-wrapper -->
 @include('layouts.footer')
- 
+<script>
+  $( function() {
+    $("#datepicker1").datepicker({ format: 'yyyy-mm-dd' });
+  } );
+  </script>

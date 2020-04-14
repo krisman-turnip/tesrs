@@ -14,9 +14,9 @@
     <div class="content">
             <div class="card mt-3">
                 <div class="card-header text-center">
-                    <h3>Tambah Barang Mentah</h3> 
+                    <h3>Tambah Barang Jadi</h3> 
                 </div>
-                <a href="{{url('barang_mentah')}}" class="btn btn-primary">Kembali</a>
+                <a href="{{url('barang_jadi')}}" class="btn btn-primary">Kembali</a>
                 <!-- <a href="../pegawai" class="btn btn-primary">store</a> -->
                 <br/>
                 <br/>
@@ -41,15 +41,6 @@
 
                                         <div class="col-md-3">
                                             <textarea id="password" type="text" class="form-control @error('password') is-invalid @enderror" name="no_hp" ></textarea>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label for="password" class="col-md-2 col-form-label text-md-right">Suplier</label>
-
-                                        <div class="col-md-3">
-                                            <input id="password" type="text" class="form-control @error('password') is-invalid @enderror" name="no_ktp" >
 
                                         </div>
                                     </div>

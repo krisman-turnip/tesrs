@@ -40,6 +40,10 @@ Route::post('/satuan/prosestambah','satuanController@store');
 Route::get('/satuan/edit/{id}','satuanController@edit');
 Route::post('/satuan/update','satuanController@update');
 
-/* Satuan */
-Route::get('/bahan_mentah','bahan_mentahController@index');
+/* barang mentah */
+Route::get('/barang_mentah','bahan_mentahController@index');
 Route::get('/barang_mentah/tambah','bahan_mentahController@tambah');
+
+/* barang jadi */
+Route::get('/barang_jadi','barang_jadiController@index');
+Route::get('/barang_jadi/tambah','barang_jadiController@tambah');
