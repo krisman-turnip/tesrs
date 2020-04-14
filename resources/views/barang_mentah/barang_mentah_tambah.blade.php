@@ -14,7 +14,7 @@
     <div class="content">
             <div class="card mt-3">
                 <div class="card-header text-center">
-                    <h3>Tambah Karyawan</h3> 
+                    <h3>Tambah Barang Mentah</h3> 
                 </div>
                 <a href="{{url('user')}}" class="btn btn-primary">Kembali</a>
                 <!-- <a href="../pegawai" class="btn btn-primary">store</a> -->
@@ -55,46 +55,46 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="menu" class="col-md-2 col-form-label text-md-right">Satuan Terkecil</label>
+                                        <label for="menu" class="col-md-2 col-form-label">Satuan Terkecil</label>
 
-                                        <div class="col-md-3">
-                                            <select name="select" class="form-control" value="{{ old('select') }}">
-                                                <option value="ktp_customer">Unit</option>
-                                            </select>
+                                        <div class="col-md-10">
+                                            <div class="col-md-2">
+                                                <select name="select" class="form-control text-right" value="{{ old('select') }}">
+                                                    <option value="ktp_customer">Unit</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label for="menu" class="col-md-1 col-form-label text-md-right" style="padding-left:0">Harga</label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input id="email" type="text" class="form-control" name="fullname" required autocomplete="email">
+                                            </div>
                                         </div>
-                                        <label for="menu" class="col-md-1 col-form-label text-md-right">Harga</label>
-                                        <div class="col-md-3">
-                                            <input id="email" type="text" class="form-control" name="fullname" required autocomplete="email">
-                                        </div>
-                                        
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="menu" class="col-md-2 col-form-label text-md-right">Satuan Lain</label>
+                                        <div class="col-md-10">
+                                            <div class="col-md-1">
+                                                <input id="menu" type="text" class="form-control @error('password') is-invalid @enderror" name="bagian" >
 
-                                        <div class="col-md-1">
-                                            <input id="menu" type="text" class="form-control @error('password') is-invalid @enderror" name="bagian" >
-
-                                        </div>
-                                        <div class="col-md-1">
-                                            <select name="select" class="form-control" value="{{ old('select') }}">
-                                                <option value="ktp_customer">Unit</option>
-                                            
-                                            </select>
-                                        </div>
-                                        <div class="col-md-1">
-                                            =
-
-                                        </div>
-                                        <div class="col-md-1">
-                                            <input id="menu" type="text" class="form-control @error('password') is-invalid @enderror" name="bagian" >
-
-                                        </div>
-
-                                        <div class="col-md-1">
-                                            <select name="select" class="form-control" value="{{ old('select') }}">
-                                                <option value="ktp_customer">Unit</option>
-                                            </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <select name="select" class="form-control" value="{{ old('select') }}">
+                                                    <option value="ktp_customer">Unit</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-1" style="width:10px;">
+                                                <label for="menu">=</label>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <input id="menu" type="text" class="form-control @error('password') is-invalid @enderror" name="bagian" >
+                                            </div>
+                                            <div class="col-md-2">
+                                                <select name="select" class="form-control" value="{{ old('select') }}">
+                                                    <option value="ktp_customer">Unit</option>
+                                                </select>
+                                            </div>
                                         </div>
                                         
                                     </div>
