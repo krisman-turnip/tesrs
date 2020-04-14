@@ -47,3 +47,17 @@ Route::get('/barang_mentah/tambah','bahan_mentahController@tambah');
 /* barang jadi */
 Route::get('/barang_jadi','barang_jadiController@index');
 Route::get('/barang_jadi/tambah','barang_jadiController@tambah');
+
+/* Customer */
+Route::get('/customer','customerController@index');
+Route::get('/customer/tambah','customerController@tambah');
+Route::post('/customer/prosestambah','customerController@store');
+Route::get('/customer/edit/{id}','customerController@edit');
+Route::post('/customer/update','customerController@update');
+
+/* Supplier */
+Route::get('/supplier','supplierController@index');
+Route::get('/supplier/tambah','supplierController@tambah');
+Route::post('/supplier/prosestambah','supplierController@store');
+Route::get('/supplier/edit/{id}','supplierController@edit');
+Route::post('/supplier/update','supplierController@update');

@@ -59,6 +59,19 @@
 
         <li class="treeview">
           <a href="#">
+            <i class="fa fa-address-card"></i> <span>Customer</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('customer') }}"><i class="fa fa-circle-o"></i> Tampil Customer</a></li>
+            <li><a href="{{ url('customer/tambah') }}"><i class="fa fa-circle-o"></i> Tambah Customer</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
             <i class="fa fa-underline"></i> <span>Satuan</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
