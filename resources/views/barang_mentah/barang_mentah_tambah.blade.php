@@ -40,7 +40,7 @@
                                         <label for="password" class="col-md-2 col-form-label text-md-right">Keterangan</label>
 
                                         <div class="col-md-3">
-                                            <input id="password" type="text" class="form-control @error('password') is-invalid @enderror" name="no_hp" >
+                                            <textarea id="password" type="text" class="form-control @error('password') is-invalid @enderror" name="no_hp" ></textarea>
 
                                         </div>
                                     </div>
@@ -103,9 +103,11 @@
                                         
                                         <div class="col-md-2">
                                         </div>
-                                        <div class="col-md-3">
-                                        <label for="menu" class="col-md-1 col-form-label text-md-right">Harga</label>
+                                        <div class="col-md-5">
+                                        <label for="menu" class="col-md-2 col-form-label text-md-right">Harga</label>
+                                        <div class="col-md-6">
                                             <input id="menu" type="text" class="form-control " name="join_date" >
+                                        </div>
                                             <input type="submit" class="btn btn-primary" value="Tambah">
                                         </div>
                                     </div>
