@@ -82,6 +82,25 @@
             <li><a href="{{ url('satuan/tambah') }}"><i class="fa fa-circle-o"></i> Tambah Satuan</a></li>
           </ul>
         </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-address-card"></i> <span>Pembelian</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('pembelian') }}"><i class="fa fa-circle-o"></i> Pemesanan</a></li>
+            <li><a href="{{ url('pembelian/tambah') }}"><i class="fa fa-circle-o"></i> Tambah Pemesanan</a></li>
+            <li><a href="{{ url('pembelian/formApproval') }}"><i class="fa fa-circle-o"></i> Approval Pemesanan</a></li>
+            <li><a href="{{ url('pembelian/penerimaanBarang') }}"><i class="fa fa-circle-o"></i> Penerimaan Barang</a></li>
+            <li><a href="{{ url('pembelian/planningPembayaran') }}"><i class="fa fa-circle-o"></i> Planning Pembayaran</a></li>
+            <li><a href="{{ url('pembelian/pembayaranKeSupplier') }}"><i class="fa fa-circle-o"></i> Pembayaran Ke Suplier</a></li>
+            <li><a href="{{ url('pembelian/formPembayaran') }}"><i class="fa fa-circle-o"></i> Form Pembayaran </a></li>
+          </ul>
+        </li>
+
       </ul>
     </section>
     <!-- /.sidebar -->

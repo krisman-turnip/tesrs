@@ -61,3 +61,12 @@ Route::get('/supplier/tambah','supplierController@tambah');
 Route::post('/supplier/prosestambah','supplierController@store');
 Route::get('/supplier/edit/{id}','supplierController@edit');
 Route::post('/supplier/update','supplierController@update');
+
+/* pemesanan barang */
+Route::get('/pembelian','pembelianController@index');
+Route::get('/pembelian/tambah','pembelianController@tambah');
+Route::get('/pembelian/formApproval','pembelianController@formapproval');
+Route::get('/pembelian/penerimaanBarang','pembelianController@penerimaanbarang');
+Route::get('/pembelian/planningPembayaran','pembelianController@planningpembayaran');
+Route::get('/pembelian/pembayaranKeSupplier','pembelianController@pembayarankesupplier');
+Route::get('/pembelian/formPembayaran','pembelianController@formpembayaran');
