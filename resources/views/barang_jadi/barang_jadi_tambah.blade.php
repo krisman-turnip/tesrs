@@ -24,14 +24,14 @@
                     <div class="col-md-12">
                         <div class="box">
                             <div class="box-body">
-                                <form method="POST" action="{{url('karyawan/prosestambah')}}">
+                                <form method="POST" action="{{url('barang_jadi/prosestambah')}}">
                                     @csrf
 
                                     <div class="form-group row">
                                         <label for="email" class="col-md-2 col-form-label text-md-right">Nama Barang</label>
 
                                         <div class="col-md-3">
-                                            <input id="email" type="text" class="form-control" name="fullname" required autocomplete="email">
+                                            <input id="email" type="text" class="form-control" name="nama_barang" required autocomplete="email">
                                         </div>
                                         
                                     </div>
@@ -40,7 +40,7 @@
                                         <label for="password" class="col-md-2 col-form-label text-md-right">Keterangan</label>
 
                                         <div class="col-md-3">
-                                            <textarea id="password" type="text" class="form-control @error('password') is-invalid @enderror" name="no_hp" ></textarea>
+                                            <textarea id="password" type="text" class="form-control" name="keterangan" ></textarea>
 
                                         </div>
                                     </div>
@@ -50,15 +50,16 @@
 
                                         <div class="col-md-10">
                                             <div class="col-md-2">
-                                                <select name="select" class="form-control text-right" value="{{ old('select') }}">
-                                                    <option value="ktp_customer">Unit</option>
+                                                <select class="form-control" name="satuan_terkecil">
+                                                    <option value="unit">Unit</option>
+                                                    <option value="kg">KG</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-1">
                                                 <label for="menu" class="col-md-1 col-form-label text-md-right" style="padding-left:0">Harga</label>
                                             </div>
                                             <div class="col-md-2">
-                                                <input id="email" type="text" class="form-control" name="fullname" required autocomplete="email">
+                                                <input id="email" type="text" class="form-control" name="harga_jual" required autocomplete="email">
                                             </div>
                                         </div>
                                     </div>

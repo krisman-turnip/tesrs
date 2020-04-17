@@ -38,19 +38,19 @@
                                             </thead>
                                             <tbody>
                                             @php $no=1; @endphp
+                                            @foreach($bj as $p)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
-                                                    <td>kayu</td>
-                                                    <td>kayu</td>
-                                                    <td>cm</td>
-                                                    <td>12000</td>
-                                                    <td></td>
-                                                    <td> 
-                                                        <a href="satuan/edit/" class="btn btn-warning">Edit</a>
-                                                        <a href="satuan/hapus/" class="btn btn-danger">Hapus</a>
+                                                    <td>{{ $p->nama_barang }}</td>
+                                                    <td>{{ $p->keterangan }}</td>
+                                                    <td>{{ $p->satuan_terkecil }}</td>
+                                                    <td>{{ $p->harga_jual }}</td>
+                                                    <td>
+                                                        <a href="barang_jadi/edit/{{ $p->jadi_id }}" class="btn btn-warning">Edit</a>
+                                                        <a href="barang_jadi/hapus/{{ $p->jadi_id }}" class="btn btn-danger">Hapus</a>
                                                     </td>
                                                 </tr>
-                                                
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

@@ -3,18 +3,13 @@
   @include('layouts.header')
   <!-- Left side column. contains the logo and sidebar -->
   @include('layouts.sidebar')
-  @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                           
-                        </div>
-                    @endif
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content">
             <div class="card mt-3">
                 <div class="card-header text-center">
-                    <h3>Tambah Barang Mentah</h3> 
+                    <h3>Edit Barang Mentah</h3> 
                 </div>
                 <a href="{{url('barang_mentah')}}" class="btn btn-primary">Kembali</a>
                 <!-- <a href="../pegawai" class="btn btn-primary">store</a> -->
@@ -24,14 +19,15 @@
                     <div class="col-md-12">
                         <div class="box">
                             <div class="box-body">
-                                <form method="POST" action="{{url('barang_mentah/prosestambah')}}">
+                                <form method="POST" action="{{url('barang_mentah/update')}}">
                                     @csrf
 
                                     <div class="form-group row">
                                         <label for="email" class="col-md-2 col-form-label text-md-right">Nama Barang</label>
 
                                         <div class="col-md-3">
-                                            <input id="email" type="text" class="form-control" name="nama_barang" required>
+                                            <input id="email" type="text" class="form-control" name="nama_barang" required value="{{$bm->nama_barang}}">
+                                            <input id="email" type="hidden" class="form-control" name="raw_id" required value="{{$bm->raw_id}}">
                                         </div>
                                         
                                     </div>
@@ -40,16 +36,14 @@
                                         <label for="password" class="col-md-2 col-form-label text-md-right">Keterangan</label>
 
                                         <div class="col-md-3">
-                                            <textarea id="password" type="text" class="form-control" name="keterangan" ></textarea>
-
-                                        </div>
+                                            <input id="password" type="text" class="form-control" name="keterangan" value="{{$bm->keterangan}}">                                        </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="password" class="col-md-2 col-form-label text-md-right">Suplier</label>
 
                                         <div class="col-md-3">
-                                            <input id="password" type="text" class="form-control" name="supplier_id" >
+                                            <input id="password" type="text" class="form-control" name="supplier_id" value="{{$bm->supplier_id}}">
 
                                         </div>
                                     </div>
@@ -68,7 +62,7 @@
                                                 <label for="menu" class="col-md-1 col-form-label text-md-right" style="padding-left:0">Harga</label>
                                             </div>
                                             <div class="col-md-2">
-                                                <input id="email" type="text" class="form-control" name="harga" required>
+                                                <input id="email" type="text" class="form-control" name="harga" required value="{{$bm->harga}}">
                                             </div>
                                         </div>
                                     </div>

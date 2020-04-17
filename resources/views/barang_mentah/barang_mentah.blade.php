@@ -31,6 +31,7 @@
                                                     <th>No</th>
                                                     <th>Nama Barang</th>
                                                     <th>Keterangan</th>
+                                                    <th>Supplier</th>
                                                     <th>Satuan Terkecil</th>
                                                     <th>Suplier</th>
                                                     <th>OPSI</th>
@@ -38,18 +39,20 @@
                                             </thead>
                                             <tbody>
                                             @php $no=1; @endphp
+                                            @foreach($bm as $p)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
-                                                    <td>kayu</td>
-                                                    <td>kayu</td>
-                                                    <td>cm</td>
-                                                    <td>kayu sejahtera</td>
-                                                    <td></td>
-                                                    <td> 
-                                                        <a href="satuan/edit/" class="btn btn-warning">Edit</a>
-                                                        <a href="satuan/hapus/" class="btn btn-danger">Hapus</a>
+                                                    <td>{{ $p->nama_barang }}</td>
+                                                    <td>{{ $p->keterangan }}</td>
+                                                    <td>{{ $p->supplier_id }}</td>
+                                                    <td>{{ $p->satuan_terkecil }}</td>
+                                                    <td>{{ $p->harga }}</td>
+                                                    <td>
+                                                        <a href="barang_mentah/edit/{{ $p->raw_id }}" class="btn btn-warning">Edit</a>
+                                                        <a href="barang_mentah/hapus/{{ $p->raw_id }}" class="btn btn-danger">Hapus</a>
                                                     </td>
                                                 </tr>
+                                                @endforeach
                                                 
                                             </tbody>
                                         </table>

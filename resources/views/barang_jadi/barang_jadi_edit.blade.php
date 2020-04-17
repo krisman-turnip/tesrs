@@ -14,9 +14,9 @@
     <div class="content">
             <div class="card mt-3">
                 <div class="card-header text-center">
-                    <h3>Tambah Barang Mentah</h3> 
+                    <h3>Edit Barang Jadi</h3> 
                 </div>
-                <a href="{{url('barang_mentah')}}" class="btn btn-primary">Kembali</a>
+                <a href="{{url('barang_jadi')}}" class="btn btn-primary">Kembali</a>
                 <!-- <a href="../pegawai" class="btn btn-primary">store</a> -->
                 <br/>
                 <br/>
@@ -24,14 +24,15 @@
                     <div class="col-md-12">
                         <div class="box">
                             <div class="box-body">
-                                <form method="POST" action="{{url('barang_mentah/prosestambah')}}">
+                                <form method="POST" action="{{url('barang_jadi/update')}}">
                                     @csrf
 
                                     <div class="form-group row">
                                         <label for="email" class="col-md-2 col-form-label text-md-right">Nama Barang</label>
 
                                         <div class="col-md-3">
-                                            <input id="email" type="text" class="form-control" name="nama_barang" required>
+                                            <input id="email" type="text" class="form-control" name="nama_barang" required value="{{$bj->nama_barang}}">
+                                            <input id="email" type="hidden" class="form-control" name="jadi_id" required value="{{$bj->jadi_id}}">
                                         </div>
                                         
                                     </div>
@@ -40,16 +41,7 @@
                                         <label for="password" class="col-md-2 col-form-label text-md-right">Keterangan</label>
 
                                         <div class="col-md-3">
-                                            <textarea id="password" type="text" class="form-control" name="keterangan" ></textarea>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label for="password" class="col-md-2 col-form-label text-md-right">Suplier</label>
-
-                                        <div class="col-md-3">
-                                            <input id="password" type="text" class="form-control" name="supplier_id" >
+                                            <input id="password" type="text" class="form-control" name="keterangan" value="{{$bj->keterangan}}">
 
                                         </div>
                                     </div>
@@ -59,16 +51,16 @@
 
                                         <div class="col-md-10">
                                             <div class="col-md-2">
-                                                <select name="satuan_terkecil" class="form-control text-right" value="">
+                                                <select class="form-control" name="satuan_terkecil">
                                                     <option value="unit">Unit</option>
-                                                    <option value="kg">kg</option>
+                                                    <option value="kg">KG</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-1">
                                                 <label for="menu" class="col-md-1 col-form-label text-md-right" style="padding-left:0">Harga</label>
                                             </div>
                                             <div class="col-md-2">
-                                                <input id="email" type="text" class="form-control" name="harga" required>
+                                                <input id="email" type="text" class="form-control" name="harga_jual" required value="{{$bj->harga_jual}}">
                                             </div>
                                         </div>
                                     </div>

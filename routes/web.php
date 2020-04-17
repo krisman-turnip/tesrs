@@ -43,10 +43,16 @@ Route::post('/satuan/update','satuanController@update');
 /* barang mentah */
 Route::get('/barang_mentah','bahan_mentahController@index');
 Route::get('/barang_mentah/tambah','bahan_mentahController@tambah');
+Route::post('/barang_mentah/prosestambah','bahan_mentahController@store');
+Route::get('/barang_mentah/edit/{id}','bahan_mentahController@edit');
+Route::post('/barang_mentah/update','bahan_mentahController@update');
 
 /* barang jadi */
 Route::get('/barang_jadi','barang_jadiController@index');
 Route::get('/barang_jadi/tambah','barang_jadiController@tambah');
+Route::post('/barang_jadi/prosestambah','barang_jadiController@store');
+Route::get('/barang_jadi/edit/{id}','barang_jadiController@edit');
+Route::post('/barang_jadi/update','barang_jadiController@update');
 
 /* Customer */
 Route::get('/customer','customerController@index');
