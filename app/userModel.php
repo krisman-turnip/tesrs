@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class userModel extends Model
 {
-    protected $table = 'tbl_m_user';
+    protected $table = 'master';
 
-    protected $fillable = ['user_id','username','password', 'fullname','menu','date_login','karyawan_id'];
+    protected $fillable = ['produk_id','nama_produk','harga_pokok', 'harga_jual','karyawan_id'];
 }

@@ -1,13 +1,4 @@
-<footer class="main-footer">      
-    <div class="pull-right hidden-xs">
-    <!-- @php echo date('d - M - Y')@endphp
-      @php echo date('H:i:s a');@endphp  -->
-    </div>
-    
-  </footer>
 
-  <div class="control-sidebar-bg"></div>
-</div>
 <!-- ./wrapper -->
 
 
@@ -39,7 +30,7 @@
 <script src="{{url('adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
 <!-- Slimscroll -->
 <script src="{{url('adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{url('adminlte/js/adminlte.min.js')}}"></script>
 </body>
